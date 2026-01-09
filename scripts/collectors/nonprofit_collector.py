@@ -1,27 +1,29 @@
 """Nonprofit Collector - IRS 990 Data via ProPublica API"""
 
-import json
 import requests
 from datetime import datetime
 from typing import List, Dict, Any
 import re
+
 
 class NonprofitCollector:
     """Collects 501(c)(4) organization data from ProPublica Nonprofit Explorer."""
     
     BASE_URL = "https://projects.propublica.org/nonprofits/api/v2"
     
+    # Patterns commonly associated with astroturf organizations
     NAME_PATTERNS = [
-        r'^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$',
+        r'^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$',  # Three word names
         r'(Citizens|Americans|People|Families|Voters) (For|Against|United|First)',
         r'(Safe|Freedom|Liberty|Justice|Action|Voice|Voices)',
         r'(Now|Today|Tomorrow|Future|Forward)',
         r'(Coalition|Alliance|Council|Committee|Fund)',
     ]
     
+    # Search terms to find potentially suspicious orgs
     SEARCH_TERMS = [
         'citizens for',
-        'americans for', 
+        'americans for',
         'action fund',
         'voices for',
         'coalition',
@@ -32,7 +34,11 @@ class NonprofitCollector:
         'safe'
     ]
     
-    TARGET_STATES = ['TX', 'CA', 'NY', 'FL', 'IL', 'PA', 'OH', 'GA', 'NC', 'MI', 'AZ', 'WA', 'CO', 'DC', 'VA']
+    # Focus on states with high political activity
+    TARGET_STATES = [
+        'TX', 'CA', 'NY', 'FL', 'IL', 'PA', 'OH', 'GA', 'NC', 'MI',
+        'AZ', 'WA', 'CO', 'DC', 'VA', 'NJ', 'MA', 'MD', 'TN', 'IN'
+    ]
     
     def __init__(self):
         self.calls_made = 0
@@ -48,14 +54,20 @@ class NonprofitCollector:
         for term in self.SEARCH_TERMS:
             if self.calls_made >= max_calls:
                 break
+            
             orgs = self._search_organizations(term)
+            
             for org in orgs:
                 risk_score = self._calculate_risk_score(org)
                 org['risk_score'] = risk_score
-                org['sourceUrl'] = f"https://projects.propublica.org/nonprofits/organizations/{org.get('ein', '')}"
+                # Add source URL for transparency
+                ein = org.get('ein', '')
+                org['sourceUrl'] = f"https://projects.propublica.org/nonprofits/organizations/{ein}"
+                
                 if risk_score >= 30:
                     results.append(org)
         
+        # Deduplicate by EIN
         seen_eins = set()
         unique_results = []
         for org in results:
@@ -64,6 +76,7 @@ class NonprofitCollector:
                 seen_eins.add(ein)
                 unique_results.append(org)
         
+        # Sort by risk score
         unique_results.sort(key=lambda x: x.get('risk_score', 0), reverse=True)
         
         return unique_results[:30]
@@ -73,7 +86,7 @@ class NonprofitCollector:
         try:
             params = {
                 'q': query,
-                'c_code[id]': 4
+                'c_code[id]': 4  # 501(c)(4) organizations only
             }
             
             response = self.session.get(
@@ -88,6 +101,7 @@ class NonprofitCollector:
                 organizations = []
                 
                 for org in data.get('organizations', [])[:20]:
+                    # Filter to target states
                     state = org.get('state', '')
                     if state not in self.TARGET_STATES:
                         continue
@@ -108,8 +122,13 @@ class NonprofitCollector:
                     })
                 
                 return organizations
-            return []
+            else:
+                print(f"  ProPublica API returned status {response.status_code} for query: {query}")
+                return []
             
+        except requests.RequestException as e:
+            print(f"  Request error searching organizations for '{query}': {e}")
+            return []
         except Exception as e:
             print(f"  Error searching organizations for '{query}': {e}")
             return []
@@ -121,15 +140,18 @@ class NonprofitCollector:
         state = org.get('state', '')
         ruling_date = org.get('ruling_date')
         
+        # Three-word names are suspicious
         words = name.split()
         if len(words) == 3:
             score += 15
         
+        # Check for pattern matches
         for pattern in self.NAME_PATTERNS:
             if re.search(pattern, name, re.IGNORECASE):
                 score += 10
                 break
         
+        # Recently formed organizations
         if ruling_date:
             try:
                 ruling_year = int(str(ruling_date)[:4])
@@ -138,18 +160,29 @@ class NonprofitCollector:
                     score += 25
                 elif current_year - ruling_year <= 5:
                     score += 15
-            except:
+            except (ValueError, TypeError):
                 pass
         
+        # Delaware registration is often used for shell companies
         if state == 'DE':
             score += 15
         
+        # High revenue with generic name
         revenue = org.get('total_revenue', 0) or 0
         if revenue > 1000000 and len(words) == 3:
             score += 15
         
+        # Politically active states get slight boost
         if state in ['TX', 'FL', 'OH', 'PA', 'GA', 'AZ', 'NC', 'MI']:
             score += 5
+        
+        # Generic patriotic words in name
+        patriotic_words = ['american', 'citizen', 'freedom', 'liberty', 'patriot', 'united']
+        name_lower = name.lower()
+        for word in patriotic_words:
+            if word in name_lower:
+                score += 5
+                break
         
         return min(score, 100)
 
@@ -160,3 +193,4 @@ if __name__ == '__main__':
     print(f"Collected {len(data)} organizations")
     for org in data[:5]:
         print(f"  - {org['name']} ({org['state']}) - Risk: {org['risk_score']}%")
+        print(f"    Source: {org['sourceUrl']}")
