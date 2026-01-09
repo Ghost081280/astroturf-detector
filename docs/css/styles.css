@@ -348,6 +348,107 @@ section {
     position: relative;
 }
 
+.chart-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+/* Geographic Grid */
+.geo-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.geo-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.geo-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(139, 92, 246, 0.3), rgba(99, 102, 241, 0.1));
+    border-radius: var(--radius-sm);
+    z-index: 0;
+}
+
+.geo-city {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    z-index: 1;
+    flex: 1;
+}
+
+.geo-count {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--color-accent-primary);
+    z-index: 1;
+}
+
+/* Keyword Chart */
+.keyword-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.keyword-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.keyword-name {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.keyword-bar-container {
+    flex: 1;
+    height: 8px;
+    background: var(--color-bg-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.keyword-bar {
+    height: 100%;
+    background: var(--color-accent-gradient);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.keyword-count {
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--color-text-primary);
+    width: 30px;
+    text-align: right;
+}
+
 /* Organization List */
 .org-list {
     display: flex;
@@ -411,9 +512,17 @@ section {
 /* Confidence Display */
 .confidence-display {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 16px;
+    gap: 24px;
+    position: relative;
+}
+
+.confidence-ring-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
 }
 
 .confidence-ring {
@@ -426,21 +535,29 @@ section {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     font-family: var(--font-mono);
     color: var(--color-text-primary);
 }
 
-.confidence-display {
-    position: relative;
+.confidence-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.confidence-label {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
 }
 
 .confidence-desc {
     font-size: 0.8125rem;
     color: var(--color-text-secondary);
-    text-align: center;
-    max-width: 240px;
+    max-width: 280px;
+    line-height: 1.5;
 }
 
 /* ============================================
