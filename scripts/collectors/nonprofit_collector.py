@@ -1,196 +1,110 @@
-"""Nonprofit Collector - IRS 990 Data via ProPublica API"""
-
+"""Nonprofit Collector - ProPublica API"""
 import requests
 from datetime import datetime
 from typing import List, Dict, Any
-import re
-
 
 class NonprofitCollector:
-    """Collects 501(c)(4) organization data from ProPublica Nonprofit Explorer."""
-    
     BASE_URL = "https://projects.propublica.org/nonprofits/api/v2"
-    
-    # Patterns commonly associated with astroturf organizations
-    NAME_PATTERNS = [
-        r'^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$',  # Three word names
-        r'(Citizens|Americans|People|Families|Voters) (For|Against|United|First)',
-        r'(Safe|Freedom|Liberty|Justice|Action|Voice|Voices)',
-        r'(Now|Today|Tomorrow|Future|Forward)',
-        r'(Coalition|Alliance|Council|Committee|Fund)',
-    ]
-    
-    # Search terms to find potentially suspicious orgs
-    SEARCH_TERMS = [
-        'citizens for',
-        'americans for',
-        'action fund',
-        'voices for',
-        'coalition',
-        'alliance for',
-        'freedom',
-        'liberty',
-        'justice now',
-        'safe'
-    ]
-    
-    # Focus on states with high political activity
-    TARGET_STATES = [
-        'TX', 'CA', 'NY', 'FL', 'IL', 'PA', 'OH', 'GA', 'NC', 'MI',
-        'AZ', 'WA', 'CO', 'DC', 'VA', 'NJ', 'MA', 'MD', 'TN', 'IN'
-    ]
+    SEARCH_TERMS = ['citizens for', 'americans for', 'action fund', 'voices for', 'coalition', 'alliance for', 'freedom', 'liberty', 'justice now', 'safe']
+    TARGET_STATES = ['TX', 'CA', 'NY', 'FL', 'IL', 'PA', 'OH', 'GA', 'NC', 'MI', 'AZ', 'WA', 'CO', 'DC', 'VA', 'NJ', 'MA', 'MD', 'TN', 'IN']
     
     def __init__(self):
         self.calls_made = 0
         self.session = requests.Session()
-        self.session.headers.update({
-            'User-Agent': 'AstroturfDetector/1.0 (Research Project)'
-        })
     
     def collect(self, max_calls: int = 15) -> List[Dict[str, Any]]:
-        """Collect 501(c)(4) organizations from ProPublica."""
         results = []
         
         for term in self.SEARCH_TERMS:
             if self.calls_made >= max_calls:
                 break
-            
             orgs = self._search_organizations(term)
-            
             for org in orgs:
-                risk_score = self._calculate_risk_score(org)
-                org['risk_score'] = risk_score
-                # Add source URL for transparency
-                ein = org.get('ein', '')
-                org['sourceUrl'] = f"https://projects.propublica.org/nonprofits/organizations/{ein}"
-                
-                if risk_score >= 30:
+                org['risk_score'] = self._calc_risk(org)
+                org['sourceUrl'] = f"https://projects.propublica.org/nonprofits/organizations/{org.get('ein', '')}"
+                if org['risk_score'] >= 30:
                     results.append(org)
         
-        # Deduplicate by EIN
-        seen_eins = set()
-        unique_results = []
+        seen = set()
+        unique = []
         for org in results:
             ein = org.get('ein')
-            if ein and ein not in seen_eins:
-                seen_eins.add(ein)
-                unique_results.append(org)
+            if ein and ein not in seen:
+                seen.add(ein)
+                unique.append(org)
         
-        # Sort by risk score
-        unique_results.sort(key=lambda x: x.get('risk_score', 0), reverse=True)
-        
-        return unique_results[:30]
+        unique.sort(key=lambda x: x.get('risk_score', 0), reverse=True)
+        return unique[:30]
     
     def _search_organizations(self, query: str) -> List[Dict[str, Any]]:
-        """Search ProPublica API for organizations."""
         try:
-            params = {
-                'q': query,
-                'c_code[id]': 4  # 501(c)(4) organizations only
-            }
-            
-            response = self.session.get(
-                f"{self.BASE_URL}/search.json",
-                params=params,
-                timeout=30
-            )
+            params = {'q': query, 'c_code[id]': 4}
+            response = self.session.get(f"{self.BASE_URL}/search.json", params=params, timeout=30)
             self.calls_made += 1
             
             if response.status_code == 200:
                 data = response.json()
-                organizations = []
+                orgs = []
                 
                 for org in data.get('organizations', [])[:20]:
-                    # Filter to target states
                     state = org.get('state', '')
                     if state not in self.TARGET_STATES:
                         continue
                     
-                    organizations.append({
+                    orgs.append({
                         'type': 'nonprofit',
                         'source': 'propublica',
                         'ein': org.get('ein'),
                         'name': org.get('name'),
                         'city': org.get('city'),
-                        'state': org.get('state'),
+                        'state': state,
                         'ntee_code': org.get('ntee_code'),
-                        'subsection_code': org.get('subsection_code'),
                         'ruling_date': org.get('ruling_date'),
                         'total_revenue': org.get('income_amount'),
-                        'total_assets': org.get('asset_amount'),
-                        'tax_period': org.get('tax_period')
+                        'total_assets': org.get('asset_amount')
                     })
                 
-                return organizations
-            else:
-                print(f"  ProPublica API returned status {response.status_code} for query: {query}")
-                return []
-            
-        except requests.RequestException as e:
-            print(f"  Request error searching organizations for '{query}': {e}")
+                return orgs
             return []
         except Exception as e:
-            print(f"  Error searching organizations for '{query}': {e}")
+            print(f"  ProPublica error: {e}")
             return []
     
-    def _calculate_risk_score(self, org: Dict[str, Any]) -> int:
-        """Calculate risk score based on astroturf indicators (0-100)."""
+    def _calc_risk(self, org: Dict[str, Any]) -> int:
         score = 0
         name = org.get('name', '')
         state = org.get('state', '')
-        ruling_date = org.get('ruling_date')
         
-        # Three-word names are suspicious
         words = name.split()
         if len(words) == 3:
             score += 15
         
-        # Check for pattern matches
-        for pattern in self.NAME_PATTERNS:
-            if re.search(pattern, name, re.IGNORECASE):
+        patterns = ['citizens for', 'americans for', 'freedom', 'liberty', 'action fund', 'voices for']
+        for p in patterns:
+            if p in name.lower():
                 score += 10
                 break
         
-        # Recently formed organizations
-        if ruling_date:
+        ruling = org.get('ruling_date')
+        if ruling:
             try:
-                ruling_year = int(str(ruling_date)[:4])
-                current_year = datetime.utcnow().year
-                if current_year - ruling_year <= 2:
+                year = int(str(ruling)[:4])
+                if datetime.utcnow().year - year <= 2:
                     score += 25
-                elif current_year - ruling_year <= 5:
+                elif datetime.utcnow().year - year <= 5:
                     score += 15
-            except (ValueError, TypeError):
+            except:
                 pass
         
-        # Delaware registration is often used for shell companies
         if state == 'DE':
             score += 15
         
-        # High revenue with generic name
-        revenue = org.get('total_revenue', 0) or 0
-        if revenue > 1000000 and len(words) == 3:
-            score += 15
-        
-        # Politically active states get slight boost
         if state in ['TX', 'FL', 'OH', 'PA', 'GA', 'AZ', 'NC', 'MI']:
             score += 5
         
-        # Generic patriotic words in name
-        patriotic_words = ['american', 'citizen', 'freedom', 'liberty', 'patriot', 'united']
-        name_lower = name.lower()
-        for word in patriotic_words:
-            if word in name_lower:
-                score += 5
-                break
-        
         return min(score, 100)
-
 
 if __name__ == '__main__':
     collector = NonprofitCollector()
     data = collector.collect(max_calls=5)
-    print(f"Collected {len(data)} organizations")
-    for org in data[:5]:
-        print(f"  - {org['name']} ({org['state']}) - Risk: {org['risk_score']}%")
-        print(f"    Source: {org['sourceUrl']}")
+    print(f"Collected {len(data)} orgs")
