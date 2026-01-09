@@ -2,15 +2,8 @@ name: Astroturf Detector Scan
 
 on:
   schedule:
-    # Run every hour
     - cron: '0 * * * *'
   workflow_dispatch:
-    # Allow manual trigger
-  push:
-    branches:
-      - main
-    paths:
-      - 'scripts/**'
 
 jobs:
   scan:
@@ -28,18 +21,10 @@ jobs:
         with:
           python-version: '3.11'
       
-      - name: Cache pip dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install requests anthropic
       
       - name: Run scan
         env:
@@ -56,11 +41,3 @@ jobs:
           git add docs/data/memory.json docs/data/alerts.json
           git diff --staged --quiet || git commit -m "Automated scan $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
-```
-
----
-
-**File: `requirements.txt`** (COMPLETE)
-```
-requests>=2.31.0
-anthropic>=0.18.0
