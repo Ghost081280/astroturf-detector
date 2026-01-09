@@ -381,14 +381,28 @@ function renderOrganizations(memory) {
         container.innerHTML = orgs.slice(0, 8).map(o => {
             const s = o.risk_score || 0;
             const rc = s >= 60 ? 'high' : s >= 40 ? 'medium' : 'low';
-            return `<a href="${escapeHtml(o.sourceUrl || '#')}" target="_blank" class="org-item">
-                <div class="org-indicator ${rc}"></div>
-                <div class="org-details">
-                    <div class="org-name">${escapeHtml((o.name || 'Unknown').substring(0, 40))}</div>
-                    <div class="org-meta">${escapeHtml(o.state || '')}${o.first_file_date ? ' · Filed: ' + o.first_file_date : ''}</div>
-                </div>
-                <div class="org-score">${s}%</div>
-            </a>`;
+            const url = o.sourceUrl || o.url || '';
+            const hasLink = url && url !== '#';
+            
+            if (hasLink) {
+                return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="org-item">
+                    <div class="org-indicator ${rc}"></div>
+                    <div class="org-details">
+                        <div class="org-name">${escapeHtml((o.name || 'Unknown').substring(0, 40))}</div>
+                        <div class="org-meta">${escapeHtml(o.state || '')}${o.first_file_date ? ' · Filed: ' + o.first_file_date : ''}</div>
+                    </div>
+                    <div class="org-score">${s}%</div>
+                </a>`;
+            } else {
+                return `<div class="org-item">
+                    <div class="org-indicator ${rc}"></div>
+                    <div class="org-details">
+                        <div class="org-name">${escapeHtml((o.name || 'Unknown').substring(0, 40))}</div>
+                        <div class="org-meta">${escapeHtml(o.state || '')}${o.first_file_date ? ' · Filed: ' + o.first_file_date : ''}</div>
+                    </div>
+                    <div class="org-score">${s}%</div>
+                </div>`;
+            }
         }).join('');
     } else {
         container.innerHTML = '<div class="empty-state">No organizations flagged</div>';
