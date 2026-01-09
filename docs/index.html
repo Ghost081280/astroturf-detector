@@ -33,7 +33,15 @@
                     <span class="tagline">United States Monitor - All 50 States</span>
                 </div>
             </div>
-            <nav class="main-nav">
+            
+            <!-- Hamburger Menu Button -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <nav class="main-nav" id="main-nav">
                 <a href="#dashboard" class="nav-link">Dashboard</a>
                 <a href="#timeline" class="nav-link">Timeline</a>
                 <a href="#services" class="nav-link">Known Services</a>
@@ -41,6 +49,9 @@
             </nav>
         </div>
     </header>
+    
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 
     <main>
         <section class="hero">
@@ -48,32 +59,35 @@
                 <div class="hero-content">
                     <h2>Real-time monitoring for manufactured movements</h2>
                     <p>An open-source intelligence engine tracking paid protest activity, suspicious nonprofit formations, and coordinated astroturf campaigns across all 50 United States.</p>
+                    
+                    <!-- Compact Stats Grid for Mobile -->
                     <div class="hero-stats" id="hero-stats">
                         <a href="#timeline" class="stat-card-link">
                             <div class="stat-card">
                                 <span class="stat-value" id="stat-events">--</span>
-                                <span class="stat-label">Events Tracked</span>
+                                <span class="stat-label">Events</span>
                             </div>
                         </a>
                         <a href="#alerts" class="stat-card-link">
                             <div class="stat-card">
                                 <span class="stat-value" id="stat-alerts">--</span>
-                                <span class="stat-label">Active Alerts</span>
+                                <span class="stat-label">Alerts</span>
                             </div>
                         </a>
                         <a href="#orgs" class="stat-card-link">
                             <div class="stat-card">
                                 <span class="stat-value" id="stat-orgs">--</span>
-                                <span class="stat-label">Orgs Flagged</span>
+                                <span class="stat-label">Orgs</span>
                             </div>
                         </a>
                         <a href="#news" class="stat-card-link">
                             <div class="stat-card">
                                 <span class="stat-value" id="stat-news">--</span>
-                                <span class="stat-label">News Articles</span>
+                                <span class="stat-label">News</span>
                             </div>
                         </a>
                     </div>
+                    
                     <div class="last-scan-info">
                         <span class="scan-indicator"></span>
                         <span>Last scanned: <strong id="last-scan-time">--</strong></span>
@@ -103,11 +117,12 @@
                             <span class="card-badge">51 Regions</span>
                         </div>
                         <div class="card-content">
-    <div class="states-grid" id="states-grid"></div>
-    <div class="monitoring-context">
-        <strong>Red states</strong> = Higher political spending, more PAC activity, and historically more astroturf incidents detected
-    </div>
-</div>
+                            <div class="states-grid" id="states-grid"></div>
+                            <div class="monitoring-context">
+                                <strong>Red states</strong> = Higher political spending, more PAC activity, and historically more astroturf incidents detected
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="dashboard-card job-tracker">
                         <div class="card-header">
@@ -197,6 +212,12 @@
                         <span>Loading...</span>
                     </div>
                 </div>
+                <button class="see-more-btn" id="timeline-see-more" style="display:none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                    Show More Events
+                </button>
             </div>
         </section>
 
@@ -215,6 +236,12 @@
                         <span>Loading...</span>
                     </div>
                 </div>
+                <button class="see-more-btn" id="news-see-more" style="display:none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                    Show More News
+                </button>
             </div>
         </section>
 
@@ -358,32 +385,21 @@
                         <span>Loading...</span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="contact-section">
-            <div class="container">
-                <div class="contact-content">
-                    <h3>Developer</h3>
-                    <div class="contact-links">
-                        <a href="https://github.com/Ghost081280" target="_blank" class="contact-link">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                            GitHub: @Ghost081280
-                        </a>
-                        <a href="https://github.com/ghost081280/astroturf-detector" target="_blank" class="contact-link">Project Repository</a>
-                    </div>
-                </div>
+                <button class="see-more-btn" id="alerts-see-more" style="display:none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                    Show More Alerts
+                </button>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-main">
                 <div class="footer-brand">
-                    <svg class="footer-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                    <svg class="footer-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
                         <defs>
                             <linearGradient id="footerGrass" x1="0%" y1="100%" x2="0%" y2="0%">
                                 <stop offset="0%" style="stop-color:#2d5a27"/>
@@ -398,26 +414,25 @@
                         <path d="M12 36 Q16 28 14 20 Q18 26 20 18 Q22 26 24 14 Q26 26 28 18 Q30 26 34 20 Q32 28 36 36" fill="url(#footerGrass)" opacity="0.9"/>
                         <circle cx="24" cy="24" r="3" fill="#fff"/>
                     </svg>
-                    <span>Astroturf Detector</span>
-                </div>
-                <div class="footer-tagline">
-                    Neutral discovery agent for manufactured grassroots activity
+                    <div class="footer-brand-text">
+                        <span class="footer-title">Astroturf Detector</span>
+                        <span class="footer-tagline">Neutral discovery agent for manufactured grassroots activity</span>
+                    </div>
                 </div>
                 <div class="footer-links">
-                    <a href="https://github.com/ghost081280/astroturf-detector" target="_blank">GitHub</a>
                     <a href="#dashboard">Dashboard</a>
+                    <a href="#timeline">Timeline</a>
                     <a href="#services">Known Services</a>
                     <a href="#alerts">Alerts</a>
+                    <a href="https://github.com/ghost081280/astroturf-detector" target="_blank">GitHub</a>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p class="footer-disclaimer">
-                    <strong>Disclaimer:</strong> This tool is fully managed by AI. Data is collected from public sources and analyzed automatically. 
+                    <strong>AI-Powered Tool:</strong> This system is fully automated. Data is collected from public sources and analyzed by AI hourly. 
                     Flags indicate patterns worth investigating — not proof of wrongdoing. Always verify findings independently.
                 </p>
-                <p class="footer-copyright">
-                    © 2026 Ghost081280. Open source under MIT License.
-                </p>
+                <p class="footer-copyright">© 2026 Ghost081280 · Open source under MIT License</p>
             </div>
         </div>
     </footer>
