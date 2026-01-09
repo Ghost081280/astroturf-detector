@@ -24,7 +24,16 @@ def load_memory(data_dir):
     memory_path = data_dir / CONFIG['memory_file']
     try:
         with open(memory_path, 'r') as f:
-            return json.load(f)
+            memory = json.load(f)
+            # Ensure dataSources exists (FIX for 'dataSources' KeyError)
+            if 'dataSources' not in memory:
+                memory['dataSources'] = {
+                    'propublica': {'status': 'active', 'lastCall': None},
+                    'fec': {'status': 'active', 'lastCall': None},
+                    'googleNews': {'status': 'active', 'lastCall': None},
+                    'craigslist': {'status': 'active', 'lastCall': None}
+                }
+            return memory
     except FileNotFoundError:
         return create_default_memory()
 
@@ -107,14 +116,25 @@ def run_collectors(memory, full_scan=False):
     print("\n=== Starting Data Collection (All 50 States) ===\n")
     results = {'news': [], 'fec': [], 'nonprofits': [], 'jobs': [], 'errors': []}
     
+    # Ensure dataSources exists in memory
+    if 'dataSources' not in memory:
+        memory['dataSources'] = {
+            'propublica': {'status': 'active', 'lastCall': None},
+            'fec': {'status': 'active', 'lastCall': None},
+            'googleNews': {'status': 'active', 'lastCall': None},
+            'craigslist': {'status': 'active', 'lastCall': None}
+        }
+    
     # Job Collector - Craigslist across all 50 states
     try:
         from collectors.job_collector import JobCollector
         print("Running job collector (Craigslist - All 50 States)...")
         job_collector = JobCollector()
         results['jobs'] = job_collector.collect(max_calls=CONFIG['max_api_calls_per_run'] // 4)
-        memory['dataSources']['craigslist']['lastCall'] = datetime.utcnow().isoformat() + 'Z'
-        memory['dataSources']['craigslist']['status'] = 'active'
+        memory['dataSources']['craigslist'] = {
+            'lastCall': datetime.utcnow().isoformat() + 'Z',
+            'status': 'active'
+        }
         print(f"  Found {len(results['jobs'])} job postings")
     except Exception as e:
         print(f"  Job collector error: {e}")
@@ -126,8 +146,10 @@ def run_collectors(memory, full_scan=False):
         print("Running news collector (Google News RSS)...")
         news_collector = NewsCollector()
         results['news'] = news_collector.collect(max_calls=CONFIG['max_api_calls_per_run'] // 4)
-        memory['dataSources']['googleNews']['lastCall'] = datetime.utcnow().isoformat() + 'Z'
-        memory['dataSources']['googleNews']['status'] = 'active'
+        memory['dataSources']['googleNews'] = {
+            'lastCall': datetime.utcnow().isoformat() + 'Z',
+            'status': 'active'
+        }
         print(f"  Found {len(results['news'])} news articles")
     except Exception as e:
         print(f"  News collector error: {e}")
@@ -139,8 +161,10 @@ def run_collectors(memory, full_scan=False):
         print("Running FEC collector (Campaign Finance)...")
         fec_collector = FECCollector()
         results['fec'] = fec_collector.collect(max_calls=CONFIG['max_api_calls_per_run'] // 4)
-        memory['dataSources']['fec']['lastCall'] = datetime.utcnow().isoformat() + 'Z'
-        memory['dataSources']['fec']['status'] = 'active'
+        memory['dataSources']['fec'] = {
+            'lastCall': datetime.utcnow().isoformat() + 'Z',
+            'status': 'active'
+        }
         print(f"  Found {len(results['fec'])} FEC records")
     except Exception as e:
         print(f"  FEC collector error: {e}")
@@ -152,8 +176,10 @@ def run_collectors(memory, full_scan=False):
         print("Running nonprofit collector (ProPublica - All 50 States)...")
         nonprofit_collector = NonprofitCollector()
         results['nonprofits'] = nonprofit_collector.collect(max_calls=CONFIG['max_api_calls_per_run'] // 4)
-        memory['dataSources']['propublica']['lastCall'] = datetime.utcnow().isoformat() + 'Z'
-        memory['dataSources']['propublica']['status'] = 'active'
+        memory['dataSources']['propublica'] = {
+            'lastCall': datetime.utcnow().isoformat() + 'Z',
+            'status': 'active'
+        }
         print(f"  Found {len(results['nonprofits'])} nonprofit filings")
     except Exception as e:
         print(f"  Nonprofit collector error: {e}")
@@ -226,7 +252,7 @@ def run_analysis(memory, alerts, collected_data):
         print("Running pattern analyzer...")
         analyzer = PatternAnalyzer(memory)
         patterns = analyzer.analyze(collected_data)
-        memory['correlations'] = patterns.get('correlations', memory['correlations'])
+        memory['correlations'] = patterns.get('correlations', memory.get('correlations', {}))
     except Exception as e:
         print(f"  Pattern analyzer error: {e}")
     
@@ -244,6 +270,10 @@ def run_analysis(memory, alerts, collected_data):
         memory['systemConfidence'] = analysis_result.get('confidence', 0)
         memory['confidenceFactors'] = analysis_result.get('confidence_factors', [])
         
+        # Ensure agentNotes exists
+        if 'agentNotes' not in memory:
+            memory['agentNotes'] = []
+        
         memory['agentNotes'].insert(0, {
             'timestamp': datetime.utcnow().isoformat() + 'Z',
             'summary': analysis_result.get('summary', ''),
@@ -255,6 +285,10 @@ def run_analysis(memory, alerts, collected_data):
             alert['id'] = f"alert_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}_{len(alerts['alerts'])}"
             alert['timestamp'] = datetime.utcnow().isoformat() + 'Z'
             alerts['alerts'].insert(0, alert)
+        
+        # Ensure timeline exists
+        if 'timeline' not in memory:
+            memory['timeline'] = []
         
         for event in analysis_result.get('timeline_events', []):
             event['id'] = f"event_{len(memory['timeline'])}"
@@ -273,6 +307,8 @@ def run_analysis(memory, alerts, collected_data):
             if alert_time.replace(tzinfo=None) > cutoff:
                 active_alerts.append(alert)
             else:
+                if 'archivedAlerts' not in alerts:
+                    alerts['archivedAlerts'] = []
                 alerts['archivedAlerts'].append(alert)
         except (ValueError, KeyError):
             active_alerts.append(alert)
@@ -280,11 +316,18 @@ def run_analysis(memory, alerts, collected_data):
     alerts['alerts'] = active_alerts[:50]
     alerts['archivedAlerts'] = alerts.get('archivedAlerts', [])[-100:]
     
+    # Ensure timeline exists before slicing
+    if 'timeline' not in memory:
+        memory['timeline'] = []
     memory['timeline'] = memory['timeline'][:1000]
     
+    # Ensure stats exists
+    if 'stats' not in memory:
+        memory['stats'] = {}
+    
     # Update stats
-    memory['stats']['events'] = len(memory['timeline'])
-    memory['stats']['alerts'] = len(alerts['alerts'])
+    memory['stats']['events'] = len(memory.get('timeline', []))
+    memory['stats']['alerts'] = len(alerts.get('alerts', []))
     memory['stats']['totalScans'] = memory['stats'].get('totalScans', 0) + 1
     memory['lastAnalysis'] = datetime.utcnow().isoformat() + 'Z'
     
