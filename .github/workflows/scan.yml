@@ -4,11 +4,6 @@ on:
   schedule:
     - cron: '0 * * * *'
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'scripts/**'
 
 jobs:
   scan:
@@ -56,29 +51,3 @@ jobs:
           git add docs/data/memory.json docs/data/alerts.json
           git diff --staged --quiet || git commit -m "Automated scan $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
-```
-
----
-
-### **13. requirements.txt**
-```
-requests>=2.31.0
-anthropic>=0.18.0
-```
-
----
-
-### **14. .gitignore**
-```
-__pycache__/
-*.py[cod]
-*.so
-.Python
-env/
-venv/
-.env
-.idea/
-.vscode/
-*.swp
-.DS_Store
-*.log
