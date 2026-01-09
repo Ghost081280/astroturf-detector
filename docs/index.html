@@ -7,60 +7,6 @@
     <meta name="description" content="Open-source intelligence engine monitoring for paid protest activity and manufactured grassroots movements across all 50 United States.">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%238b5cf6'/><path d='M25 75 Q35 55 30 40 Q40 55 45 30 Q50 55 55 25 Q60 55 70 30 Q65 55 75 75' fill='%234a7c43'/></svg>">
-    <style>
-        html{scroll-padding-top:120px}
-        .construction-banner{background:linear-gradient(90deg,#22c55e,#16a34a);color:#fff;padding:12px 24px;text-align:center;font-weight:600}
-        .construction-banner a{color:#fff;text-decoration:underline}
-        .news-feed{display:flex;flex-direction:column;gap:12px;max-height:400px;overflow-y:auto}
-        .news-item{padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);border-left:3px solid var(--color-accent-primary)}
-        .news-item:hover{background:var(--color-bg-hover)}
-        .news-title{font-size:.875rem;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;display:block;text-decoration:none}
-        .news-title:hover{color:var(--color-accent-primary)}
-        .news-meta{font-size:.75rem;color:var(--color-text-muted);display:flex;gap:12px}
-        .news-relevance{color:var(--color-accent-primary);font-weight:600}
-        .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-        .service-card{background:var(--color-bg-card);border-radius:var(--radius-md);border:1px solid rgba(239,68,68,.3);overflow:hidden}
-        .service-header{background:rgba(239,68,68,.1);padding:16px;border-bottom:1px solid rgba(239,68,68,.2)}
-        .service-header h4{font-size:1rem;color:var(--color-danger);margin-bottom:4px}
-        .service-header .service-type{font-size:.75rem;color:var(--color-text-muted)}
-        .service-body{padding:16px}
-        .service-body p{font-size:.8125rem;color:var(--color-text-secondary);margin-bottom:12px}
-        .service-locations{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-        .location-tag{font-size:.6875rem;padding:3px 8px;background:var(--color-bg-hover);color:var(--color-text-muted);border-radius:100px}
-        .service-link{font-size:.8125rem;color:var(--color-accent-primary);text-decoration:none}
-        .service-link:hover{text-decoration:underline}
-        .service-pricing{font-size:.75rem;color:var(--color-warning);margin-top:8px;padding:8px;background:rgba(234,179,8,.1);border-radius:var(--radius-sm)}
-        .states-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(50px,1fr));gap:6px;padding:12px}
-        .state-badge{padding:6px 2px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);text-align:center;font-size:.7rem;font-weight:600;color:var(--color-text-secondary)}
-        .state-badge.high-activity{background:rgba(239,68,68,.2);color:var(--color-danger);border:1px solid rgba(239,68,68,.3)}
-        .case-study{background:var(--color-bg-secondary);border-radius:var(--radius-md);padding:20px;margin-bottom:20px;border-left:4px solid var(--color-warning)}
-        .case-study h4{color:var(--color-warning);margin-bottom:8px}
-        .case-study p{font-size:.875rem;color:var(--color-text-secondary);margin-bottom:8px}
-        .case-outcome{font-size:.8125rem;color:var(--color-success);font-weight:600;display:block;margin-bottom:8px}
-        .case-source a{font-size:.75rem;color:var(--color-accent-primary);text-decoration:none}
-        .contact-section{background:var(--color-bg-primary);padding:40px 0;border-top:1px solid rgba(148,163,184,.1)}
-        .contact-content{text-align:center}
-        .contact-content h3{margin-bottom:16px}
-        .contact-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
-        .contact-link{display:flex;align-items:center;gap:8px;color:var(--color-accent-primary);text-decoration:none;font-size:.9375rem}
-        .contact-link:hover{text-decoration:underline}
-        .contact-link svg{width:20px;height:20px}
-        .job-list{display:flex;flex-direction:column;gap:10px;max-height:300px;overflow-y:auto}
-        .job-item{padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center;text-decoration:none}
-        .job-item:hover{background:var(--color-bg-hover)}
-        .job-title{font-size:.8125rem;color:var(--color-text-primary);flex:1}
-        .job-location{font-size:.75rem;color:var(--color-text-muted);margin-right:12px}
-        .job-score{font-size:.75rem;font-weight:600;padding:4px 8px;background:rgba(239,68,68,.2);color:var(--color-danger);border-radius:var(--radius-sm)}
-        .job-score.low{background:rgba(34,197,94,.2);color:var(--color-success)}
-        .job-score.medium{background:rgba(234,179,8,.2);color:var(--color-warning)}
-        .stat-card-link{text-decoration:none;display:block}
-        .stat-card-link:hover .stat-card{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
-        .stat-card{transition:transform .2s,box-shadow .2s}
-        .data-source-badge{display:inline-flex;align-items:center;gap:4px;font-size:.6875rem;padding:2px 8px;background:rgba(34,197,94,.15);color:var(--color-success);border-radius:100px;margin-left:8px}
-        .data-source-badge::before{content:'';width:6px;height:6px;background:var(--color-success);border-radius:50%}
-        .empty-state{padding:40px;text-align:center;color:var(--color-text-muted)}
-        .empty-state svg{width:48px;height:48px;margin-bottom:12px;opacity:.5}
-    </style>
 </head>
 <body>
     <div class="construction-banner">
@@ -108,10 +54,30 @@
                     <h2>Real-time monitoring for manufactured movements</h2>
                     <p>An open-source intelligence engine tracking paid protest activity, suspicious nonprofit formations, and coordinated astroturf campaigns across all 50 United States.</p>
                     <div class="hero-stats" id="hero-stats">
-                        <a href="#timeline" class="stat-card-link"><div class="stat-card"><span class="stat-value" id="stat-events">--</span><span class="stat-label">Events Tracked</span></div></a>
-                        <a href="#alerts" class="stat-card-link"><div class="stat-card"><span class="stat-value" id="stat-alerts">--</span><span class="stat-label">Active Alerts</span></div></a>
-                        <a href="#orgs" class="stat-card-link"><div class="stat-card"><span class="stat-value" id="stat-orgs">--</span><span class="stat-label">Orgs Flagged</span></div></a>
-                        <a href="#news" class="stat-card-link"><div class="stat-card"><span class="stat-value" id="stat-news">--</span><span class="stat-label">News Articles</span></div></a>
+                        <a href="#timeline" class="stat-card-link">
+                            <div class="stat-card">
+                                <span class="stat-value" id="stat-events">--</span>
+                                <span class="stat-label">Events Tracked</span>
+                            </div>
+                        </a>
+                        <a href="#alerts" class="stat-card-link">
+                            <div class="stat-card">
+                                <span class="stat-value" id="stat-alerts">--</span>
+                                <span class="stat-label">Active Alerts</span>
+                            </div>
+                        </a>
+                        <a href="#orgs" class="stat-card-link">
+                            <div class="stat-card">
+                                <span class="stat-value" id="stat-orgs">--</span>
+                                <span class="stat-label">Orgs Flagged</span>
+                            </div>
+                        </a>
+                        <a href="#news" class="stat-card-link">
+                            <div class="stat-card">
+                                <span class="stat-value" id="stat-news">--</span>
+                                <span class="stat-label">News Articles</span>
+                            </div>
+                        </a>
                     </div>
                     <div class="last-scan-info">
                         <span class="scan-indicator"></span>
@@ -125,14 +91,22 @@
         <section id="dashboard" class="dashboard-section">
             <div class="container">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
                     <h2>Activity Dashboard</h2>
                     <span class="region-badge">All 50 States + DC</span>
                 </div>
                 
                 <div class="dashboard-grid">
                     <div class="dashboard-card">
-                        <div class="card-header"><h3>Monitoring Coverage</h3><span class="card-badge">51 Regions</span></div>
+                        <div class="card-header">
+                            <h3>Monitoring Coverage</h3>
+                            <span class="card-badge">51 Regions</span>
+                        </div>
                         <div class="card-content">
                             <div class="states-grid" id="states-grid"></div>
                             <p style="font-size:.75rem;color:var(--color-text-muted);padding:0 12px 12px;text-align:center">Red = Priority states</p>
@@ -140,20 +114,46 @@
                     </div>
 
                     <div class="dashboard-card job-tracker">
-                        <div class="card-header"><h3>Job Posting Monitor</h3><span class="card-badge live">Adzuna + USAJobs</span></div>
+                        <div class="card-header">
+                            <h3>Job Posting Monitor</h3>
+                            <span class="card-badge live">Adzuna + USAJobs</span>
+                        </div>
                         <div class="card-content">
-                            <div id="job-list" class="job-list"><div class="loading-indicator"><div class="spinner"></div><span>Loading...</span></div></div>
-                            <div class="card-footer"><div class="metric"><span class="metric-value" id="job-count">--</span><span class="metric-label">Tracked listings</span></div></div>
+                            <div id="job-list" class="job-list">
+                                <div class="loading-indicator">
+                                    <div class="spinner"></div>
+                                    <span>Loading...</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="metric">
+                                    <span class="metric-value" id="job-count">--</span>
+                                    <span class="metric-label">Tracked listings</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="dashboard-card org-tracker" id="orgs">
-                        <div class="card-header"><h3>Flagged Organizations</h3><a href="https://projects.propublica.org/nonprofits/" target="_blank" class="source-link">ProPublica</a></div>
-                        <div class="card-content"><div id="org-list" class="org-list"><div class="loading-indicator"><div class="spinner"></div><span>Loading...</span></div></div></div>
+                        <div class="card-header">
+                            <h3>Flagged Organizations</h3>
+                            <a href="https://projects.propublica.org/nonprofits/" target="_blank" class="source-link">ProPublica</a>
+                        </div>
+                        <div class="card-content">
+                            <div id="org-list" class="org-list">
+                                <div class="loading-indicator">
+                                    <div class="spinner"></div>
+                                    <span>Loading...</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="dashboard-card confidence-meter">
-                        <div class="card-header"><h3>Detection Confidence</h3><span class="card-badge">AI Analysis</span></div>
+                        <div class="card-header">
+                            <h3>Detection Confidence</h3>
+                            <span class="card-badge">AI Analysis</span>
+                        </div>
                         <div class="card-content">
                             <div class="confidence-display">
                                 <div class="confidence-ring-container">
@@ -161,7 +161,9 @@
                                         <circle cx="50" cy="50" r="45" fill="none" stroke="#1e293b" stroke-width="8"/>
                                         <circle id="confidence-arc" cx="50" cy="50" r="45" fill="none" stroke="#8b5cf6" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 283" transform="rotate(-90 50 50)"/>
                                     </svg>
-                                    <div class="confidence-value"><span id="confidence-percent">--</span></div>
+                                    <div class="confidence-value">
+                                        <span id="confidence-percent">--</span>
+                                    </div>
                                 </div>
                                 <div class="confidence-text">
                                     <div class="confidence-label">System Confidence</div>
@@ -178,7 +180,10 @@
         <section id="timeline" class="timeline-section">
             <div class="container">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
                     <h2>Activity Timeline</h2>
                     <span class="region-badge" id="timeline-count">-- events</span>
                 </div>
@@ -190,25 +195,39 @@
                         <button class="range-btn" data-range="all">All Time</button>
                     </div>
                 </div>
-                <div class="timeline-events" id="timeline-events"><div class="loading-indicator"><div class="spinner"></div><span>Loading...</span></div></div>
+                <div class="timeline-events" id="timeline-events">
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <span>Loading...</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="news" class="dashboard-section">
             <div class="container">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                    </svg>
                     <h2>Recent News</h2>
                     <span class="region-badge">Google News + DuckDuckGo</span>
                 </div>
-                <div id="news-feed" class="news-feed"><div class="loading-indicator"><div class="spinner"></div><span>Loading...</span></div></div>
+                <div id="news-feed" class="news-feed">
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <span>Loading...</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="services" class="alerts-section">
             <div class="container">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
                     <h2>Known Paid Protest Services</h2>
                 </div>
 
@@ -221,7 +240,11 @@
                         <div class="service-body">
                             <p>Claims "tens of thousands" of contractors. 400% increase in requests in 2025.</p>
                             <div class="service-locations">
-                                <span class="location-tag">LA</span><span class="location-tag">NYC</span><span class="location-tag">DC</span><span class="location-tag">Dallas</span><span class="location-tag">Phoenix</span>
+                                <span class="location-tag">LA</span>
+                                <span class="location-tag">NYC</span>
+                                <span class="location-tag">DC</span>
+                                <span class="location-tag">Dallas</span>
+                                <span class="location-tag">Phoenix</span>
                             </div>
                             <div class="service-pricing">$60 to attend | $200 speaking roles</div>
                             <a href="https://crowdsondemand.com/" target="_blank" class="service-link">crowdsondemand.com</a>
@@ -247,7 +270,8 @@
                         <div class="service-body">
                             <p>Subcontracted Crowds on Demand for Entergy scandal. $55,000 billed.</p>
                             <div class="service-locations">
-                                <span class="location-tag">Virginia</span><span class="location-tag">New Orleans</span>
+                                <span class="location-tag">Virginia</span>
+                                <span class="location-tag">New Orleans</span>
                             </div>
                         </div>
                     </div>
@@ -257,7 +281,9 @@
                     <h4>Case Study: Entergy New Orleans (2018)</h4>
                     <p>~50 paid actors at city council for $210M power plant. CEO texted: "This is war."</p>
                     <span class="case-outcome">Outcome: $5 million fine</span>
-                    <div class="case-source"><a href="https://www.nola.com/" target="_blank">Source: NOLA.com</a></div>
+                    <div class="case-source">
+                        <a href="https://www.nola.com/" target="_blank">Source: NOLA.com</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -265,10 +291,18 @@
         <section id="alerts" class="dashboard-section">
             <div class="container">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
                     <h2>Active Alerts</h2>
                 </div>
-                <div class="alerts-grid" id="alerts-grid"><div class="loading-indicator"><div class="spinner"></div><span>Loading...</span></div></div>
+                <div class="alerts-grid" id="alerts-grid">
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <span>Loading...</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -278,7 +312,9 @@
                     <h3>Developer</h3>
                     <div class="contact-links">
                         <a href="https://github.com/Ghost081280" target="_blank" class="contact-link">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
                             GitHub: @Ghost081280
                         </a>
                         <a href="https://github.com/ghost081280/astroturf-detector" target="_blank" class="contact-link">Project Repository</a>
@@ -291,64 +327,20 @@
     <footer class="site-footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand"><span>Astroturf Detector</span></div>
+                <div class="footer-brand">
+                    <span>Astroturf Detector</span>
+                </div>
                 <div class="footer-links">
                     <a href="https://github.com/ghost081280/astroturf-detector" target="_blank">GitHub</a>
                     <a href="#alerts">Alerts</a>
                 </div>
             </div>
-            <div class="footer-disclaimer"><p>Indicators only, not conclusive evidence. All data from public sources.</p></div>
+            <div class="footer-disclaimer">
+                <p>Indicators only, not conclusive evidence. All data from public sources.</p>
+            </div>
         </div>
     </footer>
 
     <script src="js/app.js"></script>
-    <script>
-    const ALL_STATES=['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC'];
-    const HIGH_ACTIVITY=['TX','CA','FL','NY','PA','OH','GA','NC','MI','AZ','WA','CO','VA','NJ','IL','DC'];
-    document.getElementById('states-grid').innerHTML=ALL_STATES.map(s=>'<div class="state-badge '+(HIGH_ACTIVITY.includes(s)?'high-activity':'')+'">'+s+'</div>').join('');
-    
-    let currentRange=90,allTimelineEvents=[];
-    function parseDate(d){try{return new Date(d||0)}catch{return new Date(0)}}
-    function formatRelativeTime(d){const now=new Date(),ms=now-parseDate(d),m=Math.floor(ms/60000),h=Math.floor(ms/3600000),dy=Math.floor(ms/86400000);if(m<1)return'Just now';if(m<60)return m+'m ago';if(h<24)return h+'h ago';if(dy<7)return dy+'d ago';return parseDate(d).toLocaleDateString('en-US',{month:'short',day:'numeric'})}
-    function escapeHtml(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''}
-    
-    function renderTimeline(days){
-        const c=document.getElementById('timeline-events'),b=document.getElementById('timeline-count');
-        let f=days==='all'?allTimelineEvents:allTimelineEvents.filter(e=>{const d=parseDate(e.date||e.timestamp);return d>=new Date(Date.now()-days*86400000)});
-        f.sort((a,b)=>parseDate(b.date||b.timestamp)-parseDate(a.date||a.timestamp));
-        b.textContent=f.length+' events';
-        if(!f.length){c.innerHTML='<div class="empty-state"><p>No events in '+(days==='all'?'timeline':'last '+days+' days')+'</p></div>';return}
-        c.innerHTML=f.slice(0,20).map(e=>{const d=parseDate(e.date||e.timestamp);return'<div class="timeline-event"><div class="event-date"><span class="event-day">'+d.getDate()+'</span><span class="event-month">'+d.toLocaleString('en',{month:'short'})+'</span></div><div class="event-content"><div class="event-title">'+escapeHtml(e.title||'Event')+(e.sourceUrl?' <a href="'+escapeHtml(e.sourceUrl)+'" target="_blank" class="event-source-link">↗</a>':'')+'</div><p class="event-description">'+escapeHtml(e.description||'')+'</p><div class="event-tags"><span class="event-tag">'+(e.type||'event')+'</span>'+(e.tags||[]).slice(0,2).map(t=>'<span class="event-tag">'+escapeHtml(t)+'</span>').join('')+'</div></div></div>'}).join('')}
-    
-    (async function(){try{
-        const[mRes,aRes]=await Promise.all([fetch('data/memory.json'),fetch('data/alerts.json')]);
-        const memory=mRes.ok?await mRes.json():{},alertsData=aRes.ok?await aRes.json():{alerts:[]};
-        const stats=memory.stats||{};
-        document.getElementById('stat-events').textContent=memory.timeline?.length||stats.events||0;
-        document.getElementById('stat-alerts').textContent=alertsData.alerts?.length||stats.alerts||0;
-        document.getElementById('stat-orgs').textContent=memory.flaggedOrganizations?.length||stats.orgs||0;
-        document.getElementById('stat-news').textContent=memory.recentNews?.length||stats.newsArticles||0;
-        if(memory.lastScan)document.getElementById('last-scan-time').textContent=formatRelativeTime(memory.lastScan);
-        const conf=memory.systemConfidence||50;
-        document.getElementById('confidence-percent').textContent=conf+'%';
-        document.getElementById('confidence-arc').style.strokeDasharray=conf*2.83+' 283';
-        const notes=memory.agentNotes||[];
-        if(notes[0]?.summary)document.getElementById('confidence-desc').textContent=notes[0].summary.substring(0,150)+'...';
-        const factors=memory.confidenceFactors||[];
-        if(factors.length)document.getElementById('confidence-factors').innerHTML=factors.slice(0,3).map(f=>'<div class="confidence-factor"><span class="factor-name">'+escapeHtml(f.factor)+'</span><span class="factor-score">'+f.score+'%</span></div>').join('');
-        const news=memory.recentNews||[];
-        document.getElementById('news-feed').innerHTML=news.length?news.slice(0,12).map(a=>'<div class="news-item"><a href="'+escapeHtml(a.url||'#')+'" target="_blank" class="news-title">'+escapeHtml(a.title||'Untitled')+'</a><div class="news-meta"><span>'+escapeHtml(a.publisher||a.source||'')+'</span><span>'+escapeHtml(a.location||'')+'</span><span class="news-relevance">'+(a.relevance_score||0)+'%</span></div></div>').join(''):'<div class="empty-state"><p>No news yet</p></div>';
-        const jobs=memory.jobPostings||[],jobCount=memory.jobPostingPatterns?.totalJobs||jobs.length||0;
-        document.getElementById('job-count').textContent=jobCount;
-        if(jobs.length){document.getElementById('job-list').innerHTML=jobs.slice(0,8).map(j=>{const s=j.suspicion_score||0,sc=s>=50?'':s>=25?'medium':'low';return'<a href="'+escapeHtml(j.url||'#')+'" target="_blank" class="job-item"><span class="job-title">'+escapeHtml((j.title||'').substring(0,45))+'...</span><span class="job-location">'+escapeHtml(j.city||'')+' '+escapeHtml(j.state||'')+'</span><span class="job-score '+sc+'">'+s+'%</span></a>'}).join('')}else{const kw=memory.jobPostingPatterns?.keywords||{};document.getElementById('job-list').innerHTML=Object.keys(kw).length?'<div style="padding:12px;font-size:.8rem;color:var(--color-text-secondary)"><p>Monitoring keywords:</p>'+Object.entries(kw).slice(0,6).map(([k,v])=>'<div class="job-item"><span class="job-title">"'+escapeHtml(k)+'"</span><span class="job-score low">'+v+'</span></div>').join('')+'</div>':'<div class="empty-state"><p>No jobs tracked</p></div>'}
-        const orgs=memory.flaggedOrganizations||[];
-        document.getElementById('org-list').innerHTML=orgs.length?orgs.slice(0,8).map(o=>{const s=o.risk_score||0,rc=s>=60?'high':s>=40?'medium':'low';return'<a href="'+escapeHtml(o.sourceUrl||'#')+'" target="_blank" class="org-item"><div class="org-indicator '+rc+'"></div><div class="org-details"><div class="org-name">'+escapeHtml(o.name||'Unknown')+'</div><div class="org-meta">'+escapeHtml(o.state||'')+(o.city?' | '+escapeHtml(o.city):'')+'</div></div><div class="org-score">'+s+'%</div></a>'}).join(''):'<div class="empty-state"><p>No orgs flagged</p></div>';
-        allTimelineEvents=memory.timeline||[];
-        renderTimeline(currentRange);
-        const alerts=alertsData.alerts||[];
-        document.getElementById('alerts-grid').innerHTML=alerts.length?alerts.slice(0,6).map(a=>'<div class="alert-card"><div class="alert-header"><div class="alert-severity '+(a.severity||(a.confidence>=80?'high':a.confidence>=50?'medium':'low'))+'"></div><div class="alert-title">'+escapeHtml(a.title||'Alert')+'</div></div><div class="alert-body"><p class="alert-description">'+escapeHtml((a.description||'').substring(0,200))+'...</p><div class="alert-factors">'+(a.factors||[]).slice(0,3).map(f=>'<div class="alert-factor"><span class="factor-label">'+escapeHtml(f.name||'')+'</span><span class="factor-value">'+escapeHtml(String(f.value||''))+'</span></div>').join('')+'</div></div><div class="alert-footer"><span class="alert-confidence">Confidence: '+(a.confidence||0)+'%</span><span style="font-size:.75rem;color:var(--color-text-muted)">'+formatRelativeTime(a.timestamp)+'</span></div></div>').join(''):'<div class="empty-state"><p>No active alerts</p></div>';
-        document.querySelectorAll('.range-btn').forEach(btn=>btn.addEventListener('click',function(){document.querySelectorAll('.range-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');currentRange=this.dataset.range==='all'?'all':parseInt(this.dataset.range);renderTimeline(currentRange)}))
-    }catch(e){console.error(e)}})();
-    </script>
 </body>
 </html>
