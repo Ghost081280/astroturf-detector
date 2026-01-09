@@ -185,6 +185,22 @@ def run_collectors(memory, full_scan=False):
         print(f"  Nonprofit collector error: {e}")
         results['errors'].append(f"Nonprofits: {str(e)}")
     
+    # DuckDuckGo News Collector
+    try:
+        from collectors.ddg_collector import DuckDuckGoCollector
+        print("Running DuckDuckGo collector...")
+        ddg_collector = DuckDuckGoCollector()
+        ddg_results = ddg_collector.collect(max_calls=5)
+        results['news'].extend(ddg_results)  # Add to existing news
+        memory['dataSources']['duckduckgo'] = {
+            'lastCall': datetime.utcnow().isoformat() + 'Z',
+            'status': 'active'
+        }
+        print(f"  Found {len(ddg_results)} DuckDuckGo results")
+    except Exception as e:
+        print(f"  DuckDuckGo collector error: {e}")
+        results['errors'].append(f"DuckDuckGo: {str(e)}")
+    
     return results
 
 
