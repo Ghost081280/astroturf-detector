@@ -11,7 +11,6 @@ class JobCollector:
     
     SEARCH_TERMS = ["protest", "rally", "canvasser", "petition", "grassroots", "organizer", "activist", "field coordinator", "campaign staff", "community outreach"]
     
-    # Suspicion scoring keywords
     HIGH_SUSPICION = ["paid protest", "hold signs", "same day pay", "cash daily", "immediate start", "no experience"]
     MEDIUM_SUSPICION = ["protest", "rally", "canvass", "petition", "grassroots", "political", "campaign"]
     URGENCY_INDICATORS = ["urgent", "immediate", "today", "asap", "now hiring", "start today"]
@@ -24,10 +23,8 @@ class JobCollector:
         self.calls_made = 0
     
     def collect(self, max_calls: int = 20) -> List[Dict[str, Any]]:
-        """Collect jobs from all available APIs"""
         all_jobs = []
         
-        # 1. Adzuna API (if credentials available)
         if self.adzuna_app_id and self.adzuna_app_key:
             print("  Fetching from Adzuna API...")
             adzuna_jobs = self._fetch_adzuna_jobs(max_calls // 3)
@@ -36,19 +33,16 @@ class JobCollector:
         else:
             print("  Adzuna API not configured (set ADZUNA_APP_ID and ADZUNA_APP_KEY)")
         
-        # 2. Remotive RSS (always works, no auth)
         print("  Fetching from Remotive RSS...")
         remotive_jobs = self._fetch_remotive_jobs()
         all_jobs.extend(remotive_jobs)
         print(f"    Found {len(remotive_jobs)} Remotive jobs")
         
-        # 3. USAJobs API (always works, no auth for basic)
         print("  Fetching from USAJobs API...")
         usajobs = self._fetch_usajobs()
         all_jobs.extend(usajobs)
         print(f"    Found {len(usajobs)} USAJobs listings")
         
-        # Deduplicate by title similarity
         seen_titles = set()
         unique_jobs = []
         for job in all_jobs:
@@ -57,10 +51,8 @@ class JobCollector:
                 seen_titles.add(title_key)
                 unique_jobs.append(job)
         
-        # Sort by suspicion score
         unique_jobs.sort(key=lambda x: x.get('suspicion_score', 0), reverse=True)
         
-        # If we got very few results, add baseline monitoring data
         if len(unique_jobs) < 5:
             print("  Adding baseline monitoring data...")
             unique_jobs.extend(self._get_baseline_monitoring_data())
@@ -68,7 +60,6 @@ class JobCollector:
         return unique_jobs[:100]
     
     def _fetch_adzuna_jobs(self, max_calls: int) -> List[Dict[str, Any]]:
-        """Fetch from Adzuna Job Search API"""
         jobs = []
         base_url = "https://api.adzuna.com/v1/api/jobs/us/search/1"
         
@@ -112,7 +103,6 @@ class JobCollector:
         return jobs
     
     def _fetch_remotive_jobs(self) -> List[Dict[str, Any]]:
-        """Fetch from Remotive RSS feed (no auth required)"""
         jobs = []
         feeds = [
             "https://remotive.com/remote-jobs/feed/community-management",
@@ -133,7 +123,6 @@ class JobCollector:
                             title = title_elem.text or ''
                             description = desc_elem.text if desc_elem is not None else ''
                             
-                            # Only include if relevant keywords
                             relevant = any(kw in title.lower() for kw in ['organizer', 'coordinator', 'community', 'outreach', 'campaign', 'advocacy'])
                             if relevant:
                                 job = {
@@ -156,7 +145,6 @@ class JobCollector:
         return jobs
     
     def _fetch_usajobs(self) -> List[Dict[str, Any]]:
-        """Fetch from USAJobs API (government jobs)"""
         jobs = []
         base_url = "https://data.usajobs.gov/api/search"
         
@@ -204,26 +192,21 @@ class JobCollector:
         return jobs
     
     def _calculate_suspicion(self, title: str, description: str) -> int:
-        """Calculate suspicion score 0-100"""
         score = 0
         text = f"{title} {description}".lower()
         
-        # High suspicion keywords (+25 each, max 50)
         high_hits = sum(1 for kw in self.HIGH_SUSPICION if kw in text)
         score += min(high_hits * 25, 50)
         
-        # Medium suspicion keywords (+10 each, max 30)
         medium_hits = sum(1 for kw in self.MEDIUM_SUSPICION if kw in text)
         score += min(medium_hits * 10, 30)
         
-        # Urgency indicators (+5 each, max 20)
         urgency_hits = sum(1 for kw in self.URGENCY_INDICATORS if kw in text)
         score += min(urgency_hits * 5, 20)
         
         return min(score, 100)
     
     def _get_baseline_monitoring_data(self) -> List[Dict[str, Any]]:
-        """Return baseline monitoring entries when APIs return nothing"""
         return [
             {
                 'type': 'monitoring_target',
