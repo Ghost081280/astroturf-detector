@@ -1,4 +1,4 @@
-"""Job Collector - Adzuna, USAJobs, Remotive APIs (replaces broken Craigslist scraper)"""
+"""Job Collector - Adzuna, USAJobs, Remotive APIs"""
 import os
 import requests
 import xml.etree.ElementTree as ET
@@ -7,13 +7,41 @@ from typing import List, Dict, Any
 from urllib.parse import quote_plus
 
 class JobCollector:
-    """Collects job postings from working APIs - NO more Craigslist scraping"""
+    """Collects job postings from working APIs"""
     
-    SEARCH_TERMS = ["protest", "rally", "canvasser", "petition", "grassroots", "organizer", "activist", "field coordinator", "campaign staff", "community outreach"]
+    # More specific search terms to avoid false positives like "Protestant"
+    SEARCH_TERMS = [
+        "paid protest",
+        "rally attendee",
+        "canvasser political",
+        "petition signature",
+        "grassroots organizer",
+        "political activist",
+        "campaign field",
+        "community organizer political",
+        "mobilization coordinator",
+        "advocacy campaign"
+    ]
     
-    HIGH_SUSPICION = ["paid protest", "hold signs", "same day pay", "cash daily", "immediate start", "no experience"]
-    MEDIUM_SUSPICION = ["protest", "rally", "canvass", "petition", "grassroots", "political", "campaign"]
+    # Suspicion scoring keywords
+    HIGH_SUSPICION = [
+        "paid protest", "hold signs", "same day pay", "cash daily", 
+        "immediate start", "no experience needed", "paid rally",
+        "paid attendee", "crowd hire", "event attendee paid"
+    ]
+    MEDIUM_SUSPICION = [
+        "canvass", "petition", "grassroots", "political campaign",
+        "mobilize", "activist", "advocacy", "field organizer"
+    ]
     URGENCY_INDICATORS = ["urgent", "immediate", "today", "asap", "now hiring", "start today"]
+    
+    # Words that indicate FALSE POSITIVES - skip these jobs
+    FALSE_POSITIVE_TERMS = [
+        "protestant", "chaplain", "pastor", "minister", "church",
+        "rabbi", "imam", "religious", "clergy", "worship",
+        "senior living", "nursing", "healthcare", "medical",
+        "software protest", "test protest"  # tech jobs
+    ]
     
     def __init__(self):
         self.adzuna_app_id = os.environ.get('ADZUNA_APP_ID')
@@ -23,43 +51,59 @@ class JobCollector:
         self.calls_made = 0
     
     def collect(self, max_calls: int = 20) -> List[Dict[str, Any]]:
+        """Collect jobs from all available APIs"""
         all_jobs = []
         
+        # 1. Adzuna API (if credentials available)
         if self.adzuna_app_id and self.adzuna_app_key:
             print("  Fetching from Adzuna API...")
-            adzuna_jobs = self._fetch_adzuna_jobs(max_calls // 3)
+            adzuna_jobs = self._fetch_adzuna_jobs(max_calls // 2)
             all_jobs.extend(adzuna_jobs)
             print(f"    Found {len(adzuna_jobs)} Adzuna jobs")
         else:
             print("  Adzuna API not configured (set ADZUNA_APP_ID and ADZUNA_APP_KEY)")
         
+        # 2. Remotive RSS (always works, no auth)
         print("  Fetching from Remotive RSS...")
         remotive_jobs = self._fetch_remotive_jobs()
         all_jobs.extend(remotive_jobs)
         print(f"    Found {len(remotive_jobs)} Remotive jobs")
         
+        # 3. USAJobs API (always works, no auth for basic)
         print("  Fetching from USAJobs API...")
         usajobs = self._fetch_usajobs()
         all_jobs.extend(usajobs)
         print(f"    Found {len(usajobs)} USAJobs listings")
         
+        # Filter out false positives
+        filtered_jobs = [j for j in all_jobs if not self._is_false_positive(j)]
+        
+        # Deduplicate by title similarity
         seen_titles = set()
         unique_jobs = []
-        for job in all_jobs:
+        for job in filtered_jobs:
             title_key = job.get('title', '')[:40].lower()
             if title_key not in seen_titles:
                 seen_titles.add(title_key)
                 unique_jobs.append(job)
         
+        # Sort by suspicion score
         unique_jobs.sort(key=lambda x: x.get('suspicion_score', 0), reverse=True)
-        
-        if len(unique_jobs) < 5:
-            print("  Adding baseline monitoring data...")
-            unique_jobs.extend(self._get_baseline_monitoring_data())
         
         return unique_jobs[:100]
     
+    def _is_false_positive(self, job: dict) -> bool:
+        """Check if job is a false positive (religious, healthcare, etc.)"""
+        title = job.get('title', '').lower()
+        company = job.get('company', '').lower()
+        
+        for term in self.FALSE_POSITIVE_TERMS:
+            if term in title or term in company:
+                return True
+        return False
+    
     def _fetch_adzuna_jobs(self, max_calls: int) -> List[Dict[str, Any]]:
+        """Fetch from Adzuna Job Search API"""
         jobs = []
         base_url = "https://api.adzuna.com/v1/api/jobs/us/search/1"
         
@@ -80,6 +124,10 @@ class JobCollector:
                     for result in data.get('results', []):
                         title = result.get('title', '')
                         description = result.get('description', '')
+                        
+                        # Skip if false positive
+                        if self._is_false_positive({'title': title, 'company': result.get('company', {}).get('display_name', '')}):
+                            continue
                         
                         job = {
                             'type': 'job_posting',
@@ -103,6 +151,7 @@ class JobCollector:
         return jobs
     
     def _fetch_remotive_jobs(self) -> List[Dict[str, Any]]:
+        """Fetch from Remotive RSS feed (no auth required)"""
         jobs = []
         feeds = [
             "https://remotive.com/remote-jobs/feed/community-management",
@@ -123,8 +172,9 @@ class JobCollector:
                             title = title_elem.text or ''
                             description = desc_elem.text if desc_elem is not None else ''
                             
-                            relevant = any(kw in title.lower() for kw in ['organizer', 'coordinator', 'community', 'outreach', 'campaign', 'advocacy'])
-                            if relevant:
+                            # Only include if relevant keywords AND not false positive
+                            relevant = any(kw in title.lower() for kw in ['organizer', 'coordinator', 'community', 'outreach', 'campaign', 'advocacy', 'mobiliz'])
+                            if relevant and not self._is_false_positive({'title': title, 'company': ''}):
                                 job = {
                                     'type': 'job_posting',
                                     'source': 'remotive',
@@ -145,10 +195,11 @@ class JobCollector:
         return jobs
     
     def _fetch_usajobs(self) -> List[Dict[str, Any]]:
+        """Fetch from USAJobs API (government jobs)"""
         jobs = []
         base_url = "https://data.usajobs.gov/api/search"
         
-        search_terms = ["community outreach", "public affairs", "campaign"]
+        search_terms = ["community organizer", "public affairs campaign", "grassroots"]
         
         for term in search_terms:
             try:
@@ -167,6 +218,10 @@ class JobCollector:
                     for result in data.get('SearchResult', {}).get('SearchResultItems', []):
                         matched = result.get('MatchedObjectDescriptor', {})
                         title = matched.get('PositionTitle', '')
+                        
+                        # Skip false positives
+                        if self._is_false_positive({'title': title, 'company': matched.get('OrganizationName', '')}):
+                            continue
                         
                         locations = matched.get('PositionLocation', [])
                         city = locations[0].get('CityName', '') if locations else ''
@@ -192,49 +247,24 @@ class JobCollector:
         return jobs
     
     def _calculate_suspicion(self, title: str, description: str) -> int:
+        """Calculate suspicion score 0-100"""
         score = 0
         text = f"{title} {description}".lower()
         
+        # High suspicion keywords (+25 each, max 50)
         high_hits = sum(1 for kw in self.HIGH_SUSPICION if kw in text)
         score += min(high_hits * 25, 50)
         
+        # Medium suspicion keywords (+10 each, max 30)
         medium_hits = sum(1 for kw in self.MEDIUM_SUSPICION if kw in text)
         score += min(medium_hits * 10, 30)
         
+        # Urgency indicators (+5 each, max 20)
         urgency_hits = sum(1 for kw in self.URGENCY_INDICATORS if kw in text)
         score += min(urgency_hits * 5, 20)
         
         return min(score, 100)
-    
-    def _get_baseline_monitoring_data(self) -> List[Dict[str, Any]]:
-        return [
-            {
-                'type': 'monitoring_target',
-                'source': 'baseline',
-                'title': 'Monitoring: Craigslist gig postings',
-                'company': 'Various',
-                'city': 'Multiple Cities',
-                'state': '',
-                'url': 'https://craigslist.org',
-                'date': datetime.utcnow().isoformat() + 'Z',
-                'suspicion_score': 0,
-                'keywords': ['protest', 'rally', 'canvasser'],
-                'is_monitoring_entry': True
-            },
-            {
-                'type': 'monitoring_target',
-                'source': 'baseline',
-                'title': 'Monitoring: Indeed political jobs',
-                'company': 'Various',
-                'city': 'Multiple Cities',
-                'state': '',
-                'url': 'https://indeed.com',
-                'date': datetime.utcnow().isoformat() + 'Z',
-                'suspicion_score': 0,
-                'keywords': ['campaign', 'grassroots', 'organizer'],
-                'is_monitoring_entry': True
-            }
-        ]
+
 
 if __name__ == '__main__':
     collector = JobCollector()
