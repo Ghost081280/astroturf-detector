@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astroturf Detector - Exposing Manufactured Grassroots</title>
+    <meta name="description" content="Open-source intelligence engine monitoring for paid protest activity and manufactured grassroots movements.">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo-container">
+                <svg class="logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grassGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                            <stop offset="0%" style="stop-color:#2d5a27"/>
+                            <stop offset="100%" style="stop-color:#4a7c43"/>
+                        </linearGradient>
+                        <linearGradient id="syntheticGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8b5cf6"/>
+                            <stop offset="100%" style="stop-color:#6366f1"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="24" cy="24" r="22" fill="none" stroke="url(#syntheticGradient)" stroke-width="2"/>
+                    <path d="M12 36 Q16 28 14 20 Q18 26 20 18 Q22 26 24 14 Q26 26 28 18 Q30 26 34 20 Q32 28 36 36" 
+                          fill="url(#grassGradient)" opacity="0.9"/>
+                    <circle cx="24" cy="24" r="8" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="3 2"/>
+                    <circle cx="24" cy="24" r="3" fill="#fff"/>
+                </svg>
+                <div class="logo-text">
+                    <h1>Astroturf Detector</h1>
+                    <span class="tagline">Exposing Manufactured Grassroots</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+                <a href="#timeline" class="nav-link">Timeline</a>
+                <a href="#alerts" class="nav-link">Alerts</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Real-time monitoring for manufactured movements</h2>
+                    <p>An open-source intelligence engine that tracks paid protest activity, suspicious nonprofit formations, and coordinated astroturf campaigns using only public data sources.</p>
+                    <div class="hero-stats" id="hero-stats">
+                        <div class="stat-card">
+                            <span class="stat-value" id="stat-events">--</span>
+                            <span class="stat-label">Events Tracked</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="stat-alerts">--</span>
+                            <span class="stat-label">Active Alerts</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value" id="stat-orgs">--</span>
+                            <span class="stat-label">Orgs Flagged</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard" class="dashboard-section">
+            <div class="container">
+                <div class="section-header">
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    <h2>Activity Dashboard</h2>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-card activity-map">
+                        <div class="card-header">
+                            <h3>Geographic Activity</h3>
+                            <span class="card-badge">Last 30 Days</span>
+                        </div>
+                        <div class="card-content">
+                            <div id="activity-map" class="map-container">
+                                <div class="map-placeholder">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                                        <circle cx="12" cy="9" r="2.5"/>
+                                    </svg>
+                                    <span>Loading geographic data...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card job-tracker">
+                        <div class="card-header">
+                            <h3>Job Posting Monitor</h3>
+                            <span class="card-badge live">Live</span>
+                        </div>
+                        <div class="card-content">
+                            <div id="job-chart" class="chart-container">
+                                <canvas id="job-chart-canvas"></canvas>
+                            </div>
+                            <div class="card-footer">
+                                <div class="metric">
+                                    <span class="metric-value" id="job-count">--</span>
+                                    <span class="metric-label">Protest-related listings</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-value" id="job-trend">--</span>
+                                    <span class="metric-label">vs last week</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card org-tracker">
+                        <div class="card-header">
+                            <h3>New Organization Filings</h3>
+                            <span class="card-badge">501(c)(4) Watch</span>
+                        </div>
+                        <div class="card-content">
+                            <div id="org-list" class="org-list">
+                                <div class="loading-indicator">
+                                    <div class="spinner"></div>
+                                    <span>Scanning registries...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card confidence-meter">
+                        <div class="card-header">
+                            <h3>Detection Confidence</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="confidence-display">
+                                <svg class="confidence-ring" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="#1e293b" stroke-width="8"/>
+                                    <circle id="confidence-arc" cx="50" cy="50" r="45" fill="none" stroke="url(#confidenceGradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 283" transform="rotate(-90 50 50)"/>
+                                    <defs>
+                                        <linearGradient id="confidenceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#22c55e"/>
+                                            <stop offset="50%" style="stop-color:#eab308"/>
+                                            <stop offset="100%" style="stop-color:#ef4444"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="confidence-value">
+                                    <span id="confidence-percent">--</span>
+                                    <span class="confidence-label">System Confidence</span>
+                                </div>
+                            </div>
+                            <p class="confidence-description" id="confidence-desc">Analyzing data patterns...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" class="timeline-section">
+            <div class="container">
+                <div class="section-header">
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="20" x2="12" y2="10"/>
+                        <line x1="18" y1="20" x2="18" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="16"/>
+                    </svg>
+                    <h2>Activity Timeline</h2>
+                </div>
+                
+                <div class="timeline-controls">
+                    <div class="time-range-selector">
+                        <button class="range-btn active" data-range="7">7 Days</button>
+                        <button class="range-btn" data-range="30">30 Days</button>
+                        <button class="range-btn" data-range="90">90 Days</button>
+                        <button class="range-btn" data-range="365">1 Year</button>
+                    </div>
+                    <div class="filter-toggles">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="filter-jobs" checked>
+                            <span class="toggle-indicator jobs"></span>
+                            Job Postings
+                        </label>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="filter-orgs" checked>
+                            <span class="toggle-indicator orgs"></span>
+                            Org Filings
+                        </label>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="filter-events" checked>
+                            <span class="toggle-indicator events"></span>
+                            Public Events
+                        </label>
+                    </div>
+                </div>
+
+                <div class="timeline-chart-container">
+                    <canvas id="timeline-chart"></canvas>
+                </div>
+
+                <div class="timeline-events" id="timeline-events">
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <span>Loading historical data...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="alerts" class="alerts-section">
+            <div class="container">
+                <div class="section-header">
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <h2>Active Alerts</h2>
+                </div>
+
+                <div class="alerts-grid" id="alerts-grid">
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <span>Checking for alerts...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                    <h2>About This Project</h2>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </div>
+                        <h3>What We Monitor</h3>
+                        <p>Public job boards for protest-related hiring, FEC campaign finance disclosures, IRS nonprofit filings, and state corporate registries. All data is legally obtained from public sources.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                        </div>
+                        <h3>Why It Matters</h3>
+                        <p>Manufactured grassroots campaigns undermine democratic participation. When paid actors fill city council chambers or fake organizations flood legislators with letters, genuine public voices get drowned out.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        <h3>Privacy First</h3>
+                        <p>We do not collect personal information. All analysis is performed on organizational data, hiring patterns, and financial disclosures - never on individuals or legitimate protesters.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                        </div>
+                        <h3>Open Source</h3>
+                        <p>This entire project is open source. Review our methodology, audit our code, and contribute improvements. Transparency about our own operations is essential to our credibility.</p>
+                    </div>
+                </div>
+
+                <div class="data-sources">
+                    <h3>Data Sources</h3>
+                    <div class="source-list">
+                        <div class="source-item">
+                            <span class="source-name">Federal Election Commission</span>
+                            <span class="source-type">Campaign Finance</span>
+                        </div>
+                        <div class="source-item">
+                            <span class="source-name">IRS Form 990 Database</span>
+                            <span class="source-type">Nonprofit Filings</span>
+                        </div>
+                        <div class="source-item">
+                            <span class="source-name">ProPublica Nonprofit Explorer</span>
+                            <span class="source-type">Tax Records</span>
+                        </div>
+                        <div class="source-item">
+                            <span class="source-name">State Corporate Registries</span>
+                            <span class="source-type">Incorporation Records</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <svg class="footer-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="22" fill="none" stroke="#64748b" stroke-width="2"/>
+                        <path d="M12 36 Q16 28 14 20 Q18 26 20 18 Q22 26 24 14 Q26 26 28 18 Q30 26 34 20 Q32 28 36 36" fill="#64748b" opacity="0.6"/>
+                    </svg>
+                    <span>Astroturf Detector</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/your-repo/astroturf-detector" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                    <a href="#about">About</a>
+                    <a href="#alerts">Alerts</a>
+                </div>
+                <div class="footer-meta">
+                    <span>Last scan: <span id="last-scan-time">--</span></span>
+                    <span>Data updated hourly</span>
+                </div>
+            </div>
+            <div class="footer-disclaimer">
+                <p>This project provides indicators that may warrant investigation, not conclusive evidence of wrongdoing. Astroturfing is generally legal, though ethically questionable. All data is from public sources.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
