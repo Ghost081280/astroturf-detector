@@ -1154,3 +1154,141 @@ html {
     margin-bottom: 12px;
     opacity: .5;
 }
+/* Compact Timeline Styles */
+.timeline-event-compact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-sm);
+    margin-bottom: 6px;
+    font-size: 0.8125rem;
+}
+
+.event-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.event-title-compact {
+    flex: 1;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.event-time-compact {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+.event-link-compact {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+/* Clean Alert Cards */
+.alert-card-clean {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.alert-header-clean {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.alert-severity-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.alert-severity-dot.high {
+    background: var(--color-danger);
+}
+
+.alert-severity-dot.medium {
+    background: var(--color-warning);
+}
+
+.alert-severity-dot.low {
+    background: var(--color-info);
+}
+
+.alert-title-clean {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+}
+
+.alert-desc-clean {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.alert-footer-clean {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.alert-confidence-clean {
+    font-size: 0.75rem;
+    color: var(--color-accent-primary);
+    font-weight: 600;
+}
+
+.alert-time-clean {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+/* News source badges */
+.news-source {
+    font-weight: 600;
+    font-size: 0.6875rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.source-google {
+    background: rgba(66, 133, 244, 0.15);
+    color: #4285f4;
+}
+
+.source-ddg {
+    background: rgba(222, 88, 51, 0.15);
+    color: #de5833;
+}
+
+/* States grid tooltip */
+.state-badge[title] {
+    cursor: help;
+}
+
+/* Monitoring context text */
+.monitoring-context {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    padding: 8px 12px;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: var(--radius-sm);
+    margin-top: 8px;
+    text-align: center;
+}
