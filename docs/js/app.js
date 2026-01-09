@@ -1,514 +1,345 @@
-/**
- * ASTROTURF DETECTOR - Frontend Application
- * United States Monitor
- */
+// Astroturf Detector v2.0 - Frontend Application
 
-(function() {
-    'use strict';
+const ALL_STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC'];
+const HIGH_ACTIVITY = ['TX','CA','FL','NY','PA','OH','GA','NC','MI','AZ','WA','CO','VA','NJ','IL','DC'];
 
-    const CONFIG = {
-        dataPath: 'data/',
-        refreshInterval: 300000, // 5 minutes
-        defaultTimeRange: 365
-    };
+let currentRange = 90;
+let allTimelineEvents = [];
 
-    const state = {
-        memory: null,
-        alerts: [],
-        timeRange: CONFIG.defaultTimeRange,
-        filters: {
-            jobs: true,
-            orgs: true,
-            events: true
-        }
-    };
-
-    // Initialize
-    async function init() {
-        await loadData();
-        setupEventListeners();
-        setInterval(loadData, CONFIG.refreshInterval);
+// Initialize states grid
+function initStatesGrid() {
+    const grid = document.getElementById('states-grid');
+    if (grid) {
+        grid.innerHTML = ALL_STATES.map(s => 
+            '<div class="state-badge ' + (HIGH_ACTIVITY.includes(s) ? 'high-activity' : '') + '">' + s + '</div>'
+        ).join('');
     }
+}
 
-    // Load data from JSON files
-    async function loadData() {
-        try {
-            const [memoryRes, alertsRes] = await Promise.all([
-                fetch(CONFIG.dataPath + 'memory.json'),
-                fetch(CONFIG.dataPath + 'alerts.json')
-            ]);
-
-            if (memoryRes.ok) {
-                state.memory = await memoryRes.json();
-            }
-            if (alertsRes.ok) {
-                const alertsData = await alertsRes.json();
-                state.alerts = alertsData.alerts || [];
-            }
-
-            renderAll();
-        } catch (error) {
-            console.error('Error loading data:', error);
-        }
+// Parse date safely
+function parseDate(d) {
+    if (!d) return new Date(0);
+    try {
+        return new Date(d);
+    } catch {
+        return new Date(0);
     }
+}
 
-    // Render all components
-    function renderAll() {
-        renderStats();
-        renderLastScan();
-        renderGeographicActivity();
-        renderJobMonitor();
-        renderOrganizations();
-        renderConfidence();
-        renderTimeline();
-        renderAlerts();
-    }
+// Format relative time
+function formatRelativeTime(d) {
+    const now = new Date();
+    const date = parseDate(d);
+    const ms = now - date;
+    const m = Math.floor(ms / 60000);
+    const h = Math.floor(ms / 3600000);
+    const dy = Math.floor(ms / 86400000);
+    
+    if (m < 1) return 'Just now';
+    if (m < 60) return m + 'm ago';
+    if (h < 24) return h + 'h ago';
+    if (dy < 7) return dy + 'd ago';
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
 
-    // Render hero stats
-    function renderStats() {
-        const stats = state.memory?.stats || {};
-        
-        animateCounter('stat-events', stats.events || 0);
-        animateCounter('stat-alerts', stats.alerts || 0);
-        animateCounter('stat-orgs', stats.orgs || 0);
-        animateCounter('stat-news', stats.newsArticles || 0);
-    }
+// Escape HTML to prevent XSS
+function escapeHtml(s) {
+    if (!s) return '';
+    return s.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+}
 
-    // Animate counter
-    function animateCounter(id, target) {
-        const el = document.getElementById(id);
-        if (!el) return;
-
-        const duration = 1000;
-        const start = performance.now();
-        const startVal = parseInt(el.textContent) || 0;
-
-        function update(currentTime) {
-            const elapsed = currentTime - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const easeProgress = 1 - Math.pow(1 - progress, 3);
-            const current = Math.floor(startVal + (target - startVal) * easeProgress);
-            el.textContent = current;
-
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            }
-        }
-
-        requestAnimationFrame(update);
-    }
-
-    // Render last scan time
-    function renderLastScan() {
-        const el = document.getElementById('last-scan-time');
-        if (!el) return;
-
-        const lastScan = state.memory?.lastScan;
-        if (lastScan) {
-            el.textContent = formatRelativeTime(lastScan);
-        } else {
-            el.textContent = 'Never';
-        }
-    }
-
-    // Render geographic activity
-    function renderGeographicActivity() {
-        const container = document.getElementById('activity-map');
-        if (!container) return;
-
-        // Get geographic data from flagged organizations
-        const orgs = state.memory?.flaggedOrganizations || [];
-        const stateCounts = {};
-
-        orgs.forEach(org => {
-            const st = org.state;
-            if (st) {
-                stateCounts[st] = (stateCounts[st] || 0) + 1;
-            }
-        });
-
-        // Also check jobPostingPatterns for cities
-        const jobPatterns = state.memory?.jobPostingPatterns || {};
-        const cities = jobPatterns.cities || {};
-
-        // Combine into display data
-        const hasStateData = Object.keys(stateCounts).length > 0;
-        const hasCityData = Object.keys(cities).length > 0;
-
-        if (!hasStateData && !hasCityData) {
-            container.innerHTML = `
-                <div class="map-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                        <circle cx="12" cy="9" r="2.5"/>
-                    </svg>
-                    <span>No geographic data yet</span>
-                </div>
-            `;
-            return;
-        }
-
-        // Build display - prefer cities if available, otherwise states
-        let displayData = [];
-        
-        if (hasCityData) {
-            displayData = Object.entries(cities)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 10);
-        } else {
-            displayData = Object.entries(stateCounts)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 10);
-        }
-
-        const maxCount = Math.max(...displayData.map(d => d[1]));
-
-        container.innerHTML = `
-            <div class="geo-grid">
-                ${displayData.map(([location, count]) => `
-                    <div class="geo-item">
-                        <div class="geo-bar" style="width: ${(count / maxCount) * 100}%"></div>
-                        <span class="geo-city">${escapeHtml(location)}</span>
-                        <span class="geo-count">${count}</span>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-
-    // Render job monitor
-    function renderJobMonitor() {
-        const chartContainer = document.getElementById('job-chart');
-        const countEl = document.getElementById('job-count');
-        const trendEl = document.getElementById('job-trend');
-
-        if (!chartContainer) return;
-
-        const jobPatterns = state.memory?.jobPostingPatterns || {};
-        const keywords = jobPatterns.keywords || {};
-        const totalJobs = jobPatterns.totalJobs || 0;
-
-        // Update metrics
-        if (countEl) countEl.textContent = totalJobs;
-        if (trendEl) {
-            const trend = jobPatterns.weekOverWeekChange || 0;
-            trendEl.textContent = trend >= 0 ? `+${trend}%` : `${trend}%`;
-            trendEl.style.color = trend >= 0 ? 'var(--color-danger)' : 'var(--color-success)';
-        }
-
-        // Render keyword chart
-        const keywordEntries = Object.entries(keywords).sort((a, b) => b[1] - a[1]).slice(0, 6);
-
-        if (keywordEntries.length === 0) {
-            chartContainer.innerHTML = `
-                <div class="chart-placeholder">
-                    <span>No job posting data yet</span>
-                </div>
-            `;
-            return;
-        }
-
-        const maxKeywordCount = Math.max(...keywordEntries.map(k => k[1]));
-
-        chartContainer.innerHTML = `
-            <div class="keyword-chart">
-                ${keywordEntries.map(([keyword, count]) => `
-                    <div class="keyword-row">
-                        <span class="keyword-name">${escapeHtml(keyword)}</span>
-                        <div class="keyword-bar-container">
-                            <div class="keyword-bar" style="width: ${(count / maxKeywordCount) * 100}%"></div>
-                        </div>
-                        <span class="keyword-count">${count}</span>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-
-    // Render organizations
-    function renderOrganizations() {
-        const container = document.getElementById('org-list');
-        if (!container) return;
-
-        const orgs = state.memory?.flaggedOrganizations || [];
-
-        if (orgs.length === 0) {
-            // Check for watchlist patterns
-            const watchlist = state.memory?.knownAstroturfPatterns?.threeWordNames || [];
-            if (watchlist.length > 0) {
-                container.innerHTML = watchlist.slice(0, 8).map(name => `
-                    <div class="org-item">
-                        <div class="org-indicator medium"></div>
-                        <div class="org-details">
-                            <div class="org-name">${escapeHtml(name)}</div>
-                            <div class="org-meta">Watchlist Pattern</div>
-                        </div>
-                        <div class="org-score">--</div>
-                    </div>
-                `).join('');
-            } else {
-                container.innerHTML = `
-                    <div class="loading-indicator">
-                        <span>No organizations flagged yet</span>
-                    </div>
-                `;
-            }
-            return;
-        }
-
-        container.innerHTML = orgs.slice(0, 10).map(org => {
-            const riskClass = getRiskClass(org.risk_score || 0);
-            const sourceUrl = org.sourceUrl || `https://projects.propublica.org/nonprofits/organizations/${org.ein || ''}`;
-            
-            return `
-                <a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener" class="org-item">
-                    <div class="org-indicator ${riskClass}"></div>
-                    <div class="org-details">
-                        <div class="org-name">${escapeHtml(org.name)}</div>
-                        <div class="org-meta">${escapeHtml(org.state || 'Unknown')} • ${escapeHtml(org.city || 'Unknown')}</div>
-                    </div>
-                    <div class="org-score">${org.risk_score || 0}%</div>
-                    <span class="org-link-icon">↗</span>
-                </a>
-            `;
-        }).join('');
-    }
-
-    // Render confidence meter
-    function renderConfidence() {
-        const percentEl = document.getElementById('confidence-percent');
-        const descEl = document.getElementById('confidence-desc');
-        const arcEl = document.getElementById('confidence-arc');
-        const factorsEl = document.getElementById('confidence-factors');
-
-        if (!percentEl || !arcEl) return;
-
-        const confidence = state.memory?.systemConfidence || 0;
-        const factors = state.memory?.confidenceFactors || [];
-
-        // Update percentage
-        percentEl.textContent = `${confidence}%`;
-
-        // Update arc
-        const circumference = 2 * Math.PI * 45;
-        const dashLength = (confidence / 100) * circumference;
-        arcEl.style.strokeDasharray = `${dashLength} ${circumference}`;
-
-        // Update description
-        if (descEl) {
-            const notes = state.memory?.agentNotes || [];
-            const latestNote = notes.length > 0 ? notes[0] : null;
-            
-            if (latestNote && latestNote.summary) {
-                descEl.textContent = latestNote.summary;
-            } else if (confidence >= 70) {
-                descEl.textContent = 'High confidence in current detections. Multiple corroborating indicators found.';
-            } else if (confidence >= 40) {
-                descEl.textContent = 'Moderate confidence. Some patterns detected but more data needed.';
-            } else {
-                descEl.textContent = 'Low confidence. Insufficient data for reliable detection.';
-            }
-        }
-
-        // Update factors
-        if (factorsEl) {
-            if (factors.length > 0) {
-                factorsEl.innerHTML = factors.slice(0, 4).map(f => `
-                    <div class="confidence-factor">
-                        <span class="factor-name">${escapeHtml(f.factor)}</span>
-                        <span class="factor-score">${f.score}%</span>
-                    </div>
-                `).join('');
-            } else {
-                factorsEl.innerHTML = '';
-            }
-        }
-    }
-
-    // Render timeline
-    function renderTimeline() {
-        const container = document.getElementById('timeline-events');
-        if (!container) return;
-
-        const timeline = state.memory?.timeline || [];
-        const now = new Date();
-        const cutoffDate = new Date(now.getTime() - (state.timeRange * 24 * 60 * 60 * 1000));
-
-        // Filter by time range and type
-        const filteredEvents = timeline.filter(event => {
-            const eventDate = new Date(event.date);
-            if (eventDate < cutoffDate) return false;
-
-            if (event.type === 'job' && !state.filters.jobs) return false;
-            if (event.type === 'org' && !state.filters.orgs) return false;
-            if (event.type === 'event' && !state.filters.events) return false;
-            if (event.type === 'news' && !state.filters.events) return false;
-
-            return true;
-        });
-
-        if (filteredEvents.length === 0) {
-            container.innerHTML = `
-                <div class="loading-indicator">
-                    <span>No events in selected time range</span>
-                </div>
-            `;
-            return;
-        }
-
-        container.innerHTML = filteredEvents.slice(0, 20).map(event => {
-            const date = new Date(event.date);
-            const day = date.getDate();
-            const month = date.toLocaleString('en-US', { month: 'short' });
-            const sourceUrl = event.sourceUrl || '';
-
-            return `
-                <div class="timeline-event">
-                    <div class="event-date">
-                        <span class="event-day">${day}</span>
-                        <span class="event-month">${month}</span>
-                    </div>
-                    <div class="event-content">
-                        <div class="event-title">
-                            ${escapeHtml(event.title)}
-                            ${sourceUrl ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener" class="event-source-link">↗</a>` : ''}
-                        </div>
-                        <p class="event-description">${escapeHtml(event.description || '')}</p>
-                        <div class="event-tags">
-                            ${(event.tags || []).map(tag => `
-                                <span class="event-tag">${escapeHtml(tag)}</span>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
-
-    // Render alerts
-    function renderAlerts() {
-        const container = document.getElementById('alerts-grid');
-        if (!container) return;
-
-        const alerts = state.alerts;
-
-        if (alerts.length === 0) {
-            container.innerHTML = `
-                <div class="loading-indicator">
-                    <span>No active alerts</span>
-                </div>
-            `;
-            return;
-        }
-
-        container.innerHTML = alerts.slice(0, 6).map(alert => `
-            <div class="alert-card">
-                <div class="alert-header">
-                    <div class="alert-severity ${alert.severity || 'medium'}"></div>
-                    <div class="alert-title">${escapeHtml(alert.title)}</div>
-                    <div class="alert-time">${formatRelativeTime(alert.timestamp)}</div>
-                </div>
-                <div class="alert-body">
-                    <p class="alert-description">${escapeHtml(alert.description)}</p>
-                    <div class="alert-factors">
-                        ${(alert.factors || []).map(factor => `
-                            <div class="alert-factor">
-                                <svg class="factor-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"/>
-                                </svg>
-                                <span class="factor-label">${escapeHtml(factor.name)}</span>
-                                <span class="factor-value">${escapeHtml(String(factor.value))}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-                <div class="alert-footer">
-                    <span class="alert-confidence">Confidence: <span>${alert.confidence || 0}%</span></span>
-                    <div class="alert-sources">
-                        ${(alert.sources || []).slice(0, 2).map(src => `
-                            <a href="${escapeHtml(src)}" target="_blank" rel="noopener" class="alert-source-link">Source ↗</a>
-                        `).join('')}
-                    </div>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    // Setup event listeners
-    function setupEventListeners() {
-        // Time range buttons
-        document.querySelectorAll('.range-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                state.timeRange = parseInt(btn.dataset.range);
-                renderTimeline();
-            });
-        });
-
-        // Filter toggles
-        const filterJobs = document.getElementById('filter-jobs');
-        const filterOrgs = document.getElementById('filter-orgs');
-        const filterEvents = document.getElementById('filter-events');
-
-        if (filterJobs) {
-            filterJobs.addEventListener('change', () => {
-                state.filters.jobs = filterJobs.checked;
-                renderTimeline();
-            });
-        }
-
-        if (filterOrgs) {
-            filterOrgs.addEventListener('change', () => {
-                state.filters.orgs = filterOrgs.checked;
-                renderTimeline();
-            });
-        }
-
-        if (filterEvents) {
-            filterEvents.addEventListener('change', () => {
-                state.filters.events = filterEvents.checked;
-                renderTimeline();
-            });
-        }
-    }
-
-    // Utility functions
-    function escapeHtml(str) {
-        if (!str) return '';
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
-
-    function formatRelativeTime(timestamp) {
-        if (!timestamp) return 'Unknown';
-        
-        const now = new Date();
-        const date = new Date(timestamp);
-        const diffMs = now - date;
-        const diffMins = Math.floor(diffMs / 60000);
-        const diffHours = Math.floor(diffMs / 3600000);
-        const diffDays = Math.floor(diffMs / 86400000);
-
-        if (diffMins < 1) return 'Just now';
-        if (diffMins < 60) return `${diffMins}m ago`;
-        if (diffHours < 24) return `${diffHours}h ago`;
-        if (diffDays < 7) return `${diffDays}d ago`;
-        
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    }
-
-    function getRiskClass(score) {
-        if (score >= 70) return 'high';
-        if (score >= 40) return 'medium';
-        return 'low';
-    }
-
-    // Start the app
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
+// Render timeline with date filtering
+function renderTimeline(days) {
+    const container = document.getElementById('timeline-events');
+    const badge = document.getElementById('timeline-count');
+    
+    if (!container || !badge) return;
+    
+    let filtered;
+    if (days === 'all') {
+        filtered = allTimelineEvents;
     } else {
-        init();
+        const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+        filtered = allTimelineEvents.filter(e => {
+            const eventDate = parseDate(e.date || e.timestamp);
+            return eventDate >= cutoff;
+        });
     }
-})();
+    
+    filtered.sort((a, b) => parseDate(b.date || b.timestamp) - parseDate(a.date || a.timestamp));
+    badge.textContent = filtered.length + ' events';
+    
+    if (!filtered.length) {
+        container.innerHTML = '<div class="empty-state"><p>No events in ' + 
+            (days === 'all' ? 'timeline' : 'last ' + days + ' days') + '</p></div>';
+        return;
+    }
+    
+    container.innerHTML = filtered.slice(0, 20).map(e => {
+        const d = parseDate(e.date || e.timestamp);
+        const dayNum = d.getDate();
+        const month = d.toLocaleString('en', { month: 'short' });
+        const title = escapeHtml(e.title || 'Event');
+        const desc = escapeHtml(e.description || '');
+        const url = e.sourceUrl ? escapeHtml(e.sourceUrl) : '';
+        const type = e.type || 'event';
+        const tags = (e.tags || []).slice(0, 2);
+        
+        return '<div class="timeline-event">' +
+            '<div class="event-date">' +
+                '<span class="event-day">' + dayNum + '</span>' +
+                '<span class="event-month">' + month + '</span>' +
+            '</div>' +
+            '<div class="event-content">' +
+                '<div class="event-title">' + title + 
+                    (url ? ' <a href="' + url + '" target="_blank" class="event-source-link">↗</a>' : '') +
+                '</div>' +
+                '<p class="event-description">' + desc + '</p>' +
+                '<div class="event-tags">' +
+                    '<span class="event-tag">' + type + '</span>' +
+                    tags.map(t => '<span class="event-tag">' + escapeHtml(t) + '</span>').join('') +
+                '</div>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+}
+
+// Render stats
+function renderStats(memory, alertsData) {
+    const stats = memory.stats || {};
+    
+    const statEvents = document.getElementById('stat-events');
+    const statAlerts = document.getElementById('stat-alerts');
+    const statOrgs = document.getElementById('stat-orgs');
+    const statNews = document.getElementById('stat-news');
+    
+    if (statEvents) statEvents.textContent = memory.timeline?.length || stats.events || 0;
+    if (statAlerts) statAlerts.textContent = alertsData.alerts?.length || stats.alerts || 0;
+    if (statOrgs) statOrgs.textContent = memory.flaggedOrganizations?.length || stats.orgs || 0;
+    if (statNews) statNews.textContent = memory.recentNews?.length || stats.newsArticles || 0;
+    
+    // Last scan time
+    const lastScanEl = document.getElementById('last-scan-time');
+    if (lastScanEl && memory.lastScan) {
+        lastScanEl.textContent = formatRelativeTime(memory.lastScan);
+    }
+}
+
+// Render confidence meter
+function renderConfidence(memory) {
+    const conf = memory.systemConfidence || 50;
+    
+    const percentEl = document.getElementById('confidence-percent');
+    const arcEl = document.getElementById('confidence-arc');
+    const descEl = document.getElementById('confidence-desc');
+    const factorsEl = document.getElementById('confidence-factors');
+    
+    if (percentEl) percentEl.textContent = conf + '%';
+    if (arcEl) arcEl.style.strokeDasharray = (conf * 2.83) + ' 283';
+    
+    const notes = memory.agentNotes || [];
+    if (descEl && notes[0]?.summary) {
+        descEl.textContent = notes[0].summary.substring(0, 150) + '...';
+    }
+    
+    const factors = memory.confidenceFactors || [];
+    if (factorsEl && factors.length) {
+        factorsEl.innerHTML = factors.slice(0, 3).map(f =>
+            '<div class="confidence-factor">' +
+                '<span class="factor-name">' + escapeHtml(f.factor) + '</span>' +
+                '<span class="factor-score">' + f.score + '%</span>' +
+            '</div>'
+        ).join('');
+    }
+}
+
+// Render news feed
+function renderNews(memory) {
+    const container = document.getElementById('news-feed');
+    if (!container) return;
+    
+    const news = memory.recentNews || [];
+    
+    if (news.length) {
+        container.innerHTML = news.slice(0, 12).map(a =>
+            '<div class="news-item">' +
+                '<a href="' + escapeHtml(a.url || '#') + '" target="_blank" class="news-title">' + 
+                    escapeHtml(a.title || 'Untitled') + 
+                '</a>' +
+                '<div class="news-meta">' +
+                    '<span>' + escapeHtml(a.publisher || a.source || '') + '</span>' +
+                    '<span>' + escapeHtml(a.location || '') + '</span>' +
+                    '<span class="news-relevance">' + (a.relevance_score || 0) + '%</span>' +
+                '</div>' +
+            '</div>'
+        ).join('');
+    } else {
+        container.innerHTML = '<div class="empty-state"><p>No news yet</p></div>';
+    }
+}
+
+// Render job list
+function renderJobs(memory) {
+    const container = document.getElementById('job-list');
+    const countEl = document.getElementById('job-count');
+    if (!container) return;
+    
+    const jobs = memory.jobPostings || [];
+    const jobCount = memory.jobPostingPatterns?.totalJobs || jobs.length || 0;
+    
+    if (countEl) countEl.textContent = jobCount;
+    
+    if (jobs.length) {
+        container.innerHTML = jobs.slice(0, 8).map(j => {
+            const s = j.suspicion_score || 0;
+            const sc = s >= 50 ? '' : s >= 25 ? 'medium' : 'low';
+            return '<a href="' + escapeHtml(j.url || '#') + '" target="_blank" class="job-item">' +
+                '<span class="job-title">' + escapeHtml((j.title || '').substring(0, 45)) + '...</span>' +
+                '<span class="job-location">' + escapeHtml(j.city || '') + ' ' + escapeHtml(j.state || '') + '</span>' +
+                '<span class="job-score ' + sc + '">' + s + '%</span>' +
+            '</a>';
+        }).join('');
+    } else {
+        const kw = memory.jobPostingPatterns?.keywords || {};
+        if (Object.keys(kw).length) {
+            container.innerHTML = 
+                '<div style="padding:12px;font-size:.8rem;color:var(--color-text-secondary)">' +
+                '<p>Monitoring keywords:</p>' +
+                Object.entries(kw).slice(0, 6).map(([k, v]) =>
+                    '<div class="job-item">' +
+                        '<span class="job-title">"' + escapeHtml(k) + '"</span>' +
+                        '<span class="job-score low">' + v + '</span>' +
+                    '</div>'
+                ).join('') +
+                '</div>';
+        } else {
+            container.innerHTML = '<div class="empty-state"><p>No jobs tracked</p></div>';
+        }
+    }
+}
+
+// Render organizations list
+function renderOrganizations(memory) {
+    const container = document.getElementById('org-list');
+    if (!container) return;
+    
+    const orgs = memory.flaggedOrganizations || [];
+    
+    if (orgs.length) {
+        container.innerHTML = orgs.slice(0, 8).map(o => {
+            const s = o.risk_score || 0;
+            const rc = s >= 60 ? 'high' : s >= 40 ? 'medium' : 'low';
+            return '<a href="' + escapeHtml(o.sourceUrl || '#') + '" target="_blank" class="org-item">' +
+                '<div class="org-indicator ' + rc + '"></div>' +
+                '<div class="org-details">' +
+                    '<div class="org-name">' + escapeHtml(o.name || 'Unknown') + '</div>' +
+                    '<div class="org-meta">' + escapeHtml(o.state || '') + 
+                        (o.city ? ' | ' + escapeHtml(o.city) : '') + 
+                    '</div>' +
+                '</div>' +
+                '<div class="org-score">' + s + '%</div>' +
+            '</a>';
+        }).join('');
+    } else {
+        container.innerHTML = '<div class="empty-state"><p>No orgs flagged</p></div>';
+    }
+}
+
+// Render alerts
+function renderAlerts(alertsData) {
+    const container = document.getElementById('alerts-grid');
+    if (!container) return;
+    
+    const alerts = alertsData.alerts || [];
+    
+    if (alerts.length) {
+        container.innerHTML = alerts.slice(0, 6).map(a => {
+            const sev = a.severity || (a.confidence >= 80 ? 'high' : a.confidence >= 50 ? 'medium' : 'low');
+            return '<div class="alert-card">' +
+                '<div class="alert-header">' +
+                    '<div class="alert-severity ' + sev + '"></div>' +
+                    '<div class="alert-title">' + escapeHtml(a.title || 'Alert') + '</div>' +
+                '</div>' +
+                '<div class="alert-body">' +
+                    '<p class="alert-description">' + escapeHtml((a.description || '').substring(0, 200)) + '...</p>' +
+                    '<div class="alert-factors">' +
+                        (a.factors || []).slice(0, 3).map(f =>
+                            '<div class="alert-factor">' +
+                                '<span class="factor-label">' + escapeHtml(f.name || '') + '</span>' +
+                                '<span class="factor-value">' + escapeHtml(String(f.value || '')) + '</span>' +
+                            '</div>'
+                        ).join('') +
+                    '</div>' +
+                '</div>' +
+                '<div class="alert-footer">' +
+                    '<span class="alert-confidence">Confidence: ' + (a.confidence || 0) + '%</span>' +
+                    '<span style="font-size:.75rem;color:var(--color-text-muted)">' + 
+                        formatRelativeTime(a.timestamp) + 
+                    '</span>' +
+                '</div>' +
+            '</div>';
+        }).join('');
+    } else {
+        container.innerHTML = '<div class="empty-state"><p>No active alerts</p></div>';
+    }
+}
+
+// Setup timeline range button handlers
+function setupTimelineControls() {
+    document.querySelectorAll('.range-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const range = this.dataset.range;
+            currentRange = range === 'all' ? 'all' : parseInt(range);
+            renderTimeline(currentRange);
+        });
+    });
+}
+
+// Main initialization
+async function init() {
+    console.log('Astroturf Detector v2.0 initializing...');
+    
+    // Initialize states grid
+    initStatesGrid();
+    
+    try {
+        // Fetch data
+        const [mRes, aRes] = await Promise.all([
+            fetch('data/memory.json'),
+            fetch('data/alerts.json')
+        ]);
+        
+        const memory = mRes.ok ? await mRes.json() : {};
+        const alertsData = aRes.ok ? await aRes.json() : { alerts: [] };
+        
+        // Render all sections
+        renderStats(memory, alertsData);
+        renderConfidence(memory);
+        renderNews(memory);
+        renderJobs(memory);
+        renderOrganizations(memory);
+        renderAlerts(alertsData);
+        
+        // Setup timeline
+        allTimelineEvents = memory.timeline || [];
+        renderTimeline(currentRange);
+        setupTimelineControls();
+        
+        console.log('Astroturf Detector v2.0 loaded successfully');
+        
+    } catch (e) {
+        console.error('Error loading data:', e);
+    }
+}
+
+// Run on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
