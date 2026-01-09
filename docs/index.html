@@ -30,11 +30,10 @@
                 </svg>
                 <div class="logo-text">
                     <h1>Astroturf Detector</h1>
-                    <span class="tagline">United States Monitor - All 50 States</span>
+                    <span class="tagline">United States Monitor</span>
                 </div>
             </div>
             
-            <!-- Hamburger Menu Button -->
             <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -44,23 +43,33 @@
             <nav class="main-nav" id="main-nav">
                 <a href="#dashboard" class="nav-link">Dashboard</a>
                 <a href="#timeline" class="nav-link">Timeline</a>
+                <a href="#connections" class="nav-link">Connections</a>
                 <a href="#services" class="nav-link">Known Services</a>
                 <a href="#alerts" class="nav-link">Alerts</a>
             </nav>
         </div>
     </header>
     
-    <!-- Mobile Nav Overlay -->
     <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 
     <main>
         <section class="hero">
             <div class="container">
-                <div class="hero-content">
+                <div class="hero-content centered">
                     <h2>Real-time monitoring for manufactured movements</h2>
-                    <p>An open-source intelligence engine tracking paid protest activity, suspicious nonprofit formations, and coordinated astroturf campaigns across all 50 United States.</p>
+                    <p class="hero-description">An open-source intelligence engine tracking paid protest activity, suspicious nonprofit formations, and coordinated astroturf campaigns across all 50 United States.</p>
                     
-                    <!-- Compact Stats Grid for Mobile -->
+                    <div class="definition-box">
+                        <div class="definition-term">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4M12 8h.01"/>
+                            </svg>
+                            What is Astroturfing?
+                        </div>
+                        <p class="definition-text">Astroturfing is the practice of masking sponsors of a message to make it appear as though it originates from grassroots participants. It creates an impression of widespread support where little exists, often using paid actors, fake organizations, or coordinated campaigns.</p>
+                    </div>
+                    
                     <div class="hero-stats" id="hero-stats">
                         <a href="#timeline" class="stat-card-link">
                             <div class="stat-card">
@@ -113,13 +122,15 @@
                 <div class="dashboard-grid">
                     <div class="dashboard-card">
                         <div class="card-header">
-                            <h3>Monitoring Coverage</h3>
-                            <span class="card-badge">51 Regions</span>
+                            <h3>State Activity Heatmap</h3>
+                            <span class="card-badge live">Live Analysis</span>
                         </div>
                         <div class="card-content">
                             <div class="states-grid" id="states-grid"></div>
-                            <div class="monitoring-context">
-                                <strong>Red states</strong> = Higher political spending, more PAC activity, and historically more astroturf incidents detected
+                            <div class="heatmap-analysis" id="heatmap-analysis">
+                                <div class="loading-indicator small">
+                                    <div class="spinner"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -148,7 +159,7 @@
                     <div class="dashboard-card org-tracker" id="orgs">
                         <div class="card-header">
                             <h3>Flagged Organizations</h3>
-                            <a href="https://projects.propublica.org/nonprofits/" target="_blank" class="source-link">ProPublica + FEC</a>
+                            <a href="https://www.fec.gov/" target="_blank" class="source-link">FEC Data</a>
                         </div>
                         <div class="card-content">
                             <div id="org-list" class="org-list">
@@ -178,7 +189,7 @@
                                 </div>
                                 <div class="confidence-text">
                                     <div class="confidence-label">System Confidence</div>
-                                    <p class="confidence-desc" id="confidence-desc">Analyzing...</p>
+                                    <p class="confidence-desc" id="confidence-desc">Analyzing data patterns...</p>
                                     <div id="confidence-factors" class="confidence-factors"></div>
                                 </div>
                             </div>
@@ -200,9 +211,9 @@
                 </div>
                 <div class="timeline-controls">
                     <div class="time-range-selector">
-                        <button class="range-btn" data-range="7">7 Days</button>
+                        <button class="range-btn active" data-range="7">7 Days</button>
                         <button class="range-btn" data-range="30">30 Days</button>
-                        <button class="range-btn active" data-range="90">90 Days</button>
+                        <button class="range-btn" data-range="90">90 Days</button>
                         <button class="range-btn" data-range="all">All Time</button>
                     </div>
                 </div>
@@ -245,7 +256,31 @@
             </div>
         </section>
 
-        <section id="services" class="alerts-section">
+        <section id="connections" class="connections-section">
+            <div class="container">
+                <div class="section-header">
+                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="6" cy="6" r="3"/>
+                        <circle cx="18" cy="18" r="3"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="6" r="3"/>
+                        <line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/>
+                        <line x1="8.5" y1="15.5" x2="15.5" y2="8.5"/>
+                    </svg>
+                    <h2>Connect the Dots</h2>
+                    <span class="region-badge">AI Pattern Analysis</span>
+                </div>
+                <p class="section-desc">Our AI analyzes correlations between jobs, news, organizations, and events to identify potential coordinated activity.</p>
+                <div class="connections-grid" id="connections-grid">
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <span>Analyzing patterns...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services-section">
             <div class="container">
                 <div class="section-header">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -253,124 +288,43 @@
                     </svg>
                     <h2>Known Paid Protest Services</h2>
                 </div>
+                <p class="section-desc">Documented companies and services that provide paid crowds, actors, or manufactured support for events and campaigns.</p>
 
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-header">
-                            <h4>Crowds on Demand</h4>
-                            <span class="service-type">Founded 2012 by Adam Swart</span>
-                        </div>
-                        <div class="service-body">
-                            <p>The largest known paid crowd company. Claims "tens of thousands" of contractors nationwide. Reported 400% increase in requests in 2025.</p>
-                            <div class="service-locations">
-                                <span class="location-tag">Los Angeles</span>
-                                <span class="location-tag">New York</span>
-                                <span class="location-tag">Washington DC</span>
-                                <span class="location-tag">Dallas</span>
-                                <span class="location-tag">Phoenix</span>
-                            </div>
-                            <div class="service-pricing">$60 to attend | $200 speaking roles | $800+ lead roles</div>
-                            <a href="https://crowdsondemand.com/" target="_blank" class="service-link">crowdsondemand.com →</a>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-header">
-                            <h4>Demand Protest</h4>
-                            <span class="service-type">Strategic Crowd Mobilization</span>
-                        </div>
-                        <div class="service-body">
-                            <p>"When your strategy demands paid protest, we organize and bring it to life." Promises "absolute discretion" for clients.</p>
-                            <div class="service-locations">
-                                <span class="location-tag">Nationwide</span>
-                            </div>
-                            <div class="service-pricing">Custom quotes | NDA required</div>
-                            <a href="https://www.demandprotest.com/" target="_blank" class="service-link">demandprotest.com →</a>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-header">
-                            <h4>The Hawthorn Group</h4>
-                            <span class="service-type">PR Firm - Virginia</span>
-                        </div>
-                        <div class="service-body">
-                            <p>Major PR firm that subcontracted Crowds on Demand for the Entergy scandal. Billed $55,000 for recruiting paid supporters at council meetings.</p>
-                            <div class="service-locations">
-                                <span class="location-tag">Alexandria, VA</span>
-                                <span class="location-tag">New Orleans</span>
-                            </div>
-                            <div class="service-pricing">Corporate PR rates</div>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-header">
-                            <h4>Advantage Inc.</h4>
-                            <span class="service-type">Event Staffing / Brand Ambassadors</span>
-                        </div>
-                        <div class="service-body">
-                            <p>Event staffing company that has been linked to providing "supporters" for political events and corporate campaigns under the guise of brand ambassadors.</p>
-                            <div class="service-locations">
-                                <span class="location-tag">Multiple Markets</span>
-                            </div>
-                            <div class="service-pricing">$15-25/hour for attendees</div>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-header">
-                            <h4>Gotham Government Relations</h4>
-                            <span class="service-type">Lobbying Firm - New York</span>
-                        </div>
-                        <div class="service-body">
-                            <p>Lobbying firm known for organizing "grassroots" campaigns that are actually funded by corporate clients with direct financial interests in the outcomes.</p>
-                            <div class="service-locations">
-                                <span class="location-tag">New York</span>
-                                <span class="location-tag">Albany</span>
-                            </div>
-                            <div class="service-pricing">Retainer-based</div>
-                        </div>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-header">
-                            <h4>Crowds for Rent</h4>
-                            <span class="service-type">Event Staffing</span>
-                        </div>
-                        <div class="service-body">
-                            <p>Provides paid attendees for rallies, grand openings, and political events. Advertises "enthusiastic supporters" who will cheer, hold signs, and create energy.</p>
-                            <div class="service-locations">
-                                <span class="location-tag">Florida</span>
-                                <span class="location-tag">Texas</span>
-                                <span class="location-tag">California</span>
-                            </div>
-                            <div class="service-pricing">$50-100 per attendee</div>
-                        </div>
-                    </div>
+                <div class="services-grid" id="services-grid">
+                    <!-- Services loaded dynamically with probability scores -->
                 </div>
 
-                <div class="case-study" style="margin-top:24px">
-                    <h4>Case Study: Entergy New Orleans (2018)</h4>
-                    <p>Around 50 people in matching orange shirts appeared at city council meetings to support a controversial $210M power plant. Investigation revealed many were paid actors hired through Crowds on Demand via The Hawthorn Group. The utility's CEO texted executives: "This is war and we need all the foot soldiers we can muster."</p>
-                    <span class="case-outcome">Outcome: $5 million fine — largest ever imposed by New Orleans City Council</span>
-                    <div class="case-source">
-                        <a href="https://www.nola.com/news/politics/entergy-paid-actors-to-support-its-power-plant-proposal-at-new-orleans-city-council-meetings/article_0d9ddfe0-11d0-5d0c-a908-4e08de58e7a3.html" target="_blank">Source: NOLA.com</a>
+                <div class="case-studies">
+                    <h3 class="case-studies-title">Documented Case Studies</h3>
+                    
+                    <div class="case-study">
+                        <div class="case-header">
+                            <h4>Entergy New Orleans (2018)</h4>
+                            <span class="case-badge">$5M Fine</span>
+                        </div>
+                        <p>Around 50 people in matching orange shirts appeared at city council meetings to support a controversial $210M power plant. Investigation revealed many were paid actors hired through Crowds on Demand via The Hawthorn Group.</p>
+                        <div class="case-footer">
+                            <span class="case-outcome">Largest fine ever imposed by New Orleans City Council</span>
+                            <a href="https://www.nola.com/news/politics/entergy-paid-actors-to-support-its-power-plant-proposal-at-new-orleans-city-council-meetings/article_0d9ddfe0-11d0-5d0c-a908-4e08de58e7a3.html" target="_blank" class="case-source">Source: NOLA.com</a>
+                        </div>
                     </div>
-                </div>
 
-                <div class="case-study">
-                    <h4>Case Study: Dallas Astroturf Network (2020-2024)</h4>
-                    <p>Billionaire hotel owner Monty Bennett funded a network of fake advocacy groups through Crowds on Demand: Keep Dallas Safe, Dallas Justice Now (posed as a BLM chapter), Save Texas Kids, Protect Texas Kids, and Mission DFW. The Dallas Express, a "pink slime" news site, ran 112+ articles amplifying these fake groups.</p>
-                    <span class="case-outcome">Outcome: Journalist Steven Monacelli won defamation lawsuit after exposing the network</span>
-                    <div class="case-source">
-                        <a href="https://www.texasobserver.org/dallas-express-monty-bennett-ashford/" target="_blank">Source: Texas Observer</a>
+                    <div class="case-study">
+                        <div class="case-header">
+                            <h4>Dallas Astroturf Network (2020-2024)</h4>
+                            <span class="case-badge">Lawsuit Won</span>
+                        </div>
+                        <p>Billionaire hotel owner Monty Bennett funded a network of fake advocacy groups through Crowds on Demand: Keep Dallas Safe, Dallas Justice Now (posed as a BLM chapter), Save Texas Kids, and Mission DFW. The Dallas Express ran 112+ articles amplifying these fake groups.</p>
+                        <div class="case-footer">
+                            <span class="case-outcome">Journalist Steven Monacelli won defamation lawsuit</span>
+                            <a href="https://www.texasobserver.org/dallas-express-monty-bennett-ashford/" target="_blank" class="case-source">Source: Texas Observer</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="alerts" class="dashboard-section">
+        <section id="alerts" class="alerts-section">
             <div class="container">
                 <div class="section-header">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -378,7 +332,9 @@
                         <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
                     </svg>
                     <h2>Active Alerts</h2>
+                    <span class="region-badge">AI-Generated</span>
                 </div>
+                <p class="section-desc">Alerts generated by our AI based on pattern detection across all monitored data sources. Each alert shows what triggered it and confidence level.</p>
                 <div class="alerts-grid" id="alerts-grid">
                     <div class="loading-indicator">
                         <div class="spinner"></div>
@@ -422,14 +378,14 @@
                 <div class="footer-links">
                     <a href="#dashboard">Dashboard</a>
                     <a href="#timeline">Timeline</a>
+                    <a href="#connections">Connections</a>
                     <a href="#services">Known Services</a>
-                    <a href="#alerts">Alerts</a>
                     <a href="https://github.com/ghost081280/astroturf-detector" target="_blank">GitHub</a>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p class="footer-disclaimer">
-                    <strong>AI-Powered Tool:</strong> This system is fully automated. Data is collected from public sources and analyzed by AI hourly. 
+                    <strong>AI-Powered Tool:</strong> This system is fully automated. Data is collected from public sources (FEC, job boards, news) and analyzed by AI hourly. 
                     Flags indicate patterns worth investigating — not proof of wrongdoing. Always verify findings independently.
                 </p>
                 <p class="footer-copyright">© 2026 Ghost081280 · Open source under MIT License</p>
