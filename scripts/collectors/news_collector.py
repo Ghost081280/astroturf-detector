@@ -1,12 +1,12 @@
-"""News Collector - OSINT via DuckDuckGo and Google News RSS"""
+"""News Collector - OSINT via Google News RSS"""
 
-import json
 import requests
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import List, Dict, Any
 from urllib.parse import quote_plus
 import xml.etree.ElementTree as ET
+
 
 class NewsCollector:
     """Collects protest and astroturf related news from public sources."""
@@ -65,8 +65,10 @@ class NewsCollector:
             response = self.session.get(url, timeout=15)
             
             if response.status_code != 200:
+                print(f"  Google News returned status {response.status_code} for query: {query}")
                 return []
             
+            # Parse RSS XML
             root = ET.fromstring(response.content)
             articles = []
             
@@ -77,17 +79,20 @@ class NewsCollector:
                 source = item.find('source')
                 
                 if title is not None and link is not None:
+                    # Parse date
                     date_str = None
                     if pub_date is not None and pub_date.text:
                         try:
-                            date_obj = datetime.strptime(
-                                pub_date.text.replace(' GMT', '').replace(' EST', '').replace(' PST', '').strip(),
-                                '%a, %d %b %Y %H:%M:%S'
-                            )
+                            # Parse RSS date format: "Sat, 04 Jan 2025 12:00:00 GMT"
+                            cleaned_date = pub_date.text.replace(' GMT', '').replace(' EST', '').replace(' PST', '').replace(' EDT', '').replace(' PDT', '').strip()
+                            date_obj = datetime.strptime(cleaned_date, '%a, %d %b %Y %H:%M:%S')
                             date_str = date_obj.isoformat() + 'Z'
-                        except:
+                        except ValueError:
                             date_str = datetime.utcnow().isoformat() + 'Z'
+                    else:
+                        date_str = datetime.utcnow().isoformat() + 'Z'
                     
+                    # Calculate relevance score
                     relevance = self._calculate_relevance(title.text, query)
                     
                     articles.append({
@@ -95,7 +100,7 @@ class NewsCollector:
                         'source': 'google_news',
                         'title': title.text,
                         'url': link.text,
-                        'date': date_str or datetime.utcnow().isoformat() + 'Z',
+                        'date': date_str,
                         'publisher': source.text if source is not None else 'Unknown',
                         'query': query,
                         'relevance_score': relevance,
@@ -104,27 +109,42 @@ class NewsCollector:
             
             return articles
             
+        except ET.ParseError as e:
+            print(f"  XML parse error for query '{query}': {e}")
+            return []
+        except requests.RequestException as e:
+            print(f"  Request error for query '{query}': {e}")
+            return []
         except Exception as e:
             print(f"  Error fetching news for '{query}': {e}")
             return []
     
     def _calculate_relevance(self, title: str, query: str) -> int:
         """Calculate how relevant an article is (0-100)."""
-        score = 50
+        score = 50  # Base score
         title_lower = title.lower()
         
-        high_value = ['astroturf', 'paid protest', 'fake grassroots', 'dark money', 
-                      'manufactured', 'hired crowd', 'for hire']
+        # High-value keywords
+        high_value = [
+            'astroturf', 'paid protest', 'fake grassroots', 'dark money',
+            'manufactured', 'hired crowd', 'for hire', 'paid activist',
+            'front group', 'shell organization'
+        ]
         for kw in high_value:
             if kw in title_lower:
                 score += 20
         
-        medium_value = ['protest', 'advocacy', 'campaign', 'funding', '501c4', 
-                        'nonprofit', 'city council', 'hearing']
+        # Medium-value keywords
+        medium_value = [
+            'protest', 'advocacy', 'campaign', 'funding', '501c4',
+            'nonprofit', 'city council', 'hearing', 'rally', 'demonstration',
+            'activist', 'organizer', 'lobbyist'
+        ]
         for kw in medium_value:
             if kw in title_lower:
                 score += 10
         
+        # Location mentions (US states/cities) add credibility
         if self._extract_location(title):
             score += 5
         
@@ -150,11 +170,14 @@ class NewsCollector:
             'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'Austin',
             'San Francisco', 'Seattle', 'Denver', 'Boston', 'Atlanta',
             'Miami', 'Minneapolis', 'Detroit', 'Portland', 'Las Vegas',
-            'New Orleans', 'Cleveland', 'Pittsburgh', 'Cincinnati', 'Milwaukee'
+            'New Orleans', 'Cleveland', 'Pittsburgh', 'Cincinnati', 'Milwaukee',
+            'Sacramento', 'Kansas City', 'Tampa', 'Orlando', 'St. Louis'
         ]
         
+        text_lower = text.lower()
+        
         for location in major_cities + us_states:
-            if location.lower() in text.lower():
+            if location.lower() in text_lower:
                 return location
         
         return ''
@@ -166,3 +189,4 @@ if __name__ == '__main__':
     print(f"Collected {len(articles)} news articles")
     for article in articles[:5]:
         print(f"  - {article['title'][:60]}... ({article['publisher']})")
+        print(f"    Relevance: {article['relevance_score']}%, Location: {article['location'] or 'N/A'}")
