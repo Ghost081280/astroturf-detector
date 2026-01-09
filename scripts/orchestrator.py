@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ASTROTURF DETECTOR - Scan Orchestrator
-United States Focus
+United States - All 50 States
 """
 
 import os
@@ -15,11 +15,7 @@ CONFIG = {
     'data_dir': Path(__file__).parent.parent / 'docs' / 'data',
     'memory_file': 'memory.json',
     'alerts_file': 'alerts.json',
-    'max_api_calls_per_run': 50,
-    'target_states': [
-        'TX', 'CA', 'NY', 'FL', 'IL', 'PA', 'OH', 'GA', 'NC', 'MI',
-        'AZ', 'WA', 'CO', 'MA', 'VA', 'NJ', 'OR', 'LA', 'NV', 'DC'
-    ]
+    'max_api_calls_per_run': 200,
 }
 
 
@@ -69,62 +65,62 @@ def create_default_memory():
             'events': 0,
             'alerts': 0,
             'orgs': 0,
+            'jobs': 0,
             'totalScans': 0,
-            'newsArticles': 0,
-            'nonprofitsMonitored': 0
+            'newsArticles': 0
         },
         'systemConfidence': 0,
         'confidenceFactors': [],
         'timeline': [],
         'flaggedOrganizations': [],
-        'newsArticles': [],
+        'jobPostings': [],
         'recentNews': [],
         'jobPostingPatterns': {
             'totalJobs': 0,
             'weekOverWeekChange': 0,
             'cities': {},
-            'keywords': {}
+            'keywords': {},
+            'states': {}
         },
         'correlations': {
             'jobSpikeEvents': [],
             'orgFormationClusters': [],
-            'geographicHotspots': [],
-            'newsCorrelations': []
+            'geographicHotspots': []
         },
         'knownAstroturfPatterns': {
             'threeWordNames': [],
             'delawareShells': [],
             'prFirms': []
         },
-        'documentedCases': [],
-        'analysisHistory': [],
         'agentNotes': [],
         'dataSources': {
-            'propublica': {
-                'status': 'active',
-                'lastCall': None,
-                'description': 'ProPublica Nonprofit Explorer - 501(c)(4) tax filings'
-            },
-            'fec': {
-                'status': 'active',
-                'lastCall': None,
-                'description': 'FEC API - Campaign finance and independent expenditures'
-            },
-            'googleNews': {
-                'status': 'active',
-                'lastCall': None,
-                'description': 'Google News RSS - Real-time news monitoring'
-            }
+            'propublica': {'status': 'active', 'lastCall': None},
+            'fec': {'status': 'active', 'lastCall': None},
+            'googleNews': {'status': 'active', 'lastCall': None},
+            'craigslist': {'status': 'active', 'lastCall': None}
         }
     }
 
 
 def run_collectors(memory, full_scan=False):
     """Run all data collectors."""
-    print("\n=== Starting Data Collection (United States) ===\n")
+    print("\n=== Starting Data Collection (All 50 States) ===\n")
     results = {'news': [], 'fec': [], 'nonprofits': [], 'jobs': [], 'errors': []}
     
-    # News Collector - Real OSINT
+    # Job Collector - Craigslist across all 50 states
+    try:
+        from collectors.job_collector import JobCollector
+        print("Running job collector (Craigslist - All 50 States)...")
+        job_collector = JobCollector()
+        results['jobs'] = job_collector.collect(max_calls=CONFIG['max_api_calls_per_run'] // 4)
+        memory['dataSources']['craigslist']['lastCall'] = datetime.utcnow().isoformat() + 'Z'
+        memory['dataSources']['craigslist']['status'] = 'active'
+        print(f"  Found {len(results['jobs'])} job postings")
+    except Exception as e:
+        print(f"  Job collector error: {e}")
+        results['errors'].append(f"Jobs: {str(e)}")
+    
+    # News Collector - Google News RSS
     try:
         from collectors.news_collector import NewsCollector
         print("Running news collector (Google News RSS)...")
@@ -137,10 +133,10 @@ def run_collectors(memory, full_scan=False):
         print(f"  News collector error: {e}")
         results['errors'].append(f"News: {str(e)}")
     
-    # FEC Collector
+    # FEC Collector - Campaign Finance
     try:
         from collectors.fec_collector import FECCollector
-        print("Running FEC collector...")
+        print("Running FEC collector (Campaign Finance)...")
         fec_collector = FECCollector()
         results['fec'] = fec_collector.collect(max_calls=CONFIG['max_api_calls_per_run'] // 4)
         memory['dataSources']['fec']['lastCall'] = datetime.utcnow().isoformat() + 'Z'
@@ -150,10 +146,10 @@ def run_collectors(memory, full_scan=False):
         print(f"  FEC collector error: {e}")
         results['errors'].append(f"FEC: {str(e)}")
     
-    # Nonprofit Collector
+    # Nonprofit Collector - ProPublica
     try:
         from collectors.nonprofit_collector import NonprofitCollector
-        print("Running nonprofit collector (ProPublica)...")
+        print("Running nonprofit collector (ProPublica - All 50 States)...")
         nonprofit_collector = NonprofitCollector()
         results['nonprofits'] = nonprofit_collector.collect(max_calls=CONFIG['max_api_calls_per_run'] // 4)
         memory['dataSources']['propublica']['lastCall'] = datetime.utcnow().isoformat() + 'Z'
@@ -163,17 +159,6 @@ def run_collectors(memory, full_scan=False):
         print(f"  Nonprofit collector error: {e}")
         results['errors'].append(f"Nonprofits: {str(e)}")
     
-    # Job Collector
-    try:
-        from collectors.job_collector import JobCollector
-        print("Running job collector...")
-        job_collector = JobCollector()
-        results['jobs'] = job_collector.collect(max_calls=CONFIG['max_api_calls_per_run'] // 4)
-        print(f"  Found {len(results['jobs'])} job patterns")
-    except Exception as e:
-        print(f"  Job collector error: {e}")
-        results['errors'].append(f"Jobs: {str(e)}")
-    
     return results
 
 
@@ -182,10 +167,37 @@ def run_analysis(memory, alerts, collected_data):
     print("\n=== Starting Analysis ===\n")
     patterns = {}
     
+    # Store job postings
+    jobs = collected_data.get('jobs', [])
+    if jobs:
+        memory['jobPostings'] = jobs[:50]  # Store top 50
+        memory['stats']['jobs'] = len(jobs)
+        
+        # Aggregate job patterns
+        cities = {}
+        keywords = {}
+        states = {}
+        
+        for job in jobs:
+            city = job.get('city', 'Unknown')
+            state = job.get('state', 'Unknown')
+            cities[city] = cities.get(city, 0) + 1
+            states[state] = states.get(state, 0) + 1
+            
+            for kw in job.get('keywords', []):
+                keywords[kw] = keywords.get(kw, 0) + 1
+        
+        memory['jobPostingPatterns'] = {
+            'totalJobs': len(jobs),
+            'weekOverWeekChange': 0,
+            'cities': dict(sorted(cities.items(), key=lambda x: x[1], reverse=True)[:20]),
+            'keywords': dict(sorted(keywords.items(), key=lambda x: x[1], reverse=True)[:20]),
+            'states': dict(sorted(states.items(), key=lambda x: x[1], reverse=True))
+        }
+    
     # Store news articles
     news_articles = collected_data.get('news', [])
     if news_articles:
-        # Keep only recent articles (last 7 days)
         cutoff = datetime.utcnow() - timedelta(days=7)
         recent_news = []
         for article in news_articles:
@@ -199,33 +211,14 @@ def run_analysis(memory, alerts, collected_data):
         memory['recentNews'] = recent_news[:20]
         memory['stats']['newsArticles'] = len(recent_news)
     
-    # Store nonprofits with source links
+    # Store nonprofits
     nonprofits = collected_data.get('nonprofits', [])
     if nonprofits:
         for org in nonprofits:
             if org.get('ein') and not org.get('sourceUrl'):
                 org['sourceUrl'] = f"https://projects.propublica.org/nonprofits/organizations/{org['ein']}"
-        memory['flaggedOrganizations'] = nonprofits[:20]
+        memory['flaggedOrganizations'] = nonprofits[:30]
         memory['stats']['orgs'] = len(nonprofits)
-    
-    # Store job posting patterns
-    jobs = collected_data.get('jobs', [])
-    if jobs:
-        # Aggregate job data
-        cities = {}
-        keywords = {}
-        for job in jobs:
-            city = job.get('city', 'Unknown')
-            cities[city] = cities.get(city, 0) + 1
-            for kw in job.get('keywords', []):
-                keywords[kw] = keywords.get(kw, 0) + 1
-        
-        memory['jobPostingPatterns'] = {
-            'totalJobs': len(jobs),
-            'weekOverWeekChange': 0,
-            'cities': cities,
-            'keywords': keywords
-        }
     
     # Pattern Analysis
     try:
@@ -251,7 +244,6 @@ def run_analysis(memory, alerts, collected_data):
         memory['systemConfidence'] = analysis_result.get('confidence', 0)
         memory['confidenceFactors'] = analysis_result.get('confidence_factors', [])
         
-        # Store agent notes
         memory['agentNotes'].insert(0, {
             'timestamp': datetime.utcnow().isoformat() + 'Z',
             'summary': analysis_result.get('summary', ''),
@@ -259,13 +251,11 @@ def run_analysis(memory, alerts, collected_data):
         })
         memory['agentNotes'] = memory['agentNotes'][:100]
         
-        # Add new alerts
         for alert in analysis_result.get('alerts', []):
             alert['id'] = f"alert_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}_{len(alerts['alerts'])}"
             alert['timestamp'] = datetime.utcnow().isoformat() + 'Z'
             alerts['alerts'].insert(0, alert)
         
-        # Add timeline events
         for event in analysis_result.get('timeline_events', []):
             event['id'] = f"event_{len(memory['timeline'])}"
             memory['timeline'].insert(0, event)
@@ -274,7 +264,7 @@ def run_analysis(memory, alerts, collected_data):
     except Exception as e:
         print(f"  AI agent error: {e}")
     
-    # Cleanup old alerts (keep last 30 days)
+    # Cleanup old alerts
     cutoff = datetime.utcnow() - timedelta(days=30)
     active_alerts = []
     for alert in alerts.get('alerts', []):
@@ -290,7 +280,6 @@ def run_analysis(memory, alerts, collected_data):
     alerts['alerts'] = active_alerts[:50]
     alerts['archivedAlerts'] = alerts.get('archivedAlerts', [])[-100:]
     
-    # Trim timeline
     memory['timeline'] = memory['timeline'][:1000]
     
     # Update stats
@@ -304,39 +293,35 @@ def run_analysis(memory, alerts, collected_data):
 
 def main():
     """Main entry point."""
-    parser = argparse.ArgumentParser(description='Astroturf Detector - United States')
+    parser = argparse.ArgumentParser(description='Astroturf Detector - All 50 States')
     parser.add_argument('--full', action='store_true', help='Run full scan')
-    parser.add_argument('--analyze-only', action='store_true', help='Skip collection, only analyze')
+    parser.add_argument('--analyze-only', action='store_true', help='Skip collection')
     args = parser.parse_args()
     
     print("=" * 60)
-    print("ASTROTURF DETECTOR - United States Monitor")
+    print("ASTROTURF DETECTOR - United States (All 50 States)")
     print(f"Started at: {datetime.utcnow().isoformat()}Z")
     print("=" * 60)
     
-    # Setup data directory
     data_dir = CONFIG['data_dir']
     data_dir.mkdir(parents=True, exist_ok=True)
     
-    # Load existing data
     memory = load_memory(data_dir)
     alerts = load_alerts(data_dir)
     
-    # Run collectors
     if not args.analyze_only:
         collected_data = run_collectors(memory, full_scan=args.full)
     else:
         collected_data = {'news': [], 'fec': [], 'nonprofits': [], 'jobs': [], 'errors': []}
     
-    # Run analysis
     memory, alerts = run_analysis(memory, alerts, collected_data)
     
-    # Save results
     save_memory(data_dir, memory)
     save_alerts(data_dir, alerts)
     
     print("\n" + "=" * 60)
     print("Scan completed successfully")
+    print(f"  Job postings: {memory['stats'].get('jobs', 0)}")
     print(f"  News articles: {memory['stats'].get('newsArticles', 0)}")
     print(f"  Organizations: {memory['stats'].get('orgs', 0)}")
     print(f"  Active alerts: {memory['stats'].get('alerts', 0)}")
