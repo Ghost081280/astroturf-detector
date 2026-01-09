@@ -471,7 +471,7 @@ function renderConnections(memory) {
                 </div>
                 <div class="connection-details">${escapeHtml(c.description)}</div>
                 <div class="connection-evidence">
-                    ${(c.evidence || []).map(e => `<div class="evidence-item"><span class="evidence-label">${escapeHtml(e.type)}:</span> ${escapeHtml(e.detail)}</div>`).join('')}
+                    ${(c.evidence || []).map(e => `<div class="evidence-item"><span class="evidence-label">${escapeHtml(e.type)}:</span> ${escapeHtml(e.detail || '')}</div>`).join('')}
                 </div>
             </div>`;
         }).join('');
