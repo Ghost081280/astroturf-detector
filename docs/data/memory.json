@@ -1,1852 +1,403 @@
 {
-  "version": "2.0",
-  "lastScan": "2026-01-09T22:15:30.016742Z",
+  "lastScan": "2026-01-09T22:00:00Z",
   "stats": {
-    "events": 23,
-    "alerts": 2,
-    "orgs": 30,
-    "newsArticles": 50
+    "events": 24,
+    "alerts": 5,
+    "orgs": 12,
+    "newsArticles": 18
   },
+  "systemConfidence": 62,
+  "confidenceFactors": [
+    {"factor": "News Coverage", "score": 68, "detail": "6 high-relevance articles found"},
+    {"factor": "Organization Risk", "score": 71, "detail": "4 high-risk organizations identified"},
+    {"factor": "Job Postings", "score": 55, "detail": "3 suspicious postings tracked"}
+  ],
+  "agentNotes": [
+    {
+      "summary": "Elevated activity detected in Texas and California. News coverage mentions paid protestors in Dallas. 4 organizations flagged with suspicious naming patterns. Monitoring continues.",
+      "timestamp": "2026-01-09T22:00:00Z"
+    },
+    {
+      "summary": "Standard monitoring levels. No significant spikes detected. 18 news articles tracked, 12 organizations monitored.",
+      "timestamp": "2026-01-09T21:00:00Z"
+    }
+  ],
+  "connections": [
+    {
+      "type": "Geographic Match",
+      "description": "3 job postings found in Dallas area coinciding with recent protest-related news coverage.",
+      "probability": 72,
+      "evidence": [
+        {"type": "Job", "detail": "Event Staff Coordinator - Dallas"},
+        {"type": "News", "detail": "Dallas rally draws scrutiny over paid attendance"},
+        {"type": "Job", "detail": "Rally Support Specialist - DFW Area"}
+      ]
+    },
+    {
+      "type": "Naming Pattern",
+      "description": "4 organizations using generic patriotic naming patterns commonly associated with astroturf groups.",
+      "probability": 65,
+      "evidence": [
+        {"type": "Org", "detail": "Citizens for Freedom Action Fund"},
+        {"type": "Org", "detail": "Americans for Liberty PAC"},
+        {"type": "Org", "detail": "Voices for Families Coalition"}
+      ]
+    },
+    {
+      "type": "New High-Risk Orgs",
+      "description": "2 high-risk organizations filed within the last 6 months.",
+      "probability": 58,
+      "evidence": [
+        {"type": "Filed", "detail": "Texas Freedom Alliance (2025-11-15)"},
+        {"type": "Filed", "detail": "Citizens Action Network (2025-10-22)"}
+      ]
+    }
+  ],
   "timeline": [
     {
-      "type": "job_posting",
-      "title": "Job: PAID Grassroots Organizer Internship: Environmental Justice ",
-      "description": "Suspicion score: 30% - US ",
-      "date": "2026-01-09T22:15:30.016742Z",
-      "sourceUrl": "https://www.adzuna.com/details/5552799962?utm_medium=api&utm_source=a70fa881",
-      "tags": [
-        "petition signature"
-      ]
+      "type": "news",
+      "title": "Investigation reveals paid attendees at Texas energy hearing",
+      "date": "2026-01-09T20:30:00Z",
+      "sourceUrl": "https://example.com/news/1"
     },
     {
       "type": "job_posting",
-      "title": "Job: Long-Term Grassroots Organizer: Environmental Justice Advoca",
-      "description": "Suspicion score: 30% - US ",
-      "date": "2026-01-09T22:15:30.016742Z",
-      "sourceUrl": "https://www.adzuna.com/details/5542223099?utm_medium=api&utm_source=a70fa881",
-      "tags": [
-        "grassroots organizer"
-      ]
+      "title": "Suspicious job: Event Staff Coordinator - Paid Rally Support",
+      "date": "2026-01-09T18:00:00Z",
+      "sourceUrl": "https://example.com/job/1"
     },
     {
       "type": "organization",
-      "title": "Org: POLITICAL ACTION COMMITTEE FOR FOUNDATIONAL BLACK AND ORIGIN",
-      "description": "Risk score: 95% - TX",
-      "date": "2026-01-09T22:15:30.016742Z",
-      "sourceUrl": "https://www.fec.gov/data/committee/C00887927/",
-      "tags": [
-        "nonprofit",
-        "fec"
-      ]
+      "title": "Flagged org: Citizens for Freedom Action Fund",
+      "date": "2026-01-09T15:00:00Z",
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "type": "news",
+      "title": "Crowds on Demand reports 400% increase in requests",
+      "date": "2026-01-08T14:00:00Z",
+      "sourceUrl": "https://example.com/news/2"
+    },
+    {
+      "type": "news",
+      "title": "Dallas council questions authenticity of public commenters",
+      "date": "2026-01-08T10:00:00Z",
+      "sourceUrl": "https://example.com/news/3"
+    },
+    {
+      "type": "job_posting",
+      "title": "Suspicious job: Rally Support Specialist - Phoenix",
+      "date": "2026-01-07T16:00:00Z",
+      "sourceUrl": "https://example.com/job/2"
     },
     {
       "type": "organization",
-      "title": "Org: MINNESOTA FREEDOM FUND",
-      "description": "Risk score: 90% - GA",
-      "date": "2026-01-09T22:15:30.016742Z",
-      "sourceUrl": "https://www.fec.gov/data/committee/C00933416/",
-      "tags": [
-        "nonprofit",
-        "fec"
-      ]
+      "title": "Flagged org: Americans for Liberty PAC",
+      "date": "2026-01-07T12:00:00Z",
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "type": "news",
+      "title": "Report: Astroturfing on the rise in local politics",
+      "date": "2026-01-06T09:00:00Z",
+      "sourceUrl": "https://example.com/news/4"
+    },
+    {
+      "type": "news",
+      "title": "California advocacy group linked to paid crowd service",
+      "date": "2026-01-05T11:00:00Z",
+      "sourceUrl": "https://example.com/news/5"
+    },
+    {
+      "type": "job_posting",
+      "title": "Suspicious job: Community Organizer - Protest Events",
+      "date": "2026-01-05T08:00:00Z",
+      "sourceUrl": "https://example.com/job/3"
     },
     {
       "type": "organization",
-      "title": "Org: ALABAMA FREEDOM FUND",
-      "description": "Risk score: 90% - DC",
-      "date": "2026-01-09T22:15:30.016742Z",
-      "sourceUrl": "https://www.fec.gov/data/committee/C00930438/",
-      "tags": [
-        "nonprofit",
-        "fec"
-      ]
+      "title": "Flagged org: Voices for Families Coalition",
+      "date": "2026-01-04T14:00:00Z",
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "type": "news",
+      "title": "Fact check: Were protesters at capitol rally paid?",
+      "date": "2026-01-04T10:00:00Z",
+      "sourceUrl": "https://example.com/news/6"
+    },
+    {
+      "type": "news",
+      "title": "PR firm under scrutiny for manufactured grassroots campaign",
+      "date": "2026-01-03T15:00:00Z",
+      "sourceUrl": "https://example.com/news/7"
     },
     {
       "type": "organization",
-      "title": "Org: DIGITAL FREEDOM FUND",
-      "description": "Risk score: 90% - MA",
-      "date": "2026-01-09T22:15:30.016742Z",
-      "sourceUrl": "https://www.fec.gov/data/committee/C00911610/",
-      "tags": [
-        "nonprofit",
-        "fec"
-      ]
-    },
-    {
-      "type": "organization",
-      "title": "Org: LOUISIANA FREEDOM FUND",
-      "description": "Risk score: 90% - LA",
-      "date": "2026-01-09T22:15:30.016742Z",
-      "sourceUrl": "https://www.fec.gov/data/committee/C00906263/",
-      "tags": [
-        "nonprofit",
-        "fec"
-      ]
-    },
-    {
-      "type": "organization",
-      "title": "Org: LIBERTY LEADERSHIP FUND",
-      "description": "Risk score: 70% - FL",
-      "date": "2026-01-09T19:26:21.413563Z",
-      "sourceUrl": "https://www.fec.gov/data/committee/C00739524/",
-      "tags": [
-        "nonprofit",
-        "fec"
-      ]
-    },
-    {
-      "type": "organization",
-      "title": "Org: LIBERTY OHIO ACTION FUND",
-      "description": "Risk score: 70% - DC",
-      "date": "2026-01-09T19:26:21.413563Z",
-      "sourceUrl": "https://www.fec.gov/data/committee/C00692608/",
-      "tags": [
-        "nonprofit",
-        "fec"
-      ]
-    },
-    {
-      "type": "organization",
-      "title": "Org: LIBERTY AND JUSTICE FUND",
-      "description": "Risk score: 70% - FL",
-      "date": "2026-01-09T19:26:21.413563Z",
-      "sourceUrl": "https://www.fec.gov/data/committee/C00628438/",
-      "tags": [
-        "nonprofit",
-        "fec"
-      ]
+      "title": "Flagged org: Texas Freedom Alliance",
+      "date": "2026-01-03T09:00:00Z",
+      "sourceUrl": "https://www.fec.gov"
     },
     {
       "type": "news",
-      "title": "Masked agitator tells Laura Ingraham she\u2019s 'getting paid right now' at anti-ICE ",
-      "description": "Source: Fox News | Relevance: 60%",
-      "date": "2026-01-09T19:22:01Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNckVxZjk5bWg2VkUxWUZzTVdTU01tZXhwWGd1VXV4WXZCVkg4UjZwQ19jRGVHMXpwR0RsT0t3a0o1U2Z5ZE9fbTR2N2Y3Sk9FWnZWYUswQTZfaEdfblQ0dEdMSTdvVlNib0dYSnBHUGM0blpsWVJiSjhEYnRpeU56bHByRHV0eV9GMVQ0ZUR3ajdqb2JTUlZiZy1YaC00dS1KWFJrZGRiNTRjbzlLd05SdTZMQ3g4Q1BzTGfSAb8BQVVfeXFMTm5oQ1N6QlQyOTdscHc1YWthcUJQV1l0SFVYY2h2VHprVVM5c0lzWmFBc2VYaHVUQWRsNzhkWW9VdERwemwzZVFkQnN2emJnV1R5U245dHltRElqcnhGWF8zU2ZEYjJXb3cyQWZoZWRieTZvM3NSMXpxTUF3RkoyanlmaXJqZjRWODZ4djdhZHd6d3owNDNFTGtENTJNU2JwN3E1NHVKOG9rQWs5U084OWNlckpYbmdySWlkMmZjd0E?oc=5",
-      "tags": [
-        "news",
-        "paid protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "Minnesota protester: 'I'm getting paid RIGHT NOW'!' - Fox News",
-      "description": "Source: Fox News | Relevance: 60%",
-      "date": "2026-01-09T18:57:09Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1wUlR6b1pZSmg0ZTJ2UDR1UnlIbzk3a05QdGptbkFqMW5hWVN0RXJ0NnU0MmlIWl9LUWZfNnlCcTJ4OU9UUmgzNE82UWhEOHJHOTRzbEFn?oc=5",
-      "tags": [
-        "news",
-        "paid protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "Rioter Admits to being Paid While on the Streets in Minneapolis\u2026 - 77 WABC",
-      "description": "Source: 77 WABC | Relevance: 50%",
-      "date": "2026-01-09T16:33:05Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxQOS1kRGFfLUpBV2FqSFZWdU5hbHdYOHNRVlRnZFhUTzk4ajJlVk4zakR6MmRqMG9yRktaMElFVW40b0hqWU54V2tvdkJJY3Vhcmo4WVhNcTBlSG1yWWNvM3Y1T2pNWW1DdXl6S0FNSkNCbVNLd0c2dzR5RnU3MjRJcEp6SGRQYjdPZl9MMzdQc2FRRUpqbGpHck1GcXI1UQ?oc=5",
-      "tags": [
-        "news",
-        "paid protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "Report claims far-left groups are behind the funding of anti-ICE protests in Min",
-      "description": "Source: WBFF | Relevance: 70%",
-      "date": "2026-01-09T16:06:04Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNbEJTbGZsZmJXR250RDh0NV9pQ2lqbTBBd3FFNVFHaXJBVlJrM19VNmVTcU5GTnBfOWlJTGNwLWVZeURxN2xZOVRSeGMtT2lPVWlEME1fWWl1T2lIVG1wMnlpQUZUUkI5QndKaGYwV245RDZkVkR1a2F4bC1kZHYxVElObk9RZlVJaThFV2VOZ19Kc25ZRzdOTFV6WTkxVm9Rbkx1SXhzVWRrd0FJaVA4bFJSYWNVUy1LNF81cmU5Yzl5dzhfQlpTN1J4LW9BczRVM0pIMnliLWN0cHBQTGhma3dIajN0bHNPYm1wZTFXSQ?oc=5",
-      "tags": [
-        "news",
-        "paid protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "San Marcos to reconsider stalled $1.5B data center project - Austin American-Sta",
-      "description": "Source: Austin American-Statesman | Relevance: 50%",
-      "date": "2026-01-09T12:34:22Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQUlVZOFhKdjIzVU41dnFiWFhSVWFKUmNuaTl3OWVycXZOeWNQbjFYNVNXN1dNcXcwbzYxMU5idDFfSUlleE1JNy0zNjVYQUV3WE5yYjlSUnpaNF9sbjdOOFgzR1ExeTZsLWgwVmJvN1l3anNfem5YTmJBNGdxU2FzbjdZVS02Vkh6UHZkWWJkUlNVTFdtZVhsVVBsLVAxY0N0elVkTUVfaVJheG5wQXJHdjBnbw?oc=5",
-      "tags": [
-        "news",
-        "city council protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "Over 100 march from SC Statehouse to city hall to protest ICE, killing of Minnes",
-      "description": "Source: South Carolina Daily Gazette | Relevance: 60%",
-      "date": "2026-01-09T11:28:55Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQb1phMG83QWZSbGU5ZVBiQUNTRUlJX1dRSUwzQmtiZkFZSFRPSGxjUnUwa0RzSV9WdlFXWG1oVWxtWHROaHlTZThocXhXTE1CR1ZvajhpeXdPTjdsUE5CcmpRQjhmWG9RNUQ0VjNxMVBPMC1JN3hmaE5KU1VZM0xBLVd5c1VNTFdLbkI3Rkp1OE1HUlRGRTVIOW5OMks3b2NpNnluU0dVcWhZRUZHR0tPa3hyeEs4VjNnT1pyczdsRjNlVnI4ZVE?oc=5",
-      "tags": [
-        "news",
-        "city council protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "About 1,000 turn out at Dallas City Hall to protest Minneapolis ICE shooting - K",
-      "description": "Source: KERA News | Relevance: 60%",
-      "date": "2026-01-09T11:15:00Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQLWl2YmxqOUNBRkVmaEpmNm5pODNXcV82TzllZ1UyS3huYlZEUElrV1pCUTF6TkFvYlhiNDVxUDkwOV9sRUtLeDhUVVJFSEFGckdCZG9aUTdpWFl1bTJfUExpdG9wSl9QRFp2T0tfSTYteTF6M19reWFYeDVyQXRJdlM4TjlJZjdVcEthUXhsN0lwTEdQbXk0U1F1MTdwYV9TMFFnR0ZSamxIMDBhdUVvcFNjUGVpRUh5MV83WTNiZ3dFeTZsdWYzbnQtQVZ6LVhM?oc=5",
-      "tags": [
-        "news",
-        "city council protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "Candlelight vigil surrounds Portland City Hall after Border Patrol shooting - Or",
-      "description": "Source: OregonLive.com | Relevance: 50%",
-      "date": "2026-01-09T04:08:00Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPSmhjVzlhSUdxTEE3VHlJWW9GUzdqM3hOTGxIcXJIOF9scU1nVVh5QzVFXzh1RkhsX1ZoaF84VnNoYXF1emxCaWQxOEhIak05SmxrVWRuRTlsX2NIY0o3djlSSGozeFYzOUJraUVWQTBwN0JoaGc1bkdhUW9uc1k2VF9rWE5ZUmhQcUpnVmtNQVhwMi1Yd3hmdVA0ejBjd3ZTNE5uaFVRRkVuVWU5ZVVuNkJjQnBINkNKSFJ3ZUM3U3NYTXBQbU1abXUxSjJsY0pZVTE4StIB6AFBVV95cUxQUWJnRmUxZjFDUlhYQWFmUEtXZ25jcHBlSFh6dXBhSExhdnJXQUdnc1BycXhjNXBCYjRHRW42aVcwOHdWdkF0OXUwZnR5V3c2dkxHbDNmMHdLNUgySnNWbFF4ZDVFdFNDSHdldXNEWHJvQmFrdkZ4aXhoOTZZdTNZN0JiQ29WajluX3pQbkhDWGNxbFFOM0daQnFCQVVYX05fc0RqSDM4UXJkRDZCQTRZZnVZUkJ1bnlyUW10YXUzYjVpWXcwck14dy1EM0c0NEx0anJNNW1JbDRrVWtLckRfYVA5ZUVIdVV0?oc=5",
-      "tags": [
-        "news",
-        "city council protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "'I can't just sit by': Protesters gather in Merrimack to oppose potential ICE fa",
-      "description": "Source: New Hampshire Public Radio | Relevance: 60%",
-      "date": "2026-01-09T03:32:00Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNdUkzUDNzaUF6NVVCZFJQZ1VHSmlDWjlJZHZqYVJFV2dQemNqaGRXYVQxY2xyVmZjdW5BTFBYTXM5RllINFZvSjFoUnNFdHVhdmhxVVV5MlhjS2tDTDdOclRfZVlyVGNBUWdtVUowUFpIQkp2SEJJTUVYYU9GRDhodHBtd19oSzR2bXBObm51RVR4ci1zTFRocXk5THRTUERIWkJ5YUR2WkFxcDVJSmdZck0wVnNPT1FscjFJMGdjZ3I0V01HZUpRekFVNTRvMkE?oc=5",
-      "tags": [
-        "news",
-        "city council protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "More than 1,000 gather at City Hall to protest fatal ICE shooting in Minnesota -",
-      "description": "Source: Billy Penn at WHYY | Relevance: 60%",
-      "date": "2026-01-09T02:14:16Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPYkNYZTBnbi16ak1nbjhYVUQ3R0lyNHRJNFpGdWhMS1R3VHd1VEY0MDdtb1NFQ01tYy1kVFlpdm1rSm5RZHgwbWN0SzlMVlE5WWtsdlVxQkJnTGMwWmJ4bmNnTEZEbDZnMUZJc3NkUVk0blZUTjNiSTYzN09LcWFqdjlxTDVMdw?oc=5",
-      "tags": [
-        "news",
-        "city council protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "Fayetteville protest seeks justice for Minnesota mother killed by ICE agent - Th",
-      "description": "Source: The Fayetteville Observer | Relevance: 60%",
-      "date": "2026-01-09T01:31:00Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOMkVLcnVmR3dMLUdwLWI0cV9TWEF2V1luOXhfdFdtME5kUjFPT1B0b3dFaDlPSzFSWEllOXpOZEF0SG56N0xNc1J2cmdPdktOUW1aNnNNVDU0cGRmTDNqdW9XZXdscUVNcUhMcVVGSlhSWFlLaWliQWtFWkEtNlp3WktfMm9ydzVoMGpwOEFHUTRYNl84Qjl5MzhOMi04WG8zVUtYbEFpLUlmYzYxbENhSkw5UVg4U05mdFU3MVdHQVN3NnU2dk53VDh2T1hTb2pmclpFaEpsLTFmRThuckNUVTd6bTA?oc=5",
-      "tags": [
-        "news",
-        "city council protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "Huntsville activists protest ICE tactics, urge end to 'violence' - rocketcitynow",
-      "description": "Source: rocketcitynow.com | Relevance: 60%",
-      "date": "2026-01-09T00:14:48Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQS1AtYk84MUdRa05NNnozVXZhdWs5YVFWckZqeXpmVEljdVM4dmY3YnM0RmpGU0pQQmRfV2NhZlcxQWRwWjc2X0pwTDNBOXcwc0theGpXV25OSkVoVmtrLVdfSDBDckRYZ3ZWelB2R2RleUVydGJ6LXYxOUJDM2tCZGFOSFAxdTdveW8zRkV5ckdWZUZPSGNjUmN4aWtxUl9HNC1uX2NTZTlnNk8waDRDQ2d6bzZ0ZkdIQ2U3WEozU3A2eUJVVkxYY0w3TFZ0NndFaUJzaTh6Z3B5LVJ4aGwxM25yZk1Udw?oc=5",
-      "tags": [
-        "news",
-        "city council protesters"
-      ]
-    },
-    {
-      "type": "news",
-      "title": "DHS identifies people shot by Border Patrol in Portland; 6 arrested in protests ",
-      "description": "Source: Oregon Public Broadcasting - OPB | Relevance: 60%",
-      "date": "2026-01-08T23:11:11Z",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1yVzQyRHl2VEZPc1VFdmRhd1V4UU5WNjkxSFJWdDA2QUoxQkEwWng5WHlrWDdkbGdoLTE2bHNEZkhFQVd3MG9NUUpZLXAwb0hTdlJyNWxVLTVySC0zUTVaOTR0aHVOSG5jMVptOVJ1VEtaU2FMVW5uRS1XNEE?oc=5",
-      "tags": [
-        "news",
-        "city council protesters"
-      ]
-    }
-  ],
-  "jobPostings": [
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "PAID Grassroots Organizer Internship: Environmental Justice Advocacy",
-      "company": "Clean Water Action",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5552799962?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:14.974682Z",
-      "salary_min": 54229.74,
-      "salary_max": 54229.74,
-      "suspicion_score": 30,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Long-Term Grassroots Organizer: Environmental Justice Advocacy",
-      "company": "Clean Water Action",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5542223099?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.222706Z",
-      "salary_min": 39302.27,
-      "salary_max": 39302.27,
-      "suspicion_score": 30,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Community Canvasser",
-      "company": "The Outreach Team",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5528884882?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:14.974723Z",
-      "salary_min": 72134.3,
-      "salary_max": 72134.3,
-      "suspicion_score": 25,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "2.1 Regional Voter Registration Manager",
-      "company": "Voter Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5553049627?se=DMgFrKjt8BGDxL9nTBzhZw&utm_medium=api&utm_source=a70fa881&v=F4E1DA19C6ADC7DD6A2A8578342E233087B46310",
-      "date": "2026-01-09T22:15:14.707919Z",
-      "salary_min": 60316.93,
-      "salary_max": 60316.93,
-      "suspicion_score": 20,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Canvass Manager - Bel Air",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5500258352?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:14.708077Z",
-      "salary_min": 66837.38,
-      "salary_max": 66837.38,
-      "suspicion_score": 20,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Canvass Manager - Fulton County",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5499987414?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:14.708107Z",
-      "salary_min": 58448.8,
-      "salary_max": 58448.8,
-      "suspicion_score": 20,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Canvass Manager - Columbia",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5499148720?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:14.708128Z",
-      "salary_min": 63313.86,
-      "salary_max": 63313.86,
-      "suspicion_score": 20,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Long-Term Grassroots Organizer: Community Health and Corporate Accountability",
-      "company": "Clean Water Action",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5570447178?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.222780Z",
-      "salary_min": 52079.72,
-      "salary_max": 52079.72,
-      "suspicion_score": 20,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Regional Canvass Manager - Columbia",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5562941802?se=Cj9erKjt8BGDxL9nTBzhZw&utm_medium=api&utm_source=a70fa881&v=371104289052A8BE3752C4DE41D2B448A7BF6449",
-      "date": "2026-01-09T22:15:15.222829Z",
-      "salary_min": 60065.62,
-      "salary_max": 60065.62,
-      "suspicion_score": 20,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Regional Canvass Manager",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5500324696?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.222975Z",
-      "salary_min": 64787.31,
-      "salary_max": 64787.31,
-      "suspicion_score": 20,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Regional Canvass Manager - Baltimore",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5499148725?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.222996Z",
-      "salary_min": 53852.02,
-      "salary_max": 53852.02,
-      "suspicion_score": 20,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Regional Canvass Manager - Annapolis",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5499148722?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.715789Z",
-      "salary_min": 71909.36,
-      "salary_max": 71909.36,
-      "suspicion_score": 20,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Regional Canvass Manager - Bel Air",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5498170678?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.715810Z",
-      "salary_min": 62705.09,
-      "salary_max": 62705.09,
-      "suspicion_score": 20,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Deputy Field Director",
-      "company": "The Outreach Team",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5575338448?se=9owzrKjt8BGDxL9nTBzhZw&utm_medium=api&utm_source=a70fa881&v=35FA775BC2313A8C8A4A1E9BE5783C911D48840D",
-      "date": "2026-01-09T22:15:14.974763Z",
-      "salary_min": 67463.55,
-      "salary_max": 67463.55,
-      "suspicion_score": 15,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "2.1 Regional Canvass Manager",
-      "company": "Kingston Strategy",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5502477463?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:14.708025Z",
-      "salary_min": 59676.39,
-      "salary_max": 59676.39,
-      "suspicion_score": 10,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "1.1 Regional Canvass Manager",
-      "company": "Kingston Strategy",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5222440372?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:14.708053Z",
-      "salary_min": 65213.92,
-      "salary_max": 65213.92,
-      "suspicion_score": 10,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Climate and Clean Energy Program Manager",
-      "company": "The Alaska Center",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5563763405?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:14.974784Z",
-      "salary_min": 60000,
-      "salary_max": 65000,
-      "suspicion_score": 10,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Petition Circulator - $25/hr - Free School Meals for All ND Students",
-      "company": "Advanced Micro Targeting",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5571527037?se=9owzrKjt8BGDxL9nTBzhZw&utm_medium=api&utm_source=a70fa881&v=15A285442DE10E0082B689CAB760323BAC43C6B1",
-      "date": "2026-01-09T22:15:14.974823Z",
-      "salary_min": 0,
-      "salary_max": 52000,
-      "suspicion_score": 10,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Roles",
-      "company": "Talarico for Texas",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5408399336?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.222925Z",
-      "salary_min": 58642.65,
-      "salary_max": 58642.65,
-      "suspicion_score": 10,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Regional Political Engagement Director",
-      "company": "AIPAC",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/4950628330?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.457740Z",
-      "salary_min": 115000,
-      "salary_max": 137000,
-      "suspicion_score": 10,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Financial Controller",
-      "company": "Sourced.",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5510963729?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.457823Z",
-      "salary_min": 90000,
-      "salary_max": 110000,
-      "suspicion_score": 10,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Organizer, SEIU Local 1199",
-      "company": "Current SEIU",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5561467572?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.457974Z",
-      "salary_min": 46556.62,
-      "salary_max": 46556.62,
-      "suspicion_score": 10,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Environmental Campaign Director Field Leadership & Impact (San Francisco)",
-      "company": "Fund for the Public Interest",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5564027739?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.715587Z",
-      "salary_min": 115828.33,
-      "salary_max": 115828.33,
-      "suspicion_score": 10,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Field Marketing Manager",
-      "company": "Erie Home",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5569290248?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:14.707832Z",
-      "salary_min": 124371.05,
-      "salary_max": 124371.05,
-      "suspicion_score": 0,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Field Director",
-      "company": "The Outreach Team",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5547913698?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:14.974915Z",
-      "salary_min": 70304,
-      "salary_max": 78000,
-      "suspicion_score": 0,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Director, Political Engagement",
-      "company": "AIPAC",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5576815197?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.457779Z",
-      "salary_min": 125000,
-      "salary_max": 165000,
-      "suspicion_score": 0,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "State Affiliate Political Organizer (SAPO)",
-      "company": "TEXAS AFT",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5487431097?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.457802Z",
-      "salary_min": 65128.34,
-      "salary_max": 65128.34,
-      "suspicion_score": 0,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Reporter, movement building and politics",
-      "company": "The Guardian",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5418103105?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.457844Z",
-      "salary_min": 99000,
-      "salary_max": 104000,
-      "suspicion_score": 0,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Director",
-      "company": "SEIU 521",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5540489070?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.457922Z",
-      "salary_min": 128410,
-      "salary_max": 141926,
-      "suspicion_score": 0,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Director, SEIU Local 521",
-      "company": "Current SEIU",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5543529916?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.457942Z",
-      "salary_min": 128410,
-      "salary_max": 141926,
-      "suspicion_score": 0,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Senior Account Executive",
-      "company": "Drug Hunter",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5575335079?se=WL6prKjt8BGDxL9nTBzhZw&utm_medium=api&utm_source=a70fa881&v=7EF2202A7E908EB10606E34B1486DD9CBA12C6B1",
-      "date": "2026-01-09T22:15:15.715658Z",
-      "salary_min": 207911.4,
-      "salary_max": 207911.4,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Entry Level Marketing Representative | Training Provided",
-      "company": "Profits Management",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5445811220?se=WL6prKjt8BGDxL9nTBzhZw&utm_medium=api&utm_source=a70fa881&v=4DEA482E608A33D6F8B7093A6C34031E630FD201",
-      "date": "2026-01-09T22:15:15.715686Z",
-      "salary_min": 51753.88,
-      "salary_max": 51753.88,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Global Field Marketing Leader: Campaign Strategy & Content (San Francisco)",
-      "company": "Salesforce",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5554999212?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-09T22:15:15.715832Z",
-      "salary_min": 127094.54,
-      "salary_max": 127094.54,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    }
-  ],
-  "jobPostingPatterns": {
-    "totalJobs": 33,
-    "keywords": {
-      "petition signature": 6,
-      "grassroots organizer": 6,
-      "canvasser political": 7,
-      "campaign field": 6,
-      "political activist": 8
-    }
-  },
-  "flaggedOrganizations": [
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00887927",
-      "name": "POLITICAL ACTION COMMITTEE FOR FOUNDATIONAL BLACK AND ORIGINAL AMERICANS",
-      "city": null,
-      "state": "TX",
-      "committee_type": "V",
-      "designation": "U",
-      "first_file_date": "2024-09-01",
-      "risk_score": 95,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00887927/",
-      "date": "2026-01-09T22:15:25.450017Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00933416",
-      "name": "MINNESOTA FREEDOM FUND",
-      "city": null,
-      "state": "GA",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2026-01-07",
-      "risk_score": 90,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00933416/",
-      "date": "2026-01-09T22:15:25.623089Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00930438",
-      "name": "ALABAMA FREEDOM FUND",
-      "city": null,
-      "state": "DC",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2025-12-12",
-      "risk_score": 90,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00930438/",
-      "date": "2026-01-09T22:15:25.623109Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00911610",
-      "name": "DIGITAL FREEDOM FUND",
-      "city": null,
-      "state": "MA",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2025-07-11",
-      "risk_score": 90,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00911610/",
-      "date": "2026-01-09T22:15:25.623119Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00906263",
-      "name": "LOUISIANA FREEDOM FUND",
-      "city": null,
-      "state": "LA",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2025-05-23",
-      "risk_score": 90,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00906263/",
-      "date": "2026-01-09T22:15:25.623129Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00886952",
-      "name": "LATINO FREEDOM FUND",
-      "city": null,
-      "state": "RI",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-08-21",
-      "risk_score": 90,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00886952/",
-      "date": "2026-01-09T22:15:25.623139Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00884718",
-      "name": "AMERICANS FOR AMERICA",
-      "city": null,
-      "state": "CA",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-07-27",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00884718/",
-      "date": "2026-01-09T22:15:25.450059Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00880393",
-      "name": "AMERICANS FOR ALTERNATIVES",
-      "city": null,
-      "state": "NY",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-06-05",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00880393/",
-      "date": "2026-01-09T22:15:25.450087Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00868679",
-      "name": "AMERICANS FOR CONTRACEPTION VICTORY FUND",
-      "city": null,
-      "state": "DC",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-02-07",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00868679/",
-      "date": "2026-01-09T22:15:25.450124Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00933358",
-      "name": "LIBERTY UNCHAINED PAC",
-      "city": null,
-      "state": "IN",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2026-01-05",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00933358/",
-      "date": "2026-01-09T22:15:25.838925Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00931915",
-      "name": "ONCHAIN LIBERTY PAC",
-      "city": null,
-      "state": "FL",
-      "committee_type": "V",
-      "designation": "U",
-      "first_file_date": "2025-12-24",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00931915/",
-      "date": "2026-01-09T22:15:25.838965Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00908681",
-      "name": "TEXANS FOR LIBERTY",
-      "city": null,
-      "state": "TX",
-      "committee_type": "U",
-      "designation": "U",
-      "first_file_date": "2025-06-18",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00908681/",
-      "date": "2026-01-09T22:15:25.838989Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00901769",
-      "name": "TRANS LIBERTY PAC",
-      "city": null,
-      "state": "DC",
-      "committee_type": "V",
-      "designation": "U",
-      "first_file_date": "2025-04-08",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00901769/",
-      "date": "2026-01-09T22:15:25.839001Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00888891",
-      "name": "ITASCANS FOR LIBERTY",
-      "city": null,
-      "state": "MN",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-09-13",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00888891/",
-      "date": "2026-01-09T22:15:25.839030Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00886747",
-      "name": "RESTORING LIBERTY PAC",
-      "city": null,
-      "state": "MO",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-08-19",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00886747/",
-      "date": "2026-01-09T22:15:25.839051Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00874958",
-      "name": "LIBERTY DIGITAL PAC",
-      "city": null,
-      "state": "VA",
-      "committee_type": "V",
-      "designation": "U",
-      "first_file_date": "2024-04-02",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00874958/",
-      "date": "2026-01-09T22:15:25.839084Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00933168",
-      "name": "AMERICAN LEADERSHIP ACTION FUND",
-      "city": null,
-      "state": "MN",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2026-01-06",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00933168/",
-      "date": "2026-01-09T22:15:26.708596Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00912360",
-      "name": "BLACKNBROWN ACTION FUND",
-      "city": null,
-      "state": "FL",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2025-07-17",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00912360/",
-      "date": "2026-01-09T22:15:26.708682Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00904623",
-      "name": "OVERSIGHT ACTION FUND",
-      "city": null,
-      "state": "CA",
-      "committee_type": "V",
-      "designation": "U",
-      "first_file_date": "2025-05-07",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00904623/",
-      "date": "2026-01-09T22:15:26.708706Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00873299",
-      "name": "FUTURE GENERATIONS ACTION FUND",
-      "city": null,
-      "state": "TX",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-03-14",
-      "risk_score": 80,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00873299/",
-      "date": "2026-01-09T22:15:26.708793Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00924423",
-      "name": "CITIZENS FOR AMERICAN STRENGTH",
-      "city": null,
-      "state": "VA",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2025-10-24",
-      "risk_score": 70,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00924423/",
-      "date": "2026-01-09T22:15:25.106460Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00923979",
-      "name": "CITIZENS FOR VIRGINIA POLITICAL ACTION FUND",
-      "city": null,
-      "state": "WI",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2025-10-21",
-      "risk_score": 70,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00923979/",
-      "date": "2026-01-09T22:15:25.106486Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00922781",
-      "name": "AMERICANS FOR ISRAEL FOR AMERICA",
-      "city": null,
-      "state": "NY",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2025-10-09",
-      "risk_score": 70,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00922781/",
-      "date": "2026-01-09T22:15:25.449954Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00891937",
-      "name": "CHRONICALLY ILL AND DISABLED AMERICANS FOR PROGRESS",
-      "city": null,
-      "state": "MD",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-10-30",
-      "risk_score": 70,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00891937/",
-      "date": "2026-01-09T22:15:25.449987Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00889626",
-      "name": "AMERICANS FOR AN OKAY TOMORROW",
-      "city": null,
-      "state": "VA",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-09-20",
-      "risk_score": 70,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00889626/",
-      "date": "2026-01-09T22:15:25.449997Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00888354",
-      "name": "AMERICANS FOR BASIC INCOME",
-      "city": null,
-      "state": "NC",
-      "committee_type": "V",
-      "designation": "U",
-      "first_file_date": "2024-09-05",
-      "risk_score": 70,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00888354/",
-      "date": "2026-01-09T22:15:25.450006Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00887638",
-      "name": "AMERICANS FOR PEACE SUPER PAC",
-      "city": null,
-      "state": "MN",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-08-28",
-      "risk_score": 70,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00887638/",
-      "date": "2026-01-09T22:15:25.450026Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00885871",
-      "name": "YOUNG AMERICANS FOR A BETTER AMERICA",
-      "city": null,
-      "state": "CA",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-08-08",
-      "risk_score": 70,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00885871/",
-      "date": "2026-01-09T22:15:25.450036Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00884429",
-      "name": "AMERICANS FOR TECH SOVEREIGNTY",
-      "city": null,
-      "state": "VA",
-      "committee_type": "V",
-      "designation": "U",
-      "first_file_date": "2024-07-24",
-      "risk_score": 70,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00884429/",
-      "date": "2026-01-09T22:15:25.450068Z"
-    },
-    {
-      "type": "political_committee",
-      "source": "fec",
-      "committee_id": "C00884015",
-      "name": "AMERICANS FOR 21ST CENTURY TECHNOLOGY",
-      "city": null,
-      "state": "NC",
-      "committee_type": "O",
-      "designation": "U",
-      "first_file_date": "2024-07-22",
-      "risk_score": 70,
-      "sourceUrl": "https://www.fec.gov/data/committee/C00884015/",
-      "date": "2026-01-09T22:15:25.450078Z"
+      "title": "Energy company admits to hiring actors for public meetings",
+      "date": "2026-01-02T12:00:00Z",
+      "sourceUrl": "https://example.com/news/8"
     }
   ],
   "recentNews": [
     {
-      "type": "news",
-      "source": "google_news",
-      "title": "Masked agitator tells Laura Ingraham she\u2019s 'getting paid right now' at anti-ICE protest - Fox News",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNckVxZjk5bWg2VkUxWUZzTVdTU01tZXhwWGd1VXV4WXZCVkg4UjZwQ19jRGVHMXpwR0RsT0t3a0o1U2Z5ZE9fbTR2N2Y3Sk9FWnZWYUswQTZfaEdfblQ0dEdMSTdvVlNib0dYSnBHUGM0blpsWVJiSjhEYnRpeU56bHByRHV0eV9GMVQ0ZUR3ajdqb2JTUlZiZy1YaC00dS1KWFJrZGRiNTRjbzlLd05SdTZMQ3g4Q1BzTGfSAb8BQVVfeXFMTm5oQ1N6QlQyOTdscHc1YWthcUJQV1l0SFVYY2h2VHprVVM5c0lzWmFBc2VYaHVUQWRsNzhkWW9VdERwemwzZVFkQnN2emJnV1R5U245dHltRElqcnhGWF8zU2ZEYjJXb3cyQWZoZWRieTZvM3NSMXpxTUF3RkoyanlmaXJqZjRWODZ4djdhZHd6d3owNDNFTGtENTJNU2JwN3E1NHVKOG9rQWs5U084OWNlckpYbmdySWlkMmZjd0E?oc=5",
-      "date": "2026-01-09T19:22:01Z",
-      "publisher": "Fox News",
-      "query": "paid protesters",
-      "relevance_score": 60,
-      "location": ""
+      "title": "Investigation reveals paid attendees at Texas energy hearing",
+      "url": "https://example.com/news/1",
+      "publisher": "Texas Tribune",
+      "source": "google",
+      "relevance_score": 85,
+      "query": "paid protesters"
     },
     {
-      "type": "news",
-      "source": "google_news",
-      "title": "Minnesota protester: 'I'm getting paid RIGHT NOW'!' - Fox News",
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1wUlR6b1pZSmg0ZTJ2UDR1UnlIbzk3a05QdGptbkFqMW5hWVN0RXJ0NnU0MmlIWl9LUWZfNnlCcTJ4OU9UUmgzNE82UWhEOHJHOTRzbEFn?oc=5",
-      "date": "2026-01-09T18:57:09Z",
-      "publisher": "Fox News",
-      "query": "paid protesters",
-      "relevance_score": 60,
-      "location": ""
+      "title": "Crowds on Demand reports 400% increase in business requests",
+      "url": "https://example.com/news/2",
+      "publisher": "Vice News",
+      "source": "google",
+      "relevance_score": 82,
+      "query": "crowds on demand"
     },
     {
-      "type": "news",
-      "source": "google_news",
-      "title": "Rioter Admits to being Paid While on the Streets in Minneapolis\u2026 - 77 WABC",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQOS1kRGFfLUpBV2FqSFZWdU5hbHdYOHNRVlRnZFhUTzk4ajJlVk4zakR6MmRqMG9yRktaMElFVW40b0hqWU54V2tvdkJJY3Vhcmo4WVhNcTBlSG1yWWNvM3Y1T2pNWW1DdXl6S0FNSkNCbVNLd0c2dzR5RnU3MjRJcEp6SGRQYjdPZl9MMzdQc2FRRUpqbGpHck1GcXI1UQ?oc=5",
-      "date": "2026-01-09T16:33:05Z",
-      "publisher": "77 WABC",
-      "query": "paid protesters",
-      "relevance_score": 50,
-      "location": "Minneapolis"
+      "title": "Dallas council questions authenticity of public commenters",
+      "url": "https://example.com/news/3",
+      "publisher": "Dallas Morning News",
+      "source": "google",
+      "relevance_score": 78,
+      "query": "astroturf campaign"
     },
     {
-      "type": "news",
-      "source": "google_news",
-      "title": "Report claims far-left groups are behind the funding of anti-ICE protests in Minnesota - WBFF",
-      "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNbEJTbGZsZmJXR250RDh0NV9pQ2lqbTBBd3FFNVFHaXJBVlJrM19VNmVTcU5GTnBfOWlJTGNwLWVZeURxN2xZOVRSeGMtT2lPVWlEME1fWWl1T2lIVG1wMnlpQUZUUkI5QndKaGYwV245RDZkVkR1a2F4bC1kZHYxVElObk9RZlVJaThFV2VOZ19Kc25ZRzdOTFV6WTkxVm9Rbkx1SXhzVWRrd0FJaVA4bFJSYWNVUy1LNF81cmU5Yzl5dzhfQlpTN1J4LW9BczRVM0pIMnliLWN0cHBQTGhma3dIajN0bHNPYm1wZTFXSQ?oc=5",
-      "date": "2026-01-09T16:06:04Z",
-      "publisher": "WBFF",
-      "query": "paid protesters",
+      "title": "Report: Astroturfing on the rise in local politics nationwide",
+      "url": "https://example.com/news/4",
+      "publisher": "Associated Press",
+      "source": "duckduckgo",
+      "relevance_score": 75,
+      "query": "astroturf campaign"
+    },
+    {
+      "title": "California advocacy group linked to professional crowd service",
+      "url": "https://example.com/news/5",
+      "publisher": "LA Times",
+      "source": "google",
+      "relevance_score": 72,
+      "query": "fake grassroots"
+    },
+    {
+      "title": "Fact check: Were protesters at state capitol rally paid actors?",
+      "url": "https://example.com/news/6",
+      "publisher": "PolitiFact",
+      "source": "duckduckgo",
       "relevance_score": 70,
-      "location": ""
+      "query": "paid protesters"
     },
     {
-      "type": "news",
-      "source": "google_news",
-      "title": "San Marcos to reconsider stalled $1.5B data center project - Austin American-Statesman",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQUlVZOFhKdjIzVU41dnFiWFhSVWFKUmNuaTl3OWVycXZOeWNQbjFYNVNXN1dNcXcwbzYxMU5idDFfSUlleE1JNy0zNjVYQUV3WE5yYjlSUnpaNF9sbjdOOFgzR1ExeTZsLWgwVmJvN1l3anNfem5YTmJBNGdxU2FzbjdZVS02Vkh6UHZkWWJkUlNVTFdtZVhsVVBsLVAxY0N0elVkTUVfaVJheG5wQXJHdjBnbw?oc=5",
-      "date": "2026-01-09T12:34:22Z",
-      "publisher": "Austin American-Statesman",
-      "query": "city council protesters",
-      "relevance_score": 50,
-      "location": "Austin"
+      "title": "PR firm under scrutiny for manufactured grassroots campaign",
+      "url": "https://example.com/news/7",
+      "publisher": "NPR",
+      "source": "google",
+      "relevance_score": 68,
+      "query": "astroturf campaign"
     },
     {
-      "type": "news",
-      "source": "google_news",
-      "title": "Over 100 march from SC Statehouse to city hall to protest ICE, killing of Minnesota woman - South Carolina Daily Gazette",
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQb1phMG83QWZSbGU5ZVBiQUNTRUlJX1dRSUwzQmtiZkFZSFRPSGxjUnUwa0RzSV9WdlFXWG1oVWxtWHROaHlTZThocXhXTE1CR1ZvajhpeXdPTjdsUE5CcmpRQjhmWG9RNUQ0VjNxMVBPMC1JN3hmaE5KU1VZM0xBLVd5c1VNTFdLbkI3Rkp1OE1HUlRGRTVIOW5OMks3b2NpNnluU0dVcWhZRUZHR0tPa3hyeEs4VjNnT1pyczdsRjNlVnI4ZVE?oc=5",
-      "date": "2026-01-09T11:28:55Z",
-      "publisher": "South Carolina Daily Gazette",
-      "query": "city council protesters",
-      "relevance_score": 60,
-      "location": ""
+      "title": "Energy company admits to hiring actors for public meetings",
+      "url": "https://example.com/news/8",
+      "publisher": "Reuters",
+      "source": "google",
+      "relevance_score": 88,
+      "query": "paid protesters"
     },
     {
-      "type": "news",
-      "source": "google_news",
-      "title": "About 1,000 turn out at Dallas City Hall to protest Minneapolis ICE shooting - KERA News",
-      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQLWl2YmxqOUNBRkVmaEpmNm5pODNXcV82TzllZ1UyS3huYlZEUElrV1pCUTF6TkFvYlhiNDVxUDkwOV9sRUtLeDhUVVJFSEFGckdCZG9aUTdpWFl1bTJfUExpdG9wSl9QRFp2T0tfSTYteTF6M19reWFYeDVyQXRJdlM4TjlJZjdVcEthUXhsN0lwTEdQbXk0U1F1MTdwYV9TMFFnR0ZSamxIMDBhdUVvcFNjUGVpRUh5MV83WTNiZ3dFeTZsdWYzbnQtQVZ6LVhM?oc=5",
-      "date": "2026-01-09T11:15:00Z",
-      "publisher": "KERA News",
-      "query": "city council protesters",
-      "relevance_score": 60,
-      "location": "Dallas"
+      "title": "Dark money groups funding protest movements: A deep dive",
+      "url": "https://example.com/news/9",
+      "publisher": "ProPublica",
+      "source": "duckduckgo",
+      "relevance_score": 65,
+      "query": "dark money protest"
     },
     {
-      "type": "news",
-      "source": "google_news",
-      "title": "Candlelight vigil surrounds Portland City Hall after Border Patrol shooting - OregonLive.com",
-      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPSmhjVzlhSUdxTEE3VHlJWW9GUzdqM3hOTGxIcXJIOF9scU1nVVh5QzVFXzh1RkhsX1ZoaF84VnNoYXF1emxCaWQxOEhIak05SmxrVWRuRTlsX2NIY0o3djlSSGozeFYzOUJraUVWQTBwN0JoaGc1bkdhUW9uc1k2VF9rWE5ZUmhQcUpnVmtNQVhwMi1Yd3hmdVA0ejBjd3ZTNE5uaFVRRkVuVWU5ZVVuNkJjQnBINkNKSFJ3ZUM3U3NYTXBQbU1abXUxSjJsY0pZVTE4StIB6AFBVV95cUxQUWJnRmUxZjFDUlhYQWFmUEtXZ25jcHBlSFh6dXBhSExhdnJXQUdnc1BycXhjNXBCYjRHRW42aVcwOHdWdkF0OXUwZnR5V3c2dkxHbDNmMHdLNUgySnNWbFF4ZDVFdFNDSHdldXNEWHJvQmFrdkZ4aXhoOTZZdTNZN0JiQ29WajluX3pQbkhDWGNxbFFOM0daQnFCQVVYX05fc0RqSDM4UXJkRDZCQTRZZnVZUkJ1bnlyUW10YXUzYjVpWXcwck14dy1EM0c0NEx0anJNNW1JbDRrVWtLckRfYVA5ZUVIdVV0?oc=5",
-      "date": "2026-01-09T04:08:00Z",
-      "publisher": "OregonLive.com",
-      "query": "city council protesters",
-      "relevance_score": 50,
-      "location": "Portland"
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "'I can't just sit by': Protesters gather in Merrimack to oppose potential ICE facility - New Hampshire Public Radio",
-      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNdUkzUDNzaUF6NVVCZFJQZ1VHSmlDWjlJZHZqYVJFV2dQemNqaGRXYVQxY2xyVmZjdW5BTFBYTXM5RllINFZvSjFoUnNFdHVhdmhxVVV5MlhjS2tDTDdOclRfZVlyVGNBUWdtVUowUFpIQkp2SEJJTUVYYU9GRDhodHBtd19oSzR2bXBObm51RVR4ci1zTFRocXk5THRTUERIWkJ5YUR2WkFxcDVJSmdZck0wVnNPT1FscjFJMGdjZ3I0V01HZUpRekFVNTRvMkE?oc=5",
-      "date": "2026-01-09T03:32:00Z",
-      "publisher": "New Hampshire Public Radio",
-      "query": "city council protesters",
-      "relevance_score": 60,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "More than 1,000 gather at City Hall to protest fatal ICE shooting in Minnesota - Billy Penn at WHYY",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPYkNYZTBnbi16ak1nbjhYVUQ3R0lyNHRJNFpGdWhMS1R3VHd1VEY0MDdtb1NFQ01tYy1kVFlpdm1rSm5RZHgwbWN0SzlMVlE5WWtsdlVxQkJnTGMwWmJ4bmNnTEZEbDZnMUZJc3NkUVk0blZUTjNiSTYzN09LcWFqdjlxTDVMdw?oc=5",
-      "date": "2026-01-09T02:14:16Z",
-      "publisher": "Billy Penn at WHYY",
-      "query": "city council protesters",
-      "relevance_score": 60,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Fayetteville protest seeks justice for Minnesota mother killed by ICE agent - The Fayetteville Observer",
-      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOMkVLcnVmR3dMLUdwLWI0cV9TWEF2V1luOXhfdFdtME5kUjFPT1B0b3dFaDlPSzFSWEllOXpOZEF0SG56N0xNc1J2cmdPdktOUW1aNnNNVDU0cGRmTDNqdW9XZXdscUVNcUhMcVVGSlhSWFlLaWliQWtFWkEtNlp3WktfMm9ydzVoMGpwOEFHUTRYNl84Qjl5MzhOMi04WG8zVUtYbEFpLUlmYzYxbENhSkw5UVg4U05mdFU3MVdHQVN3NnU2dk53VDh2T1hTb2pmclpFaEpsLTFmRThuckNUVTd6bTA?oc=5",
-      "date": "2026-01-09T01:31:00Z",
-      "publisher": "The Fayetteville Observer",
-      "query": "city council protesters",
-      "relevance_score": 60,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "DHS identifies people shot by Border Patrol in Portland; 6 arrested in protests after shooting - Oregon Public Broadcasting - OPB",
-      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1yVzQyRHl2VEZPc1VFdmRhd1V4UU5WNjkxSFJWdDA2QUoxQkEwWng5WHlrWDdkbGdoLTE2bHNEZkhFQVd3MG9NUUpZLXAwb0hTdlJyNWxVLTVySC0zUTVaOTR0aHVOSG5jMVptOVJ1VEtaU2FMVW5uRS1XNEE?oc=5",
-      "date": "2026-01-08T23:11:11Z",
-      "publisher": "Oregon Public Broadcasting - OPB",
-      "query": "city council protesters",
-      "relevance_score": 60,
-      "location": "Portland"
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Sexual assault victim advocacy groups awarded funding from ADECA - Black Belt News Network",
-      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxOSXA0S1FBZ2Itd3lCSnlLWDJSQUNsRE9VUEFTcmp1SjVxWFhxdk9KRG45SjZNX2pzaEdWMDJOMGM0bGdQb0NaSmI2Q0c4WnVFOWszY1RPMEEycmV4WlZGNkhlblR5X25HMXNhLTVGSkRJbERkanZpeDRVRGRxTFZkRVNvY2tvY0ZaU3hJQTJBdFo1b3JHbTRlTVJmeEZlbHBvX1Zkc1lBR2g5RHNnbnBUMlktOE5LZlIxMXJEbmJUUlJ1VFdPbDB6X3JDS2I1bjlEWlRabkJoUDlrb2Zsak1jZzBqNWhqaUJKWTIxdg?oc=5",
-      "date": "2026-01-07T21:27:00Z",
-      "publisher": "Black Belt News Network",
-      "query": "advocacy group funding",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Saratoga Springs agrees 'to refrain from retaliating' against protesters - Times Union",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPc0Nac1ZTUVh0VnM1cGIxNWZoZExzMzBYa1hsV19ESmlDdTd2azV1OEZyU1dva3N2eWVNdEw0VlpWUmRvWDF3YjZrQURZSW1KMzVleTJZdzZQMU5Odkt5cnlOSi1Gc1RoN1NfM3dybEtCSk1ldlU1ZjFEWWZnanExeEZUVGxBVDdRNk1uSGVuZkdhMEgxbHlR?oc=5",
-      "date": "2026-01-07T11:46:15Z",
-      "publisher": "Times Union",
-      "query": "city council protesters",
-      "relevance_score": 60,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Trump touts \u2018brilliant\u2019 Venezuela attack in remarks at House Republicans retreat - The Guardian",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeU9hbFVTdzNYU1NvRzRaVXRwV0pSV2pWMnlpdUthZkI4a0pybjA4OFJlU0ozVmlTc0pIUWpNbnJreVVWTDVUVkwyUFpsZHp0ejY5VU4xakZlbEIwTmRyUk40MmdESkpncVlsV1JLajJ4NHJKWnFYcElRVmt0Y3o3aWtn?oc=5",
-      "date": "2026-01-06T19:25:00Z",
+      "title": "How to spot an astroturf campaign in your community",
+      "url": "https://example.com/news/10",
       "publisher": "The Guardian",
-      "query": "paid protesters",
-      "relevance_score": 50,
-      "location": ""
+      "source": "google",
+      "relevance_score": 62,
+      "query": "astroturf campaign"
     },
     {
-      "type": "news",
-      "source": "google_news",
-      "title": "Pro-statue protesters gather outside Quincy inauguration. See photos - The Patriot Ledger",
-      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOckg2d3ByTU5yXy1feWxHSkRSZW9aeUkyVXA1N29vX1JRZlcyX2Eyb1paT1IwQjNMRS1RaGNBU3lYMW1xdzRHcEtzanQtVExmV01IUTIycEhreDNMUzRiYS1hNmE4dDFYM2EwUlFNVkdiVjF6WFMyU18ycmQ3akVSRWQ5aTA2ckJPSTZ2OTY0ZmNPVHlQRUlFZkhzQ3E2dEI4WUVNSDFCdkZmT3dpUzQtb0xOSjlmUlo5Q2VRQmc1WGhEcW9NV3A1VWhzSUgxaXRfeFZfZ0xSVy1leGt0azZPcGNXWC1PN3lJaUlBT0JQWjc?oc=5",
-      "date": "2026-01-06T19:20:00Z",
-      "publisher": "The Patriot Ledger",
-      "query": "city council protesters",
-      "relevance_score": 60,
-      "location": ""
+      "title": "501(c)(4) groups and political spending: What you need to know",
+      "url": "https://example.com/news/11",
+      "publisher": "OpenSecrets",
+      "source": "duckduckgo",
+      "relevance_score": 58,
+      "query": "501c4 political"
     },
     {
-      "type": "news",
-      "source": "google_news",
-      "title": "Federal funding change could impact thousands in state, homelessness advocacy group says - Springfield Business Journal",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOMHhRaF9TaWJ3S1RhYW1WcHZhRXFwdHFjTjd1OW9YUy05ZlNIejROdUJ0dXBXUTFJZDE0WlVSNFlsYWNGeTJJWHpZUWpoVnBMN1lPWVFiZkVfY0ZvR2p4QW9QMVNhRDFYWDNVbmhPREFJaGdzOGJST1RQYnd6VXZDbUJlQXgtV0haS2MtWlAtSjNoWW54OWZLNjRlM21fcS1GdVd2T29FQTNQNVA2OVdSYk5yLXZmVlVyYkE?oc=5",
-      "date": "2025-12-23T17:52:00Z",
-      "publisher": "Springfield Business Journal",
-      "query": "advocacy group funding",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Leading Climate Lawfare Firm Accepts Millions in Donations from Left-Wing Dark Money Groups - National Review",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNNzVrekNZSlVoZlJRdTZYZ3IzNUtMNUFZMmt4RXMzTkVIellGUU9USGFnUHFGU2pxNXNjVS1iNWh1UVUwZVdRcVY1MDhYVEJkMHY0aEdnaDJWNS1NTDI2WjBMdlZhZWVOaVV2a0RSTnp1TFZud2F3NkI5amR3ZmlSYWpmb2dVZDBKZnhjYzJDNUdRQ3huUUVEYTY4Mk9mbzdObFBMYVUyMTk5aXNHeDFLcTRLaUlqVnJoS2dwZ2l4b3AxcUZwb1Zn0gHMAUFVX3lxTFBuci1XQ09oWjVuNkkxaUo0OTZTWVkwa3h4WEoxajhFeFFkYnN5RktFYUFwRmsxcnJCMFRsdERaYmxHQzFoUUZRSE9JUEtTODBLSUo4bWVsOFBaY1M5cnkyUXZJbTZuMkdHa0JqTW1MeEVLVzBuamF1d3VxQUhaY0tDU2RIMUdRTkxLM2lERWF4bUFBRmhvYUZDYUtwTVBMZzYwekRBd0xHSE9xLW14eU5KOWEyTEdmZ1JyTTB6QjFrUnpfNDFuOUVqWXdibw?oc=5",
-      "date": "2025-12-21T08:00:00Z",
-      "publisher": "National Review",
-      "query": "dark money protest",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Quiet GOP 'Astroturf' campaign convinced liberal firebrand to run for US Senate, source says - Fox News",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQMDdGTXU5QWh4aGx1VW5mTWIwRDBmdXlhdk5SNWd5YWV0VFZCUzBtZU9ibkJITWFVb1haT0NJdjhFZEdtbm5reEk2QzNHOWpYbjBTcl9ZWkNuWjBvdmpPQThuVjVoTEkxUnE4NGlyLWxzYUNQR0VzaDVkY2hIRkZBY1IyeDlqSi1SNXpmWlJwbURVeDlKb3lUSlRQQ0ZaSGxzNnZkb0tIMERfNUZEZXpoSEJ1cHk4Z9IBuwFBVV95cUxOOUxPTzhlNFJZWmt6TFN1MHVkS05Lakc0N3BmYm1IWFRGbzlhU05qS0R1U0EyWDZoVHk1QmxvN3JvdjJ3dDJ5YktoVFpKVTNFcTVTRkt1QUVpSGU5UldqcGV5U2dadzNXa1NCcjI3WmxzaWtVbVV4X0E0Z3dwMnFkR1pMMGJoNFBndld5MnZyS01YMklkbjg1c3ZVWWlieUxYLWlGeEdIdm05SHB1WjJxd0VnREpOVDVNWTNV?oc=5",
-      "date": "2025-12-11T08:00:00Z",
-      "publisher": "Fox News",
-      "query": "astroturf campaign",
-      "relevance_score": 80,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Blake Lively Wasn\u2019t Only High-Profile Smear Campaign By Baldoni Crisis PR, Alleges Jonesworks PR Firm Boss; Overlaps With Taylor Swift Attack, Astroturfing Study Finds - Deadline",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOd0JoMmFyM0FWOGY2a1JPM0cwWXVYbGdwcF94LW5zNHpaVnpqOXMzSjRqZ3ozTVRSby1Sb0JPaXRuMlhpaGllbUVBMmgyNHZLdXBERDQwNzhnVThlMlIydklINVJhMDk1UnJFS3VZbTRoRWpPdmlvWlctYmRaUksteDc5NEE4aC1KWUVqdnJpNUJwV0pFdGt6R2xn?oc=5",
-      "date": "2025-12-11T08:00:00Z",
-      "publisher": "Deadline",
-      "query": "astroturf campaign",
-      "relevance_score": 80,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "GOP reportedly used \u2018AstroTurf\u2019 campaign to push Crockett to run for U.S. Senate - San Antonio Current",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQM1FWSUVpSzVnRDlNN3d2bXpuZEZyOEJIeUtsWmZhU1dCbm1ON3BEVFRHZUgtbnhKVkVaTGYxQ3VDMlFMdlo0N2NOcU1jYThCLXA3S1kxT21aYVhVZk1zS0NQcUVnVTJtcUZRb085LUt0UXBPQS1GRExpYkVCRi03ZUp5M0tJaXg3OGJJLTk2b01QWVRMZlhDbk9yX1QwLTFsejRFeHIyb2RYRFpoQ1FFZVVxQUVjeU0?oc=5",
-      "date": "2025-12-10T08:00:00Z",
-      "publisher": "San Antonio Current",
-      "query": "astroturf campaign",
-      "relevance_score": 80,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "An \u2018AstroTurf Recruitment Process\u2019: National Republicans Propped Up Jasmine Crockett to Push Her Into a Senate Run - NOTUS \u2014 News of the United States",
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1mTjhDMThRQjNxeEt6Tkh6amloYzB3U0VSQVI4Q2pjWnpmRkoyc282V29wN29IWDlhNFFNU1pDdGtobGxTSlUycmRxa092SjJCWWlXenRwQmRyYWx2a19KR3l6ZGhsUTc0S01JdjBLSTg?oc=5",
-      "date": "2025-12-09T08:00:00Z",
-      "publisher": "NOTUS \u2014 News of the United States",
-      "query": "astroturf campaign",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Federal funding delays force Little Rock disability advocacy group to cut staff, services - thv11.com",
-      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNRi1WbTZUOHBRYWZPaFY4d3hYek5jbWVwSUI0ak1NSTN1RFhOblRHUjM5aS1fMXJ0eU55VWlWTlF6M2dLYUNhOUVYZ2hsZm5jd0xaQ21Cdzh4MzFWaHFyOWtlNFdITER6b2VsZDd5TGFMTWpmeWtFT2xfN1hFRG9ZOWZ3SERPWGdrUkptRzgxUFVZWTlXTkpGQTVnd3pVb3U0V3J4TktiS3BueHdjR1VYUzJLbXJPcUVLblY5dld5em9zSzA1OVBTdjNNdlg?oc=5",
-      "date": "2025-12-05T08:00:00Z",
-      "publisher": "thv11.com",
-      "query": "advocacy group funding",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Keir Starmer Machine Ran a Secret Campaign to Demonetize Breitbart News and Other Opposition Outlets - Drop Site News",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZVUzN2RqazhYNmxKTzFSU08yTHRTcWZwLUN4SVFRWUl5UUsySXJlUzhmazAtT1VSTHdicDNCSEsyOEFrWTdhczNSS3pRUE1BNjNOT1hDLVotM3FIampjMkllcU5GdndtdEJTcm5PZmFjUjNJZWlWOGlKWXE3Y2VURTBUM0xuNk1UT1ByMFpEeHdyQ1lCUk56eHlGQkpGbWx0TzV3Z1NTVHhyN1U?oc=5",
-      "date": "2025-12-03T08:00:00Z",
-      "publisher": "Drop Site News",
-      "query": "astroturf campaign",
-      "relevance_score": 60,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Changes to federal funding could make hundreds of West Virginians homeless, advocacy group says - West Virginia Watch",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxON0VhNVkwOFF1OUhWRDRseGppTDlYZVhBanRQdGgtZFVzNnBHM3l6YWNyZE50enNWYVdKWXZIcHlXb0pLNzRzei1NelhsRXF2MnJENUdsM3NlSEZqWmQtVW44d0dQemV2RkR6RnFSb05FdEttMVFMbWU4WnRuZUNCRGw3ZmtHenpCejBMdS1uY2ZTdlJlNWZtWXFHLTJhUG9sczlsbV9XS0ZYSkIxNVhmUUdoWXA1a0NzN25vX3doMUo5aWQ3RFY3Z2xXNmxwVER5d2c?oc=5",
-      "date": "2025-12-03T08:00:00Z",
-      "publisher": "West Virginia Watch",
-      "query": "advocacy group funding",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Immigration advocacy group operating increased services despite funding challenges - WCNC",
-      "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxQT2hmS2VSV0dMR0ltdHg3WEdvU2ZENktxR2NNOTFOcmFTX0FSTFVoa1NzYjZoQXF5ZlFMbWk4SlAyV0YtSU5wVWVlc1cyMUpzQkVTWGNaa2tKYTM4Uk9nV0t1YkVZVDlJRGZoRlNtM2lPT3Y0NmZsNjdIVGI0Yk5ySVd4VnJWenVzX3Qtak54S0p5allxSHBJMk5lYTF0b1Z2SkE0NkRiUlVuSFNMZU5PamJGa1lTcW5YZ3dWWkRWbk9PTXVocXJtUng2ZEVObU1pR1p3QUl1RmNib1I3R25MMk4xMWNJSmpPU0M0aUpjR0ZBQUVNam9IdDZjbWs4SEtOWmw0WTF0M08xMkp1cGc?oc=5",
-      "date": "2025-12-03T08:00:00Z",
-      "publisher": "WCNC",
-      "query": "advocacy group funding",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Gen Z protests: Kenya authorities paid trolls to threaten activists, Amnesty says - BBC",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE03NExQSkpxQkhrdkZSTURjSlYzS3FJazg3X2FuR0VqaHFXdF9JMGluMFEzclJuRDc1WWZyanIzMk01ZFF5UTRBYkFaMFlmVXpPaFA5NzM5QnFqZ9IBX0FVX3lxTE5yU2lvamFXMFBkTXVTbHRLYi1wblc4VnpFZDNFaFd4M0RlVTRGekd0cHYyb0dnV2JxeERRbnRnY1pfMm1tZm9TYUhXV2FrdTRjclBhNGVNZ01yZldDb3VJ?oc=5",
-      "date": "2025-11-19T08:00:00Z",
-      "publisher": "BBC",
-      "query": "paid protesters",
-      "relevance_score": 60,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Dark money groups pour cash into fight over gerrymandered Missouri congressional map - Missouri Independent",
-      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNQ1l6UkFUQ3JwRVFPSWh3aXpMMzFPSjJOU1k3TmJ6Q25XazRBRF9VaURXVEdLakRpNGREcEtvVVNweHJKaV9KdVlBZUlrUDQ2TG1zS0VVQ1N5VnFRazRHMDBHYy1mZzEwNnlZZ3R2QVJDTm51Snl3S19fZnJwdE9EWTZpV2N6Q1FRU2tRRXNwV0p6SWoxTVBfYU43VHBJVFowY1FoSnZFSnJzaXBrNlgzYnllclV5azIydEE2MGlBcW4zTXVHOVJz?oc=5",
-      "date": "2025-11-18T08:00:00Z",
-      "publisher": "Missouri Independent",
-      "query": "dark money protest",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Game Marketing Agency Admits To Using Fake Reddit Accounts - Kotaku",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPV1ZCWS1uaG5wTHd1ZE83ZGFWTVN4cDNiaVVqcF85ai1OYXBDSW83ZFBOYUdYRzY4RkJXV292ekswNDQwdHloYXZQWW1wYWxxUkVWZ2VLSlBsd2JrUnpxdXFqUG9NT05VTXd4dkNNeVJ0eU1DQkpfRDZyVHIwcm15MXNEdzAtS09Da2I5aFZzanViNHhxRmJOSDgtV2M?oc=5",
-      "date": "2025-11-10T08:00:00Z",
-      "publisher": "Kotaku",
-      "query": "astroturf campaign",
-      "relevance_score": 50,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Advance \"duping\" public: Top expert - The Klaxon",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5tY1gwYkJxU2c4OW54ekg0TkRwLVJIelU3TklYWGhYelJrVmJ5R0hmVTY0VjRPbkV3eHBKQkdEYXAta3B1bExoNG44OEJZZG12MTgxX2o1Wnl6MUZmSWdWU01QZmNkNFlOOWc?oc=5",
-      "date": "2025-11-05T08:00:00Z",
-      "publisher": "The Klaxon",
-      "query": "fake grassroots",
-      "relevance_score": 50,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "How to Recognize an Astroturf Movement - CounterPunch.org",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOeE13MkFReC0tU0R6dEpzSzVPS0JqZU90RDh3TUx5VWpmSEtmY1ZCV0ZrdUJIT0hjWmVOZ09qbVFuY3V5dUdUSW9jRzltU1hfRGlTX3JHcEtlMmJfX2JMY3JZSUZDODlsTWRZMWRxVmVoMXlZWlZXZHRLdEk0cWtwMEp6WEdRdw?oc=5",
-      "date": "2025-11-02T07:00:00Z",
-      "publisher": "CounterPunch.org",
-      "query": "astroturf campaign",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "New Milford official criticized for allegedly claiming 'No Kings' protesters were paid - CT Insider",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNNFlIbkdTam9jOG92dkZIOUw2eTdtQXpUelhUUEZHTkNBb1BXTEdiN2VndnpNVzR5TTJab2dNVTJoZFIzRm9YMlVTR0ZWNnQwektjTkFKUWpaUW5feFJVbG1Bb0Q5TVY4QzVZUzY4d1lTNGZZck5YRURvUVliOFZOU0hiT0wxcUN4T1RnTmNwZkdQNmFEV1BzYS14VVdXU3dq?oc=5",
-      "date": "2025-10-23T07:00:00Z",
-      "publisher": "CT Insider",
-      "query": "paid protesters",
-      "relevance_score": 60,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "\u2018Compensated activist\u2019 says majority of protesters are paid - Yahoo",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNLXp3S1pVNU5PWTBlbEZQMEZpcmJlZFE1NERjeFU0WDRfSm5NZk9XUjU4aEtNR205bDRtTk1QclRUSXBzT1NMWmJRMzBCQ0FUSGh5ME5NelBFYW9UZDQxWEw2NGc1YTlGWTI0SWs0SlhwcHV4YUt5S1VHMVJ4cEYzMEYtM3V4NklRcnRiRW5IVGVVQmZBVWdPTnVxUk8?oc=5",
-      "date": "2025-10-17T07:00:00Z",
-      "publisher": "Yahoo",
-      "query": "paid protesters",
-      "relevance_score": 60,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Railroad Barons Launch an Astroturf Campaign For Their Mega-Merger - Revolving Door Project",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOdXFFQ3lUSXhxT1N2ajVwczdTNk43aGlOZWhyNk9wcVlHNjRVdDJzVGlUS2tHZ0F1U29IdG1pX1RlTEhpNWx1VjBPbFhLelkzVkFacTdxaUZlbWhseXJHeFJNdnpyZDVvZ3ZOWjRmWjRxeHhPRFU5cGh3Y2p4TTVyZUYyMy1JekdDU1N0ZWloOHFHTVo5dnBJWXRsNl9BYjJ5SmF4aVZB?oc=5",
-      "date": "2025-10-06T07:00:00Z",
-      "publisher": "Revolving Door Project",
-      "query": "astroturf campaign",
-      "relevance_score": 80,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Federal District Court Issues Opinion Finding IRS 501(c)(4) Political Activity Standard Unconstitutionally Vague - The National Law Review",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPdEdGaDA0VzYwVXJjQUpkOXIxNE1WLUc1Njg4YUxFcGRiYmw2bFdMRE5oOEt1enVvLWc5VDg0Y2ZqVTNkaE5pcnFCdHNqWTI4OHpuTU1ReFBYNWVod0JBelNReWlzazZlaktoNmVkNUhiS0dRLVE3NW9qcmV1OUxLaDd6QWVUVE5WRkdWTENKVDl0cTRXdmp6NlFQTTN5YlpIcHk5Q040RjRvbTg1Mk1OZDB4R1lsSTjSAbwBQVVfeXFMTVlSUkdEdHRjazFGX2FQTnZpMk54djVNRzY0VXhOYzJyUF9JNGswbkFSeHFnMXNpajVaUXc5aExXWkNSRmxfZDFvdnZrdU5FNWNYU3V0QmZhektxY1N6dXh5T0lXekY4R1ByaDBiWERkaGthTTlkeFk2V1M3aDJFRTIwVWV6UWFKTDBIWWFBaHliaW9XcXBYQXZTN1dsMy1oWFpNZHVMY2hidlZJdk50MVpRbnJhcklNQkpBQlc?oc=5",
-      "date": "2025-10-03T07:00:00Z",
-      "publisher": "The National Law Review",
-      "query": "501c4 political",
-      "relevance_score": 50,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Left-wing groups are funding 'dark money' organizations, GOP House Oversight chairman says - Fox Business",
-      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1pdGVpTXFKLXhTWGhUQmJLUUlmYjNtTElLbVYyd2pxUUJuNjM2blRQeHNxNW9DTDgxeDducDVrU0pqQlNoajQ4d3otUEpkb0Q3WjAyVzdQRmk5bG8?oc=5",
-      "date": "2025-09-17T07:00:00Z",
-      "publisher": "Fox Business",
-      "query": "dark money protest",
-      "relevance_score": 80,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Delaware advocacy group's federal funding at risk - Delaware Public Media",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPbV9faHZtSExMMjFoM2txdFhJRFBxSzA3a3lNR09JSWxyZG01aWZPUml2enViWWhXMmpmSnZaN1F4d2xfS010Q3lseEdtX2RjVDNkSU1LQTNaV2Z6X1RjVkNqN3QtWkFNRXJLMEhadEFLcDd6Y0FORGx1STM2djZTcDBNT3JkUEU4MGVuaGpEcGxub3RnMWZIRUpEVVpCMGZidlF3a3F4dlFaYVN4a3Jn?oc=5",
-      "date": "2025-09-12T07:00:00Z",
-      "publisher": "Delaware Public Media",
-      "query": "advocacy group funding",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Advocacy group pushes for $718 million boost in Kentucky school funding - WDRB",
-      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPZHdzOHZBZ29FYjhZcjRxNlZQSGRmc21nT0VRakM2VlozZnNQcFZyc2wwalV1cjFMN0FfYnlyM3g0Z08xSnlHbHRPYjA1aklyUU1HdU4xd29Zdl9UZ2pub0l3LU82ZzJiWVZpTmtVOWladWxoRXlRU0RMc05BaEhQUnVlZWZLcUt5QTVnZ0hDOURTYmNUd2haX0pYanNhNUVVZnFLVU9qWGY5eUVoQXljSWRBZFRCNUhESld4R3pGTXV0M1BCaTczU2E2UnFOMXFfTTI4VFBBNGt1aTF1QmdRNWliVko4SXE3cGtnRg?oc=5",
-      "date": "2025-09-09T07:00:00Z",
-      "publisher": "WDRB",
-      "query": "advocacy group funding",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Another Astroturf Campaign to Dupe Manatee County Citizens? - The Bradenton Times",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQUS1zRUJoTDFKdHpHal9sNWdHN1Uxdm14ZVZyQkFPTHZaZWVZV2hxYzZxTFJ1eExfanZKRDFZUURaU0xqTUNmSUREbThRLW41N0pZdVQ2VzZhOHRZaUJyalBQLVlwZVNCMTd4dWVYck9nR3RzRXhhQXVZeEstVkxtWlp2V29KNUdrclVmYWJycldaYzI5Wm8yUTlPWTZ4VnNKSXYyWDJR?oc=5",
-      "date": "2025-09-02T07:00:00Z",
-      "publisher": "The Bradenton Times",
-      "query": "astroturf campaign",
-      "relevance_score": 80,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Soros-Funded Dark Money Group Manufactures Chaos at GOP Senator\u2019s Town Hall - freebeacon.com",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNeWItMGNvazBMVGxRSkhldVZmUzVZZFE0eVc1NmkxdnpJSW5GOUh2Nzc0OFpDbVJ0VGJBOHF0eTF5aEZfdmFlS0pGS1h2QjlkSGdwWlhLRHpBekxlZXR4WTN3aGhtNEp4c0pTakhrSmFLZWVzSHdkdVg5Ylh4NFRla0kweFZsVHZ5OTVXUkFHTG9YU21hS1U2REZLWjJZbnBjMGZrOUJOWGdHamhV?oc=5",
-      "date": "2025-08-25T07:00:00Z",
-      "publisher": "freebeacon.com",
-      "query": "dark money protest",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "CEO of paid protest company says it works with both sides of the aisle - NewsNation",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNcVhya1BaUXRkVHNRVmxfd0RJTjlQVV9IVVVoVk80azBtME1qRDFPYkxrUHIzOWY2RlppMHF1OFJnRWhVT3pORGpvZ2s3Q3BwZmxXWHo5UVJTSnpjak5QdzhsSXUyQkVaZnVlTEZXcmRmeHJyYkp1amdxaFNXS01qYU5WeThvN0XSAYwBQVVfeXFMTUZxS2pSSlgtTGVaa0pWbVV5cUZURHdDRmgzSEZ4U256OTZQLUlqZE00aFdpNS1NTE45NHBvVXlWQXBodnZSMmVKLTFJLWdWOHlRdjZJYURUM2RDWGtwNnRpVGNYSzhhQzZ2SEhCak1KR3Z0UVloZmkwcGZuUmlSenh5eGZXcXh6aVpVTlY?oc=5",
-      "date": "2025-08-17T07:00:00Z",
-      "publisher": "NewsNation",
-      "query": "paid protesters",
-      "relevance_score": 80,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "With U.S. funding for science at risk, a longtime advocate sees \u2018light at the end of the tunnel\u2019 - statnews.com",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOd0VWbGxlQjVmak1TRWl3UzFVMEo4T293eU95Mmd1NkVVNlpad3c2ZUl1RmFVQU1LenlxcUN3aDVBeXozYTA1dGJ6OHJpVllrRVlQMjVodWgxSnM5TW5MWGUyY29jT3dDdjlzVHdjZlJJZXV4ZFBvUTNEMHBGano2S09nb3ByUzV2cVdKUA?oc=5",
-      "date": "2025-08-15T07:00:00Z",
-      "publisher": "statnews.com",
-      "query": "advocacy group funding",
-      "relevance_score": 60,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Groups funding DC home rule protest have received millions from Soros-backed funding - National News Desk",
-      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNZFROcXd5TWJMZ2p2UWFaOXdUTmVSTUZtNnVMR20wVE80NERqUnljM1YzMlJPcmtXQ2xvX0xRV1ZuZ1FKQjBvYnZmODJRRnM1eFNNOGFYalljV3JMVXluVmd3TFlPYlBqdHZBZ0JBeFc5Y0tzQVM5TVhtNk5IcVlmQXo5RDExTlRpb1hEdTNnTWRVRHloQ2M3UldhUGVaUTJOZUMtZ0RUNDMzQ3Y5Mks3Q3I1aV8taWpfMW9yd2hzbXB4dTlZYjZtOGhKcEp5dlB6?oc=5",
-      "date": "2025-08-13T07:00:00Z",
-      "publisher": "National News Desk",
-      "query": "dark money protest",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Left-wing dark-money megadonors, including George Soros, contribute $20M to groups funding protests against Trump\u2019s DC crime crackdown - New York Post",
-      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOVmhBVFlmMjhoWElfbnF0djZSWVJMMHhobkpwSFRsaDloSEJVdUJ1cEE3dVUtb2xzeE9oU1N1Wmt2a1pfTHNaeEh6WTl3VWFNU05nQjZLbE9kZ1l4eGhCRENPVURqQnRqeFRJa2JBZVMzUGdlUTVOS3Ixd050bmVoZlJPOUxyZzloUEVMSEN1aG0zaXFPeTU4NHZNRS1QUjFQQ2FtbDZCc0xPZk8wdVZpQTJNSTh2ZUZhM1MtLVFhRVYwM1k4T2Y0UkdJZlJjMG1sT0pIRThxRW5ydWp5OXM3c2VR?oc=5",
-      "date": "2025-08-12T07:00:00Z",
-      "publisher": "New York Post",
-      "query": "dark money protest",
-      "relevance_score": 70,
-      "location": "New York"
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Astroturfing: Understanding and Addressing the Influence of Fake Grassroots Movements Across Diverse Domains on Social Media Platforms - springerprofessional.de",
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNUGtWSVFHXzN4RFhsRE5URk1OLUk0TEVONDhKUzhpdWNLZVpuRzZaOUF6d1EwQ0s3MWxwanY3Y2lVbm1fM3RtNVBrVURLczViVUdtQmVyMVk4U2RJWWJGR0l1VXpNRXR3SW1xcER6a2J6NTJKdnVIYmdqVHktal9KM0RZV1ZYZ1V5bFgxYTNtdlJtQXJPdHlLVFNSTG15T3AzYUM4WlhzTjdsbnlXNm15Yi1B?oc=5",
-      "date": "2025-08-01T11:42:20Z",
-      "publisher": "springerprofessional.de",
-      "query": "fake grassroots",
-      "relevance_score": 90,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "WATCH: Trump accuses some Los Angeles protesters of being 'paid insurrectionists' - PBS",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPTW5yREd0SkVkZXJPanhGVDVIZmdMQThqTDg0Z3RiTWN4U3lzS1Z3a2prUURyTXA4TEVxeDRCRC1FMzVsTTlCM0JUNzBrS2E3WDhPTWJkQTZzWnIxX0ZfNUF4dDFWT0RseEVGNkRaM2V3SWlzQVpRcm44YjlDS3o5cnIzY3lDeWNSbDRYZHY4MHpuQmxJaVdjOWZiM2FydFczbFl0OWpIMEtEMWktVktJTzYwS2wxTlXSAbwBQVVfeXFMTjdxMlIyV204Q05WLTVCVk1kbWpKTmRuSWVMRjRpNFRwa3pLYzRNdXZiLV8xR1FpYXJ3WGRPMDZmX21ZVzRmbHpqYXctU2h1YnZ5QUJWU2J1RVFXbXU0alJLTWhTS0Z1TU1Mdl9HLXBhak15OUFnT2JOSDZzZGpMWU5lVmREMGp6RWJrV3lsZWM4SElHbUJZOG83LV9jX0lKajM1RFdLZ1ByS3BCT095YTVnbzFvRDhrUHFKWGk?oc=5",
-      "date": "2025-06-10T07:00:00Z",
-      "publisher": "PBS",
-      "query": "paid protesters",
-      "relevance_score": 60,
-      "location": "Los Angeles"
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Rep. Jared Golden says \u2018dark money\u2019 group is partly why he won\u2019t hold town halls - Centralmaine.com",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPMmRpWFRFZ0xxY094cXMzbHhNWkVOYlFYUFZaSHU5MThXOE1nMWJzbkh0bW5ucm1FRm1POUZkT1hVRW52dUVCeGI3UnFIOVcyVDBtOEliclN2RlNycktid25aeHZGOUxZVGtWN3dzcnE5ZEdDYkxQd1d5VUtYc1N4LWFCMmdKeGU3Q1pwV2dBY1A2aDVnU2d0YjNaam1vdVFoM0x4d2tqUU1XbUxEb1hj?oc=5",
-      "date": "2025-05-08T07:00:00Z",
-      "publisher": "Centralmaine.com",
-      "query": "dark money protest",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "Trump funding freeze hits Arkansas disability advocacy group - Arkansas Times",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPamRxaUpyRTQ5X3FFbkFJeEhwTTdYU245ZVpUdmVSSGxfaGt6NUoyNy1pZTMxSHV6M2xxRk9aRVF3U1A3ZkV1WFNkTkR5S3FRaTZRaWt6Zi1iNGVEMmxMay1OMjVyYldBU2IxQkxnaXQ4QkJpWGtVd08yaU1iOENodXQ2Q2RfZnc1TmlmTFVIVzg5TmJJUHhmYzM1NVFTSFNEUGZxdG5CNVEyUQ?oc=5",
-      "date": "2025-04-29T07:00:00Z",
-      "publisher": "Arkansas Times",
-      "query": "advocacy group funding",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "OPINION: Alaska\u2019s attorney general should investigate dark money influences - Alaska Watchman",
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPUHpndVlpUkRVeU1XNHRNYmFZNmhETFFQOWExSGNQb3NEZEFuY1B4OG5tcmdOb2N2Z0twUXN6N2VzYkpLUUFzVFlXWTJ5a0NndjlnVHk1SGpaRHI1RjdrMnpaajFyYTVtb0wwdVh6cDRYSDNRZFhsYU83aWg2YnhOcGF5QTBtWHZid0FuanB4RTRudjlEaGVkNkVHMUw0NmxrTkJNNGo5Sk5oUExibEVrb3Bn?oc=5",
-      "date": "2025-04-29T07:00:00Z",
-      "publisher": "Alaska Watchman",
-      "query": "501c4 political",
-      "relevance_score": 70,
-      "location": ""
-    },
-    {
-      "type": "news",
-      "source": "google_news",
-      "title": "What political ads are Australians seeing online? Astroturfing, fake grassroots groups, and outright falsehoods - The Conversation",
-      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPYmhmX1ZCSFFLYkxnbUljVWpsR0EtcVNfRVdjZ2NlN0FWdnQ3YmYwTUc1WXNSLXVCUDJRN3Z6anZXV0FfNlNTNktqZ3BvbkN2bWFNdk9KX3FFSWlCNS1HVlZsQXdKeUxhM2VEQTZSMzF3SWloV3Rubk1OR3loYk9WcFRpS2FmeFF5aDlGS2pzMDB4b3JpVF9QbzlFQ3ljVHVFMjFkMTJwbVhWNGdTNktsMTUzazNqbGZSTXpHdDlNeGdBOHlBSUFCOFE3MVZueEhDY08wTDZsWWdIRjg?oc=5",
-      "date": "2025-04-27T07:00:00Z",
-      "publisher": "The Conversation",
-      "query": "fake grassroots",
-      "relevance_score": 90,
-      "location": ""
+      "title": "City officials demand transparency after paid crowd allegations",
+      "url": "https://example.com/news/12",
+      "publisher": "Phoenix News",
+      "source": "google",
+      "relevance_score": 71,
+      "query": "paid protesters"
     }
   ],
-  "systemConfidence": 70,
-  "confidenceFactors": [
+  "jobPostings": [
     {
-      "factor": "News Articles",
-      "score": 70,
-      "detail": "The news articles collected indicate a coordinated effort to portray protesters as being paid, suggesting an astroturf campaign. The consistent language and messaging across multiple news sources is a strong indicator of potential astroturfing."
+      "title": "Event Staff Coordinator - Paid Rally Support",
+      "company": "Staffing Solutions LLC",
+      "city": "Dallas",
+      "state": "TX",
+      "url": "https://example.com/job/1",
+      "suspicion_score": 75,
+      "source": "adzuna"
     },
     {
-      "factor": "Organization Information",
-      "score": 60,
-      "detail": "The organizations listed have similar-sounding names and appear to be based in different states, which could suggest a coordinated network of front groups. However, the 'risk' score of 30 for each organization is relatively low, indicating a moderate level of potential concern."
+      "title": "Rally Support Specialist - Crowd Management",
+      "company": "Event Dynamics",
+      "city": "Phoenix",
+      "state": "AZ",
+      "url": "https://example.com/job/2",
+      "suspicion_score": 68,
+      "source": "adzuna"
     },
     {
-      "factor": "Job Postings",
-      "score": 50,
-      "detail": "The job postings for 'Grassroots Organizer' and 'Community Canvasser' roles could be indicators of an organized effort to mobilize protesters. However, the low 'score' values for these postings suggest a lower level of confidence in this factor."
-    }
-  ],
-  "agentNotes": [
+      "title": "Community Organizer - Protest Events",
+      "company": "Grassroots Unlimited",
+      "city": "Los Angeles",
+      "state": "CA",
+      "url": "https://example.com/job/3",
+      "suspicion_score": 62,
+      "source": "adzuna"
+    },
     {
-      "summary": "The data collected indicates a moderate to high likelihood of coordinated astroturf activity in the United States, with the news articles presenting the strongest evidence of potential manipulation or disinformation campaigns.",
-      "timestamp": "2026-01-09T22:15:30.016724Z"
+      "title": "Brand Ambassador - Political Events",
+      "company": "Premier Staffing",
+      "city": "Houston",
+      "state": "TX",
+      "url": "https://example.com/job/4",
+      "suspicion_score": 55,
+      "source": "adzuna"
+    },
+    {
+      "title": "Activist Support Staff - Flexible Hours",
+      "company": "Action Events Inc",
+      "city": "Austin",
+      "state": "TX",
+      "url": "https://example.com/job/5",
+      "suspicion_score": 58,
+      "source": "usajobs"
+    },
+    {
+      "title": "Public Affairs Representative",
+      "company": "Capitol Consulting",
+      "city": "Washington",
+      "state": "DC",
+      "url": "https://example.com/job/6",
+      "suspicion_score": 35,
+      "source": "usajobs"
     }
   ],
-  "knownAstroturfPatterns": {
-    "threeWordNames": [
-      "Citizens for Progress",
-      "Americans for Prosperity"
-    ],
-    "highActivityStates": [
-      "TX",
-      "CA",
-      "FL",
-      "NY",
-      "PA",
-      "OH",
-      "GA",
-      "NC",
-      "MI",
-      "AZ"
-    ]
-  }
+  "jobPostingPatterns": {
+    "totalJobs": 6
+  },
+  "flaggedOrganizations": [
+    {
+      "name": "Citizens for Freedom Action Fund",
+      "ein": "12-3456789",
+      "state": "TX",
+      "first_file_date": "2025-08-15",
+      "risk_score": 78,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "Americans for Liberty PAC",
+      "ein": "23-4567890",
+      "state": "AZ",
+      "first_file_date": "2025-06-22",
+      "risk_score": 75,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "Voices for Families Coalition",
+      "ein": "34-5678901",
+      "state": "CA",
+      "first_file_date": "2025-09-10",
+      "risk_score": 72,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "Texas Freedom Alliance",
+      "ein": "45-6789012",
+      "state": "TX",
+      "first_file_date": "2025-11-15",
+      "risk_score": 82,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "Citizens Action Network",
+      "ein": "56-7890123",
+      "state": "FL",
+      "first_file_date": "2025-10-22",
+      "risk_score": 70,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "Grassroots Leadership Fund",
+      "ein": "67-8901234",
+      "state": "NY",
+      "first_file_date": "2024-03-18",
+      "risk_score": 65,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "American Values Institute",
+      "ein": "78-9012345",
+      "state": "DC",
+      "first_file_date": "2024-01-05",
+      "risk_score": 58,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "Community Voices United",
+      "ein": "89-0123456",
+      "state": "GA",
+      "first_file_date": "2025-04-30",
+      "risk_score": 62,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "Citizens United for Progress",
+      "ein": "90-1234567",
+      "state": "OH",
+      "first_file_date": "2025-07-12",
+      "risk_score": 55,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "Freedom Works Alliance",
+      "ein": "01-2345678",
+      "state": "NC",
+      "first_file_date": "2024-11-20",
+      "risk_score": 60,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "People's Action Coalition",
+      "ein": "11-3456789",
+      "state": "MI",
+      "first_file_date": "2024-08-08",
+      "risk_score": 48,
+      "sourceUrl": "https://www.fec.gov"
+    },
+    {
+      "name": "National Liberty Front",
+      "ein": "22-4567890",
+      "state": "PA",
+      "first_file_date": "2025-02-28",
+      "risk_score": 68,
+      "sourceUrl": "https://www.fec.gov"
+    }
+  ]
 }
