@@ -101,11 +101,15 @@ class Orchestrator:
         # Update timestamp
         memory['lastScan'] = now
         
-        # Update news (keep top 20 by relevance)
+        # Update news (keep top 20 by relevance, filter out example URLs)
         existing_urls = {n.get('url') for n in memory.get('recentNews', [])}
         for article in new_data.get('news', []):
-            if article.get('url') and article['url'] not in existing_urls:
+            url = article.get('url', '')
+            if url and url not in existing_urls and 'example.com' not in url:
                 memory['recentNews'].append(article)
+        
+        # Remove any example.com URLs from existing news
+        memory['recentNews'] = [n for n in memory.get('recentNews', []) if 'example.com' not in n.get('url', '')]
         
         # Sort by relevance and keep top 20
         memory['recentNews'] = sorted(
@@ -167,7 +171,8 @@ class Orchestrator:
                     'sourceUrl': org.get('sourceUrl')
                 })
         
-        # Sort timeline and keep recent
+        # Sort timeline, remove example URLs, and keep recent
+        memory['timeline'] = [t for t in memory.get('timeline', []) if 'example.com' not in t.get('sourceUrl', '')]
         memory['timeline'] = sorted(
             memory.get('timeline', []),
             key=lambda x: x.get('date', ''),
