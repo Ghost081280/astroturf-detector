@@ -381,8 +381,18 @@ function renderOrganizations(memory) {
         container.innerHTML = orgs.slice(0, 8).map(o => {
             const s = o.risk_score || 0;
             const rc = s >= 60 ? 'high' : s >= 40 ? 'medium' : 'low';
-            const url = o.sourceUrl || o.url || '';
-            const hasLink = url && url !== '#';
+            
+            // Build URL - handle different org types
+            let url = o.sourceUrl || o.url || '';
+            if (!url && o.committee_id) {
+                // FEC committee - construct URL
+                url = `https://www.fec.gov/data/committee/${o.committee_id}/`;
+            } else if (!url && o.ein) {
+                // ProPublica nonprofit - construct URL
+                url = `https://projects.propublica.org/nonprofits/organizations/${o.ein}`;
+            }
+            
+            const hasLink = url && url !== '#' && url.startsWith('http');
             
             if (hasLink) {
                 return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="org-item">
@@ -391,16 +401,16 @@ function renderOrganizations(memory) {
                         <div class="org-name">${escapeHtml((o.name || 'Unknown').substring(0, 40))}</div>
                         <div class="org-meta">${escapeHtml(o.state || '')}${o.first_file_date ? ' · Filed: ' + o.first_file_date : ''}</div>
                     </div>
-                    <div class="org-score">${s}%</div>
+                    <div class="org-score">${s || '-'}%</div>
                 </a>`;
             } else {
-                return `<div class="org-item">
+                return `<div class="org-item" style="cursor: default;">
                     <div class="org-indicator ${rc}"></div>
                     <div class="org-details">
                         <div class="org-name">${escapeHtml((o.name || 'Unknown').substring(0, 40))}</div>
                         <div class="org-meta">${escapeHtml(o.state || '')}${o.first_file_date ? ' · Filed: ' + o.first_file_date : ''}</div>
                     </div>
-                    <div class="org-score">${s}%</div>
+                    <div class="org-score">${s || '-'}%</div>
                 </div>`;
             }
         }).join('');
