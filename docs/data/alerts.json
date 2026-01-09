@@ -1,7 +1,52 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-01-09T16:31:30.264565Z",
+  "lastUpdated": "2026-01-09T18:23:49.196742Z",
   "alerts": [
+    {
+      "title": "Potential Astroturf Campaign Around ICE and Border Patrol Shootings",
+      "description": "Multiple news articles report on protests and events in cities across the US, including Minneapolis, Dallas, Portland, and others, related to ICE and Border Patrol shootings. This, combined with the presence of generic advocacy organizations with similar naming patterns and geographic clustering, suggests a possible coordinated astroturf campaign.",
+      "severity": "high",
+      "confidence": 85,
+      "factors": [
+        {
+          "name": "News article clusters",
+          "value": 90
+        },
+        {
+          "name": "Generic organization names",
+          "value": 80
+        },
+        {
+          "name": "Geographic clustering",
+          "value": 75
+        },
+        {
+          "name": "Lack of FEC records",
+          "value": 60
+        }
+      ],
+      "locations": [
+        "Minnesota",
+        "Texas",
+        "Oregon",
+        "New Hampshire",
+        "South Carolina"
+      ],
+      "sources": [
+        "NewsNation",
+        "Austin American-Statesman",
+        "South Carolina Daily Gazette",
+        "KERA News",
+        "OregonLive.com",
+        "New Hampshire Public Radio",
+        "Billy Penn at WHYY",
+        "The Fayetteville Observer",
+        "rocketcitynow.com",
+        "Oregon Public Broadcasting - OPB"
+      ],
+      "id": "alert_20260109182349_5",
+      "timestamp": "2026-01-09T18:23:49.195414Z"
+    },
     {
       "title": "Potential Astroturf Activity around ICE Shooting Protests",
       "description": "Multiple news articles mention protests and rallies in response to the fatal ICE shooting in Minnesota, with similar messaging and organization names across different states. This could indicate a coordinated astroturf campaign to manufacture grassroots activity.",
