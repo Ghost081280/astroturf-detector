@@ -1,0 +1,80 @@
+{
+    "version": "1.0.0",
+    "lastScan": "2026-01-09T14:30:00Z",
+    "lastAnalysis": "2026-01-09T14:35:00Z",
+    "stats": {
+        "events": 0,
+        "alerts": 0,
+        "orgs": 0,
+        "totalScans": 0,
+        "jobPostingsTracked": 0,
+        "nonprofitsMonitored": 0
+    },
+    "systemConfidence": 0,
+    "timeline": [],
+    "flaggedOrganizations": [],
+    "jobPostingPatterns": {
+        "cities": {},
+        "keywords": {},
+        "weeklyTrends": []
+    },
+    "correlations": {
+        "jobSpikeEvents": [],
+        "orgFormationClusters": [],
+        "geographicHotspots": []
+    },
+    "knownAstroturfPatterns": {
+        "threeWordNames": [
+            "Keep Dallas Safe",
+            "Dallas Justice Now",
+            "Save Texas Kids",
+            "Protect Texas Kids",
+            "Mission DFW"
+        ],
+        "delawareShells": [],
+        "prFirms": [
+            {
+                "name": "Crowds on Demand",
+                "location": "Beverly Hills, CA",
+                "knownOperations": ["Los Angeles", "San Francisco", "Las Vegas", "New York", "Washington DC", "Dallas", "Iowa", "New Hampshire"]
+            },
+            {
+                "name": "The Hawthorn Group",
+                "location": "Virginia",
+                "incidents": ["Entergy New Orleans 2018"]
+            }
+        ]
+    },
+    "documentedCases": [
+        {
+            "id": "entergy-2018",
+            "name": "Entergy New Orleans Power Plant",
+            "year": 2018,
+            "location": "New Orleans, LA",
+            "description": "Energy company paid $55,000 for actors to fill city council chambers supporting controversial gas plant",
+            "outcome": "$5 million fine",
+            "actors": ["Crowds on Demand", "Hawthorn Group"],
+            "sources": ["thelensnola.org", "nola.com"]
+        },
+        {
+            "id": "dallas-network-2020",
+            "name": "Dallas Astroturf Network",
+            "year": 2020,
+            "location": "Dallas, TX",
+            "description": "Billionaire hotelier funded network of fake advocacy groups including hoax BLM organization",
+            "outcome": "Journalist won defamation lawsuit",
+            "actors": ["Crowds on Demand"],
+            "organizations": ["Keep Dallas Safe", "Dallas Justice Now", "Save Texas Kids", "Mission DFW"],
+            "sources": ["texasobserver.org", "dmagazine.com"]
+        }
+    ],
+    "analysisHistory": [],
+    "agentNotes": [],
+    "config": {
+        "scanFrequencyHours": 1,
+        "alertThreshold": 60,
+        "maxJobPostingsPerScan": 100,
+        "maxOrgsPerScan": 50,
+        "retentionDays": 365
+    }
+}
