@@ -22,13 +22,39 @@
 
 ---
 
+## Dashboard Features
+
+### 🔗 Connect the Dots
+Our AI-powered pattern detection identifies correlations between:
+- **Geographic Matches** — Job postings in cities with protest-related news
+- **Naming Patterns** — Organizations using generic patriotic names typical of astroturf
+- **New High-Risk Orgs** — Recently filed committees with suspicious characteristics
+- **News Clustering** — Multiple articles about paid protesters in the same region
+
+Each connection shows a probability score based on the strength of evidence.
+
+### 📊 Real-Time Monitoring
+- **Confidence Score** — Overall assessment of astroturf activity levels
+- **State Heatmap** — Visual display of activity across all 50 states + DC
+- **Timeline** — Chronological feed of detected events
+- **News Feed** — Aggregated coverage from Google News and DuckDuckGo
+
+### ⚠️ Known Services
+Documented paid protest companies with probability scores:
+- Crowds on Demand (95%)
+- Demand Protest (90%)
+- The Hawthorn Group (88%)
+- And more...
+
+---
+
 ## What This Tool Monitors
 
 | Source | What We're Watching |
 |--------|---------------------|
 | **Job Boards** | Postings for "protesters," "rally attendees," "canvassers" with cash pay |
 | **Nonprofit Filings** | New 501(c)(4) organizations with suspicious naming patterns |
-| **Campaign Finance** | Political committees and independent expenditures |
+| **Campaign Finance** | Political committees and independent expenditures (FEC data) |
 | **News Coverage** | Articles about paid protests, dark money, and astroturf campaigns |
 
 ---
@@ -91,6 +117,22 @@ Billionaire hotel owner Monty Bennett funded a network of fake advocacy groups t
 The Dallas Express, a "pink slime" news site, ran 112+ articles amplifying these fake groups.
 
 **Outcome:** Journalist Steven Monacelli won a defamation lawsuit after exposing the network
+
+---
+
+## Technical Details
+
+### Data Sources
+- **FEC API** — Federal Election Commission committee filings
+- **ProPublica Nonprofit Explorer** — 501(c)(4) organization data
+- **Adzuna API** — Job postings across the US
+- **Google News RSS** — News coverage aggregation
+- **DuckDuckGo** — Alternative news search
+
+### Update Frequency
+- Automated scans run **hourly** via GitHub Actions
+- AI analysis powered by Claude (Anthropic)
+- All data stored in JSON for fast frontend loading
 
 ---
 
