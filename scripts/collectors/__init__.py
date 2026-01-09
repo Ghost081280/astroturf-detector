@@ -3,5 +3,6 @@
 from .job_collector import JobCollector
 from .fec_collector import FECCollector
 from .nonprofit_collector import NonprofitCollector
+from .news_collector import NewsCollector
 
-__all__ = ['JobCollector', 'FECCollector', 'NonprofitCollector']
+__all__ = ['JobCollector', 'FECCollector', 'NonprofitCollector', 'NewsCollector']
