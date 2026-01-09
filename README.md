@@ -1,202 +1,223 @@
-# Astroturf Detector
+# Astroturf Detector 🇺🇸
 
-**An open-source intelligence engine that monitors for paid protest activity and manufactured grassroots movements.**
+**An open-source intelligence engine monitoring for paid protest activity and manufactured grassroots movements in the United States.**
+
+🔗 **Live Dashboard**: [https://ghost081280.github.io/astroturf-detector/](https://ghost081280.github.io/astroturf-detector/)
 
 ---
 
-## The Problem
+## What This Project Does
+
+Astroturf Detector is an automated monitoring system that:
+
+1. **Scans real public data sources** for suspicious nonprofit activity
+2. **Monitors news** for reports of paid protests and astroturfing
+3. **Tracks campaign finance** through FEC filings
+4. **Uses AI analysis** to identify patterns suggesting manufactured movements
+5. **Provides transparency** through a public dashboard updated hourly
+
+---
+
+## Data Sources (What We Actually Use)
+
+We believe in transparency. Here's exactly what data sources power this project:
+
+| Source | Status | What It Provides |
+|--------|--------|------------------|
+| **ProPublica Nonprofit Explorer** | ✅ Active | Real 501(c)(4) tax filings, organization data, revenue/assets |
+| **FEC API** | ✅ Active | Campaign finance, independent expenditures, new committee filings |
+| **Google News RSS** | ✅ Active | Real-time news articles about protests, astroturfing, advocacy |
+| **AI Analysis (Claude)** | ✅ Active | Pattern detection, risk scoring, alert generation |
+
+### What We DON'T Have Access To
+
+Being honest about limitations:
+
+- ❌ **Real-time job board scraping** - No free API allows this legally. Job posting data shown is for demonstration/tracking patterns only.
+- ❌ **State Corporate Registries** - No unified free API exists. Would require scraping 50 different state websites.
+- ❌ **Direct IRS access** - We use ProPublica which aggregates IRS Form 990 data (with delays).
+- ❌ **Social media monitoring** - Not implemented, privacy concerns.
+
+---
+
+## The Problem We're Addressing
 
 What looks like organic public outrage is sometimes manufactured. Companies exist that openly advertise services to:
 
 - Hire crowds of "protesters" at $25-64/hour
 - Provide speakers for city council meetings with scripted talking points  
 - Create fake advocacy organizations overnight
-- Run phone banking and letter-writing campaigns that simulate grassroots support
+- Run campaigns that simulate grassroots support
 
 This practice is called **astroturfing** - creating the illusion of grassroots support where none exists.
 
 ### Documented Cases
 
 **New Orleans Power Plant (2018)**  
-Energy company Entergy paid $55,000 to fill city council chambers with actors in orange t-shirts supporting a controversial $210 million gas plant. Organizers told recruits to "tell nobody you're being paid." The city fined Entergy $5 million after an investigation exposed the scheme.
+Energy company Entergy paid $55,000 to fill city council chambers with actors supporting a controversial gas plant. The city fined Entergy $5 million after the scheme was exposed.
 
 **Dallas Influence Network (2020-2024)**  
-A billionaire hotelier funded a network of fake advocacy groups including a hoax Black Lives Matter organization called "Dallas Justice Now." Multiple groups were created through a protesters-for-hire firm, all registered as shell corporations in Delaware. A local journalist who exposed the network was sued by the donor - and won.
-
-**How Common Is This?**  
-One major crowd-for-hire company reported a 400% increase in paid protester requests in 2025. They claim "tens of thousands" of contractors nationwide and openly advertise the ability to deploy crowds "within 24 hours."
+A billionaire funded a network of fake advocacy groups including a hoax organization. Multiple groups were created through a protesters-for-hire firm, registered as shell corporations in Delaware.
 
 ---
 
-## What This Project Does
+## Detection Methodology
 
-Astroturf Detector is an automated intelligence system that:
+### Organization Risk Scoring
 
-1. **Monitors job boards** for suspicious protest-related hiring activity
-2. **Tracks nonprofit filings** for newly created advocacy organizations  
-3. **Correlates data** to identify patterns that suggest manufactured movements
-4. **Provides transparency** through a public dashboard anyone can access
+We flag 501(c)(4) organizations based on:
 
-### Detection Factors
+| Factor | Points | Rationale |
+|--------|--------|-----------|
+| Generic 3-word name | +15 | "Citizens For Freedom" pattern common in astroturf |
+| Name matches suspicious patterns | +10 | Patriotic/action words often used |
+| Formed within last 2 years | +25 | New orgs more likely to be purpose-built |
+| Formed within last 5 years | +15 | Still relatively new |
+| Delaware registration | +15 | Shell company haven |
+| High revenue + generic name | +15 | Well-funded but vague purpose |
+| Politically active state | +5 | TX, FL, OH, PA, etc. |
 
-| Factor | What We Look For |
-|--------|------------------|
-| **Job Posting Spikes** | Sudden increases in "protest," "canvasser," "community organizer" listings in specific cities |
-| **Organization Red Flags** | Three-word generic names, Delaware incorporation, recent creation, no verifiable leadership |
-| **Financial Patterns** | Nonprofits suddenly receiving large grants, vague expense descriptions like "media services" |
-| **Timing Correlation** | Activity spikes before city council votes, permit hearings, or legislative sessions |
-| **Geographic Anomalies** | "Local" organizations with out-of-state registration or leadership |
+Organizations scoring 30+ are flagged for display.
 
----
+### News Relevance Scoring
 
-## The Data Sources
+Articles are scored based on keywords:
 
-All data comes from public, legally accessible sources:
-
-- **Federal Election Commission** - Campaign finance disclosures, independent expenditure reports
-- **IRS Form 990 Database** - Nonprofit tax filings including revenue, expenses, and officer names
-- **Public Job Boards** - Aggregated job posting data (no personal information collected)
-- **State Corporate Registries** - Organization incorporation records
-
-We do not scrape private data, social media accounts, or any information that isn't already public record.
+- **High value (+20 each)**: "astroturf", "paid protest", "fake grassroots", "dark money"
+- **Medium value (+10 each)**: "protest", "advocacy", "campaign", "nonprofit"
+- **Location bonus (+5)**: US state or city mentioned
 
 ---
 
-## Understanding the Dashboard
-
-### Activity Timeline
-Shows detected events over time. Spikes may indicate coordinated activity around specific dates - such as city council meetings, elections, or corporate permit hearings.
-
-### Geographic View
-Heat map of suspicious activity by metropolitan area. Higher concentrations may indicate active astroturf campaigns.
-
-### Alert Feed
-Recent detections with confidence scores. Each alert includes:
-- What triggered the detection
-- Relevant public records
-- Correlation with known events
-- Confidence assessment
-
-### Organization Profiles
-When patterns point to specific entities, we provide:
-- Public incorporation records
-- Available 990 tax filings
-- Timeline of detected activity
-- Known connections to other flagged organizations
-
----
-
-## What This Is NOT
-
-- **Not a claim that all protests are fake.** The vast majority of protests are genuine expressions of public sentiment.
-- **Not surveillance of protesters.** We track organizations and hiring patterns, not individuals.
-- **Not politically biased.** Astroturfing happens across the political spectrum. We apply the same analysis regardless of the cause.
-- **Not definitive proof.** Our detections are indicators that warrant further investigation, not conclusive evidence.
-
----
-
-## Why Transparency Matters
-
-Democracy depends on authentic public participation. When corporations or wealthy individuals can manufacture the appearance of grassroots support:
-
-- **City councils** approve projects that communities actually oppose
-- **Legislators** vote based on fabricated constituent pressure  
-- **Media coverage** amplifies artificial movements as if they were real
-- **Genuine activists** get drowned out by paid voices
-
-Sunlight is the best disinfectant. This project aims to make the astroturf industry visible.
-
----
-
-## How It Works (Technical Overview)
-
+## Technical Architecture
 ```
-Scheduled Scans (GitHub Actions)
+GitHub Actions (Hourly)
          |
          v
 +------------------+     +------------------+     +------------------+
-|   Job Board      |     |   FEC/IRS        |     |   State Corp     |
-|   Aggregator     |     |   API Scraper    |     |   Registry       |
+|   Google News    |     |   ProPublica     |     |   FEC API        |
+|   RSS Feed       |     |   Nonprofit API  |     |   (Campaign $)   |
 +------------------+     +------------------+     +------------------+
          |                       |                       |
          +-----------------------+-----------------------+
                                  |
                                  v
                     +------------------------+
-                    |   AI Analysis Engine   |
+                    |   Claude AI Analysis   |
                     |   (Pattern Detection)  |
                     +------------------------+
                                  |
                                  v
                     +------------------------+
-                    |   Memory System        |
-                    |   (Historical Context) |
+                    |   memory.json          |
+                    |   alerts.json          |
                     +------------------------+
                                  |
                                  v
                     +------------------------+
+                    |   GitHub Pages         |
                     |   Public Dashboard     |
-                    |   (GitHub Pages)       |
                     +------------------------+
 ```
 
-The system runs automated scans on a schedule, staying within free API tier limits. An AI agent analyzes collected data against historical patterns stored in the memory system. Significant findings are published to the public dashboard.
+### Files Structure
+```
+astroturf-detector/
+├── docs/                    # Frontend (GitHub Pages)
+│   ├── index.html
+│   ├── css/styles.css
+│   ├── js/app.js
+│   └── data/
+│       ├── memory.json      # Scan results & history
+│       └── alerts.json      # Active alerts
+├── scripts/
+│   ├── orchestrator.py      # Main scan coordinator
+│   ├── collectors/
+│   │   ├── news_collector.py      # Google News RSS
+│   │   ├── nonprofit_collector.py # ProPublica API
+│   │   ├── fec_collector.py       # FEC API
+│   │   └── job_collector.py       # Job patterns (limited)
+│   └── analyzers/
+│       ├── ai_agent.py            # Claude analysis
+│       └── pattern_analyzer.py    # Statistical patterns
+└── .github/workflows/
+    └── scan.yml             # Hourly automation
+```
 
 ---
 
-## Data Retention and Privacy
+## What This Is NOT
 
-- No personal information is collected or stored
-- All source data is already public record
-- Detection results are aggregated patterns, not individual tracking
-- The memory system stores event correlations, not personal data
+- **Not a claim that all protests are fake.** The vast majority of protests are genuine.
+- **Not surveillance of individuals.** We track organizations and patterns, not people.
+- **Not politically biased.** Astroturfing happens across the political spectrum.
+- **Not definitive proof.** Our detections are indicators, not conclusions.
 
 ---
 
-## Limitations
+## Limitations (Honest Assessment)
 
-- **Delayed data**: Government filings can lag 6-12 months behind actual activity
-- **Incomplete coverage**: Not all astroturf activity leaves detectable traces
-- **False positives**: Legitimate organizing can sometimes match suspicious patterns
-- **Resource constraints**: Free-tier API limits mean we can't monitor everything
+1. **Data delays**: Nonprofit filings lag 6-12 months behind actual activity
+2. **No job board access**: Can't actually scrape Indeed/LinkedIn legally
+3. **API rate limits**: Free tiers limit how much we can scan
+4. **False positives**: Legitimate orgs can match suspicious patterns
+5. **US only**: Currently focused on United States data sources
+
+---
+
+## Environment Variables
+
+To run locally or in GitHub Actions:
+```bash
+ANTHROPIC_API_KEY=your_key_here  # Required for AI analysis
+FEC_API_KEY=your_key_here        # Optional, uses DEMO_KEY if not set
+```
+
+---
+
+## Running Locally
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run a scan
+cd scripts
+python orchestrator.py
+
+# Run with full scan
+python orchestrator.py --full
+```
 
 ---
 
 ## Contributing
 
-This is an open-source project. If you have expertise in:
+We welcome contributions, especially:
 
-- OSINT investigation techniques
-- Nonprofit financial analysis
-- Campaign finance law
-- Data visualization
-- AI/ML pattern detection
-
-We welcome contributions. See the repository for technical documentation.
+- Additional public data source integrations
+- Better pattern detection algorithms
+- UI/UX improvements
+- Documentation and fact-checking
 
 ---
 
 ## Legal
 
-This project engages only in legal research using publicly available data. We make no accusations of illegal activity - astroturfing itself is generally legal, though ethically questionable and sometimes involves violations of lobbying disclosure laws.
+This project uses only legally accessible public data:
+- ProPublica's public API
+- FEC's public API  
+- Public RSS feeds
 
-If you believe any information displayed is inaccurate, please open an issue with documentation and we will investigate.
-
----
-
-## Contact
-
-For media inquiries, partnership proposals, or to report suspected astroturf activity:
-
-Open an issue on this repository or reach out through the channels listed in the project profile.
+Astroturfing itself is generally legal, though ethically questionable. We make no accusations of illegal activity.
 
 ---
 
-*"The term 'astroturf' was coined to describe organizations that try to present themselves as grassroots organizations and are actually initiated and funded by donors. The groups themselves are the 'astroturf.'"*  
-— Anne Nelson, Columbia University School of International and Public Affairs
+## License
+
+MIT License - See LICENSE file
 
 ---
 
-**License**: MIT  
 **Status**: Active Development  
-**Last Updated**: January 2026
+**Last Updated**: January 2026  
+**Maintainer**: [@ghost081280](https://github.com/ghost081280)
