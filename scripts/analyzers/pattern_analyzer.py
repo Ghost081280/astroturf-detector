@@ -1,126 +1,160 @@
-"""Pattern Analyzer - Statistical Pattern Detection"""
-
-import json
+"""Pattern Analyzer - Statistical pattern detection"""
+import re
 from datetime import datetime
 from typing import Dict, Any, List
 from collections import defaultdict
-import re
 
 class PatternAnalyzer:
+    
     SUSPICIOUS_NAME_PATTERNS = [
         r'^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$',
         r'(Keep|Save|Protect) \w+ (Safe|Now|First)',
         r'(Citizens|Americans|People|Families|Voters) (For|Against|United|First)',
-        r'\w+ (Justice|Action|Voice|Voices) (Now|Today)',
+        r'(Freedom|Liberty|Justice|Truth) (Fund|Foundation|Alliance|Coalition)'
     ]
     
     def __init__(self, memory: Dict[str, Any]):
         self.memory = memory
-        self.historical_patterns = memory.get('jobPostingPatterns', {})
-        self.known_cases = memory.get('documentedCases', [])
     
     def analyze(self, collected_data: Dict[str, Any]) -> Dict[str, Any]:
         results = {
-            'job_patterns': self._analyze_job_patterns(collected_data.get('jobs', [])),
-            'org_patterns': self._analyze_org_patterns(collected_data.get('nonprofits', [])),
-            'financial_patterns': self._analyze_financial_patterns(collected_data.get('fec', [])),
-            'correlations': self._find_correlations(collected_data),
+            'job_patterns': self._analyze_jobs(collected_data.get('jobs', [])),
+            'org_patterns': self._analyze_orgs(collected_data.get('nonprofits', [])),
+            'news_patterns': self._analyze_news(collected_data.get('news', [])),
+            'correlations': {
+                'jobSpikeEvents': [],
+                'orgFormationClusters': [],
+                'geographicHotspots': []
+            },
             'anomalies': []
         }
-        results['anomalies'] = self._detect_anomalies(results)
+        
+        results['correlations']['geographicHotspots'] = self._detect_hotspots(collected_data)
         return results
     
-    def _analyze_job_patterns(self, jobs: List[Dict]) -> Dict[str, Any]:
-        patterns = {'cities': defaultdict(int), 'keywords': defaultdict(int), 'weeklyTrends': [], 'spikes': []}
+    def _analyze_jobs(self, jobs: List[Dict]) -> Dict[str, Any]:
+        patterns = {
+            'cities': defaultdict(int),
+            'keywords': defaultdict(int),
+            'high_suspicion_count': 0,
+            'spikes': []
+        }
+        
         for job in jobs:
             city = job.get('city', 'Unknown')
-            patterns['cities'][city] += 1
-            for keyword in job.get('keywords_tracked', []):
-                patterns['keywords'][keyword] += 1
-        patterns['cities'] = dict(patterns['cities'])
-        patterns['keywords'] = dict(patterns['keywords'])
-        historical_cities = self.historical_patterns.get('cities', {})
-        for city, count in patterns['cities'].items():
-            historical_count = historical_cities.get(city, 0)
-            if historical_count > 0 and count > historical_count * 2:
-                patterns['spikes'].append({
-                    'type': 'city_spike', 'city': city, 'current': count,
-                    'historical': historical_count,
-                    'increase_pct': ((count - historical_count) / historical_count) * 100
-                })
-        return patterns
+            if city:
+                patterns['cities'][city] += 1
+            
+            for kw in job.get('keywords', []):
+                patterns['keywords'][kw] += 1
+            
+            if job.get('suspicion_score', 0) >= 50:
+                patterns['high_suspicion_count'] += 1
+        
+        return {
+            'cities': dict(patterns['cities']),
+            'keywords': dict(patterns['keywords']),
+            'high_suspicion_count': patterns['high_suspicion_count'],
+            'spikes': patterns['spikes']
+        }
     
-    def _analyze_org_patterns(self, orgs: List[Dict]) -> Dict[str, Any]:
-        patterns = {'name_flags': [], 'geographic_clusters': [], 'formation_clusters': [], 'high_risk_orgs': []}
+    def _analyze_orgs(self, orgs: List[Dict]) -> Dict[str, Any]:
+        patterns = {
+            'name_flags': [],
+            'high_risk_orgs': [],
+            'state_distribution': defaultdict(int),
+            'recent_formations': []
+        }
+        
         for org in orgs:
             name = org.get('name', '')
-            risk_score = org.get('risk_score', 0)
+            risk = org.get('risk_score', 0)
+            state = org.get('state', '')
+            
             for pattern in self.SUSPICIOUS_NAME_PATTERNS:
                 if re.search(pattern, name, re.IGNORECASE):
-                    patterns['name_flags'].append({'name': name, 'pattern_matched': pattern, 'ein': org.get('ein'), 'state': org.get('state')})
+                    patterns['name_flags'].append({
+                        'name': name,
+                        'pattern': pattern,
+                        'state': state
+                    })
                     break
-            if risk_score >= 50:
-                patterns['high_risk_orgs'].append({'name': name, 'ein': org.get('ein'), 'risk_score': risk_score, 'state': org.get('state'), 'ruling_date': org.get('ruling_date')})
-        patterns['geographic_clusters'] = self._detect_geographic_clusters(orgs)
-        patterns['formation_clusters'] = self._detect_formation_clusters(orgs)
-        return patterns
-    
-    def _analyze_financial_patterns(self, fec_data: List[Dict]) -> Dict[str, Any]:
-        patterns = {'large_expenditures': [], 'new_committees': [], 'expenditure_clusters': []}
-        for record in fec_data:
-            if record.get('type') == 'independent_expenditure':
-                amount = record.get('amount', 0) or 0
-                if amount > 100000:
-                    patterns['large_expenditures'].append({'committee': record.get('committee_name'), 'amount': amount, 'date': record.get('date'), 'purpose': record.get('purpose'), 'support_oppose': record.get('support_oppose')})
-            elif record.get('type') == 'new_committee':
-                patterns['new_committees'].append({'name': record.get('name'), 'committee_id': record.get('committee_id'), 'first_file_date': record.get('first_file_date'), 'state': record.get('state'), 'type': record.get('committee_type')})
-        return patterns
-    
-    def _find_correlations(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        correlations = {'jobSpikeEvents': [], 'orgFormationClusters': [], 'geographicHotspots': []}
-        job_cities = set(job.get('city') for job in data.get('jobs', []) if job.get('city'))
-        org_cities = set(org.get('city') for org in data.get('nonprofits', []) if org.get('city'))
-        for city in job_cities.intersection(org_cities):
-            correlations['geographicHotspots'].append({'city': city, 'has_job_activity': True, 'has_org_activity': True, 'correlation_strength': 'moderate'})
-        return correlations
-    
-    def _detect_geographic_clusters(self, orgs: List[Dict]) -> List[Dict]:
-        state_counts = defaultdict(list)
-        for org in orgs:
-            state = org.get('state')
+            
+            if risk >= 50:
+                patterns['high_risk_orgs'].append({
+                    'name': name,
+                    'risk_score': risk,
+                    'state': state
+                })
+            
             if state:
-                state_counts[state].append(org)
-        return [{'state': state, 'count': len(state_orgs), 'organizations': [o.get('name') for o in state_orgs[:5]]} for state, state_orgs in state_counts.items() if len(state_orgs) >= 3]
+                patterns['state_distribution'][state] += 1
+        
+        return {
+            'name_flags': patterns['name_flags'],
+            'high_risk_orgs': patterns['high_risk_orgs'],
+            'state_distribution': dict(patterns['state_distribution']),
+            'recent_formations': patterns['recent_formations']
+        }
     
-    def _detect_formation_clusters(self, orgs: List[Dict]) -> List[Dict]:
-        by_year = defaultdict(list)
-        for org in orgs:
-            ruling_date = org.get('ruling_date')
-            if ruling_date:
-                try:
-                    year = int(str(ruling_date)[:4])
-                    by_year[year].append(org)
-                except:
-                    pass
-        current_year = datetime.utcnow().year
-        return [{'year': year, 'count': len(by_year[year]), 'organizations': [o.get('name') for o in by_year[year][:5]]} for year in [current_year, current_year - 1] if len(by_year.get(year, [])) >= 3]
+    def _analyze_news(self, articles: List[Dict]) -> Dict[str, Any]:
+        patterns = {
+            'high_relevance_count': 0,
+            'sources': defaultdict(int),
+            'topics': defaultdict(int)
+        }
+        
+        for article in articles:
+            if article.get('relevance_score', 0) >= 60:
+                patterns['high_relevance_count'] += 1
+            
+            source = article.get('publisher', article.get('source', 'Unknown'))
+            patterns['sources'][source] += 1
+            
+            query = article.get('query', '')
+            if query:
+                patterns['topics'][query] += 1
+        
+        return {
+            'high_relevance_count': patterns['high_relevance_count'],
+            'sources': dict(patterns['sources']),
+            'topics': dict(patterns['topics'])
+        }
     
-    def _detect_anomalies(self, analysis_results: Dict) -> List[Dict]:
-        anomalies = []
-        for spike in analysis_results.get('job_patterns', {}).get('spikes', []):
-            if spike.get('increase_pct', 0) > 100:
-                anomalies.append({'type': 'job_spike', 'severity': 'high' if spike['increase_pct'] > 200 else 'medium', 'description': f"Job postings in {spike['city']} increased {spike['increase_pct']:.0f}%", 'data': spike})
-        for org in analysis_results.get('org_patterns', {}).get('high_risk_orgs', []):
-            if org.get('risk_score', 0) >= 70:
-                anomalies.append({'type': 'high_risk_org', 'severity': 'high', 'description': f"High-risk organization detected: {org['name']}", 'data': org})
-        for cluster in analysis_results.get('org_patterns', {}).get('geographic_clusters', []):
-            if cluster.get('count', 0) >= 5:
-                anomalies.append({'type': 'geographic_cluster', 'severity': 'medium', 'description': f"Cluster of {cluster['count']} organizations in {cluster['state']}", 'data': cluster})
-        return anomalies
+    def _detect_hotspots(self, collected: Dict[str, Any]) -> List[Dict[str, Any]]:
+        state_activity = defaultdict(int)
+        
+        for job in collected.get('jobs', []):
+            state = job.get('state', '')
+            if state:
+                state_activity[state] += 2
+        
+        for org in collected.get('nonprofits', []):
+            state = org.get('state', '')
+            if state:
+                state_activity[state] += 1
+        
+        if not state_activity:
+            return []
+        
+        avg = sum(state_activity.values()) / len(state_activity)
+        hotspots = []
+        
+        for state, count in sorted(state_activity.items(), key=lambda x: x[1], reverse=True)[:10]:
+            if count > avg:
+                hotspots.append({
+                    'state': state,
+                    'activity_score': count,
+                    'above_average': round((count / avg - 1) * 100, 1)
+                })
+        
+        return hotspots
 
 if __name__ == '__main__':
-    memory = {'jobPostingPatterns': {}, 'documentedCases': []}
-    analyzer = PatternAnalyzer(memory)
-    test_data = {'jobs': [{'city': 'Dallas', 'keywords_tracked': ['protest']}], 'nonprofits': [{'name': 'Keep Dallas Safe', 'state': 'TX', 'risk_score': 75}], 'fec': []}
+    analyzer = PatternAnalyzer({})
+    test_data = {
+        'jobs': [{'city': 'Dallas', 'state': 'TX', 'keywords': ['protest'], 'suspicion_score': 60}],
+        'nonprofits': [{'name': 'Citizens for Progress', 'state': 'TX', 'risk_score': 55}]
+    }
     results = analyzer.analyze(test_data)
-    print(json.dumps(results, indent=2))
+    print(f"Analysis complete")
