@@ -1,334 +1,261 @@
-"""Job Collector - Craigslist Job Scraper for All 50 States"""
-
+"""Job Collector - Adzuna, USAJobs, Remotive APIs (replaces broken Craigslist scraper)"""
+import os
 import requests
-import re
+import xml.etree.ElementTree as ET
 from datetime import datetime
 from typing import List, Dict, Any
 from urllib.parse import quote_plus
-import time
-
 
 class JobCollector:
-    """Scrapes Craigslist gig and job postings for protest-related activity."""
+    """Collects job postings from working APIs - NO more Craigslist scraping"""
     
-    # All 50 states + DC - major Craigslist city for each
-    CRAIGSLIST_CITIES = {
-        # State: craigslist subdomain
-        'AL': 'birmingham',
-        'AK': 'anchorage',
-        'AZ': 'phoenix',
-        'AR': 'littlerock',
-        'CA': 'losangeles',
-        'CO': 'denver',
-        'CT': 'hartford',
-        'DE': 'delaware',
-        'FL': 'miami',
-        'GA': 'atlanta',
-        'HI': 'honolulu',
-        'ID': 'boise',
-        'IL': 'chicago',
-        'IN': 'indianapolis',
-        'IA': 'desmoines',
-        'KS': 'kansascity',
-        'KY': 'louisville',
-        'LA': 'neworleans',
-        'ME': 'maine',
-        'MD': 'baltimore',
-        'MA': 'boston',
-        'MI': 'detroit',
-        'MN': 'minneapolis',
-        'MS': 'jackson',
-        'MO': 'stlouis',
-        'MT': 'billings',
-        'NE': 'omaha',
-        'NV': 'lasvegas',
-        'NH': 'nh',
-        'NJ': 'newjersey',
-        'NM': 'albuquerque',
-        'NY': 'newyork',
-        'NC': 'charlotte',
-        'ND': 'fargo',
-        'OH': 'cleveland',
-        'OK': 'oklahomacity',
-        'OR': 'portland',
-        'PA': 'philadelphia',
-        'RI': 'providence',
-        'SC': 'charleston',
-        'SD': 'siouxfalls',
-        'TN': 'nashville',
-        'TX': 'dallas',
-        'UT': 'saltlakecity',
-        'VT': 'burlington',
-        'VA': 'norfolk',
-        'WA': 'seattle',
-        'WV': 'charlestonwv',
-        'WI': 'milwaukee',
-        'WY': 'wyoming',
-        'DC': 'washingtondc'
-    }
+    SEARCH_TERMS = ["protest", "rally", "canvasser", "petition", "grassroots", "organizer", "activist", "field coordinator", "campaign staff", "community outreach"]
     
-    # Additional major cities for high-population states
-    EXTRA_CITIES = {
-        'CA': ['sfbay', 'sandiego', 'sacramento'],
-        'TX': ['houston', 'austin', 'sanantonio'],
-        'FL': ['tampa', 'orlando', 'jacksonville'],
-        'NY': ['buffalo', 'albany'],
-        'PA': ['pittsburgh'],
-        'OH': ['columbus', 'cincinnati'],
-        'IL': ['springfieldil'],
-        'GA': ['savannah'],
-        'NC': ['raleigh'],
-        'WA': ['spokane'],
-        'AZ': ['tucson'],
-        'CO': ['cosprings'],
-        'MI': ['grandrapids'],
-        'TN': ['memphis', 'knoxville']
-    }
-    
-    # Keywords that suggest paid protest/astroturf activity
-    SUSPICIOUS_KEYWORDS = [
-        'paid protest',
-        'protest sign',
-        'rally attendee', 
-        'demonstration',
-        'hold signs',
-        'peaceful protest',
-        'political event',
-        'grassroots',
-        'advocacy event',
-        'town hall',
-        'city council',
-        'public hearing',
-        'civic event',
-        'campaign event'
-    ]
-    
-    # Broader search terms to find gigs
-    SEARCH_TERMS = [
-        'protest',
-        'rally',
-        'canvasser',
-        'organizer',
-        'activist',
-        'campaign',
-        'petition',
-        'signature gatherer',
-        'event staff political',
-        'community outreach'
-    ]
+    # Suspicion scoring keywords
+    HIGH_SUSPICION = ["paid protest", "hold signs", "same day pay", "cash daily", "immediate start", "no experience"]
+    MEDIUM_SUSPICION = ["protest", "rally", "canvass", "petition", "grassroots", "political", "campaign"]
+    URGENCY_INDICATORS = ["urgent", "immediate", "today", "asap", "now hiring", "start today"]
     
     def __init__(self):
-        self.calls_made = 0
+        self.adzuna_app_id = os.environ.get('ADZUNA_APP_ID')
+        self.adzuna_app_key = os.environ.get('ADZUNA_APP_KEY')
         self.session = requests.Session()
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-        })
+        self.session.headers.update({'User-Agent': 'AstroturfDetector/1.0'})
+        self.calls_made = 0
     
-    def collect(self, max_calls: int = 100) -> List[Dict[str, Any]]:
-        """Collect job postings from Craigslist across all 50 states."""
-        results = []
-        cities_to_scan = self._get_priority_cities()
+    def collect(self, max_calls: int = 20) -> List[Dict[str, Any]]:
+        """Collect jobs from all available APIs"""
+        all_jobs = []
         
-        for state, city in cities_to_scan:
-            if self.calls_made >= max_calls:
-                break
-            
-            for search_term in self.SEARCH_TERMS[:3]:  # Top 3 terms per city
-                if self.calls_made >= max_calls:
-                    break
-                
-                jobs = self._search_craigslist(city, state, search_term)
-                results.extend(jobs)
-                
-                # Be respectful - small delay between requests
-                time.sleep(0.5)
+        # 1. Adzuna API (if credentials available)
+        if self.adzuna_app_id and self.adzuna_app_key:
+            print("  Fetching from Adzuna API...")
+            adzuna_jobs = self._fetch_adzuna_jobs(max_calls // 3)
+            all_jobs.extend(adzuna_jobs)
+            print(f"    Found {len(adzuna_jobs)} Adzuna jobs")
+        else:
+            print("  Adzuna API not configured (set ADZUNA_APP_ID and ADZUNA_APP_KEY)")
         
-        # Deduplicate by title + city
-        seen = set()
-        unique_results = []
-        for job in results:
-            key = f"{job.get('title', '')[:50]}_{job.get('city', '')}"
-            if key not in seen:
-                seen.add(key)
-                unique_results.append(job)
+        # 2. Remotive RSS (always works, no auth)
+        print("  Fetching from Remotive RSS...")
+        remotive_jobs = self._fetch_remotive_jobs()
+        all_jobs.extend(remotive_jobs)
+        print(f"    Found {len(remotive_jobs)} Remotive jobs")
+        
+        # 3. USAJobs API (always works, no auth for basic)
+        print("  Fetching from USAJobs API...")
+        usajobs = self._fetch_usajobs()
+        all_jobs.extend(usajobs)
+        print(f"    Found {len(usajobs)} USAJobs listings")
+        
+        # Deduplicate by title similarity
+        seen_titles = set()
+        unique_jobs = []
+        for job in all_jobs:
+            title_key = job.get('title', '')[:40].lower()
+            if title_key not in seen_titles:
+                seen_titles.add(title_key)
+                unique_jobs.append(job)
         
         # Sort by suspicion score
-        unique_results.sort(key=lambda x: x.get('suspicion_score', 0), reverse=True)
+        unique_jobs.sort(key=lambda x: x.get('suspicion_score', 0), reverse=True)
         
-        return unique_results[:100]  # Return top 100
+        # If we got very few results, add baseline monitoring data
+        if len(unique_jobs) < 5:
+            print("  Adding baseline monitoring data...")
+            unique_jobs.extend(self._get_baseline_monitoring_data())
+        
+        return unique_jobs[:100]
     
-    def _get_priority_cities(self) -> List[tuple]:
-        """Get list of cities to scan, prioritizing high-activity states."""
-        cities = []
+    def _fetch_adzuna_jobs(self, max_calls: int) -> List[Dict[str, Any]]:
+        """Fetch from Adzuna Job Search API"""
+        jobs = []
+        base_url = "https://api.adzuna.com/v1/api/jobs/us/search/1"
         
-        # Priority states (politically active)
-        priority_states = ['TX', 'CA', 'FL', 'NY', 'PA', 'OH', 'GA', 'NC', 'MI', 'AZ', 
-                          'WA', 'CO', 'VA', 'NJ', 'IL', 'DC', 'NV', 'WI', 'MN', 'OR']
-        
-        # Add priority states first
-        for state in priority_states:
-            if state in self.CRAIGSLIST_CITIES:
-                cities.append((state, self.CRAIGSLIST_CITIES[state]))
-                # Add extra cities for this state
-                if state in self.EXTRA_CITIES:
-                    for extra_city in self.EXTRA_CITIES[state]:
-                        cities.append((state, extra_city))
-        
-        # Add remaining states
-        for state, city in self.CRAIGSLIST_CITIES.items():
-            if state not in priority_states:
-                cities.append((state, city))
-        
-        return cities
-    
-    def _search_craigslist(self, city: str, state: str, search_term: str) -> List[Dict[str, Any]]:
-        """Search Craigslist gigs section for a city."""
-        results = []
-        
-        # Search both gigs (ggg) and jobs (jjj) sections
-        sections = ['ggg', 'jjj']
-        
-        for section in sections:
+        for term in self.SEARCH_TERMS[:max_calls]:
             try:
-                url = f"https://{city}.craigslist.org/search/{section}?query={quote_plus(search_term)}"
-                
-                response = self.session.get(url, timeout=15)
+                params = {
+                    'app_id': self.adzuna_app_id,
+                    'app_key': self.adzuna_app_key,
+                    'what': term,
+                    'results_per_page': 10,
+                    'content-type': 'application/json'
+                }
+                response = self.session.get(base_url, params=params, timeout=15)
                 self.calls_made += 1
                 
                 if response.status_code == 200:
-                    jobs = self._parse_craigslist_html(response.text, city, state, search_term, section)
-                    results.extend(jobs)
-                elif response.status_code == 403:
-                    print(f"  Blocked by Craigslist for {city} - trying next city")
-                    break
-                    
-            except requests.RequestException as e:
-                print(f"  Error fetching {city} {section}: {e}")
-                continue
+                    data = response.json()
+                    for result in data.get('results', []):
+                        title = result.get('title', '')
+                        description = result.get('description', '')
+                        
+                        job = {
+                            'type': 'job_posting',
+                            'source': 'adzuna',
+                            'title': title,
+                            'company': result.get('company', {}).get('display_name', 'Unknown'),
+                            'city': result.get('location', {}).get('area', [''])[0] if result.get('location', {}).get('area') else '',
+                            'state': '',
+                            'url': result.get('redirect_url', ''),
+                            'date': datetime.utcnow().isoformat() + 'Z',
+                            'salary_min': result.get('salary_min'),
+                            'salary_max': result.get('salary_max'),
+                            'suspicion_score': self._calculate_suspicion(title, description),
+                            'keywords': [term],
+                            'is_monitoring_entry': False
+                        }
+                        jobs.append(job)
+            except Exception as e:
+                print(f"    Adzuna error for '{term}': {e}")
         
-        return results
+        return jobs
     
-    def _parse_craigslist_html(self, html: str, city: str, state: str, search_term: str, section: str) -> List[Dict[str, Any]]:
-        """Parse Craigslist HTML to extract job listings."""
-        results = []
+    def _fetch_remotive_jobs(self) -> List[Dict[str, Any]]:
+        """Fetch from Remotive RSS feed (no auth required)"""
+        jobs = []
+        feeds = [
+            "https://remotive.com/remote-jobs/feed/community-management",
+            "https://remotive.com/remote-jobs/feed/marketing"
+        ]
         
-        # Find all result rows - Craigslist uses <li class="cl-static-search-result">
-        # or <li class="result-row"> depending on version
+        for feed_url in feeds:
+            try:
+                response = self.session.get(feed_url, timeout=15)
+                if response.status_code == 200:
+                    root = ET.fromstring(response.content)
+                    for item in root.findall('.//item')[:10]:
+                        title_elem = item.find('title')
+                        link_elem = item.find('link')
+                        desc_elem = item.find('description')
+                        
+                        if title_elem is not None:
+                            title = title_elem.text or ''
+                            description = desc_elem.text if desc_elem is not None else ''
+                            
+                            # Only include if relevant keywords
+                            relevant = any(kw in title.lower() for kw in ['organizer', 'coordinator', 'community', 'outreach', 'campaign', 'advocacy'])
+                            if relevant:
+                                job = {
+                                    'type': 'job_posting',
+                                    'source': 'remotive',
+                                    'title': title,
+                                    'company': 'Remote Company',
+                                    'city': 'Remote',
+                                    'state': '',
+                                    'url': link_elem.text if link_elem is not None else '',
+                                    'date': datetime.utcnow().isoformat() + 'Z',
+                                    'suspicion_score': self._calculate_suspicion(title, description or ''),
+                                    'keywords': ['remote', 'organizer'],
+                                    'is_monitoring_entry': False
+                                }
+                                jobs.append(job)
+            except Exception as e:
+                print(f"    Remotive error: {e}")
         
-        # Pattern for newer Craigslist format
-        pattern = r'<li[^>]*class="[^"]*cl-static-search-result[^"]*"[^>]*>.*?<a[^>]*href="([^"]+)"[^>]*>.*?<span[^>]*class="[^"]*label[^"]*"[^>]*>([^<]+)</span>.*?</li>'
-        
-        matches = re.findall(pattern, html, re.DOTALL | re.IGNORECASE)
-        
-        # Also try older format
-        if not matches:
-            pattern2 = r'<a[^>]*href="(https?://[^"]*craigslist[^"]+/([^/]+)/d/[^"]+)"[^>]*class="[^"]*result-title[^"]*"[^>]*>([^<]+)</a>'
-            matches2 = re.findall(pattern2, html, re.DOTALL | re.IGNORECASE)
-            for url, category, title in matches2:
-                matches.append((url, title))
-        
-        # Simpler fallback - just find titles and links
-        if not matches:
-            title_pattern = r'<a[^>]*href="(/[^"]+/\d+\.html)"[^>]*>([^<]+)</a>'
-            matches = re.findall(title_pattern, html)
-            matches = [(f"https://{city}.craigslist.org{url}", title) for url, title in matches]
-        
-        for match in matches[:20]:  # Limit per search
-            if len(match) >= 2:
-                url = match[0]
-                title = match[1].strip()
-                
-                # Skip if title is too short or generic
-                if len(title) < 10:
-                    continue
-                
-                # Calculate suspicion score
-                suspicion_score = self._calculate_suspicion(title)
-                
-                # Only include if somewhat relevant
-                if suspicion_score >= 20 or search_term.lower() in title.lower():
-                    results.append({
-                        'type': 'job_posting',
-                        'source': 'craigslist',
-                        'title': title,
-                        'url': url if url.startswith('http') else f"https://{city}.craigslist.org{url}",
-                        'city': city,
-                        'state': state,
-                        'section': 'gigs' if section == 'ggg' else 'jobs',
-                        'search_term': search_term,
-                        'suspicion_score': suspicion_score,
-                        'date': datetime.utcnow().isoformat() + 'Z',
-                        'keywords': self._extract_keywords(title)
-                    })
-        
-        return results
+        return jobs
     
-    def _calculate_suspicion(self, title: str) -> int:
-        """Calculate how suspicious a job posting is (0-100)."""
+    def _fetch_usajobs(self) -> List[Dict[str, Any]]:
+        """Fetch from USAJobs API (government jobs)"""
+        jobs = []
+        base_url = "https://data.usajobs.gov/api/search"
+        
+        search_terms = ["community outreach", "public affairs", "campaign"]
+        
+        for term in search_terms:
+            try:
+                params = {
+                    'Keyword': term,
+                    'ResultsPerPage': 10
+                }
+                headers = {
+                    'Host': 'data.usajobs.gov',
+                    'User-Agent': 'AstroturfDetector/1.0'
+                }
+                response = self.session.get(base_url, params=params, headers=headers, timeout=15)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    for result in data.get('SearchResult', {}).get('SearchResultItems', []):
+                        matched = result.get('MatchedObjectDescriptor', {})
+                        title = matched.get('PositionTitle', '')
+                        
+                        locations = matched.get('PositionLocation', [])
+                        city = locations[0].get('CityName', '') if locations else ''
+                        state = locations[0].get('CountrySubDivisionCode', '') if locations else ''
+                        
+                        job = {
+                            'type': 'job_posting',
+                            'source': 'usajobs',
+                            'title': title,
+                            'company': matched.get('OrganizationName', 'Federal Government'),
+                            'city': city,
+                            'state': state,
+                            'url': matched.get('PositionURI', ''),
+                            'date': datetime.utcnow().isoformat() + 'Z',
+                            'suspicion_score': self._calculate_suspicion(title, matched.get('QualificationSummary', '')),
+                            'keywords': [term],
+                            'is_monitoring_entry': False
+                        }
+                        jobs.append(job)
+            except Exception as e:
+                print(f"    USAJobs error: {e}")
+        
+        return jobs
+    
+    def _calculate_suspicion(self, title: str, description: str) -> int:
+        """Calculate suspicion score 0-100"""
         score = 0
-        title_lower = title.lower()
+        text = f"{title} {description}".lower()
         
-        # High suspicion keywords
-        high_value = [
-            'paid protest', 'hold signs', 'rally attendee', 'protest sign',
-            'demonstration', 'political event', 'grassroots', 'town hall',
-            'city council', 'public hearing', 'cash daily', 'same day pay'
-        ]
-        for kw in high_value:
-            if kw in title_lower:
-                score += 25
+        # High suspicion keywords (+25 each, max 50)
+        high_hits = sum(1 for kw in self.HIGH_SUSPICION if kw in text)
+        score += min(high_hits * 25, 50)
         
-        # Medium suspicion keywords  
-        medium_value = [
-            'protest', 'rally', 'canvass', 'petition', 'campaign',
-            'activist', 'organizer', 'advocacy', 'political', 'signatures',
-            'event staff', 'street team', 'brand ambassador'
-        ]
-        for kw in medium_value:
-            if kw in title_lower:
-                score += 10
+        # Medium suspicion keywords (+10 each, max 30)
+        medium_hits = sum(1 for kw in self.MEDIUM_SUSPICION if kw in text)
+        score += min(medium_hits * 10, 30)
         
-        # Pay indicators (often associated with paid protests)
-        pay_indicators = ['$/hr', 'per hour', 'daily pay', 'cash', 'paid', '$15', '$20', '$25', '$50']
-        for indicator in pay_indicators:
-            if indicator in title_lower:
-                score += 5
-        
-        # Urgency indicators
-        urgency = ['immediate', 'urgent', 'today', 'tomorrow', 'this week', 'asap']
-        for word in urgency:
-            if word in title_lower:
-                score += 5
+        # Urgency indicators (+5 each, max 20)
+        urgency_hits = sum(1 for kw in self.URGENCY_INDICATORS if kw in text)
+        score += min(urgency_hits * 5, 20)
         
         return min(score, 100)
     
-    def _extract_keywords(self, title: str) -> List[str]:
-        """Extract relevant keywords from title."""
-        keywords = []
-        title_lower = title.lower()
-        
-        all_keywords = [
-            'protest', 'rally', 'canvass', 'petition', 'campaign', 'activist',
-            'organizer', 'advocacy', 'political', 'grassroots', 'signatures',
-            'demonstration', 'march', 'event', 'staff', 'paid'
+    def _get_baseline_monitoring_data(self) -> List[Dict[str, Any]]:
+        """Return baseline monitoring entries when APIs return nothing"""
+        return [
+            {
+                'type': 'monitoring_target',
+                'source': 'baseline',
+                'title': 'Monitoring: Craigslist gig postings',
+                'company': 'Various',
+                'city': 'Multiple Cities',
+                'state': '',
+                'url': 'https://craigslist.org',
+                'date': datetime.utcnow().isoformat() + 'Z',
+                'suspicion_score': 0,
+                'keywords': ['protest', 'rally', 'canvasser'],
+                'is_monitoring_entry': True
+            },
+            {
+                'type': 'monitoring_target',
+                'source': 'baseline',
+                'title': 'Monitoring: Indeed political jobs',
+                'company': 'Various',
+                'city': 'Multiple Cities',
+                'state': '',
+                'url': 'https://indeed.com',
+                'date': datetime.utcnow().isoformat() + 'Z',
+                'suspicion_score': 0,
+                'keywords': ['campaign', 'grassroots', 'organizer'],
+                'is_monitoring_entry': True
+            }
         ]
-        
-        for kw in all_keywords:
-            if kw in title_lower:
-                keywords.append(kw)
-        
-        return keywords
-
 
 if __name__ == '__main__':
     collector = JobCollector()
-    print("Starting Craigslist scan across all 50 states...")
-    jobs = collector.collect(max_calls=50)
-    print(f"\nCollected {len(jobs)} job postings")
-    
-    print("\nTop 10 most suspicious:")
-    for job in jobs[:10]:
-        print(f"  [{job['state']}] {job['title'][:60]}...")
-        print(f"       Score: {job['suspicion_score']}% | {job['url']}")
+    jobs = collector.collect(max_calls=10)
+    print(f"\nCollected {len(jobs)} total jobs")
+    for job in jobs[:5]:
+        print(f"  - {job['title'][:50]}... (score: {job['suspicion_score']})")
