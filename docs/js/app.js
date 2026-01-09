@@ -6,13 +6,15 @@ const HIGH_ACTIVITY = ['TX','CA','FL','NY','PA','OH','GA','NC','MI','AZ','WA','C
 let currentRange = 90;
 let allTimelineEvents = [];
 
-// Initialize states grid
+// Initialize states grid with tooltip context
 function initStatesGrid() {
     const grid = document.getElementById('states-grid');
     if (grid) {
-        grid.innerHTML = ALL_STATES.map(s => 
-            '<div class="state-badge ' + (HIGH_ACTIVITY.includes(s) ? 'high-activity' : '') + '">' + s + '</div>'
-        ).join('');
+        grid.innerHTML = ALL_STATES.map(s => {
+            const isHighActivity = HIGH_ACTIVITY.includes(s);
+            const tooltip = isHighActivity ? 'Priority: High political spending & activity' : 'Standard monitoring';
+            return '<div class="state-badge ' + (isHighActivity ? 'high-activity' : '') + '" title="' + tooltip + '">' + s + '</div>';
+        }).join('');
     }
 }
 
@@ -51,7 +53,7 @@ function escapeHtml(s) {
             .replace(/"/g, '&quot;');
 }
 
-// Render timeline with date filtering
+// Render timeline with COMPACT items
 function renderTimeline(days) {
     const container = document.getElementById('timeline-events');
     const badge = document.getElementById('timeline-count');
@@ -78,31 +80,19 @@ function renderTimeline(days) {
         return;
     }
     
-    container.innerHTML = filtered.slice(0, 20).map(e => {
+    // Compact timeline items
+    container.innerHTML = filtered.slice(0, 25).map(e => {
         const d = parseDate(e.date || e.timestamp);
-        const dayNum = d.getDate();
-        const month = d.toLocaleString('en', { month: 'short' });
         const title = escapeHtml(e.title || 'Event');
-        const desc = escapeHtml(e.description || '');
         const url = e.sourceUrl ? escapeHtml(e.sourceUrl) : '';
         const type = e.type || 'event';
-        const tags = (e.tags || []).slice(0, 2);
+        const typeIcon = type === 'news' ? '📰' : type === 'job_posting' ? '💼' : type === 'organization' ? '🏢' : '📌';
         
-        return '<div class="timeline-event">' +
-            '<div class="event-date">' +
-                '<span class="event-day">' + dayNum + '</span>' +
-                '<span class="event-month">' + month + '</span>' +
-            '</div>' +
-            '<div class="event-content">' +
-                '<div class="event-title">' + title + 
-                    (url ? ' <a href="' + url + '" target="_blank" class="event-source-link">↗</a>' : '') +
-                '</div>' +
-                '<p class="event-description">' + desc + '</p>' +
-                '<div class="event-tags">' +
-                    '<span class="event-tag">' + type + '</span>' +
-                    tags.map(t => '<span class="event-tag">' + escapeHtml(t) + '</span>').join('') +
-                '</div>' +
-            '</div>' +
+        return '<div class="timeline-event-compact">' +
+            '<span class="event-icon">' + typeIcon + '</span>' +
+            '<span class="event-title-compact">' + title.substring(0, 60) + (title.length > 60 ? '...' : '') + '</span>' +
+            '<span class="event-time-compact">' + formatRelativeTime(e.date || e.timestamp) + '</span>' +
+            (url ? '<a href="' + url + '" target="_blank" class="event-link-compact">↗</a>' : '') +
         '</div>';
     }).join('');
 }
@@ -128,7 +118,7 @@ function renderStats(memory, alertsData) {
     }
 }
 
-// Render confidence meter
+// Render confidence meter - FULL AI analysis, no truncation
 function renderConfidence(memory) {
     const conf = memory.systemConfidence || 50;
     
@@ -140,14 +130,18 @@ function renderConfidence(memory) {
     if (percentEl) percentEl.textContent = conf + '%';
     if (arcEl) arcEl.style.strokeDasharray = (conf * 2.83) + ' 283';
     
+    // Show FULL AI analysis - no truncation
     const notes = memory.agentNotes || [];
-    if (descEl && notes[0]?.summary) {
-        descEl.textContent = notes[0].summary.substring(0, 150) + '...';
+    if (descEl && notes.length > 0) {
+        const latestNote = notes[0];
+        const summary = latestNote.summary || 'Awaiting analysis...';
+        const timestamp = latestNote.timestamp ? formatRelativeTime(latestNote.timestamp) : '';
+        descEl.innerHTML = '<strong>AI Analysis (' + timestamp + '):</strong><br>' + escapeHtml(summary);
     }
     
     const factors = memory.confidenceFactors || [];
     if (factorsEl && factors.length) {
-        factorsEl.innerHTML = factors.slice(0, 3).map(f =>
+        factorsEl.innerHTML = factors.map(f =>
             '<div class="confidence-factor">' +
                 '<span class="factor-name">' + escapeHtml(f.factor) + '</span>' +
                 '<span class="factor-score">' + f.score + '%</span>' +
@@ -156,7 +150,7 @@ function renderConfidence(memory) {
     }
 }
 
-// Render news feed
+// Render news feed - show source (Google News OR DuckDuckGo)
 function renderNews(memory) {
     const container = document.getElementById('news-feed');
     if (!container) return;
@@ -164,18 +158,20 @@ function renderNews(memory) {
     const news = memory.recentNews || [];
     
     if (news.length) {
-        container.innerHTML = news.slice(0, 12).map(a =>
-            '<div class="news-item">' +
+        container.innerHTML = news.slice(0, 15).map(a => {
+            const source = a.source === 'duckduckgo' ? 'DuckDuckGo' : (a.publisher || a.source || 'Google News');
+            const sourceClass = a.source === 'duckduckgo' ? 'source-ddg' : 'source-google';
+            return '<div class="news-item">' +
                 '<a href="' + escapeHtml(a.url || '#') + '" target="_blank" class="news-title">' + 
                     escapeHtml(a.title || 'Untitled') + 
                 '</a>' +
                 '<div class="news-meta">' +
-                    '<span>' + escapeHtml(a.publisher || a.source || '') + '</span>' +
+                    '<span class="news-source ' + sourceClass + '">' + escapeHtml(source) + '</span>' +
                     '<span>' + escapeHtml(a.location || '') + '</span>' +
                     '<span class="news-relevance">' + (a.relevance_score || 0) + '%</span>' +
                 '</div>' +
-            '</div>'
-        ).join('');
+            '</div>';
+        }).join('');
     } else {
         container.innerHTML = '<div class="empty-state"><p>No news yet</p></div>';
     }
@@ -203,21 +199,7 @@ function renderJobs(memory) {
             '</a>';
         }).join('');
     } else {
-        const kw = memory.jobPostingPatterns?.keywords || {};
-        if (Object.keys(kw).length) {
-            container.innerHTML = 
-                '<div style="padding:12px;font-size:.8rem;color:var(--color-text-secondary)">' +
-                '<p>Monitoring keywords:</p>' +
-                Object.entries(kw).slice(0, 6).map(([k, v]) =>
-                    '<div class="job-item">' +
-                        '<span class="job-title">"' + escapeHtml(k) + '"</span>' +
-                        '<span class="job-score low">' + v + '</span>' +
-                    '</div>'
-                ).join('') +
-                '</div>';
-        } else {
-            container.innerHTML = '<div class="empty-state"><p>No jobs tracked</p></div>';
-        }
+        container.innerHTML = '<div class="empty-state"><p>No suspicious jobs found</p></div>';
     }
 }
 
@@ -248,7 +230,7 @@ function renderOrganizations(memory) {
     }
 }
 
-// Render alerts
+// Render alerts - CLEANED UP
 function renderAlerts(alertsData) {
     const container = document.getElementById('alerts-grid');
     if (!container) return;
@@ -257,28 +239,21 @@ function renderAlerts(alertsData) {
     
     if (alerts.length) {
         container.innerHTML = alerts.slice(0, 6).map(a => {
-            const sev = a.severity || (a.confidence >= 80 ? 'high' : a.confidence >= 50 ? 'medium' : 'low');
-            return '<div class="alert-card">' +
-                '<div class="alert-header">' +
-                    '<div class="alert-severity ' + sev + '"></div>' +
-                    '<div class="alert-title">' + escapeHtml(a.title || 'Alert') + '</div>' +
+            const conf = a.confidence || 50;
+            const sev = conf >= 70 ? 'high' : conf >= 50 ? 'medium' : 'low';
+            const title = a.title || 'Alert';
+            // Don't repeat title in description
+            const desc = a.description && a.description !== title ? a.description : '';
+            
+            return '<div class="alert-card-clean">' +
+                '<div class="alert-header-clean">' +
+                    '<span class="alert-severity-dot ' + sev + '"></span>' +
+                    '<span class="alert-title-clean">' + escapeHtml(title.substring(0, 100)) + '</span>' +
                 '</div>' +
-                '<div class="alert-body">' +
-                    '<p class="alert-description">' + escapeHtml((a.description || '').substring(0, 200)) + '...</p>' +
-                    '<div class="alert-factors">' +
-                        (a.factors || []).slice(0, 3).map(f =>
-                            '<div class="alert-factor">' +
-                                '<span class="factor-label">' + escapeHtml(f.name || '') + '</span>' +
-                                '<span class="factor-value">' + escapeHtml(String(f.value || '')) + '</span>' +
-                            '</div>'
-                        ).join('') +
-                    '</div>' +
-                '</div>' +
-                '<div class="alert-footer">' +
-                    '<span class="alert-confidence">Confidence: ' + (a.confidence || 0) + '%</span>' +
-                    '<span style="font-size:.75rem;color:var(--color-text-muted)">' + 
-                        formatRelativeTime(a.timestamp) + 
-                    '</span>' +
+                (desc ? '<p class="alert-desc-clean">' + escapeHtml(desc.substring(0, 150)) + '</p>' : '') +
+                '<div class="alert-footer-clean">' +
+                    '<span class="alert-confidence-clean">' + conf + '% confidence</span>' +
+                    '<span class="alert-time-clean">' + formatRelativeTime(a.timestamp) + '</span>' +
                 '</div>' +
             '</div>';
         }).join('');
