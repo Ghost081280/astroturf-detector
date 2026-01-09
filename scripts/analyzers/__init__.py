@@ -1,5 +1,4 @@
-"""Analyzers package - Analysis modules for Astroturf Detector"""
-
+"""Analyzers package"""
 from .pattern_analyzer import PatternAnalyzer
 from .ai_agent import AIAgent
 
