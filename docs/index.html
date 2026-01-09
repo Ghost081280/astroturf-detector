@@ -8,11 +8,16 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%238b5cf6'/><path d='M25 75 Q35 55 30 40 Q40 55 45 30 Q50 55 55 25 Q60 55 70 30 Q65 55 75 75' fill='%234a7c43'/></svg>">
     <style>
+        /* Scroll offset for fixed header */
+        html { scroll-padding-top: 140px; }
+        
         .construction-banner{background:linear-gradient(90deg,#f59e0b,#d97706);color:#000;padding:16px 24px;text-align:center;font-weight:600}
         .construction-banner::before{content:'🚧';margin-right:12px}
         .construction-banner::after{content:'🚧';margin-left:12px}
         .construction-banner a{color:#000;text-decoration:underline}
         .construction-date{font-size:.875rem;opacity:.8;display:block;margin-top:4px}
+        
+        /* News feed styles */
         .news-feed{display:flex;flex-direction:column;gap:12px;max-height:400px;overflow-y:auto}
         .news-item{padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);border-left:3px solid var(--color-accent-primary)}
         .news-item:hover{background:var(--color-bg-hover)}
@@ -20,6 +25,11 @@
         .news-title:hover{color:var(--color-accent-primary)}
         .news-meta{font-size:.75rem;color:var(--color-text-muted);display:flex;gap:12px}
         .news-relevance{color:var(--color-accent-primary);font-weight:600}
+        .news-source-tag{font-size:.625rem;padding:2px 6px;border-radius:4px;font-weight:600}
+        .news-source-tag.google{background:rgba(66,133,244,.2);color:#4285f4}
+        .news-source-tag.ddg{background:rgba(222,88,51,.2);color:#de5833}
+        
+        /* Services grid */
         .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
         .service-card{background:var(--color-bg-card);border-radius:var(--radius-md);border:1px solid rgba(239,68,68,.3);overflow:hidden}
         .service-header{background:rgba(239,68,68,.1);padding:16px;border-bottom:1px solid rgba(239,68,68,.2)}
@@ -32,28 +42,90 @@
         .service-link{font-size:.8125rem;color:var(--color-accent-primary);text-decoration:none}
         .service-link:hover{text-decoration:underline}
         .service-pricing{font-size:.75rem;color:var(--color-warning);margin-top:8px;padding:8px;background:rgba(234,179,8,.1);border-radius:var(--radius-sm)}
+        
+        /* States grid */
         .states-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(50px,1fr));gap:6px;padding:12px}
         .state-badge{padding:6px 2px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);text-align:center;font-size:.7rem;font-weight:600;color:var(--color-text-secondary)}
         .state-badge.high-activity{background:rgba(239,68,68,.2);color:var(--color-danger);border:1px solid rgba(239,68,68,.3)}
+        
+        /* Case studies */
         .case-study{background:var(--color-bg-secondary);border-radius:var(--radius-md);padding:20px;margin-bottom:20px;border-left:4px solid var(--color-warning)}
         .case-study h4{color:var(--color-warning);margin-bottom:8px}
         .case-study p{font-size:.875rem;color:var(--color-text-secondary);margin-bottom:8px}
         .case-outcome{font-size:.8125rem;color:var(--color-success);font-weight:600}
-        .case-quote{font-style:italic;padding:12px;background:var(--color-bg-primary);border-radius:var(--radius-sm);margin-top:12px;font-size:.875rem;color:var(--color-text-secondary)}
-        .case-quote cite{display:block;margin-top:8px;font-style:normal;color:var(--color-text-muted);font-size:.75rem}
+        .case-source{margin-top:12px}
+        .case-source a{font-size:.75rem;color:var(--color-accent-primary);text-decoration:none}
+        .case-source a:hover{text-decoration:underline}
+        
+        /* Contact section */
         .contact-section{background:var(--color-bg-primary);padding:40px 0;border-top:1px solid rgba(148,163,184,.1)}
         .contact-content{text-align:center}
         .contact-content h3{margin-bottom:16px}
         .contact-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
         .contact-link{display:flex;align-items:center;gap:8px;color:var(--color-accent-primary);text-decoration:none;font-size:.9375rem}
         .contact-link:hover{text-decoration:underline}
-        .contact-link svg{width:20px;height:20px}
+        
+        /* Job list */
         .job-list{display:flex;flex-direction:column;gap:10px;max-height:300px;overflow-y:auto}
         .job-item{padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center;text-decoration:none}
         .job-item:hover{background:var(--color-bg-hover)}
         .job-title{font-size:.8125rem;color:var(--color-text-primary);flex:1}
         .job-location{font-size:.75rem;color:var(--color-text-muted);margin-right:12px}
         .job-score{font-size:.75rem;font-weight:600;padding:4px 8px;background:rgba(239,68,68,.2);color:var(--color-danger);border-radius:var(--radius-sm)}
+        
+        /* Timeline styles */
+        .timeline-container{position:relative;padding:20px 0}
+        .timeline-filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+        .timeline-filter{padding:8px 16px;background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-text-secondary);cursor:pointer;font-size:.8125rem;transition:all .2s}
+        .timeline-filter:hover{background:var(--color-bg-hover)}
+        .timeline-filter.active{background:var(--color-accent-primary);color:#fff;border-color:var(--color-accent-primary)}
+        .timeline-list{display:flex;flex-direction:column;gap:16px;max-height:400px;overflow-y:auto}
+        .timeline-item{display:flex;gap:16px;padding:16px;background:var(--color-bg-secondary);border-radius:var(--radius-md);border-left:3px solid var(--color-accent-primary)}
+        .timeline-date{min-width:80px;text-align:center}
+        .timeline-date .day{font-size:1.5rem;font-weight:700;color:var(--color-text-primary)}
+        .timeline-date .month{font-size:.75rem;color:var(--color-text-muted);text-transform:uppercase}
+        .timeline-content h4{font-size:.9375rem;color:var(--color-text-primary);margin-bottom:4px}
+        .timeline-content p{font-size:.8125rem;color:var(--color-text-secondary);margin-bottom:8px}
+        .timeline-meta{display:flex;gap:12px;font-size:.75rem;color:var(--color-text-muted)}
+        .timeline-empty{text-align:center;padding:40px;color:var(--color-text-muted)}
+        
+        /* Alerts styles - redesigned */
+        .alerts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px;max-height:600px;overflow-y:auto}
+        .alert-card{background:var(--color-bg-card);border-radius:var(--radius-md);border:1px solid var(--color-border);overflow:hidden;transition:transform .2s,box-shadow .2s}
+        .alert-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
+        .alert-header{padding:16px;border-bottom:1px solid var(--color-border);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+        .alert-severity{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px}
+        .alert-severity.high{background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.5)}
+        .alert-severity.medium{background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,.5)}
+        .alert-severity.low{background:#22c55e}
+        .alert-title{flex:1;font-size:.9375rem;font-weight:600;color:var(--color-text-primary);line-height:1.4}
+        .alert-time{font-size:.75rem;color:var(--color-text-muted);white-space:nowrap}
+        .alert-body{padding:16px}
+        .alert-description{font-size:.8125rem;color:var(--color-text-secondary);line-height:1.5;margin-bottom:12px}
+        .alert-indicators{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+        .alert-indicator{display:flex;align-items:flex-start;gap:8px;font-size:.75rem}
+        .alert-indicator-label{color:var(--color-text-muted);min-width:80px}
+        .alert-indicator-value{color:var(--color-accent-secondary);font-family:var(--font-mono)}
+        .alert-footer{padding:12px 16px;background:var(--color-bg-secondary);border-top:1px solid var(--color-border);display:flex;justify-content:space-between;align-items:center}
+        .alert-confidence{font-size:.75rem;color:var(--color-text-muted)}
+        .alert-confidence strong{color:var(--color-accent-primary)}
+        .alert-sources{display:flex;gap:8px}
+        .alert-source-btn{font-size:.6875rem;padding:4px 10px;background:var(--color-bg-hover);color:var(--color-accent-primary);border-radius:var(--radius-sm);text-decoration:none;transition:background .2s}
+        .alert-source-btn:hover{background:var(--color-accent-primary);color:#fff}
+        .alerts-show-more{text-align:center;padding:16px}
+        .alerts-show-more button{padding:10px 24px;background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-text-secondary);cursor:pointer;font-size:.875rem}
+        .alerts-show-more button:hover{background:var(--color-bg-hover);color:var(--color-text-primary)}
+        
+        /* Clickable stat cards */
+        .stat-card-link{text-decoration:none;display:block}
+        .stat-card-link:hover .stat-card{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
+        .stat-card{transition:transform .2s,box-shadow .2s}
+        
+        /* Source toggle buttons */
+        .source-toggles{display:flex;gap:8px;margin-bottom:16px}
+        .source-toggle{padding:6px 12px;background:var(--color-bg-secondary);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-text-secondary);cursor:pointer;font-size:.75rem;display:flex;align-items:center;gap:6px}
+        .source-toggle.active{background:var(--color-accent-primary);color:#fff;border-color:var(--color-accent-primary)}
+        .source-toggle .source-icon{width:14px;height:14px}
     </style>
 </head>
 <body>
@@ -62,424 +134,613 @@
         <span class="construction-date">Last updated: January 9, 2026 | <a href="https://github.com/Ghost081280">Contact Developer</a></span>
     </div>
 
-    <div style="background:linear-gradient(135deg,#1e293b,#0f172a);border-bottom:1px solid rgba(139,92,246,0.3);padding:20px 24px;">
-        <div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
-            <div style="flex:1;min-width:300px;">
-                <p style="font-style:italic;color:#e2e8f0;font-size:1rem;line-height:1.6;margin:0;">
-                    "The groups themselves are the <strong style="color:#ef4444;">'astroturf'</strong>, 
-                    <a href="https://crowdsondemand.com/" target="_blank" style="color:#f59e0b;text-decoration:underline;">Crowds on Demand</a> is a sort of <strong style="color:#f59e0b;">astroturf planter</strong>, 
-                    and the <a href="https://www.texasobserver.org/the-dallas-express-your-go-to-source-for-right-wing-astroturf-news/" target="_blank" style="color:#22c55e;text-decoration:underline;">Dallas Express</a> provides the <strong style="color:#22c55e;">'pink-slime' fertilizer</strong> to help the groups grow."
-                </p>
-                <p style="color:#64748b;font-size:0.8125rem;margin:8px 0 0 0;">
-                    — <strong>Anne Nelson</strong>, Columbia University | 
-                    <a href="https://www.texasobserver.org/dallas-has-a-problem-with-zombie-astroturf-groups/" target="_blank" style="color:#8b5cf6;">Texas Observer Investigation ↗</a>
-                </p>
-            </div>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                <a href="https://crowdsondemand.com/" target="_blank" style="padding:8px 16px;background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:6px;color:#f59e0b;text-decoration:none;font-size:0.8125rem;font-weight:600;">🌱 The Planter</a>
-                <a href="https://www.texasobserver.org/the-dallas-express-your-go-to-source-for-right-wing-astroturf-news/" target="_blank" style="padding:8px 16px;background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);border-radius:6px;color:#22c55e;text-decoration:none;font-size:0.8125rem;font-weight:600;">🧪 The Fertilizer</a>
-                <a href="https://en.wikipedia.org/wiki/Astroturfing" target="_blank" style="padding:8px 16px;background:rgba(239,68,68,0.2);border:1px solid rgba(239,68,68,0.4);border-radius:6px;color:#ef4444;text-decoration:none;font-size:0.8125rem;font-weight:600;">🌿 The Astroturf</a>
-            </div>
-        </div>
-    </div>
-
     <header class="site-header">
         <div class="container">
-            <div class="logo-container">
-                <svg class="logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="grassGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                            <stop offset="0%" style="stop-color:#2d5a27"/>
-                            <stop offset="100%" style="stop-color:#4a7c43"/>
-                        </linearGradient>
-                        <linearGradient id="syntheticGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#8b5cf6"/>
-                            <stop offset="100%" style="stop-color:#6366f1"/>
-                        </linearGradient>
-                    </defs>
-                    <circle cx="24" cy="24" r="22" fill="none" stroke="url(#syntheticGradient)" stroke-width="2"/>
-                    <path d="M12 36 Q16 28 14 20 Q18 26 20 18 Q22 26 24 14 Q26 26 28 18 Q30 26 34 20 Q32 28 36 36" fill="url(#grassGradient)" opacity="0.9"/>
-                    <circle cx="24" cy="24" r="8" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="3 2"/>
-                    <circle cx="24" cy="24" r="3" fill="#fff"/>
-                </svg>
-                <div class="logo-text">
-                    <h1>Astroturf Detector</h1>
-                    <span class="tagline">United States Monitor - All 50 States</span>
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="20" cy="20" r="8" fill="#22c55e"/>
+                            <circle cx="20" cy="20" r="4" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">Astroturf Detector</span>
+                        <span class="logo-subtitle">United States Monitor - All 50 States</span>
+                    </div>
                 </div>
+                <nav class="main-nav">
+                    <a href="#dashboard" class="nav-link">Dashboard</a>
+                    <a href="#news" class="nav-link">News</a>
+                    <a href="#services" class="nav-link">Known Services</a>
+                    <a href="#alerts" class="nav-link">Alerts</a>
+                    <a href="#about" class="nav-link">About</a>
+                </nav>
             </div>
-            <nav class="main-nav">
-                <a href="#dashboard" class="nav-link">Dashboard</a>
-                <a href="#news" class="nav-link">News</a>
-                <a href="#services" class="nav-link">Known Services</a>
-                <a href="#alerts" class="nav-link">Alerts</a>
-                <a href="#about" class="nav-link">About</a>
-            </nav>
         </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h2>Real-time monitoring for manufactured movements</h2>
-                    <p>An open-source intelligence engine tracking paid protest activity, suspicious nonprofit formations, and coordinated astroturf campaigns across all 50 United States.</p>
-                    <div class="hero-stats" id="hero-stats">
-                        <div class="stat-card"><span class="stat-value" id="stat-events">--</span><span class="stat-label">Events Tracked</span></div>
-                        <div class="stat-card"><span class="stat-value" id="stat-alerts">--</span><span class="stat-label">Active Alerts</span></div>
-                        <div class="stat-card"><span class="stat-value" id="stat-orgs">--</span><span class="stat-label">Orgs Flagged</span></div>
-                        <div class="stat-card"><span class="stat-value" id="stat-news">--</span><span class="stat-label">News Articles</span></div>
+    <main class="main-content">
+        <div class="container">
+            <!-- Stats Overview - Now Clickable -->
+            <div class="stats-grid" id="dashboard">
+                <a href="#timeline" class="stat-card-link">
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-value" id="stat-events">0</div>
+                        <div class="stat-label">Events Tracked</div>
                     </div>
-                    <div class="last-scan-info">
-                        <span class="scan-indicator"></span>
-                        <span>Last scanned: <strong id="last-scan-time">--</strong></span>
-                        <span class="scan-frequency">• Hourly via GitHub Actions</span>
+                </a>
+                <a href="#alerts" class="stat-card-link">
+                    <div class="stat-card">
+                        <div class="stat-icon">🚨</div>
+                        <div class="stat-value" id="stat-alerts">0</div>
+                        <div class="stat-label">Active Alerts</div>
                     </div>
-                </div>
+                </a>
+                <a href="#organizations" class="stat-card-link">
+                    <div class="stat-card">
+                        <div class="stat-icon">🏢</div>
+                        <div class="stat-value" id="stat-orgs">0</div>
+                        <div class="stat-label">Orgs Flagged</div>
+                    </div>
+                </a>
+                <a href="#news" class="stat-card-link">
+                    <div class="stat-card">
+                        <div class="stat-icon">📰</div>
+                        <div class="stat-value" id="stat-news">0</div>
+                        <div class="stat-label">News Articles</div>
+                    </div>
+                </a>
             </div>
-        </section>
 
-        <section id="services" class="alerts-section">
-            <div class="container">
+            <!-- Activity Dashboard -->
+            <section class="section" id="activity">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                    <h2>Known Paid Protest Services</h2>
+                    <h2 class="section-title"><span class="section-icon">📊</span> Activity Dashboard</h2>
                 </div>
-                
-                <div class="case-study">
-                    <h4>How The Astroturf Ecosystem Works</h4>
-                    <p>A 2024 Texas Observer investigation revealed how multiple entities work together to manufacture grassroots movements:</p>
-                    <div class="case-quote">
-                        "The groups themselves are the 'astroturf,' Crowds on Demand is a sort of astroturf planter, and the Dallas Express provides the 'pink-slime' fertilizer to help the groups grow."
-                        <cite>— Anne Nelson, Columbia University, quoted in Dallas Weekly</cite>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Monitoring Coverage</h3>
+                            <span class="badge badge-primary">51 REGIONS</span>
+                        </div>
+                        <div class="card-body">
+                            <p style="font-size:.75rem;color:var(--color-text-muted);margin-bottom:12px;">50 States + Washington DC • Red = High Activity</p>
+                            <div class="states-grid" id="states-grid"></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Job Posting Monitor</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="job-list" id="job-list">
+                                <p style="color:var(--color-text-muted);text-align:center;padding:20px;">Loading job data...</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
+            <!-- Recent News Coverage -->
+            <section class="section" id="news">
+                <div class="section-header">
+                    <h2 class="section-title"><span class="section-icon">📰</span> Recent News Coverage</h2>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Latest Articles</h3>
+                        <div class="source-toggles">
+                            <button class="source-toggle active" data-source="all">All Sources</button>
+                            <button class="source-toggle" data-source="google">
+                                <span style="color:#4285f4">●</span> Google News
+                            </button>
+                            <button class="source-toggle" data-source="ddg">
+                                <span style="color:#de5833">●</span> DuckDuckGo
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="news-feed" id="news-feed">
+                            <p style="color:var(--color-text-muted);text-align:center;padding:20px;">Loading news...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Known Paid Protest Services -->
+            <section class="section" id="services">
+                <div class="section-header">
+                    <h2 class="section-title"><span class="section-icon">⚠️</span> Known Paid Protest Services</h2>
+                </div>
                 <div class="services-grid">
                     <div class="service-card">
                         <div class="service-header">
                             <h4>Crowds on Demand</h4>
-                            <span class="service-type">Protesters-for-Hire • Founded 2012 by Adam Swart</span>
+                            <span class="service-type">Founded 2012 • Los Angeles</span>
                         </div>
                         <div class="service-body">
-                            <p>Claims "tens of thousands" of contractors nationwide. Services: hire protesters, phone banking, letter writing, creating "turn-key advocacy groups." 400% increase in requests in 2025.</p>
+                            <p>Self-described as providing "protests, rallies, flash-mobs, paparazzi events" with "tens of thousands" of contractors nationwide.</p>
                             <div class="service-locations">
-                                <span class="location-tag">LA</span><span class="location-tag">SF</span><span class="location-tag">Vegas</span><span class="location-tag">NYC</span><span class="location-tag">DC</span><span class="location-tag">Dallas</span><span class="location-tag">Iowa</span><span class="location-tag">NH</span><span class="location-tag">Phoenix</span>
+                                <span class="location-tag">Los Angeles</span>
+                                <span class="location-tag">San Francisco</span>
+                                <span class="location-tag">Las Vegas</span>
+                                <span class="location-tag">New York</span>
+                                <span class="location-tag">Washington DC</span>
+                                <span class="location-tag">Iowa</span>
+                                <span class="location-tag">Dallas</span>
+                                <span class="location-tag">New Hampshire</span>
+                                <span class="location-tag">Phoenix</span>
                             </div>
-                            <div class="service-pricing">💰 $25-30/hr base • $60 to attend • $200 speaking roles • $100-300+ complex</div>
-                            <a href="https://crowdsondemand.com/" target="_blank" rel="noopener" class="service-link">crowdsondemand.com ↗</a>
+                            <div class="service-pricing">💰 Pay rates: $25-30/hr base, $60 attend, $200 speaking roles</div>
+                            <a href="https://crowdsondemand.com/" target="_blank" class="service-link">Visit Website ↗</a>
                         </div>
                     </div>
-
                     <div class="service-card">
                         <div class="service-header">
                             <h4>Demand Protest</h4>
-                            <span class="service-type">Strategic Crowd Mobilization</span>
+                            <span class="service-type">Strategic Mobilization</span>
                         </div>
                         <div class="service-body">
-                            <p>"When your strategy demands paid protest, we organize and bring it to life." Claims: "absolute discretion" and "appearance of outrage at scale."</p>
-                            <div class="service-pricing">💰 "We develop, recruit, manage, and execute on your high-level objectives"</div>
-                            <a href="https://www.demandprotest.com/" target="_blank" rel="noopener" class="service-link">demandprotest.com ↗</a>
+                            <p>"When your strategy demands paid protest, we organize and bring it to life" with "absolute discretion" and "appearance of outrage at scale."</p>
+                            <a href="https://demandprotest.com/" target="_blank" class="service-link">Visit Website ↗</a>
                         </div>
                     </div>
-
                     <div class="service-card">
                         <div class="service-header">
                             <h4>The Hawthorn Group</h4>
-                            <span class="service-type">PR Firm • Virginia-based</span>
+                            <span class="service-type">Virginia-based PR Firm</span>
                         </div>
                         <div class="service-body">
-                            <p>History of astroturf operations. 2009 forged letters scandal is literally a PR textbook case study of what NOT to do. Subcontracted Crowds on Demand for Entergy scandal.</p>
-                            <div class="service-locations">
-                                <span class="location-tag">Virginia</span><span class="location-tag">Alabama</span><span class="location-tag">Michigan</span><span class="location-tag">New Orleans</span>
-                            </div>
-                            <div class="service-pricing">⚠️ Entergy billed $55,000 • Alabama Power paid $7.8M (1996-2001)</div>
+                            <p>PR firm with documented history of astroturf operations. 2009 forged letters scandal is a textbook case study. Subcontracted Crowds on Demand for Entergy New Orleans.</p>
+                            <div class="service-pricing">Alabama Power paid $7.8 million (1996-2001)</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="case-study" style="margin-top:24px">
-                    <h4>📋 Case Study: Entergy New Orleans (2018)</h4>
-                    <p>~50 people in orange shirts at city council for $210M power plant — paid actors ($60 attend, $200 speaking). CEO texted: "If Hawthorne can get more people I will pay" and "This is war."</p>
-                    <span class="case-outcome">Outcome: $5 million fine — largest ever imposed by the city council</span>
+                <!-- Case Studies with Source Links -->
+                <div style="margin-top:24px;">
+                    <h3 style="margin-bottom:16px;color:var(--color-text-primary);">📋 Documented Case Studies</h3>
+                    <div class="case-study">
+                        <h4>Entergy New Orleans (2017-2018)</h4>
+                        <p>~50 people in orange shirts appeared at city council meetings supporting a $210M power plant — many were paid actors ($60 to attend, $200 for speaking roles). CEO Charles Rice texted: "If Hawthorne can get more people I will pay" and "This is war and we need all the foot soldiers we can muster."</p>
+                        <div class="case-outcome">Outcome: $5 million fine — largest ever imposed by the city council</div>
+                        <div class="case-source">
+                            <a href="https://www.nola.com/news/politics/entergy-paid-actors-to-support-power-plant-at-new-orleans-city-council-meetings/article_5e7f5e5a-7a0e-5b0c-9c0e-7c3e5c9e5e5a.html" target="_blank">📄 Source: NOLA.com Investigation ↗</a>
+                        </div>
+                    </div>
+                    <div class="case-study">
+                        <h4>Dallas Astroturf Network (2020-2024)</h4>
+                        <p>Billionaire hotelier Monty Bennett hired Crowds on Demand to create a network of groups: Keep Dallas Safe, Dallas Justice Now (hoax BLM org), Save Texas Kids, Protect Texas Kids, Mission DFW. All registered as tax-exempt corporations in Delaware. Dallas Express (pink-slime news site) ran 112+ articles amplifying these groups.</p>
+                        <div class="case-outcome">Outcome: Journalist Steven Monacelli won defamation lawsuit after exposing the network</div>
+                        <div class="case-source">
+                            <a href="https://www.texasobserver.org/dallas-has-a-problem-with-zombie-astroturf-groups/" target="_blank">📄 Source: Texas Observer Investigation ↗</a>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-                <div class="case-study">
-                    <h4>📋 Case Study: Dallas Astroturf Network (2020-2024)</h4>
-                    <p>Billionaire Monty Bennett hired Crowds on Demand to create: Keep Dallas Safe, Dallas Justice Now (hoax BLM org), Save Texas Kids, Protect Texas Kids, Mission DFW. All Delaware-registered. Dallas Express (pink-slime news) ran 112+ articles amplifying them.</p>
-                    <span class="case-outcome">Outcome: Journalist Steven Monacelli won defamation lawsuit</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="dashboard" class="dashboard-section">
-            <div class="container">
+            <!-- Activity Timeline -->
+            <section class="section" id="timeline">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                    <h2>Activity Dashboard</h2>
-                    <span class="region-badge">🇺🇸 All 50 States + DC</span>
+                    <h2 class="section-title"><span class="section-icon">🕐</span> Activity Timeline</h2>
                 </div>
-                
-                <div class="dashboard-grid">
-                    <div class="dashboard-card">
-                        <div class="card-header"><h3>Monitoring Coverage</h3><span class="card-badge">51 Regions</span></div>
-                        <div class="card-content">
-                            <div class="states-grid" id="states-grid"></div>
-                            <p style="font-size:.75rem;color:var(--color-text-muted);padding:0 12px 12px;text-align:center">Red = Priority states (high political activity)</p>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-card job-tracker">
-                        <div class="card-header"><h3>Job Posting Monitor</h3><span class="card-badge live">Craigslist</span></div>
-                        <div class="card-content">
-                            <div id="job-list" class="job-list"><div class="loading-indicator"><div class="spinner"></div><span>Scanning 50 states...</span></div></div>
-                            <div class="card-footer"><div class="metric"><span class="metric-value" id="job-count">--</span><span class="metric-label">Suspicious listings</span></div></div>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-card org-tracker">
-                        <div class="card-header"><h3>Flagged Organizations</h3><a href="https://projects.propublica.org/nonprofits/" target="_blank" rel="noopener" class="source-link">ProPublica ↗</a></div>
-                        <div class="card-content"><div id="org-list" class="org-list"><div class="loading-indicator"><div class="spinner"></div><span>Scanning 501(c)(4)s...</span></div></div></div>
-                    </div>
-
-                    <div class="dashboard-card confidence-meter">
-                        <div class="card-header"><h3>Detection Confidence</h3><span class="card-badge">AI Analysis</span></div>
-                        <div class="card-content">
-                            <div class="confidence-display">
-                                <div class="confidence-ring-container">
-                                    <svg class="confidence-ring" viewBox="0 0 100 100">
-                                        <circle cx="50" cy="50" r="45" fill="none" stroke="#1e293b" stroke-width="8"/>
-                                        <circle id="confidence-arc" cx="50" cy="50" r="45" fill="none" stroke="#8b5cf6" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 283" transform="rotate(-90 50 50)"/>
-                                    </svg>
-                                    <div class="confidence-value"><span id="confidence-percent">--</span></div>
-                                </div>
-                                <div class="confidence-text">
-                                    <div class="confidence-label">System Confidence</div>
-                                    <p class="confidence-desc" id="confidence-desc">Analyzing patterns...</p>
-                                    <div id="confidence-factors" class="confidence-factors"></div>
-                                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="timeline-container">
+                            <div class="timeline-filters">
+                                <button class="timeline-filter active" data-days="7">7 Days</button>
+                                <button class="timeline-filter" data-days="30">30 Days</button>
+                                <button class="timeline-filter" data-days="90">90 Days</button>
+                                <button class="timeline-filter" data-days="365">1 Year</button>
+                            </div>
+                            <div class="timeline-list" id="timeline-list">
+                                <div class="timeline-empty">Loading timeline...</div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="news" class="timeline-section">
-            <div class="container">
+            <!-- Active Alerts - Redesigned -->
+            <section class="section" id="alerts">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
-                    <h2>Recent News Coverage</h2>
-                    <span class="region-badge">Google News RSS</span>
+                    <h2 class="section-title"><span class="section-icon">🔔</span> Active Alerts</h2>
                 </div>
-                <div id="news-feed" class="news-feed"><div class="loading-indicator"><div class="spinner"></div><span>Loading news...</span></div></div>
-            </div>
-        </section>
+                <div class="alerts-grid" id="alerts-container">
+                    <p style="color:var(--color-text-muted);text-align:center;padding:40px;">Loading alerts...</p>
+                </div>
+                <div class="alerts-show-more" id="alerts-show-more" style="display:none;">
+                    <button onclick="showMoreAlerts()">Show More Alerts</button>
+                </div>
+            </section>
 
-        <section id="timeline" class="dashboard-section">
-            <div class="container">
+            <!-- Flagged Organizations -->
+            <section class="section" id="organizations">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    <h2>Activity Timeline</h2>
+                    <h2 class="section-title"><span class="section-icon">🏢</span> Flagged Organizations</h2>
                 </div>
-                <div class="timeline-controls">
-                    <div class="time-range-selector">
-                        <button class="range-btn" data-range="7">7 Days</button>
-                        <button class="range-btn" data-range="30">30 Days</button>
-                        <button class="range-btn" data-range="90">90 Days</button>
-                        <button class="range-btn active" data-range="365">1 Year</button>
+                <div class="card">
+                    <div class="card-body">
+                        <div id="orgs-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;max-height:400px;overflow-y:auto;">
+                            <p style="color:var(--color-text-muted);text-align:center;padding:20px;">Loading organizations...</p>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-events" id="timeline-events"><div class="loading-indicator"><div class="spinner"></div><span>Loading timeline...</span></div></div>
-            </div>
-        </section>
+            </section>
 
-        <section id="alerts" class="alerts-section">
-            <div class="container">
+            <!-- AI Analysis -->
+            <section class="section" id="analysis">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                    <h2>Active Alerts</h2>
+                    <h2 class="section-title"><span class="section-icon">🤖</span> AI Analysis</h2>
                 </div>
-                <div class="alerts-grid" id="alerts-grid"><div class="loading-indicator"><div class="spinner"></div><span>Loading alerts...</span></div></div>
-            </div>
-        </section>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Pattern Detection</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="ai-analysis">
+                            <p style="color:var(--color-text-muted);text-align:center;padding:20px;">Loading AI analysis...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section id="about" class="about-section">
-            <div class="container">
+            <!-- Data Sources -->
+            <section class="section" id="about">
                 <div class="section-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                    <h2>About This Project</h2>
+                    <h2 class="section-title"><span class="section-icon">📡</span> Data Sources</h2>
                 </div>
-                <div class="about-content">
-                    <div class="about-card">
-                        <div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
-                        <h3>What We Monitor</h3>
-                        <p><strong>ProPublica</strong> - 501(c)(4) filings. <strong>FEC API</strong> - Campaign finance. <strong>Google News</strong> - Real-time news. <strong>Craigslist</strong> - Job postings (50 states).</p>
-                    </div>
-                    <div class="about-card">
-                        <div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                        <h3>Why It Matters</h3>
-                        <p>Paid actors filling city councils and fake organizations flooding legislators with letters drown out genuine public voices.</p>
-                    </div>
-                    <div class="about-card">
-                        <div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-                        <h3>Privacy First</h3>
-                        <p>We analyze organizational data and hiring patterns — never individuals or legitimate protesters.</p>
-                    </div>
-                    <div class="about-card">
-                        <div class="about-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
-                        <h3>Open Source</h3>
-                        <p>Review methodology, audit code, contribute. Transparency is essential.</p>
-                    </div>
-                </div>
-                <div class="data-sources">
-                    <h3>Data Sources</h3>
-                    <div class="source-list">
-                        <div class="source-item"><span class="source-name">ProPublica Nonprofit Explorer</span><span class="source-type">✅ Active</span></div>
-                        <div class="source-item"><span class="source-name">FEC Campaign Finance API</span><span class="source-type">✅ Active</span></div>
-                        <div class="source-item"><span class="source-name">Google News RSS</span><span class="source-type">✅ Active</span></div>
-                        <div class="source-item"><span class="source-name">DuckDuckGo Search</span><span class="source-type">✅ Active</span></div>
-                        <div class="source-item"><span class="source-name">Craigslist (50 States)</span><span class="source-type">✅ Active</span></div>
-                        <div class="source-item"><span class="source-name">Claude AI Analysis</span><span class="source-type">✅ Active</span></div>
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
+                            <div style="padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center;">
+                                <span>ProPublica Nonprofit Explorer</span>
+                                <span style="color:var(--color-success)">✅ Active</span>
+                            </div>
+                            <div style="padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center;">
+                                <span>FEC Campaign Finance API</span>
+                                <span style="color:var(--color-success)">✅ Active</span>
+                            </div>
+                            <div style="padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center;">
+                                <span>Google News RSS</span>
+                                <span style="color:var(--color-success)">✅ Active</span>
+                            </div>
+                            <div style="padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center;">
+                                <span>DuckDuckGo Search</span>
+                                <span style="color:var(--color-success)">✅ Active</span>
+                            </div>
+                            <div style="padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center;">
+                                <span>Craigslist (50 States)</span>
+                                <span style="color:var(--color-success)">✅ Active</span>
+                            </div>
+                            <div style="padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center;">
+                                <span>Claude AI Analysis</span>
+                                <span style="color:var(--color-success)">✅ Active</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="contact-section">
-            <div class="container">
-                <div class="contact-content">
-                    <h3>Contact Developer</h3>
-                    <div class="contact-links">
-                        <a href="https://github.com/Ghost081280" target="_blank" rel="noopener" class="contact-link">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                            GitHub: @Ghost081280
-                        </a>
-                        <a href="https://github.com/ghost081280/astroturf-detector" target="_blank" rel="noopener" class="contact-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                            Project Repository
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <h3>Contact Developer</h3>
+                <div class="contact-links">
+                    <a href="https://github.com/Ghost081280" target="_blank" class="contact-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub: Ghost081280
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <svg class="footer-logo" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="#64748b" stroke-width="2"/><path d="M12 36 Q16 28 14 20 Q18 26 20 18 Q22 26 24 14 Q26 26 28 18 Q30 26 34 20 Q32 28 36 36" fill="#64748b" opacity="0.6"/></svg>
-                    <span>Astroturf Detector</span>
-                </div>
-                <div class="footer-links">
-                    <a href="https://github.com/ghost081280/astroturf-detector" target="_blank">GitHub</a>
-                    <a href="#about">About</a>
-                    <a href="#alerts">Alerts</a>
-                </div>
-            </div>
-            <div class="footer-disclaimer"><p>This project provides indicators that may warrant investigation, not conclusive evidence. Astroturfing is generally legal, though ethically questionable. All data from public sources.</p></div>
+            <p>Astroturf Detector - Open Source Intelligence Tool</p>
+            <p style="font-size:.75rem;margin-top:8px;">This tool monitors public data sources to detect potential manufactured grassroots activity.</p>
         </div>
     </footer>
 
-    <script src="js/app.js"></script>
     <script>
-    const ALL_STATES=['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC'];
-    const HIGH_ACTIVITY=['TX','CA','FL','NY','PA','OH','GA','NC','MI','AZ','WA','CO','VA','NJ','IL','DC'];
-    
-    document.getElementById('states-grid').innerHTML=ALL_STATES.map(s=>`<div class="state-badge ${HIGH_ACTIVITY.includes(s)?'high-activity':''}">${s}</div>`).join('');
-    
-    (async function(){
-        try{
-            const[mRes,aRes]=await Promise.all([fetch('data/memory.json'),fetch('data/alerts.json')]);
-            const memory=mRes.ok?await mRes.json():{};
-            const alertsData=aRes.ok?await aRes.json():{alerts:[]};
-            
-            // Stats
-            const stats=memory.stats||{};
-            document.getElementById('stat-events').textContent=stats.events||0;
-            document.getElementById('stat-alerts').textContent=stats.alerts||0;
-            document.getElementById('stat-orgs').textContent=stats.orgs||0;
-            document.getElementById('stat-news').textContent=stats.newsArticles||0;
-            
-            // Last scan
-            if(memory.lastScan){
-                const d=new Date(memory.lastScan);
-                const mins=Math.floor((Date.now()-d)/60000);
-                document.getElementById('last-scan-time').textContent=mins<60?`${mins}m ago`:mins<1440?`${Math.floor(mins/60)}h ago`:`${Math.floor(mins/1440)}d ago`;
+        // Global state
+        let memoryData = null;
+        let alertsData = null;
+        let currentAlertLimit = 6;
+        let currentNewsSource = 'all';
+        let currentTimelineDays = 90;
+
+        // Load data
+        async function loadData() {
+            try {
+                const [memoryRes, alertsRes] = await Promise.all([
+                    fetch('data/memory.json'),
+                    fetch('data/alerts.json')
+                ]);
+                memoryData = await memoryRes.json();
+                alertsData = await alertsRes.json();
+                renderAll();
+            } catch (err) {
+                console.error('Error loading data:', err);
+            }
+        }
+
+        // Render all sections
+        function renderAll() {
+            renderStats();
+            renderStatesGrid();
+            renderJobs();
+            renderNews();
+            renderTimeline();
+            renderAlerts();
+            renderOrganizations();
+            renderAnalysis();
+        }
+
+        // Render stats
+        function renderStats() {
+            if (!memoryData) return;
+            document.getElementById('stat-events').textContent = memoryData.events?.length || 0;
+            document.getElementById('stat-alerts').textContent = alertsData?.alerts?.length || 0;
+            document.getElementById('stat-orgs').textContent = memoryData.flaggedOrganizations?.length || 0;
+            document.getElementById('stat-news').textContent = memoryData.recentNews?.length || 0;
+        }
+
+        // Render states grid
+        function renderStatesGrid() {
+            const states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC'];
+            const highActivity = ['AZ','CA','CO','FL','GA','MI','NY','OH','PA','TX','DC'];
+            const grid = document.getElementById('states-grid');
+            grid.innerHTML = states.map(s => 
+                `<div class="state-badge ${highActivity.includes(s) ? 'high-activity' : ''}">${s}</div>`
+            ).join('');
+        }
+
+        // Render jobs
+        function renderJobs() {
+            const container = document.getElementById('job-list');
+            if (!memoryData?.jobPostings?.length) {
+                container.innerHTML = '<p style="color:var(--color-text-muted);text-align:center;padding:20px;">No suspicious job postings detected</p>';
+                return;
+            }
+            container.innerHTML = memoryData.jobPostings.slice(0, 10).map(job => `
+                <a href="${job.url || '#'}" target="_blank" class="job-item">
+                    <span class="job-title">${job.title || 'Untitled'}</span>
+                    <span class="job-location">${job.location || 'Unknown'}</span>
+                    <span class="job-score">${job.suspicionScore || 0}%</span>
+                </a>
+            `).join('');
+        }
+
+        // Render news with source filtering
+        function renderNews() {
+            const container = document.getElementById('news-feed');
+            if (!memoryData?.recentNews?.length) {
+                container.innerHTML = '<p style="color:var(--color-text-muted);text-align:center;padding:20px;">No recent news articles</p>';
+                return;
             }
             
-            // Confidence
-            const conf=memory.systemConfidence||0;
-            document.getElementById('confidence-percent').textContent=conf+'%';
-            document.getElementById('confidence-arc').style.strokeDasharray=`${conf*2.83} 283`;
-            const notes=memory.agentNotes||[];
-            if(notes[0]?.summary)document.getElementById('confidence-desc').textContent=notes[0].summary.substring(0,200)+'...';
+            let news = memoryData.recentNews;
+            if (currentNewsSource !== 'all') {
+                news = news.filter(n => {
+                    const src = (n.source || '').toLowerCase();
+                    if (currentNewsSource === 'google') return src.includes('google') || !src.includes('duckduckgo');
+                    if (currentNewsSource === 'ddg') return src.includes('duckduckgo') || src.includes('ddg');
+                    return true;
+                });
+            }
             
-            // News
-            const news=memory.recentNews||[];
-            document.getElementById('news-feed').innerHTML=news.length?news.slice(0,12).map(a=>`
-                <div class="news-item">
-                    <a href="${a.url||'#'}" target="_blank" class="news-title">${a.title||'Untitled'}</a>
-                    <div class="news-meta"><span>${a.publisher||''}</span><span>${a.location||''}</span><span class="news-relevance">${a.relevance_score||0}%</span></div>
-                </div>`).join(''):'<div class="loading-indicator"><span>No news yet</span></div>';
-            
-            // Jobs
-            const jobs=memory.jobPostings||[];
-            const patterns=memory.jobPostingPatterns||{};
-            document.getElementById('job-count').textContent=patterns.totalJobs||jobs.length||0;
-            const keywords=patterns.keywords||{};
-            document.getElementById('job-list').innerHTML=jobs.length?jobs.slice(0,8).map(j=>`
-                <a href="${j.url||'#'}" target="_blank" class="job-item">
-                    <span class="job-title">${(j.title||'').substring(0,45)}...</span>
-                    <span class="job-location">${j.city||j.state||''}</span>
-                    <span class="job-score">${j.suspicion_score||0}%</span>
-                </a>`).join(''):Object.keys(keywords).length?`<div style="padding:12px;font-size:.8rem;color:var(--color-text-secondary)"><p>Tracking keywords:</p>${Object.entries(keywords).slice(0,6).map(([k,v])=>`<div class="job-item"><span class="job-title">"${k}"</span><span class="job-score">${v}</span></div>`).join('')}</div>`:'<div class="loading-indicator"><span>Scanning...</span></div>';
-            
-            // Orgs
-            const orgs=memory.flaggedOrganizations||[];
-            document.getElementById('org-list').innerHTML=orgs.length?orgs.slice(0,8).map(o=>`
-                <a href="${o.sourceUrl||'#'}" target="_blank" class="org-item">
-                    <div class="org-indicator ${o.risk_score>=60?'high':o.risk_score>=40?'medium':'low'}"></div>
-                    <div class="org-details"><div class="org-name">${o.name||'Unknown'}</div><div class="org-meta">${o.state||''} • ${o.city||''}</div></div>
-                    <div class="org-score">${o.risk_score||0}%</div>
-                </a>`).join(''):'<div class="loading-indicator"><span>No orgs flagged</span></div>';
-            
-            // Timeline
-            const timeline=memory.timeline||[];
-            document.getElementById('timeline-events').innerHTML=timeline.length?timeline.slice(0,15).map(e=>{
-                const d=new Date(e.date);
-                return`<div class="timeline-event">
-                    <div class="event-date"><span class="event-day">${d.getDate()}</span><span class="event-month">${d.toLocaleString('en',{month:'short'})}</span></div>
-                    <div class="event-content">
-                        <div class="event-title">${e.title||'Event'}${e.sourceUrl?` <a href="${e.sourceUrl}" target="_blank" class="event-source-link">↗</a>`:''}</div>
-                        <p class="event-description">${e.description||''}</p>
-                        <div class="event-tags">${(e.tags||[]).map(t=>`<span class="event-tag">${t}</span>`).join('')}</div>
+            container.innerHTML = news.slice(0, 15).map(article => {
+                const isGoogle = !(article.source || '').toLowerCase().includes('duckduckgo');
+                return `
+                    <div class="news-item">
+                        <a href="${article.url || '#'}" target="_blank" class="news-title">${article.title || 'Untitled'}</a>
+                        <div class="news-meta">
+                            <span class="news-source-tag ${isGoogle ? 'google' : 'ddg'}">${isGoogle ? 'Google' : 'DDG'}</span>
+                            <span>${article.source || 'Unknown source'}</span>
+                            <span>${article.date || ''}</span>
+                            ${article.relevanceScore ? `<span class="news-relevance">${article.relevanceScore}% relevant</span>` : ''}
+                        </div>
                     </div>
-                </div>`;
-            }).join(''):'<div class="loading-indicator"><span>No events</span></div>';
+                `;
+            }).join('');
+        }
+
+        // Render timeline with actual events
+        function renderTimeline() {
+            const container = document.getElementById('timeline-list');
+            if (!memoryData?.events?.length) {
+                container.innerHTML = '<div class="timeline-empty">No events recorded yet. Events will appear here as they are detected.</div>';
+                return;
+            }
             
-            // Alerts
-            const alerts=alertsData.alerts||[];
-            document.getElementById('alerts-grid').innerHTML=alerts.length?alerts.slice(0,6).map(a=>`
-                <div class="alert-card">
-                    <div class="alert-header">
-                        <div class="alert-severity ${a.severity||'medium'}"></div>
-                        <div class="alert-title">${a.title||'Alert'}</div>
-                    </div>
-                    <div class="alert-body">
-                        <p class="alert-description">${(a.description||'').substring(0,200)}...</p>
-                        <div class="alert-factors">${(a.factors||[]).slice(0,3).map(f=>`<div class="alert-factor"><span class="factor-label">${f.name}</span><span class="factor-value">${f.value}</span></div>`).join('')}</div>
-                    </div>
-                    <div class="alert-footer"><span class="alert-confidence">Confidence: ${a.confidence||0}%</span></div>
-                </div>`).join(''):'<div class="loading-indicator"><span>No active alerts</span></div>';
+            const now = new Date();
+            const cutoff = new Date(now.getTime() - (currentTimelineDays * 24 * 60 * 60 * 1000));
             
-            // Range buttons
-            document.querySelectorAll('.range-btn').forEach(btn=>btn.addEventListener('click',function(){
-                document.querySelectorAll('.range-btn').forEach(b=>b.classList.remove('active'));
-                this.classList.add('active');
-            }));
-        }catch(e){console.error(e)}
-    })();
+            const filtered = memoryData.events.filter(e => {
+                const eventDate = new Date(e.date || e.timestamp);
+                return eventDate >= cutoff;
+            }).sort((a, b) => new Date(b.date || b.timestamp) - new Date(a.date || a.timestamp));
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="timeline-empty">No events in the last ${currentTimelineDays} days. Try expanding the time range.</div>`;
+                return;
+            }
+            
+            container.innerHTML = filtered.slice(0, 20).map(event => {
+                const date = new Date(event.date || event.timestamp);
+                const day = date.getDate();
+                const month = date.toLocaleString('default', { month: 'short' });
+                return `
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <div class="day">${day}</div>
+                            <div class="month">${month}</div>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>${event.title || event.type || 'Event'}</h4>
+                            <p>${event.description || event.summary || 'No description'}</p>
+                            <div class="timeline-meta">
+                                ${event.location ? `<span>📍 ${event.location}</span>` : ''}
+                                ${event.source ? `<span>📰 ${event.source}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render alerts - max 6 at a time
+        function renderAlerts() {
+            const container = document.getElementById('alerts-container');
+            const showMoreBtn = document.getElementById('alerts-show-more');
+            
+            if (!alertsData?.alerts?.length) {
+                container.innerHTML = '<p style="color:var(--color-text-muted);text-align:center;padding:40px;grid-column:1/-1;">No active alerts</p>';
+                showMoreBtn.style.display = 'none';
+                return;
+            }
+            
+            const alerts = alertsData.alerts.slice(0, currentAlertLimit);
+            
+            container.innerHTML = alerts.map(alert => {
+                const severity = alert.confidence >= 80 ? 'high' : alert.confidence >= 50 ? 'medium' : 'low';
+                const timeAgo = getTimeAgo(alert.timestamp);
+                
+                // Build indicators HTML
+                let indicatorsHtml = '';
+                if (alert.states) {
+                    indicatorsHtml += `<div class="alert-indicator"><span class="alert-indicator-label">States:</span><span class="alert-indicator-value">${Array.isArray(alert.states) ? alert.states.join(', ') : alert.states}</span></div>`;
+                }
+                if (alert.organizations) {
+                    indicatorsHtml += `<div class="alert-indicator"><span class="alert-indicator-label">Organizations:</span><span class="alert-indicator-value">${Array.isArray(alert.organizations) ? alert.organizations.slice(0,3).join(', ') : alert.organizations}</span></div>`;
+                }
+                if (alert.patterns) {
+                    indicatorsHtml += `<div class="alert-indicator"><span class="alert-indicator-label">Patterns:</span><span class="alert-indicator-value">${Array.isArray(alert.patterns) ? alert.patterns.join(', ') : alert.patterns}</span></div>`;
+                }
+                
+                return `
+                    <div class="alert-card">
+                        <div class="alert-header">
+                            <div class="alert-severity ${severity}"></div>
+                            <div class="alert-title">${alert.title || 'Potential Astroturf Activity'}</div>
+                            <div class="alert-time">${timeAgo}</div>
+                        </div>
+                        <div class="alert-body">
+                            <div class="alert-description">${alert.description || alert.summary || 'No description available'}</div>
+                            ${indicatorsHtml ? `<div class="alert-indicators">${indicatorsHtml}</div>` : ''}
+                        </div>
+                        <div class="alert-footer">
+                            <div class="alert-confidence">Confidence: <strong>${alert.confidence || 0}%</strong></div>
+                            <div class="alert-sources">
+                                ${alert.sources ? alert.sources.slice(0,2).map(s => `<a href="${s.url || '#'}" target="_blank" class="alert-source-btn">Source ↗</a>`).join('') : '<span style="font-size:.75rem;color:var(--color-text-muted)">No sources</span>'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Show/hide "Show More" button
+            if (alertsData.alerts.length > currentAlertLimit) {
+                showMoreBtn.style.display = 'block';
+            } else {
+                showMoreBtn.style.display = 'none';
+            }
+        }
+
+        // Show more alerts
+        function showMoreAlerts() {
+            currentAlertLimit += 6;
+            renderAlerts();
+        }
+
+        // Get time ago string
+        function getTimeAgo(timestamp) {
+            if (!timestamp) return '';
+            const now = new Date();
+            const then = new Date(timestamp);
+            const diff = Math.floor((now - then) / 1000 / 60);
+            if (diff < 60) return `${diff}m ago`;
+            if (diff < 1440) return `${Math.floor(diff/60)}h ago`;
+            return `${Math.floor(diff/1440)}d ago`;
+        }
+
+        // Render organizations
+        function renderOrganizations() {
+            const container = document.getElementById('orgs-list');
+            if (!memoryData?.flaggedOrganizations?.length) {
+                container.innerHTML = '<p style="color:var(--color-text-muted);text-align:center;padding:20px;grid-column:1/-1;">No organizations flagged yet</p>';
+                return;
+            }
+            container.innerHTML = memoryData.flaggedOrganizations.slice(0, 30).map(org => `
+                <div style="padding:12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);border-left:3px solid ${org.riskLevel === 'high' ? 'var(--color-danger)' : 'var(--color-warning)'};">
+                    <div style="font-weight:600;color:var(--color-text-primary);margin-bottom:4px;">${org.name || 'Unknown'}</div>
+                    <div style="font-size:.75rem;color:var(--color-text-muted);">${org.type || ''} ${org.state ? '• ' + org.state : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        // Render AI analysis
+        function renderAnalysis() {
+            const container = document.getElementById('ai-analysis');
+            if (!memoryData?.aiAnalysis) {
+                container.innerHTML = '<p style="color:var(--color-text-muted);text-align:center;padding:20px;">No AI analysis available yet</p>';
+                return;
+            }
+            const analysis = memoryData.aiAnalysis;
+            container.innerHTML = `
+                <div style="display:grid;gap:16px;">
+                    <div style="padding:16px;background:var(--color-bg-secondary);border-radius:var(--radius-md);">
+                        <h4 style="margin-bottom:8px;color:var(--color-accent-primary);">Summary</h4>
+                        <p style="color:var(--color-text-secondary);font-size:.875rem;">${analysis.summary || 'No summary available'}</p>
+                    </div>
+                    ${analysis.confidence ? `
+                        <div style="padding:16px;background:var(--color-bg-secondary);border-radius:var(--radius-md);">
+                            <h4 style="margin-bottom:8px;">Confidence Level</h4>
+                            <div style="display:flex;align-items:center;gap:12px;">
+                                <div style="flex:1;height:8px;background:var(--color-bg-hover);border-radius:4px;overflow:hidden;">
+                                    <div style="width:${analysis.confidence}%;height:100%;background:var(--color-accent-primary);"></div>
+                                </div>
+                                <span style="font-weight:600;color:var(--color-accent-primary);">${analysis.confidence}%</span>
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        // Event listeners for filters
+        document.addEventListener('DOMContentLoaded', () => {
+            // Timeline filters
+            document.querySelectorAll('.timeline-filter').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.timeline-filter').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentTimelineDays = parseInt(btn.dataset.days);
+                    renderTimeline();
+                });
+            });
+
+            // News source toggles
+            document.querySelectorAll('.source-toggle').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.source-toggle').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentNewsSource = btn.dataset.source;
+                    renderNews();
+                });
+            });
+
+            // Load data
+            loadData();
+        });
     </script>
 </body>
 </html>
