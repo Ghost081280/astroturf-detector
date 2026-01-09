@@ -1292,3 +1292,46 @@ html {
     margin-top: 8px;
     text-align: center;
 }
+/* Enhanced Footer */
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.footer-logo {
+    flex-shrink: 0;
+}
+
+.footer-tagline {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 12px 0;
+    font-style: italic;
+}
+
+.footer-bottom {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.footer-disclaimer {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.footer-disclaimer strong {
+    color: var(--color-warning);
+}
+
+.footer-copyright {
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    opacity: 0.7;
+}
