@@ -7,6 +7,7 @@
     <meta name="description" content="Open-source intelligence engine monitoring for paid protest activity and manufactured grassroots movements.">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
 </head>
 <body>
     <header class="site-header">
@@ -141,23 +142,27 @@
                         </div>
                         <div class="card-content">
                             <div class="confidence-display">
-                                <svg class="confidence-ring" viewBox="0 0 100 100">
-                                    <circle cx="50" cy="50" r="45" fill="none" stroke="#1e293b" stroke-width="8"/>
-                                    <circle id="confidence-arc" cx="50" cy="50" r="45" fill="none" stroke="url(#confidenceGradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 283" transform="rotate(-90 50 50)"/>
-                                    <defs>
-                                        <linearGradient id="confidenceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                            <stop offset="0%" style="stop-color:#22c55e"/>
-                                            <stop offset="50%" style="stop-color:#eab308"/>
-                                            <stop offset="100%" style="stop-color:#ef4444"/>
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
-                                <div class="confidence-value">
-                                    <span id="confidence-percent">--</span>
-                                    <span class="confidence-label">System Confidence</span>
+                                <div class="confidence-ring-container">
+                                    <svg class="confidence-ring" viewBox="0 0 100 100">
+                                        <defs>
+                                            <linearGradient id="confidenceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" style="stop-color:#22c55e"/>
+                                                <stop offset="50%" style="stop-color:#eab308"/>
+                                                <stop offset="100%" style="stop-color:#ef4444"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="50" cy="50" r="45" fill="none" stroke="#1e293b" stroke-width="8"/>
+                                        <circle id="confidence-arc" cx="50" cy="50" r="45" fill="none" stroke="url(#confidenceGradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 283" transform="rotate(-90 50 50)"/>
+                                    </svg>
+                                    <div class="confidence-value">
+                                        <span id="confidence-percent">--</span>
+                                    </div>
+                                </div>
+                                <div class="confidence-text">
+                                    <div class="confidence-label">System Confidence</div>
+                                    <p class="confidence-desc" id="confidence-desc">Analyzing current data patterns...</p>
                                 </div>
                             </div>
-                            <p class="confidence-description" id="confidence-desc">Analyzing data patterns...</p>
                         </div>
                     </div>
                 </div>
@@ -168,13 +173,12 @@
             <div class="container">
                 <div class="section-header">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="20" x2="12" y2="10"/>
-                        <line x1="18" y1="20" x2="18" y2="4"/>
-                        <line x1="6" y1="20" x2="6" y2="16"/>
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
                     </svg>
                     <h2>Activity Timeline</h2>
                 </div>
-                
+
                 <div class="timeline-controls">
                     <div class="time-range-selector">
                         <button class="range-btn active" data-range="7">7 Days</button>
@@ -183,20 +187,17 @@
                         <button class="range-btn" data-range="365">1 Year</button>
                     </div>
                     <div class="filter-toggles">
-                        <label class="toggle-label">
+                        <label class="filter-toggle">
                             <input type="checkbox" id="filter-jobs" checked>
-                            <span class="toggle-indicator jobs"></span>
-                            Job Postings
+                            <span class="toggle-label jobs">Job Postings</span>
                         </label>
-                        <label class="toggle-label">
+                        <label class="filter-toggle">
                             <input type="checkbox" id="filter-orgs" checked>
-                            <span class="toggle-indicator orgs"></span>
-                            Org Filings
+                            <span class="toggle-label orgs">Organizations</span>
                         </label>
-                        <label class="toggle-label">
+                        <label class="filter-toggle">
                             <input type="checkbox" id="filter-events" checked>
-                            <span class="toggle-indicator events"></span>
-                            Public Events
+                            <span class="toggle-label events">Events</span>
                         </label>
                     </div>
                 </div>
