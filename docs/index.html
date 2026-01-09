@@ -7,6 +7,7 @@
     <meta name="description" content="Open-source intelligence engine monitoring for paid protest activity and manufactured grassroots movements in the United States.">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%238b5cf6'/><path d='M25 75 Q35 55 30 40 Q40 55 45 30 Q50 55 55 25 Q60 55 70 30 Q65 55 75 75' fill='%234a7c43'/></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%238b5cf6'/><path d='M25 75 Q35 55 30 40 Q40 55 45 30 Q50 55 55 25 Q60 55 70 30 Q65 55 75 75' fill='%234a7c43'/></svg>">
 </head>
 <body>
     <header class="site-header">
@@ -24,7 +25,8 @@
                         </linearGradient>
                     </defs>
                     <circle cx="24" cy="24" r="22" fill="none" stroke="url(#syntheticGradient)" stroke-width="2"/>
-                    <path d="M12 36 Q16 28 14 20 Q18 26 20 18 Q22 26 24 14 Q26 26 28 18 Q30 26 34 20 Q32 28 36 36" fill="url(#grassGradient)" opacity="0.9"/>
+                    <path d="M12 36 Q16 28 14 20 Q18 26 20 18 Q22 26 24 14 Q26 26 28 18 Q30 26 34 20 Q32 28 36 36" 
+                          fill="url(#grassGradient)" opacity="0.9"/>
                     <circle cx="24" cy="24" r="8" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="3 2"/>
                     <circle cx="24" cy="24" r="3" fill="#fff"/>
                 </svg>
@@ -35,7 +37,7 @@
             </div>
             <nav class="main-nav">
                 <a href="#dashboard" class="nav-link">Dashboard</a>
-                <a href="#news" class="nav-link">News</a>
+                <a href="#timeline" class="nav-link">Timeline</a>
                 <a href="#alerts" class="nav-link">Alerts</a>
                 <a href="#about" class="nav-link">About</a>
             </nav>
@@ -47,7 +49,7 @@
             <div class="container">
                 <div class="hero-content">
                     <h2>Real-time monitoring for manufactured movements</h2>
-                    <p>An open-source intelligence engine tracking paid protest activity, suspicious nonprofit formations, and coordinated astroturf campaigns across the United States using verified public data sources.</p>
+                    <p>An open-source intelligence engine that tracks paid protest activity, suspicious nonprofit formations, and coordinated astroturf campaigns across the United States using only public data sources.</p>
                     <div class="hero-stats" id="hero-stats">
                         <div class="stat-card">
                             <span class="stat-value" id="stat-events">--</span>
@@ -89,6 +91,46 @@
                 </div>
                 
                 <div class="dashboard-grid">
+                    <div class="dashboard-card activity-map">
+                        <div class="card-header">
+                            <h3>Geographic Activity</h3>
+                            <span class="card-badge">Last 30 Days</span>
+                        </div>
+                        <div class="card-content">
+                            <div id="activity-map" class="map-container">
+                                <div class="map-placeholder">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                                        <circle cx="12" cy="9" r="2.5"/>
+                                    </svg>
+                                    <span>Loading geographic data...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card job-tracker">
+                        <div class="card-header">
+                            <h3>Job Posting Monitor</h3>
+                            <span class="card-badge live">Live</span>
+                        </div>
+                        <div class="card-content">
+                            <div id="job-chart" class="chart-container">
+                                <canvas id="job-chart-canvas"></canvas>
+                            </div>
+                            <div class="card-footer">
+                                <div class="metric">
+                                    <span class="metric-value" id="job-count">--</span>
+                                    <span class="metric-label">Protest-related listings</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-value" id="job-trend">--</span>
+                                    <span class="metric-label">vs last week</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="dashboard-card org-tracker">
                         <div class="card-header">
                             <h3>Flagged Organizations</h3>
@@ -98,7 +140,7 @@
                             <div id="org-list" class="org-list">
                                 <div class="loading-indicator">
                                     <div class="spinner"></div>
-                                    <span>Loading organizations...</span>
+                                    <span>Scanning registries...</span>
                                 </div>
                             </div>
                         </div>
@@ -127,40 +169,10 @@
                                         <span id="confidence-percent">--</span>
                                     </div>
                                 </div>
-                                <div class="confidence-details">
+                                <div class="confidence-text">
                                     <div class="confidence-label">System Confidence</div>
-                                    <p class="confidence-desc" id="confidence-desc">Analyzing patterns...</p>
+                                    <p class="confidence-desc" id="confidence-desc">Analyzing current data patterns...</p>
                                     <div id="confidence-factors" class="confidence-factors"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-card geographic-card">
-                        <div class="card-header">
-                            <h3>Geographic Hotspots</h3>
-                            <span class="card-badge">By State</span>
-                        </div>
-                        <div class="card-content">
-                            <div id="geo-hotspots" class="geo-hotspots">
-                                <div class="loading-indicator">
-                                    <div class="spinner"></div>
-                                    <span>Analyzing locations...</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-card data-sources-card">
-                        <div class="card-header">
-                            <h3>Live Data Sources</h3>
-                            <span class="card-badge live">Active</span>
-                        </div>
-                        <div class="card-content">
-                            <div id="data-sources" class="data-sources-list">
-                                <div class="loading-indicator">
-                                    <div class="spinner"></div>
-                                    <span>Checking sources...</span>
                                 </div>
                             </div>
                         </div>
@@ -169,19 +181,47 @@
             </div>
         </section>
 
-        <section id="news" class="news-section">
+        <section id="timeline" class="timeline-section">
             <div class="container">
                 <div class="section-header">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/>
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
                     </svg>
-                    <h2>Recent News</h2>
-                    <a href="https://news.google.com/search?q=astroturf+protest" target="_blank" rel="noopener" class="source-link">Google News ↗</a>
+                    <h2>Activity Timeline</h2>
                 </div>
-                <div id="news-feed" class="news-feed">
+
+                <div class="timeline-controls">
+                    <div class="time-range-selector">
+                        <button class="range-btn" data-range="7">7 Days</button>
+                        <button class="range-btn" data-range="30">30 Days</button>
+                        <button class="range-btn" data-range="90">90 Days</button>
+                        <button class="range-btn active" data-range="365">1 Year</button>
+                    </div>
+                    <div class="filter-toggles">
+                        <label class="filter-toggle">
+                            <input type="checkbox" id="filter-jobs" checked>
+                            <span class="toggle-label jobs">Job Postings</span>
+                        </label>
+                        <label class="filter-toggle">
+                            <input type="checkbox" id="filter-orgs" checked>
+                            <span class="toggle-label orgs">Organizations</span>
+                        </label>
+                        <label class="filter-toggle">
+                            <input type="checkbox" id="filter-events" checked>
+                            <span class="toggle-label events">Events</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="timeline-chart-container">
+                    <canvas id="timeline-chart"></canvas>
+                </div>
+
+                <div class="timeline-events" id="timeline-events">
                     <div class="loading-indicator">
                         <div class="spinner"></div>
-                        <span>Loading news...</span>
+                        <span>Loading historical data...</span>
                     </div>
                 </div>
             </div>
@@ -196,10 +236,11 @@
                     </svg>
                     <h2>Active Alerts</h2>
                 </div>
+
                 <div class="alerts-grid" id="alerts-grid">
                     <div class="loading-indicator">
                         <div class="spinner"></div>
-                        <span>Checking alerts...</span>
+                        <span>Checking for alerts...</span>
                     </div>
                 </div>
             </div>
@@ -224,8 +265,8 @@
                                 <circle cx="12" cy="12" r="3"/>
                             </svg>
                         </div>
-                        <h3>What We Actually Monitor</h3>
-                        <p><strong>ProPublica Nonprofit Explorer</strong> - Real 501(c)(4) tax filings and organization data. <strong>FEC API</strong> - Campaign finance and independent expenditures. <strong>Google News RSS</strong> - Real-time news about protests, astroturfing, and advocacy.</p>
+                        <h3>What We Monitor</h3>
+                        <p><strong>ProPublica Nonprofit Explorer</strong> - Real 501(c)(4) tax filings. <strong>FEC API</strong> - Campaign finance data. <strong>Google News RSS</strong> - Real-time news about protests and astroturfing. All data is legally obtained from public sources.</p>
                     </div>
 
                     <div class="about-card">
@@ -245,19 +286,38 @@
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                             </svg>
                         </div>
-                        <h3>Transparency</h3>
-                        <p>Every data point links to its source. We only use publicly available APIs and never scrape private data. This project is open source - audit our methodology on GitHub.</p>
+                        <h3>Privacy First</h3>
+                        <p>We do not collect personal information. All analysis is performed on organizational data, hiring patterns, and financial disclosures - never on individuals or legitimate protesters.</p>
                     </div>
 
                     <div class="about-card">
                         <div class="about-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
                             </svg>
                         </div>
-                        <h3>Hourly Updates</h3>
-                        <p>Automated scans run every hour via GitHub Actions. Data is analyzed by Claude AI to identify patterns and generate alerts. All timestamps show when data was last refreshed.</p>
+                        <h3>Open Source</h3>
+                        <p>This entire project is open source. Review our methodology, audit our code, and contribute improvements. Transparency about our own operations is essential to our credibility.</p>
+                    </div>
+                </div>
+
+                <div class="data-sources">
+                    <h3>Data Sources</h3>
+                    <div class="source-list">
+                        <div class="source-item">
+                            <span class="source-name">ProPublica Nonprofit Explorer</span>
+                            <span class="source-type">501(c)(4) Tax Filings</span>
+                        </div>
+                        <div class="source-item">
+                            <span class="source-name">Federal Election Commission</span>
+                            <span class="source-type">Campaign Finance</span>
+                        </div>
+                        <div class="source-item">
+                            <span class="source-name">Google News RSS</span>
+                            <span class="source-type">Real-time News</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -285,13 +345,13 @@
                     <a href="#alerts">Alerts</a>
                 </div>
                 <div class="footer-meta">
-                    <span>🇺🇸 United States Only</span>
+                    <span>🇺🇸 United States</span>
                     <span>•</span>
                     <span>Hourly scans</span>
                 </div>
             </div>
             <div class="footer-disclaimer">
-                <p>This project provides indicators for research purposes, not conclusive evidence. Astroturfing is generally legal though ethically questionable. All data comes from public APIs with source links provided.</p>
+                <p>This project provides indicators that may warrant investigation, not conclusive evidence of wrongdoing. Astroturfing is generally legal, though ethically questionable. All data is from public sources.</p>
             </div>
         </div>
     </footer>
