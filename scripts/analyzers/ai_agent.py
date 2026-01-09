@@ -6,6 +6,7 @@ import requests
 from datetime import datetime
 from typing import Dict, Any, List
 
+
 class AIAgent:
     """Analyzes collected data using Claude API for pattern detection."""
     
@@ -35,6 +36,7 @@ class AIAgent:
     def _build_prompt(self, memory: Dict[str, Any], new_data: Dict[str, Any], patterns: Dict[str, Any]) -> str:
         """Build analysis prompt for Claude."""
         
+        # Summarize news
         news_summary = []
         for article in new_data.get('news', [])[:10]:
             news_summary.append({
@@ -44,6 +46,7 @@ class AIAgent:
                 'location': article.get('location', '')
             })
         
+        # Summarize orgs
         org_summary = []
         for org in new_data.get('nonprofits', [])[:10]:
             org_summary.append({
@@ -53,9 +56,19 @@ class AIAgent:
                 'ruling_date': org.get('ruling_date')
             })
         
+        # Summarize jobs
+        job_summary = []
+        for job in new_data.get('jobs', [])[:5]:
+            job_summary.append({
+                'title': job.get('title', '')[:50],
+                'city': job.get('city'),
+                'keywords': job.get('keywords', [])[:3]
+            })
+        
         summary = {
             'news_articles': news_summary,
             'organizations': org_summary,
+            'job_postings': job_summary,
             'fec_records': len(new_data.get('fec', [])),
             'known_patterns': memory.get('knownAstroturfPatterns', {}).get('threeWordNames', [])[:5],
             'previous_alerts': len(memory.get('timeline', []))
@@ -72,6 +85,7 @@ TASK: Analyze this data for signs of manufactured grassroots campaigns. Consider
 3. Recently formed 501(c)(4) organizations with large funding
 4. Geographic clusters of similar organizations
 5. Correlation between news events and organization activity
+6. Job postings for protest-related work
 
 RESPOND WITH ONLY VALID JSON in this exact format:
 {{
@@ -96,7 +110,7 @@ RESPOND WITH ONLY VALID JSON in this exact format:
             "date": "<ISO date>",
             "title": "<event title>",
             "description": "<description>",
-            "type": "news|org|fec",
+            "type": "news|org|fec|job",
             "tags": ["<tag>"],
             "sourceUrl": "<url if available>"
         }}
@@ -133,12 +147,14 @@ Be specific about locations (US states/cities). Focus on United States activity 
         try:
             text = response_text.strip()
             
+            # Remove markdown code blocks if present
             if text.startswith('```'):
-                text = text.split('```')[1]
-                if text.startswith('json'):
-                    text = text[4:]
+                lines = text.split('\n')
+                text = '\n'.join(lines[1:])
             if text.endswith('```'):
                 text = text[:-3]
+            if text.startswith('json'):
+                text = text[4:]
             
             result = json.loads(text.strip())
             
@@ -163,6 +179,7 @@ Be specific about locations (US states/cities). Focus on United States activity 
         confidence = 30
         confidence_factors = []
         
+        # Analyze news articles
         news = new_data.get('news', [])
         high_relevance_news = [a for a in news if a.get('relevance_score', 0) >= 70]
         
@@ -184,6 +201,7 @@ Be specific about locations (US states/cities). Focus on United States activity 
                     'sourceUrl': article.get('url', '')
                 })
         
+        # Analyze organizations
         orgs = new_data.get('nonprofits', [])
         high_risk_orgs = [o for o in orgs if o.get('risk_score', 0) >= 60]
         
@@ -195,6 +213,7 @@ Be specific about locations (US states/cities). Focus on United States activity 
                 'detail': f'Found {len(high_risk_orgs)} organizations with suspicious patterns'
             })
             
+            # Create alert for high-risk orgs
             states = list(set(o.get('state', 'Unknown') for o in high_risk_orgs))
             alerts.append({
                 'title': f"Suspicious Organizations Detected in {', '.join(states[:3])}",
@@ -220,6 +239,17 @@ Be specific about locations (US states/cities). Focus on United States activity 
                     'sourceUrl': org.get('sourceUrl', '')
                 })
         
+        # Analyze job postings
+        jobs = new_data.get('jobs', [])
+        if jobs:
+            confidence += 10
+            confidence_factors.append({
+                'factor': 'Job Posting Activity',
+                'score': min(len(jobs) * 5, 40),
+                'detail': f'Tracking {len(jobs)} protest-related job postings'
+            })
+        
+        # Add baseline confidence factors
         confidence_factors.append({
             'factor': 'Data Freshness',
             'score': 80,
@@ -232,10 +262,23 @@ Be specific about locations (US states/cities). Focus on United States activity 
             'detail': 'ProPublica, FEC, and Google News RSS'
         })
         
+        # Build summary
+        summary_parts = []
+        if news:
+            summary_parts.append(f"Analyzed {len(news)} news articles")
+        if orgs:
+            summary_parts.append(f"{len(orgs)} organizations")
+        if high_risk_orgs:
+            summary_parts.append(f"Found {len(high_risk_orgs)} high-risk organizations")
+        if high_relevance_news:
+            summary_parts.append(f"{len(high_relevance_news)} relevant news stories")
+        
+        summary = '. '.join(summary_parts) + '.' if summary_parts else 'Insufficient data for analysis.'
+        
         return {
             'confidence': min(confidence, 100),
             'confidence_factors': confidence_factors,
-            'summary': f"Analyzed {len(news)} news articles and {len(orgs)} organizations. Found {len(high_risk_orgs)} high-risk organizations and {len(high_relevance_news)} relevant news stories.",
+            'summary': summary,
             'alerts': alerts,
             'recommendations': [
                 "Monitor flagged organizations for increased activity",
@@ -250,9 +293,10 @@ Be specific about locations (US states/cities). Focus on United States activity 
 if __name__ == '__main__':
     agent = AIAgent()
     test_data = {
-        'news': [{'title': 'Test article', 'relevance_score': 75, 'publisher': 'Test'}],
-        'nonprofits': [{'name': 'Citizens For Freedom', 'state': 'TX', 'risk_score': 70}],
-        'fec': []
+        'news': [{'title': 'Test article about paid protesters', 'relevance_score': 75, 'publisher': 'Test News', 'date': datetime.utcnow().isoformat() + 'Z'}],
+        'nonprofits': [{'name': 'Citizens For Freedom', 'state': 'TX', 'risk_score': 70, 'ein': '123456789'}],
+        'fec': [],
+        'jobs': [{'title': 'Canvasser needed', 'city': 'Dallas', 'keywords': ['protest', 'rally']}]
     }
     result = agent.analyze({}, test_data, {})
     print(json.dumps(result, indent=2))
