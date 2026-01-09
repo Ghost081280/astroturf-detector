@@ -1,0 +1,63 @@
+{
+    "version": "1.0.0",
+    "lastUpdated": "2026-01-09T14:30:00Z",
+    "alerts": [],
+    "archivedAlerts": [],
+    "alertConfig": {
+        "severityLevels": {
+            "high": {
+                "minScore": 70,
+                "color": "#ef4444",
+                "autoNotify": true
+            },
+            "medium": {
+                "minScore": 40,
+                "color": "#eab308",
+                "autoNotify": false
+            },
+            "low": {
+                "minScore": 0,
+                "color": "#3b82f6",
+                "autoNotify": false
+            }
+        },
+        "factors": [
+            {
+                "id": "job_spike",
+                "name": "Job Posting Spike",
+                "weight": 25,
+                "description": "Unusual increase in protest-related job listings"
+            },
+            {
+                "id": "new_org",
+                "name": "New Organization",
+                "weight": 20,
+                "description": "Recently incorporated 501(c)(4) with suspicious characteristics"
+            },
+            {
+                "id": "three_word_name",
+                "name": "Pattern Name",
+                "weight": 15,
+                "description": "Organization name matches known astroturf naming patterns"
+            },
+            {
+                "id": "delaware_shell",
+                "name": "Delaware Registration",
+                "weight": 10,
+                "description": "Out-of-state Delaware incorporation for local organization"
+            },
+            {
+                "id": "event_correlation",
+                "name": "Event Timing",
+                "weight": 20,
+                "description": "Activity correlates with upcoming council vote or hearing"
+            },
+            {
+                "id": "funding_opacity",
+                "name": "Funding Opacity",
+                "weight": 10,
+                "description": "No disclosed funding sources or vague 990 filings"
+            }
+        ]
+    }
+}
