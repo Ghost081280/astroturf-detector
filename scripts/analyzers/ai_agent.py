@@ -72,7 +72,7 @@ class AIAgent:
                     'type': 'Geographic Match',
                     'description': f'{len(jobs_in_news_cities)} job posting(s) found in cities with protest-related news.',
                     'probability': min(55 + len(jobs_in_news_cities) * 8, 85),
-                    'evidence': [{'type': 'Job', 'detail': j.get('title', '')[:45]} for j in jobs_in_news_cities[:3]]
+                    'evidence': [{'type': 'Job', 'detail': j.get('title', '')[:80]} for j in jobs_in_news_cities[:3]]
                 })
         
         # 2. Organization naming patterns (astroturf red flags)
@@ -91,7 +91,7 @@ class AIAgent:
                 'type': 'Naming Pattern',
                 'description': f'{len(suspicious_orgs)} orgs with generic patriotic names typical of astroturf.',
                 'probability': min(50 + len(suspicious_orgs) * 5, 78),
-                'evidence': [{'type': 'Org', 'detail': o.get('name', '')[:40]} for o in suspicious_orgs[:3]]
+                'evidence': [{'type': 'Org', 'detail': o.get('name', '')[:80]} for o in suspicious_orgs[:3]]
             })
         
         # 3. High-risk new organizations
@@ -124,7 +124,7 @@ class AIAgent:
                 'type': 'Paid Protest News',
                 'description': f'{len(paid_news)} articles specifically about paid protesters.',
                 'probability': min(40 + len(paid_news) * 8, 72),
-                'evidence': [{'type': 'News', 'detail': n.get('title', '')[:50]} for n in paid_news[:2]]
+                'evidence': [{'type': 'News', 'detail': n.get('title', '')[:100]} for n in paid_news[:2]]
             })
         
         # 5. State clustering
