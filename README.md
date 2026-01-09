@@ -1,223 +1,143 @@
-# Astroturf Detector 🇺🇸
+# Astroturf Detector
 
-**An open-source intelligence engine monitoring for paid protest activity and manufactured grassroots movements in the United States.**
+[![Live Site](https://img.shields.io/badge/Live_Site-ghost081280.github.io-8b5cf6?style=for-the-badge)](https://ghost081280.github.io/astroturf-detector/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automated-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/Ghost081280/astroturf-detector/actions)
+[![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![AI Powered](https://img.shields.io/badge/AI_Powered-Claude-f59e0b?style=for-the-badge&logo=anthropic&logoColor=white)](https://anthropic.com)
 
-🔗 **Live Dashboard**: [https://ghost081280.github.io/astroturf-detector/](https://ghost081280.github.io/astroturf-detector/)
+**Open-source intelligence engine monitoring for paid protest activity and manufactured grassroots movements across all 50 United States + DC.**
+
+![Dashboard Preview](https://img.shields.io/badge/Status-Under_Active_Development-f59e0b?style=flat-square)
 
 ---
 
 ## What This Project Does
 
-Astroturf Detector is an automated monitoring system that:
+Astroturf Detector automatically scans multiple public data sources to identify potential **astroturfing** — fake grassroots campaigns funded by corporations, political operatives, or special interest groups to manufacture the appearance of organic public support.
 
-1. **Scans real public data sources** for suspicious nonprofit activity
-2. **Monitors news** for reports of paid protests and astroturfing
-3. **Tracks campaign finance** through FEC filings
-4. **Uses AI analysis** to identify patterns suggesting manufactured movements
-5. **Provides transparency** through a public dashboard updated hourly
+### Real-World Examples We Track
 
----
-
-## Data Sources (What We Actually Use)
-
-We believe in transparency. Here's exactly what data sources power this project:
-
-| Source | Status | What It Provides |
-|--------|--------|------------------|
-| **ProPublica Nonprofit Explorer** | ✅ Active | Real 501(c)(4) tax filings, organization data, revenue/assets |
-| **FEC API** | ✅ Active | Campaign finance, independent expenditures, new committee filings |
-| **Google News RSS** | ✅ Active | Real-time news articles about protests, astroturfing, advocacy |
-| **AI Analysis (Claude)** | ✅ Active | Pattern detection, risk scoring, alert generation |
-
-### What We DON'T Have Access To
-
-Being honest about limitations:
-
-- ❌ **Real-time job board scraping** - No free API allows this legally. Job posting data shown is for demonstration/tracking patterns only.
-- ❌ **State Corporate Registries** - No unified free API exists. Would require scraping 50 different state websites.
-- ❌ **Direct IRS access** - We use ProPublica which aggregates IRS Form 990 data (with delays).
-- ❌ **Social media monitoring** - Not implemented, privacy concerns.
+- **Paid protesters** hired through services like Crowds on Demand ($60 to attend, $200 for speaking roles)
+- **Fake advocacy groups** like "Dallas Justice Now" (a hoax BLM organization created by a billionaire hotelier)
+- **Pink-slime news sites** that amplify manufactured campaigns
+- **Suspicious job postings** on Craigslist advertising for "protesters," "rally attendees," or "brand ambassadors"
+- **501(c)(4) dark money organizations** with generic names like "Citizens For [X]"
 
 ---
 
-## The Problem We're Addressing
+## Data Sources
 
-What looks like organic public outrage is sometimes manufactured. Companies exist that openly advertise services to:
-
-- Hire crowds of "protesters" at $25-64/hour
-- Provide speakers for city council meetings with scripted talking points  
-- Create fake advocacy organizations overnight
-- Run campaigns that simulate grassroots support
-
-This practice is called **astroturfing** - creating the illusion of grassroots support where none exists.
-
-### Documented Cases
-
-**New Orleans Power Plant (2018)**  
-Energy company Entergy paid $55,000 to fill city council chambers with actors supporting a controversial gas plant. The city fined Entergy $5 million after the scheme was exposed.
-
-**Dallas Influence Network (2020-2024)**  
-A billionaire funded a network of fake advocacy groups including a hoax organization. Multiple groups were created through a protesters-for-hire firm, registered as shell corporations in Delaware.
+| Source | What We Monitor |
+|--------|-----------------|
+| **ProPublica Nonprofit Explorer** | 501(c)(4) tax filings and dark money organizations |
+| **FEC Campaign Finance API** | Political spending and PAC contributions |
+| **Google News RSS** | Real-time news coverage of protests and advocacy |
+| **DuckDuckGo Search** | Additional news and investigation articles |
+| **Craigslist (All 50 States + DC)** | Job postings for paid protesters, rally attendees |
+| **Claude AI Analysis** | Pattern detection and confidence scoring |
 
 ---
 
-## Detection Methodology
+## What Gets Flagged
 
-### Organization Risk Scoring
+The system generates alerts when it detects:
 
-We flag 501(c)(4) organizations based on:
-
-| Factor | Points | Rationale |
-|--------|--------|-----------|
-| Generic 3-word name | +15 | "Citizens For Freedom" pattern common in astroturf |
-| Name matches suspicious patterns | +10 | Patriotic/action words often used |
-| Formed within last 2 years | +25 | New orgs more likely to be purpose-built |
-| Formed within last 5 years | +15 | Still relatively new |
-| Delaware registration | +15 | Shell company haven |
-| High revenue + generic name | +15 | Well-funded but vague purpose |
-| Politically active state | +5 | TX, FL, OH, PA, etc. |
-
-Organizations scoring 30+ are flagged for display.
-
-### News Relevance Scoring
-
-Articles are scored based on keywords:
-
-- **High value (+20 each)**: "astroturf", "paid protest", "fake grassroots", "dark money"
-- **Medium value (+10 each)**: "protest", "advocacy", "campaign", "nonprofit"
-- **Location bonus (+5)**: US state or city mentioned
+- **Coordinated messaging** across multiple states with identical talking points
+- **Generic organization names** following patterns like "Citizens For [X]", "[State] Freedom Fund"
+- **Suspicious job postings** advertising protest/rally work with cash pay
+- **Sudden appearance** of new advocacy groups around controversial issues
+- **Geographic clustering** of activity in politically strategic locations
+- **Connection to known services** like Crowds on Demand or The Hawthorn Group
 
 ---
 
-## Technical Architecture
+## How It Works
+
 ```
-GitHub Actions (Hourly)
-         |
-         v
-+------------------+     +------------------+     +------------------+
-|   Google News    |     |   ProPublica     |     |   FEC API        |
-|   RSS Feed       |     |   Nonprofit API  |     |   (Campaign $)   |
-+------------------+     +------------------+     +------------------+
-         |                       |                       |
-         +-----------------------+-----------------------+
-                                 |
-                                 v
-                    +------------------------+
-                    |   Claude AI Analysis   |
-                    |   (Pattern Detection)  |
-                    +------------------------+
-                                 |
-                                 v
-                    +------------------------+
-                    |   memory.json          |
-                    |   alerts.json          |
-                    +------------------------+
-                                 |
-                                 v
-                    +------------------------+
-                    |   GitHub Pages         |
-                    |   Public Dashboard     |
-                    +------------------------+
-```
-
-### Files Structure
-```
-astroturf-detector/
-├── docs/                    # Frontend (GitHub Pages)
-│   ├── index.html
-│   ├── css/styles.css
-│   ├── js/app.js
-│   └── data/
-│       ├── memory.json      # Scan results & history
-│       └── alerts.json      # Active alerts
-├── scripts/
-│   ├── orchestrator.py      # Main scan coordinator
-│   ├── collectors/
-│   │   ├── news_collector.py      # Google News RSS
-│   │   ├── nonprofit_collector.py # ProPublica API
-│   │   ├── fec_collector.py       # FEC API
-│   │   └── job_collector.py       # Job patterns (limited)
-│   └── analyzers/
-│       ├── ai_agent.py            # Claude analysis
-│       └── pattern_analyzer.py    # Statistical patterns
-└── .github/workflows/
-    └── scan.yml             # Hourly automation
+┌─────────────────────────────────────────────────────────────────┐
+│                    GitHub Actions (Daily)                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│   ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│   │  Craigslist  │  │  ProPublica  │  │  FEC API     │          │
+│   │  50 States   │  │  Nonprofits  │  │  Finance     │          │
+│   └──────┬───────┘  └──────┬───────┘  └──────┬───────┘          │
+│          │                 │                 │                   │
+│          └────────────────┼────────────────┘                    │
+│                           ▼                                      │
+│                  ┌────────────────┐                              │
+│                  │  Google News   │                              │
+│                  │  + DuckDuckGo  │                              │
+│                  └────────┬───────┘                              │
+│                           ▼                                      │
+│                  ┌────────────────┐                              │
+│                  │   Claude AI    │                              │
+│                  │   Analysis     │                              │
+│                  └────────┬───────┘                              │
+│                           ▼                                      │
+│                  ┌────────────────┐                              │
+│                  │  memory.json   │                              │
+│                  │  alerts.json   │                              │
+│                  └────────────────┘                              │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+              ┌─────────────────────────┐
+              │   GitHub Pages Site     │
+              │   (Public Dashboard)    │
+              └─────────────────────────┘
 ```
 
 ---
 
-## What This Is NOT
+## Documented Case Studies
 
-- **Not a claim that all protests are fake.** The vast majority of protests are genuine.
-- **Not surveillance of individuals.** We track organizations and patterns, not people.
-- **Not politically biased.** Astroturfing happens across the political spectrum.
-- **Not definitive proof.** Our detections are indicators, not conclusions.
+### Entergy New Orleans (2017-2018)
+~50 people in orange shirts appeared at city council meetings supporting a $210M power plant — many were paid actors. The CEO texted: *"This is war and we need all the foot soldiers we can muster."*
 
----
+**Outcome:** $5 million fine — largest ever imposed by the city council
 
-## Limitations (Honest Assessment)
+### Dallas Astroturf Network (2020-2024)
+Billionaire Monty Bennett hired Crowds on Demand to create fake groups: Keep Dallas Safe, Dallas Justice Now (hoax BLM org), Save Texas Kids, Protect Texas Kids, Mission DFW. The Dallas Express (pink-slime news) ran 112+ articles amplifying them.
 
-1. **Data delays**: Nonprofit filings lag 6-12 months behind actual activity
-2. **No job board access**: Can't actually scrape Indeed/LinkedIn legally
-3. **API rate limits**: Free tiers limit how much we can scan
-4. **False positives**: Legitimate orgs can match suspicious patterns
-5. **US only**: Currently focused on United States data sources
+**Outcome:** Journalist Steven Monacelli won defamation lawsuit after exposing the network
 
 ---
 
-## Environment Variables
+## Coverage
 
-To run locally or in GitHub Actions:
-```bash
-ANTHROPIC_API_KEY=your_key_here  # Required for AI analysis
-FEC_API_KEY=your_key_here        # Optional, uses DEMO_KEY if not set
-```
+**51 Regions Monitored:** All 50 US States + Washington DC
 
----
-
-## Running Locally
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Run a scan
-cd scripts
-python orchestrator.py
-
-# Run with full scan
-python orchestrator.py --full
-```
+High-activity states (shown in red on dashboard): AZ, CA, CO, FL, GA, MI, NY, OH, PA, TX, DC
 
 ---
 
 ## Contributing
 
-We welcome contributions, especially:
+Found a paid protest service we should track? Know of an astroturf campaign? 
 
-- Additional public data source integrations
-- Better pattern detection algorithms
-- UI/UX improvements
-- Documentation and fact-checking
-
----
-
-## Legal
-
-This project uses only legally accessible public data:
-- ProPublica's public API
-- FEC's public API  
-- Public RSS feeds
-
-Astroturfing itself is generally legal, though ethically questionable. We make no accusations of illegal activity.
+- Open an issue with documentation/sources
+- Submit a pull request with new data sources
+- Help improve pattern detection algorithms
 
 ---
 
-## License
+## Disclaimer
 
-MIT License - See LICENSE file
+This tool monitors **publicly available data** to detect potential manufactured grassroots activity. It does not make accusations — it flags patterns that warrant further investigation. Always verify findings through additional research before drawing conclusions.
 
 ---
 
-**Status**: Active Development  
-**Last Updated**: January 2026  
-**Maintainer**: [@ghost081280](https://github.com/ghost081280)
+## Contact
+
+**Developer:** [@Ghost081280](https://github.com/Ghost081280)
+
+**Live Site:** [ghost081280.github.io/astroturf-detector](https://ghost081280.github.io/astroturf-detector/)
+
+---
+
+<p align="center">
+  <i>Democracy works best when grassroots means grassroots.</i>
+</p>
