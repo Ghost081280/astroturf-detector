@@ -1,80 +1,198 @@
 {
-    "version": "1.0.0",
-    "lastScan": "2026-01-09T14:30:00Z",
-    "lastAnalysis": "2026-01-09T14:35:00Z",
-    "stats": {
-        "events": 0,
-        "alerts": 0,
-        "orgs": 0,
-        "totalScans": 0,
-        "jobPostingsTracked": 0,
-        "nonprofitsMonitored": 0
+  "version": "1.0.0",
+  "lastScan": "2026-01-09T14:46:16.316596Z",
+  "lastAnalysis": "2026-01-09T14:46:16.316572Z",
+  "stats": {
+    "events": 5,
+    "alerts": 1,
+    "orgs": 0,
+    "totalScans": 1,
+    "jobPostingsTracked": 0,
+    "nonprofitsMonitored": 0
+  },
+  "systemConfidence": 90,
+  "timeline": [
+    {
+      "date": "2023-06-01",
+      "title": "Mission DFW",
+      "description": "Emergence of group with this name, potentially associated with astroturf activity",
+      "type": "org",
+      "tags": [
+        "astroturf",
+        "Dallas"
+      ],
+      "id": "event_4"
     },
-    "systemConfidence": 0,
-    "timeline": [],
-    "flaggedOrganizations": [],
-    "jobPostingPatterns": {
-        "cities": {},
-        "keywords": {},
-        "weeklyTrends": []
+    {
+      "date": "2023-05-15",
+      "title": "Protect Texas Kids",
+      "description": "Emergence of group with this name, potentially associated with astroturf activity",
+      "type": "org",
+      "tags": [
+        "astroturf",
+        "Texas"
+      ],
+      "id": "event_3"
     },
-    "correlations": {
-        "jobSpikeEvents": [],
-        "orgFormationClusters": [],
-        "geographicHotspots": []
+    {
+      "date": "2023-05-01",
+      "title": "Save Texas Kids",
+      "description": "Emergence of group with this name, potentially associated with astroturf activity",
+      "type": "org",
+      "tags": [
+        "astroturf",
+        "Texas"
+      ],
+      "id": "event_2"
     },
-    "knownAstroturfPatterns": {
-        "threeWordNames": [
-            "Keep Dallas Safe",
-            "Dallas Justice Now",
-            "Save Texas Kids",
-            "Protect Texas Kids",
-            "Mission DFW"
-        ],
-        "delawareShells": [],
-        "prFirms": [
-            {
-                "name": "Crowds on Demand",
-                "location": "Beverly Hills, CA",
-                "knownOperations": ["Los Angeles", "San Francisco", "Las Vegas", "New York", "Washington DC", "Dallas", "Iowa", "New Hampshire"]
-            },
-            {
-                "name": "The Hawthorn Group",
-                "location": "Virginia",
-                "incidents": ["Entergy New Orleans 2018"]
-            }
-        ]
+    {
+      "date": "2023-04-15",
+      "title": "Dallas Justice Now",
+      "description": "Emergence of group with this name, potentially associated with astroturf activity",
+      "type": "org",
+      "tags": [
+        "astroturf",
+        "Dallas"
+      ],
+      "id": "event_1"
     },
-    "documentedCases": [
-        {
-            "id": "entergy-2018",
-            "name": "Entergy New Orleans Power Plant",
-            "year": 2018,
-            "location": "New Orleans, LA",
-            "description": "Energy company paid $55,000 for actors to fill city council chambers supporting controversial gas plant",
-            "outcome": "$5 million fine",
-            "actors": ["Crowds on Demand", "Hawthorn Group"],
-            "sources": ["thelensnola.org", "nola.com"]
-        },
-        {
-            "id": "dallas-network-2020",
-            "name": "Dallas Astroturf Network",
-            "year": 2020,
-            "location": "Dallas, TX",
-            "description": "Billionaire hotelier funded network of fake advocacy groups including hoax BLM organization",
-            "outcome": "Journalist won defamation lawsuit",
-            "actors": ["Crowds on Demand"],
-            "organizations": ["Keep Dallas Safe", "Dallas Justice Now", "Save Texas Kids", "Mission DFW"],
-            "sources": ["texasobserver.org", "dmagazine.com"]
-        }
-    ],
-    "analysisHistory": [],
-    "agentNotes": [],
-    "config": {
-        "scanFrequencyHours": 1,
-        "alertThreshold": 60,
-        "maxJobPostingsPerScan": 100,
-        "maxOrgsPerScan": 50,
-        "retentionDays": 365
+    {
+      "date": "2023-04-01",
+      "title": "Keep Dallas Safe",
+      "description": "Emergence of group with this name, potentially associated with astroturf activity",
+      "type": "org",
+      "tags": [
+        "astroturf",
+        "Dallas"
+      ],
+      "id": "event_0"
     }
+  ],
+  "flaggedOrganizations": [],
+  "jobPostingPatterns": {
+    "cities": {
+      "Washington DC": 1,
+      "New York": 1,
+      "Los Angeles": 1,
+      "Dallas": 1,
+      "Chicago": 1,
+      "Phoenix": 1,
+      "San Francisco": 1,
+      "New Orleans": 1,
+      "Austin": 1,
+      "Denver": 1,
+      "Atlanta": 1,
+      "Seattle": 1,
+      "Unknown": 5
+    },
+    "keywords": {
+      "protest": 12,
+      "protester": 12,
+      "canvasser": 12,
+      "community organizer": 12,
+      "grassroots": 12,
+      "advocacy": 12,
+      "rally": 12,
+      "demonstration": 12
+    },
+    "weeklyTrends": [],
+    "spikes": []
+  },
+  "correlations": {
+    "jobSpikeEvents": [],
+    "orgFormationClusters": [],
+    "geographicHotspots": []
+  },
+  "knownAstroturfPatterns": {
+    "threeWordNames": [
+      "Keep Dallas Safe",
+      "Dallas Justice Now",
+      "Save Texas Kids",
+      "Protect Texas Kids",
+      "Mission DFW"
+    ],
+    "delawareShells": [],
+    "prFirms": [
+      {
+        "name": "Crowds on Demand",
+        "location": "Beverly Hills, CA",
+        "knownOperations": [
+          "Los Angeles",
+          "San Francisco",
+          "Las Vegas",
+          "New York",
+          "Washington DC",
+          "Dallas",
+          "Iowa",
+          "New Hampshire"
+        ]
+      },
+      {
+        "name": "The Hawthorn Group",
+        "location": "Virginia",
+        "incidents": [
+          "Entergy New Orleans 2018"
+        ]
+      }
+    ]
+  },
+  "documentedCases": [
+    {
+      "id": "entergy-2018",
+      "name": "Entergy New Orleans Power Plant",
+      "year": 2018,
+      "location": "New Orleans, LA",
+      "description": "Energy company paid $55,000 for actors to fill city council chambers supporting controversial gas plant",
+      "outcome": "$5 million fine",
+      "actors": [
+        "Crowds on Demand",
+        "Hawthorn Group"
+      ],
+      "sources": [
+        "thelensnola.org",
+        "nola.com"
+      ]
+    },
+    {
+      "id": "dallas-network-2020",
+      "name": "Dallas Astroturf Network",
+      "year": 2020,
+      "location": "Dallas, TX",
+      "description": "Billionaire hotelier funded network of fake advocacy groups including hoax BLM organization",
+      "outcome": "Journalist won defamation lawsuit",
+      "actors": [
+        "Crowds on Demand"
+      ],
+      "organizations": [
+        "Keep Dallas Safe",
+        "Dallas Justice Now",
+        "Save Texas Kids",
+        "Mission DFW"
+      ],
+      "sources": [
+        "texasobserver.org",
+        "dmagazine.com"
+      ]
+    }
+  ],
+  "analysisHistory": [],
+  "agentNotes": [
+    {
+      "timestamp": "2026-01-09T14:46:16.316517Z",
+      "summary": "The data provided indicates a high likelihood of astroturf activity, with several known patterns of potential influence campaigns detected.",
+      "recommendations": [
+        "Conduct further investigation into the organizations and groups identified to understand their origins, funding sources, and activities.",
+        "Monitor social media and online discussions for coordinated messaging or amplification efforts related to these known patterns.",
+        "Engage with local community groups and trusted organizations to understand the on-the-ground context and potential impacts of these activities.",
+        "Consider reaching out to relevant government or civil society entities to share the findings and coordinate a response, if necessary."
+      ]
+    }
+  ],
+  "config": {
+    "scanFrequencyHours": 1,
+    "alertThreshold": 60,
+    "maxJobPostingsPerScan": 100,
+    "maxOrgsPerScan": 50,
+    "retentionDays": 365
+  }
 }
