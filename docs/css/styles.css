@@ -165,6 +165,8 @@ body {
 .hero-stats {
     display: flex;
     gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
 }
 
 .stat-card {
@@ -190,6 +192,27 @@ body {
     letter-spacing: 0.05em;
 }
 
+/* Last Scan Info */
+.last-scan-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.scan-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--color-success);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.scan-frequency {
+    color: var(--color-text-muted);
+}
+
 /* ============================================
    SECTIONS
    ============================================ */
@@ -202,6 +225,7 @@ section {
     align-items: center;
     gap: 14px;
     margin-bottom: 32px;
+    flex-wrap: wrap;
 }
 
 .section-icon {
@@ -214,6 +238,33 @@ section {
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.02em;
+}
+
+/* Region Badge */
+.region-badge {
+    margin-left: auto;
+    padding: 6px 12px;
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--color-accent-primary);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Source Link */
+.source-link {
+    margin-left: auto;
+    font-size: 0.8125rem;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    padding: 4px 12px;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast);
+}
+
+.source-link:hover {
+    background: rgba(139, 92, 246, 0.2);
 }
 
 /* ============================================
@@ -454,7 +505,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    max-height: 240px;
+    max-height: 280px;
     overflow-y: auto;
 }
 
@@ -466,6 +517,9 @@ section {
     background: var(--color-bg-secondary);
     border-radius: var(--radius-sm);
     transition: background var(--transition-fast);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 }
 
 .org-item:hover {
@@ -509,11 +563,16 @@ section {
     color: var(--color-accent-primary);
 }
 
+.org-link-icon {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+}
+
 /* Confidence Display */
 .confidence-display {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     gap: 24px;
     position: relative;
 }
@@ -545,6 +604,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    flex: 1;
 }
 
 .confidence-label {
@@ -556,8 +616,35 @@ section {
 .confidence-desc {
     font-size: 0.8125rem;
     color: var(--color-text-secondary);
-    max-width: 280px;
     line-height: 1.5;
+}
+
+/* Confidence Factors */
+.confidence-factors {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.confidence-factor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+}
+
+.factor-name {
+    color: var(--color-text-secondary);
+}
+
+.factor-score {
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--color-accent-primary);
 }
 
 /* ============================================
@@ -704,6 +791,17 @@ section {
     border-radius: 100px;
 }
 
+.event-source-link {
+    font-size: 0.75rem;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+.event-source-link:hover {
+    text-decoration: underline;
+}
+
 /* ============================================
    ALERTS
    ============================================ */
@@ -781,7 +879,7 @@ section {
 .factor-icon {
     width: 16px;
     height: 16px;
-    color: var(--color-text-muted);
+    color: var(--color-success);
 }
 
 .factor-label {
@@ -825,6 +923,25 @@ section {
 
 .alert-link:hover {
     text-decoration: underline;
+}
+
+.alert-sources {
+    display: flex;
+    gap: 8px;
+}
+
+.alert-source-link {
+    font-size: 0.75rem;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    padding: 4px 8px;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast);
+}
+
+.alert-source-link:hover {
+    background: rgba(139, 92, 246, 0.2);
 }
 
 /* ============================================
@@ -973,7 +1090,7 @@ section {
 
 .footer-meta {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     font-size: 0.8125rem;
     color: var(--color-text-muted);
 }
@@ -1058,6 +1175,12 @@ section {
         flex-direction: column;
         align-items: flex-start;
     }
+    
+    .confidence-display {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1090,281 +1213,4 @@ section {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--color-text-muted);
-}
-/* ============================================
-   NEW FEATURES - JANUARY 2026 UPDATE
-   ============================================ */
-
-/* Last Scan Info */
-.last-scan-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 24px;
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-}
-
-.scan-indicator {
-    width: 8px;
-    height: 8px;
-    background: var(--color-success);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-}
-
-.scan-frequency {
-    color: var(--color-text-muted);
-}
-
-/* Region Badge */
-.region-badge {
-    margin-left: auto;
-    padding: 6px 12px;
-    background: rgba(139, 92, 246, 0.15);
-    color: var(--color-accent-primary);
-    border-radius: 100px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-/* Source Links */
-.source-link {
-    margin-left: auto;
-    font-size: 0.8125rem;
-    color: var(--color-accent-primary);
-    text-decoration: none;
-    padding: 4px 12px;
-    background: rgba(139, 92, 246, 0.1);
-    border-radius: var(--radius-sm);
-    transition: background var(--transition-fast);
-}
-
-.source-link:hover {
-    background: rgba(139, 92, 246, 0.2);
-}
-
-/* Clickable Org Items */
-.org-item {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-}
-
-.org-link-icon {
-    color: var(--color-text-muted);
-    font-size: 0.75rem;
-    margin-left: 8px;
-}
-
-/* Confidence Factors */
-.confidence-factors {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 12px;
-}
-
-.confidence-factor {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px;
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-}
-
-.factor-name {
-    color: var(--color-text-secondary);
-}
-
-.factor-score {
-    font-weight: 600;
-    font-family: var(--font-mono);
-    color: var(--color-accent-primary);
-}
-
-/* Geographic Hotspots - State Pills */
-.geo-hotspots {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.geo-state {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-sm);
-}
-
-.state-abbr {
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--color-text-primary);
-}
-
-.state-count {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-}
-
-/* Data Sources List */
-.data-sources-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.data-source-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px;
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    color: inherit;
-    transition: background var(--transition-fast);
-}
-
-.data-source-item:hover {
-    background: var(--color-bg-hover);
-}
-
-.source-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.source-status {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-}
-
-.source-status.active {
-    background: var(--color-success);
-}
-
-.source-status.inactive {
-    background: var(--color-text-muted);
-}
-
-.source-name {
-    font-size: 0.875rem;
-    font-weight: 500;
-}
-
-.source-desc {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-}
-
-.source-time {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-}
-
-/* News Section */
-.news-section {
-    background: var(--color-bg-primary);
-}
-
-.news-feed {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 16px;
-}
-
-.news-item {
-    display: block;
-    padding: 16px;
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    color: inherit;
-    border: 1px solid rgba(148, 163, 184, 0.1);
-    transition: all var(--transition-fast);
-}
-
-.news-item:hover {
-    border-color: rgba(139, 92, 246, 0.3);
-    transform: translateY(-2px);
-}
-
-.news-title {
-    font-size: 0.9375rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    line-height: 1.4;
-    color: var(--color-text-primary);
-}
-
-.news-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.news-publisher {
-    font-size: 0.75rem;
-    color: var(--color-accent-primary);
-}
-
-.news-date {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-}
-
-.news-location {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 2px 8px;
-    background: rgba(139, 92, 246, 0.15);
-    color: var(--color-accent-primary);
-    border-radius: 100px;
-    font-size: 0.6875rem;
-}
-
-/* Alert Source Links */
-.alert-sources {
-    display: flex;
-    gap: 8px;
-}
-
-.alert-source-link {
-    font-size: 0.75rem;
-    color: var(--color-accent-primary);
-    text-decoration: none;
-    padding: 4px 8px;
-    background: rgba(139, 92, 246, 0.1);
-    border-radius: var(--radius-sm);
-    transition: background var(--transition-fast);
-}
-
-.alert-source-link:hover {
-    background: rgba(139, 92, 246, 0.2);
-}
-
-/* Section Header Flex Wrap */
-.section-header {
-    flex-wrap: wrap;
-}
-
-/* Responsive News */
-@media (max-width: 768px) {
-    .news-feed {
-        grid-template-columns: 1fr;
-    }
-    
-    .confidence-display {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
 }
