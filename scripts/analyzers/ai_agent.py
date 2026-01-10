@@ -43,7 +43,7 @@ class AIAgent:
         correlations = []
         jobs = new_data.get('jobs', [])
         news = new_data.get('news', [])
-        orgs = new_data.get('nonprofits', []) + new_data.get('campaign_finance', [])
+        orgs = new_data.get('nonprofits', []) + new_data.get('campaign_finance', []) + new_data.get('propublica', [])
         
         # 1. Geographic correlation: Jobs in cities mentioned in news
         news_cities = set()
@@ -77,7 +77,8 @@ class AIAgent:
         
         # 2. Organization naming patterns (astroturf red flags)
         astroturf_patterns = ['freedom fund', 'liberty', 'citizens for', 'americans for', 
-                             'action fund', 'leadership', 'voices for', 'families for']
+                             'action fund', 'leadership', 'voices for', 'families for',
+                             'prosperity', 'progress', 'future of', 'coalition for']
         suspicious_orgs = []
         for org in orgs:
             name_lower = (org.get('name', '') or '').lower()
