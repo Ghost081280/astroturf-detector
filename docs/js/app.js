@@ -2,67 +2,93 @@
 
 const ALL_STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC'];
 
-// Known services with documentation
+// Known services with detailed documentation
 const KNOWN_SERVICES = [
     {
         name: "Crowds on Demand",
-        type: "Founded 2012 by Adam Swart",
-        description: "The largest known paid crowd company. Claims \"tens of thousands\" of contractors nationwide. Reported 400% increase in requests in 2025.",
-        locations: ["Los Angeles", "New York", "Washington DC", "Dallas", "Phoenix"],
-        pricing: "$60 to attend | $200 speaking roles | $800+ lead roles",
+        type: "Paid Crowd Company",
+        founder: "Adam Swart",
+        founderDetails: "UCLA Political Science grad (2012), former AOL Patch journalist, Twitter: @ceoadamswart",
+        description: "The largest documented paid protest company in America. Claims to have \"tens of thousands\" of contractors nationwide. Openly advertises protest and rally services.",
+        locations: ["Los Angeles", "New York", "Washington DC", "Dallas", "Phoenix", "San Francisco", "Las Vegas"],
+        pricing: "$60-100 to attend | $200 speaking roles | $800+ lead roles | $5K-15K full events",
         url: "https://crowdsondemand.com/",
         probability: 95,
-        evidence: "Documented in Entergy case, Dallas astroturf network, multiple news investigations"
+        scandals: [
+            "Entergy New Orleans: Paid actors at city council ($5M fine)",
+            "Dallas Justice Now: Fake BLM chapter funded by billionaire",
+            "Keep Dallas Safe: Fake pro-police group exposed 2024",
+            "Attempted extortion lawsuit filed by Zdeněk Bakala"
+        ],
+        evidence: "Featured on Last Week Tonight, Good Morning America, Texas Observer investigations"
     },
     {
         name: "Demand Protest",
-        type: "Strategic Crowd Mobilization",
-        description: "\"When your strategy demands paid protest, we organize and bring it to life.\" Promises \"absolute discretion\" for clients.",
-        locations: ["Nationwide"],
-        pricing: "Custom quotes | NDA required",
+        type: "Strategic Protest Organization",
+        founder: "Unknown",
+        founderDetails: "Company maintains anonymity of ownership",
+        description: "\"When your strategy demands paid protest, we organize and bring it to life.\" Promises \"absolute discretion\" and NDAs for all clients. Operates entirely through referrals.",
+        locations: ["Nationwide - all major cities"],
+        pricing: "Custom quotes only | NDA required | Minimum $5,000 reported",
         url: "https://www.demandprotest.com/",
         probability: 90,
-        evidence: "Self-advertised service, openly markets paid protest organization"
+        scandals: [],
+        evidence: "Self-advertised service, openly markets paid protest organization on website"
     },
     {
         name: "The Hawthorn Group",
-        type: "PR Firm - Virginia",
-        description: "Major PR firm that subcontracted Crowds on Demand for the Entergy scandal. Billed $55,000 for recruiting paid supporters at council meetings.",
-        locations: ["Alexandria, VA", "New Orleans"],
-        pricing: "Corporate PR rates",
+        type: "PR & Lobbying Firm",
+        founder: "J. Patrick Griffin",
+        founderDetails: "Virginia-based, founded 1987, clients include energy companies and political PACs",
+        description: "Major PR firm that subcontracted Crowds on Demand for the Entergy scandal. Billed $55,000+ for recruiting paid supporters at New Orleans council meetings.",
+        locations: ["Alexandria, VA", "New Orleans", "Washington DC"],
+        pricing: "Corporate retainer rates - $10K-50K/month typical",
         url: null,
         probability: 88,
-        evidence: "Documented in Entergy New Orleans case, $5M fine"
-    },
-    {
-        name: "Advantage Inc.",
-        type: "Event Staffing / Brand Ambassadors",
-        description: "Event staffing company linked to providing \"supporters\" for political events and corporate campaigns under the guise of brand ambassadors.",
-        locations: ["Multiple Markets"],
-        pricing: "$15-25/hour for attendees",
-        url: null,
-        probability: 65,
-        evidence: "Investigative journalism reports linking to political events"
-    },
-    {
-        name: "Gotham Government Relations",
-        type: "Lobbying Firm - New York",
-        description: "Lobbying firm known for organizing \"grassroots\" campaigns funded by corporate clients with direct financial interests in the outcomes.",
-        locations: ["New York", "Albany"],
-        pricing: "Retainer-based",
-        url: null,
-        probability: 70,
-        evidence: "Corporate lobbying records, campaign finance disclosures"
+        scandals: [
+            "Entergy New Orleans: Orchestrated paid actor campaign",
+            "Linked to multiple energy industry astroturf campaigns"
+        ],
+        evidence: "Documented in Entergy investigation, resulted in historic $5M fine"
     },
     {
         name: "Crowds for Rent",
         type: "Event Staffing",
-        description: "Provides paid attendees for rallies, grand openings, and political events. Advertises \"enthusiastic supporters\" who will cheer, hold signs, and create energy.",
-        locations: ["Florida", "Texas", "California"],
-        pricing: "$50-100 per attendee",
+        founder: "Unknown",
+        founderDetails: "Florida-based operation",
+        description: "Provides paid attendees for rallies, grand openings, and political events. Advertises \"enthusiastic supporters\" who will cheer, hold signs, and create energy on demand.",
+        locations: ["Florida", "Texas", "California", "Georgia"],
+        pricing: "$50-150 per attendee | Volume discounts available",
         url: null,
         probability: 75,
-        evidence: "Online advertisements, event coordination records"
+        scandals: [],
+        evidence: "Online advertisements, Craigslist postings, event coordination records"
+    },
+    {
+        name: "Extra Mile Casting",
+        type: "Background Actor Agency",
+        founder: "Various",
+        founderDetails: "Multiple casting agencies provide \"background actors\" for political events",
+        description: "Casting agencies that blur the line between entertainment and politics by providing \"background actors\" for political rallies and events under the guise of film work.",
+        locations: ["Los Angeles", "New York", "Atlanta", "Chicago"],
+        pricing: "$100-200/day standard background rates",
+        url: null,
+        probability: 60,
+        scandals: [],
+        evidence: "Casting calls matching political event dates, actor testimonials"
+    },
+    {
+        name: "Gotham Government Relations",
+        type: "Lobbying Firm",
+        founder: "Bradley Gerstman",
+        founderDetails: "New York-based lobbying firm with corporate and political clients",
+        description: "Lobbying firm known for organizing \"grassroots\" campaigns funded by corporate clients with direct financial interests in policy outcomes.",
+        locations: ["New York", "Albany", "Long Island"],
+        pricing: "Retainer-based lobbying rates",
+        url: null,
+        probability: 70,
+        scandals: [],
+        evidence: "Corporate lobbying records, campaign finance disclosures, policy advocacy patterns"
     }
 ];
 
@@ -211,13 +237,20 @@ function getStateName(abbr) {
     return names[abbr] || '';
 }
 
-// Render stats
+// Render stats - connected to actual data
 function renderStats(memory, alertsData) {
-    const stats = memory.stats || {};
-    document.getElementById('stat-events').textContent = memory.timeline?.length || stats.events || 0;
-    document.getElementById('stat-alerts').textContent = alertsData.alerts?.length || stats.alerts || 0;
-    document.getElementById('stat-orgs').textContent = memory.flaggedOrganizations?.length || stats.orgs || 0;
-    document.getElementById('stat-news').textContent = memory.recentNews?.length || stats.newsArticles || 0;
+    // Events = high-value timeline items (news ≥70% relevance)
+    const highValueNews = (memory.recentNews || []).filter(n => (n.relevance_score || 0) >= 70);
+    document.getElementById('stat-events').textContent = highValueNews.length || 0;
+    
+    // Alerts from alerts data
+    document.getElementById('stat-alerts').textContent = alertsData.alerts?.length || 0;
+    
+    // Orgs from flagged organizations
+    document.getElementById('stat-orgs').textContent = memory.flaggedOrganizations?.length || 0;
+    
+    // News = total news count
+    document.getElementById('stat-news').textContent = memory.recentNews?.length || 0;
     
     const lastScanEl = document.getElementById('last-scan-time');
     if (lastScanEl && memory.lastScan) {
@@ -516,7 +549,7 @@ function getFlagReason(org) {
     return 'Pattern match detected';
 }
 
-// Render services with probability scores
+// Render services with founder info and scandals
 function renderServices() {
     const container = document.getElementById('services-grid');
     if (!container) return;
@@ -529,10 +562,18 @@ function renderServices() {
                 <span class="service-type">${escapeHtml(s.type)}</span>
             </div>
             <div class="service-body">
+                ${s.founder ? `<div class="service-founder"><strong>Founder:</strong> ${escapeHtml(s.founder)}${s.founderDetails ? ` <span class="founder-details">— ${escapeHtml(s.founderDetails)}</span>` : ''}</div>` : ''}
                 <p>${escapeHtml(s.description)}</p>
                 <div class="service-locations">
-                    ${s.locations.map(l => `<span class="location-tag">${escapeHtml(l)}</span>`).join('')}
+                    ${s.locations.slice(0, 5).map(l => `<span class="location-tag">${escapeHtml(l)}</span>`).join('')}
+                    ${s.locations.length > 5 ? `<span class="location-tag">+${s.locations.length - 5} more</span>` : ''}
                 </div>
+                ${s.scandals && s.scandals.length ? `
+                    <div class="service-scandals">
+                        <strong>Known Incidents:</strong>
+                        <ul>${s.scandals.slice(0, 3).map(sc => `<li>${escapeHtml(sc)}</li>`).join('')}</ul>
+                    </div>
+                ` : ''}
                 ${s.url ? `<a href="${escapeHtml(s.url)}" target="_blank" class="service-link">${new URL(s.url).hostname} →</a>` : '<span class="service-link">No public website</span>'}
                 ${s.pricing ? `<div class="service-pricing">${escapeHtml(s.pricing)}</div>` : ''}
             </div>
