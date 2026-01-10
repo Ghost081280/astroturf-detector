@@ -76,10 +76,10 @@ class NewsCollector:
         return results
     
     def _collect_duckduckgo(self) -> List[Dict]:
-        """Collect from DuckDuckGo using duckduckgo-search library"""
+        """Collect from DuckDuckGo using ddgs library"""
         results = []
         try:
-            from duckduckgo_search import DDGS
+            from ddgs import DDGS
             
             with DDGS() as ddgs:
                 for term in self.SEARCH_TERMS[:3]:
@@ -102,7 +102,7 @@ class NewsCollector:
                         print(f"    DDG search error for '{term}': {e}")
                         continue
         except ImportError:
-            print("  DuckDuckGo: duckduckgo-search not installed, skipping")
+            print("  DuckDuckGo: ddgs not installed (pip install ddgs), skipping")
         except Exception as e:
             print(f"  DuckDuckGo error: {e}")
         return results
