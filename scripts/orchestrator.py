@@ -68,7 +68,8 @@ class Orchestrator:
             'news': [],
             'jobs': [],
             'nonprofits': [],
-            'campaign_finance': []
+            'campaign_finance': [],
+            'propublica': []
         }
         
         # Try to import and run each collector
@@ -76,7 +77,8 @@ class Orchestrator:
             ('collectors.news_collector', 'NewsCollector', 'news'),
             ('collectors.job_collector', 'JobCollector', 'jobs'),
             ('collectors.nonprofit_collector', 'NonprofitCollector', 'nonprofits'),
-            ('collectors.fec_collector', 'FECCollector', 'campaign_finance')
+            ('collectors.fec_collector', 'FECCollector', 'campaign_finance'),
+            ('collectors.propublica_collector', 'ProPublicaCollector', 'propublica')
         ]
         
         for module_name, class_name, result_key in collectors:
@@ -127,13 +129,13 @@ class Orchestrator:
         memory['jobPostings'] = memory['jobPostings'][-50:]  # Keep last 50
         memory['jobPostingPatterns'] = {'totalJobs': len(memory['jobPostings'])}
         
-        # Update organizations
-        existing_org_ids = {o.get('ein') or o.get('name') for o in memory.get('flaggedOrganizations', [])}
-        for org in new_data.get('nonprofits', []) + new_data.get('campaign_finance', []):
-            org_id = org.get('ein') or org.get('name')
+        # Update organizations (from nonprofits, FEC, and ProPublica)
+        existing_org_ids = {o.get('ein') or o.get('committee_id') or o.get('name') for o in memory.get('flaggedOrganizations', [])}
+        for org in new_data.get('nonprofits', []) + new_data.get('campaign_finance', []) + new_data.get('propublica', []):
+            org_id = org.get('ein') or org.get('committee_id') or org.get('name')
             if org_id and org_id not in existing_org_ids:
                 memory['flaggedOrganizations'].append(org)
-        memory['flaggedOrganizations'] = memory['flaggedOrganizations'][-30:]  # Keep last 30
+        memory['flaggedOrganizations'] = memory['flaggedOrganizations'][-40:]  # Keep last 40
         
         # Update from AI result
         memory['systemConfidence'] = ai_result.get('systemConfidence', memory.get('systemConfidence', 50))
