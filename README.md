@@ -2,9 +2,9 @@
 
 [![Live Site](https://img.shields.io/badge/Live_Site-ghost081280.github.io-8b5cf6?style=for-the-badge)](https://ghost081280.github.io/astroturf-detector/)
 [![Status](https://img.shields.io/badge/Status-Live-22c55e?style=for-the-badge)](https://ghost081280.github.io/astroturf-detector/)
-[![Updated](https://img.shields.io/badge/Updates-Hourly-2088FF?style=for-the-badge)](https://ghost081280.github.io/astroturf-detector/)
+[![Updates](https://img.shields.io/badge/Updates-Hourly-2088FF?style=for-the-badge)](https://ghost081280.github.io/astroturf-detector/)
 
-**An open-source intelligence tool monitoring for paid protest activity and manufactured grassroots movements across all 50 United States + DC.**
+**An AI-powered watchdog that exposes paid protest operations and manufactured grassroots campaigns across all 50 United States + DC.**
 
 🔗 **[View Live Dashboard](https://ghost081280.github.io/astroturf-detector/)**
 
@@ -14,61 +14,129 @@
 
 **Astroturfing** is when corporations, political operatives, or special interest groups create fake grassroots campaigns to manufacture the appearance of organic public support. The name comes from AstroTurf — fake grass.
 
-### Real Examples
+> *"A fellow from Texas can tell the difference between grass roots and AstroTurf."*  
+> — Senator Lloyd Bentsen, who coined the term in 1985
 
-- **Crowds on Demand** pays people $60 to attend rallies, $200 for speaking roles
-- **Entergy New Orleans** hired ~50 paid actors to support a $210M power plant at city council meetings (resulted in $5 million fine)
-- **Dallas Justice Now** was a fake BLM organization created by a billionaire hotelier to push his agenda
+### Why It Matters
 
----
-
-## Dashboard Features
-
-### 🔗 Connect the Dots
-Our AI-powered pattern detection identifies correlations between:
-- **Geographic Matches** — Job postings in cities with protest-related news
-- **Naming Patterns** — Organizations using generic patriotic names typical of astroturf
-- **New High-Risk Orgs** — Recently filed committees with suspicious characteristics
-- **News Clustering** — Multiple articles about paid protesters in the same region
-
-Each connection shows a probability score based on the strength of evidence.
-
-### 📊 Real-Time Monitoring
-- **Confidence Score** — Overall assessment of astroturf activity levels
-- **State Heatmap** — Visual display of activity across all 50 states + DC
-- **Timeline** — Chronological feed of detected events
-- **News Feed** — Aggregated coverage from Google News and DuckDuckGo
-
-### ⚠️ Known Services
-Documented paid protest companies with probability scores:
-- Crowds on Demand (95%)
-- Demand Protest (90%)
-- The Hawthorn Group (88%)
-- And more...
+- **Undermines democracy** by creating illusions of public consensus
+- **Drowns out authentic voices** with manufactured support
+- **Deceives policymakers and journalists** who rely on public input
+- **Hides corporate interests** behind patriotic-sounding names
+- **Costs millions** — the Entergy scandal alone resulted in a $5 million fine
 
 ---
 
-## What This Tool Monitors
+## Exposed: Real Astroturf Scandals
+
+### Entergy New Orleans ($5 Million Fine)
+Around 50 people in matching orange shirts appeared at city council meetings to support a controversial $210M power plant. Investigation revealed they were **paid actors hired through Crowds on Demand** at $60 each. The utility's CEO texted executives:
+
+> *"This is war and we need all the foot soldiers we can muster."*
+
+**Result:** Largest fine ever imposed by New Orleans City Council
+
+### Dallas Fake Advocacy Network
+Billionaire hotel owner Monty Bennett funded a network of fake groups through Crowds on Demand:
+- **Dallas Justice Now** — posed as a BLM chapter
+- **Keep Dallas Safe** — fake pro-police group  
+- **Save Texas Kids** / **Protect Texas Kids** / **Mission DFW**
+
+The Dallas Express, a "pink slime" news site, ran **112+ articles** amplifying these fake groups.
+
+**Result:** Journalist Steven Monacelli won defamation lawsuit after exposing the network
+
+### Forged Letters to Congress (2009)
+**Bonner & Associates** sent forged letters to Congress opposing climate legislation, supposedly from groups like the NAACP and American Legion. The letters were completely fabricated.
+
+**Result:** Congressional investigation, exposed as industry-funded astroturf
+
+### Facebook's Anti-Google Campaign (2011)
+**Burson-Marsteller**, one of the world's largest PR firms, was caught running a covert campaign to plant negative stories about Google in major newspapers — secretly funded by Facebook.
+
+**Result:** USA Today exposé, PR industry embarrassment
+
+---
+
+## What We Monitor
+
+Our system scans **7 OSINT databases** every hour to detect suspicious patterns:
 
 | Source | What We're Watching |
 |--------|---------------------|
+| **FEC Filings** | New PACs with generic patriotic names, Super PAC spending |
+| **ProPublica Campaign Finance** | Committee formations, independent expenditures |
+| **Nonprofit 990s** | Recently formed 501(c)(4)s with vague purposes |
 | **Job Boards** | Postings for "protesters," "rally attendees," "canvassers" with cash pay |
-| **Nonprofit Filings** | New 501(c)(4) organizations with suspicious naming patterns |
-| **Campaign Finance** | Political committees and independent expenditures (FEC data) |
-| **News Coverage** | Articles about paid protests, dark money, and astroturf campaigns |
+| **Google News** | Coverage of paid protests, dark money, astroturf campaigns |
+| **DuckDuckGo News** | Alternative news search for broader coverage |
+| **USAJobs** | Government-adjacent organizing positions |
+
+---
+
+## Connect the Dots
+
+Our AI analyzes correlations between data sources to identify coordinated activity:
+
+- **Geographic Matches** — Job postings appearing in cities with protest news
+- **Naming Patterns** — "Citizens For X" / "Americans For Y" naming conventions
+- **Timing Clusters** — Multiple suspicious orgs forming before major events
+- **News Clustering** — Multiple articles about paid protesters in same region
+- **High-Risk New Orgs** — Recently filed committees with red flag characteristics
+
+Each connection shows a **probability score** based on evidence strength.
+
+---
+
+## Known Paid Protest Services
+
+We track documented companies that provide crowds-for-hire:
+
+| Company | Risk | What They Do |
+|---------|------|--------------|
+| **Crowds on Demand** | 95% | Paid rally attendees, scripted testimonials. Behind Entergy & Dallas scandals. 400% increase in requests (2024-25) |
+| **Demand Protest** | 90% | NDA-protected "absolute discretion" protest services. $5K minimum |
+| **The Hawthorn Group** | 88% | Orchestrated Entergy paid actor campaign. Billed $55K for fake supporters |
+| **Bonner & Associates** | 85% | Pioneer of "manufactured grassroots." Forged letters to Congress (2009) |
+| **FTI Consulting** | 82% | Fortune 500 PR firm. Ran ExxonMobil "shadow groups" for climate denial |
+| **DCI Group** | 80% | Created front groups for tobacco and energy industries |
+| **Burson-Marsteller** | 72% | Global PR giant. Facebook anti-Google astroturf (2011), Bhopal disaster PR |
+
+### Industry Pricing (Documented Rates)
+| Activity | Pay Rate |
+|----------|----------|
+| Phone banking, letter writing | $25-30/hour |
+| Rally attendance | $60-100 |
+| Live event participation | $150-500/day |
+| Speaking roles | $200+ |
+| Lead organizer roles | $800/day |
+| Full campaign | $5,000-15,000 |
 
 ---
 
 ## What Gets Flagged
 
-The system looks for warning signs like:
+The system looks for these warning signs:
 
-- Job postings advertising "paid protest" or "same day cash"
-- Organizations with generic names like "Citizens For [X]" or "Americans For [Y]"
-- Three-word patriotic names (common in astroturf operations)
-- Recently formed nonprofits with vague purposes
-- Geographic clustering in politically strategic states
-- Connections to known paid protest services
+### Job Postings
+- "Paid protest," "hold signs," "same day cash"  
+- "Rally attendees needed," "event staff" with political context  
+- Vague descriptions with unusually high pay  
+- NDA requirements for advocacy work
+
+### Organizations  
+- Generic names like "Citizens For [X]" or "Americans For [Y]"  
+- Three-word patriotic names (common astroturf pattern)  
+- Recently formed with immediate high spending  
+- Delaware incorporation (minimal disclosure)  
+- Boards with fewer than 3 people  
+- No website or vague mission statement
+
+### Behavioral Patterns
+- Business hours only activity (paid workers vs. volunteers)  
+- Identical messaging across platforms  
+- Sudden activity spikes before political events  
+- Geographic clustering in swing states
 
 ---
 
@@ -80,69 +148,86 @@ The system looks for warning signs like:
 
 ---
 
-## Known Paid Protest Services
+## How We Detect Astroturf
 
-### Crowds on Demand
-- Founded 2012 by Adam Swart
-- Claims "tens of thousands" of contractors
-- **Pricing:** $60 to attend, $200 for speaking roles
-- 400% increase in requests reported in 2025
+Our methodology is informed by academic research on manufactured grassroots:
 
-### Demand Protest
-- *"When your strategy demands paid protest, we organize and bring it to life."*
-- Offers "absolute discretion"
+### Coordination Detection
+Research shows **74% of astroturf accounts** exhibit co-tweeting and co-retweeting patterns — synchronized messaging that real grassroots movements don't display.
 
-### The Hawthorn Group
-- Virginia-based PR firm
-- Subcontracted Crowds on Demand for the Entergy scandal
-- Billed $55,000 for fake supporters
+### Timing Analysis  
+Genuine grassroots activity happens 24/7. Astroturf campaigns often show **business hours patterns** (9-5) because participants are paid workers, not passionate volunteers.
 
----
+### "Cash-Rich, People-Poor"
+Real grassroots movements are people-rich but cash-poor. Astroturf is the opposite — lots of money, few actual supporters. We flag organizations with high spending but minimal visible membership.
 
-## Case Studies
-
-### Entergy New Orleans (2017-2018)
-Around 50 people in matching orange shirts appeared at city council meetings to support a controversial $210M power plant. Investigation revealed many were paid actors hired through Crowds on Demand. The utility's CEO texted executives: *"This is war and we need all the foot soldiers we can muster."*
-
-**Outcome:** $5 million fine — the largest ever imposed by the New Orleans City Council
-
-### Dallas Astroturf Network (2020-2024)
-Billionaire hotel owner Monty Bennett funded a network of fake advocacy groups through Crowds on Demand:
-- Keep Dallas Safe
-- Dallas Justice Now (posed as a BLM chapter)
-- Save Texas Kids
-- Protect Texas Kids
-- Mission DFW
-
-The Dallas Express, a "pink slime" news site, ran 112+ articles amplifying these fake groups.
-
-**Outcome:** Journalist Steven Monacelli won a defamation lawsuit after exposing the network
+### Name Pattern Analysis
+Academic research confirms astroturf groups commonly use:
+- Generic patriotic terms (freedom, liberty, American)
+- "Citizens for" / "Americans for" / "Families for" constructions
+- Vague positive words (progress, prosperity, future)
+- Three-word names that sound grassroots but lack specificity
 
 ---
 
-## Technical Details
+## The Dark Money Pipeline
 
-### Data Sources
-- **FEC API** — Federal Election Commission committee filings
-- **ProPublica Nonprofit Explorer** — 501(c)(4) organization data
-- **Adzuna API** — Job postings across the US
-- **Google News RSS** — News coverage aggregation
-- **DuckDuckGo** — Alternative news search
+How corporate money becomes "grassroots":
 
-### Update Frequency
-- Automated scans run **hourly** via GitHub Actions
-- AI analysis powered by Claude (Anthropic)
-- All data stored in JSON for fast frontend loading
+```
+Corporation
+    ↓
+Trade Association (lobbying group)
+    ↓
+501(c)(4) "Social Welfare" Org (no donor disclosure)
+    ↓
+Astroturf Group with patriotic name
+    ↓
+"Concerned citizens" at your city council
+```
+
+Example: Telecom companies funneled **$4.2 million** through Broadband for America, which generated **8.5 million fake FCC comments** opposing net neutrality.
+
+---
+
+## In The News
+
+Astroturfing has been documented by:
+
+- **Last Week Tonight** with John Oliver — [Astroturfing segment](https://www.youtube.com/results?search_query=john+oliver+astroturfing)
+- **Good Morning America** — Crowds on Demand exposé
+- **Texas Observer** — Dallas fake advocacy network investigation
+- **NOLA.com** — Entergy paid actors scandal
+- **USA Today** — Burson-Marsteller/Facebook exposé
+- **InfluenceWatch** — Comprehensive astroturf documentation
 
 ---
 
 ## Important Disclaimer
 
-This tool monitors **publicly available data** to detect patterns that may indicate manufactured grassroots activity. 
+This tool monitors **publicly available data** to detect patterns that may indicate manufactured grassroots activity.
 
-**It does not make accusations.** 
+**It does not make accusations.**
 
 Flags and alerts indicate patterns worth investigating — not proof of wrongdoing. Always verify findings through additional research before drawing conclusions.
+
+---
+
+## How You Can Help
+
+### Report Suspicious Activity
+See paid protest job postings or fake advocacy groups? [Open an issue](https://github.com/Ghost081280/astroturf-detector/issues) with details.
+
+### Verify Locally  
+Cross-check our alerts with local news. Attend public meetings. Ask who's funding that new "citizens coalition."
+
+### Follow the Money
+- Search organizations on [OpenSecrets](https://www.opensecrets.org/)
+- Check nonprofit filings on [ProPublica Nonprofit Explorer](https://projects.propublica.org/nonprofits/)
+- Look up PACs on [FEC.gov](https://www.fec.gov/)
+
+### Spread Awareness
+Share this tool with journalists, researchers, and anyone who cares about authentic democracy.
 
 ---
 
@@ -150,10 +235,16 @@ Flags and alerts indicate patterns worth investigating — not proof of wrongdoi
 
 **Developer:** [@Ghost081280](https://github.com/Ghost081280)
 
-**Questions or Tips?** Open an issue on this repository
+**Found Something?** [Open an Issue](https://github.com/Ghost081280/astroturf-detector/issues)
+
+**Contribute:** Pull requests welcome!
 
 ---
 
 <p align="center">
-  <i>Democracy works best when grassroots means grassroots.</i>
+  <strong>Democracy works best when grassroots means grassroots.</strong>
+</p>
+
+<p align="center">
+  <i>Built with transparency. Powered by open data. No corporate sponsors.</i>
 </p>
