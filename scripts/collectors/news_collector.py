@@ -1,108 +1,132 @@
-"""News Collector - Google News RSS"""
+"""News Collector - Google News and DuckDuckGo"""
+import os
+import json
 import requests
-import re
 from datetime import datetime
-from typing import List, Dict, Any
-from urllib.parse import quote_plus
-import xml.etree.ElementTree as ET
+from typing import List, Dict
 
 class NewsCollector:
-    GOOGLE_NEWS_RSS = "https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en"
-    SEARCH_QUERIES = ["paid protesters", "astroturf campaign", "fake grassroots", "city council protesters", "advocacy group funding", "dark money protest", "501c4 political"]
+    # Search terms optimized for astroturf detection
+    SEARCH_TERMS = [
+        "paid protesters",
+        "astroturf campaign",
+        "fake grassroots",
+        "crowds on demand",
+        "paid activist",
+        "manufactured outrage",
+        "dark money protest",
+        "crisis actors rally"
+    ]
     
     def __init__(self):
-        self.calls_made = 0
-        self.session = requests.Session()
-        self.session.headers.update({'User-Agent': 'AstroturfDetector/1.0'})
+        self.google_api_key = os.environ.get('GOOGLE_NEWS_API_KEY')
+        self.google_cx = os.environ.get('GOOGLE_SEARCH_CX')
     
-    def collect(self, max_calls: int = 10) -> List[Dict[str, Any]]:
+    def collect(self) -> List[Dict]:
+        """Collect news from all sources"""
         results = []
-        for query in self.SEARCH_QUERIES:
-            if self.calls_made >= max_calls:
-                break
-            articles = self._fetch_google_news(query)
-            results.extend(articles)
-            self.calls_made += 1
         
+        # Try Google News API
+        if self.google_api_key and self.google_cx:
+            results.extend(self._collect_google())
+        
+        # Always try DuckDuckGo (no API key needed)
+        results.extend(self._collect_duckduckgo())
+        
+        # Dedupe by URL
         seen = set()
         unique = []
-        for a in results:
-            key = a.get('title', '')[:50].lower()
-            if key not in seen:
-                seen.add(key)
-                unique.append(a)
+        for item in results:
+            url = item.get('url', '')
+            if url and url not in seen:
+                seen.add(url)
+                unique.append(item)
         
-        unique.sort(key=lambda x: x.get('date', ''), reverse=True)
-        return unique[:50]
+        return unique[:20]  # Top 20
     
-    def _fetch_google_news(self, query: str) -> List[Dict[str, Any]]:
+    def _collect_google(self) -> List[Dict]:
+        """Collect from Google Custom Search API"""
+        results = []
         try:
-            url = self.GOOGLE_NEWS_RSS.format(query=quote_plus(query))
-            response = self.session.get(url, timeout=15)
-            if response.status_code != 200:
-                return []
-            
-            root = ET.fromstring(response.content)
-            articles = []
-            
-            for item in root.findall('.//item')[:10]:
-                title = item.find('title')
-                link = item.find('link')
-                pub_date = item.find('pubDate')
-                source = item.find('source')
-                
-                if title is not None and link is not None:
-                    date_str = datetime.utcnow().isoformat() + 'Z'
-                    if pub_date is not None and pub_date.text:
-                        try:
-                            cleaned = pub_date.text.replace(' GMT', '').replace(' EST', '').replace(' PST', '').replace(' EDT', '').replace(' PDT', '').strip()
-                            date_obj = datetime.strptime(cleaned, '%a, %d %b %Y %H:%M:%S')
-                            date_str = date_obj.isoformat() + 'Z'
-                        except:
-                            pass
-                    
-                    relevance = self._calc_relevance(title.text, query)
-                    articles.append({
-                        'type': 'news',
-                        'source': 'google_news',
-                        'title': title.text,
-                        'url': link.text,
-                        'date': date_str,
-                        'publisher': source.text if source is not None else 'Unknown',
-                        'query': query,
-                        'relevance_score': relevance,
-                        'location': self._extract_location(title.text)
-                    })
-            
-            return articles
+            for term in self.SEARCH_TERMS[:4]:  # Limit to save API quota
+                url = f"https://www.googleapis.com/customsearch/v1"
+                params = {
+                    'key': self.google_api_key,
+                    'cx': self.google_cx,
+                    'q': term,
+                    'num': 5,
+                    'sort': 'date'
+                }
+                response = requests.get(url, params=params, timeout=10)
+                if response.status_code == 200:
+                    data = response.json()
+                    for item in data.get('items', []):
+                        results.append({
+                            'title': item.get('title', ''),
+                            'url': item.get('link', ''),
+                            'snippet': item.get('snippet', ''),
+                            'publisher': item.get('displayLink', ''),
+                            'source': 'google',
+                            'query': term,
+                            'relevance_score': self._calculate_relevance(item, term),
+                            'collected_at': datetime.utcnow().isoformat() + 'Z'
+                        })
         except Exception as e:
-            print(f"  News error for '{query}': {e}")
-            return []
+            print(f"  Google News error: {e}")
+        return results
     
-    def _calc_relevance(self, title: str, query: str) -> int:
+    def _collect_duckduckgo(self) -> List[Dict]:
+        """Collect from DuckDuckGo using duckduckgo-search library"""
+        results = []
+        try:
+            from duckduckgo_search import DDGS
+            
+            with DDGS() as ddgs:
+                for term in self.SEARCH_TERMS[:3]:
+                    try:
+                        # Search news specifically
+                        news_results = list(ddgs.news(term, max_results=5))
+                        for item in news_results:
+                            results.append({
+                                'title': item.get('title', ''),
+                                'url': item.get('url', ''),
+                                'snippet': item.get('body', ''),
+                                'publisher': item.get('source', 'DuckDuckGo'),
+                                'source': 'duckduckgo',
+                                'query': term,
+                                'date': item.get('date', ''),
+                                'relevance_score': self._calculate_relevance({'title': item.get('title', ''), 'snippet': item.get('body', '')}, term),
+                                'collected_at': datetime.utcnow().isoformat() + 'Z'
+                            })
+                    except Exception as e:
+                        print(f"    DDG search error for '{term}': {e}")
+                        continue
+        except ImportError:
+            print("  DuckDuckGo: duckduckgo-search not installed, skipping")
+        except Exception as e:
+            print(f"  DuckDuckGo error: {e}")
+        return results
+    
+    def _calculate_relevance(self, item: Dict, query: str) -> int:
+        """Calculate relevance score 0-100"""
         score = 50
-        title_lower = title.lower()
+        title = (item.get('title', '') or '').lower()
+        snippet = (item.get('snippet', '') or '').lower()
         
-        high = ['astroturf', 'paid protest', 'fake grassroots', 'dark money', 'manufactured', 'hired crowd']
-        for kw in high:
-            if kw in title_lower:
-                score += 20
-        
-        medium = ['protest', 'advocacy', 'campaign', 'funding', '501c4', 'nonprofit', 'city council']
-        for kw in medium:
-            if kw in title_lower:
-                score += 10
+        # Boost for direct keyword matches
+        keywords = ['paid', 'protest', 'astroturf', 'fake', 'manufactured', 'crowds on demand']
+        for kw in keywords:
+            if kw in title:
+                score += 15
+            if kw in snippet:
+                score += 5
         
         return min(score, 100)
-    
-    def _extract_location(self, text: str) -> str:
-        cities = ['Dallas', 'Houston', 'Austin', 'Los Angeles', 'New York', 'Chicago', 'Phoenix', 'Philadelphia', 'San Francisco', 'Seattle', 'Denver', 'Atlanta', 'Miami', 'Minneapolis', 'Detroit', 'Portland', 'New Orleans']
-        for c in cities:
-            if c.lower() in text.lower():
-                return c
-        return ''
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     collector = NewsCollector()
-    articles = collector.collect(max_calls=3)
-    print(f"Collected {len(articles)} articles")
+    results = collector.collect()
+    print(f"Collected {len(results)} news items")
+    for r in results[:3]:
+        print(f"  - {r['title'][:60]}...")
