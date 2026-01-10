@@ -9,24 +9,25 @@ const KNOWN_SERVICES = [
         type: "Paid Crowd Company",
         founder: "Adam Swart",
         founderDetails: "UCLA Political Science grad (2012), former AOL Patch journalist, Twitter: @ceoadamswart",
-        description: "The largest documented paid protest company in America. Claims to have \"tens of thousands\" of contractors nationwide. Openly advertises protest and rally services.",
-        locations: ["Los Angeles", "New York", "Washington DC", "Dallas", "Phoenix", "San Francisco", "Las Vegas"],
-        pricing: "$60-100 to attend | $200 speaking roles | $800+ lead roles | $5K-15K full events",
+        description: "The largest documented paid protest company in America. Claims to have \"tens of thousands\" of contractors nationwide. Openly advertises protest and rally services. 400% increase in requests reported in 2024-2025.",
+        locations: ["Los Angeles", "New York", "Washington DC", "Dallas", "Phoenix", "San Francisco", "Las Vegas", "Iowa", "New Hampshire"],
+        pricing: "$25-30/hr phone banking | $100/hr live events | $150-500/day depending on role | $5K-15K full campaigns",
         url: "https://crowdsondemand.com/",
         probability: 95,
         scandals: [
-            "Entergy New Orleans: Paid actors at city council ($5M fine)",
-            "Dallas Justice Now: Fake BLM chapter funded by billionaire",
+            "Entergy New Orleans: Paid actors at city council ($5M fine, 2018)",
+            "Dallas Justice Now: Fake BLM chapter funded by Monty Bennett",
             "Keep Dallas Safe: Fake pro-police group exposed 2024",
-            "Attempted extortion lawsuit filed by Zdeněk Bakala"
+            "Zdeněk Bakala extortion lawsuit (Czech billionaire)",
+            "Camarillo city council: Paid 'concerned citizen' was scripted (2015)"
         ],
-        evidence: "Featured on Last Week Tonight, Good Morning America, Texas Observer investigations"
+        evidence: "Featured on Last Week Tonight, Good Morning America, Texas Observer, NBC Los Angeles, InfluenceWatch"
     },
     {
         name: "Demand Protest",
         type: "Strategic Protest Organization",
         founder: "Unknown",
-        founderDetails: "Company maintains anonymity of ownership",
+        founderDetails: "Company maintains anonymity of ownership, all contractors sign NDAs",
         description: "\"When your strategy demands paid protest, we organize and bring it to life.\" Promises \"absolute discretion\" and NDAs for all clients. Operates entirely through referrals.",
         locations: ["Nationwide - all major cities"],
         pricing: "Custom quotes only | NDA required | Minimum $5,000 reported",
@@ -46,10 +47,59 @@ const KNOWN_SERVICES = [
         url: null,
         probability: 88,
         scandals: [
-            "Entergy New Orleans: Orchestrated paid actor campaign",
+            "Entergy New Orleans: Orchestrated paid actor campaign (2018)",
             "Linked to multiple energy industry astroturf campaigns"
         ],
         evidence: "Documented in Entergy investigation, resulted in historic $5M fine"
+    },
+    {
+        name: "Bonner & Associates",
+        type: "Grassroots Lobbying Firm",
+        founder: "Jack Bonner",
+        founderDetails: "Washington DC, founded 1984, pioneer of manufactured grassroots lobbying",
+        description: "One of the original 'astroturf' lobbying firms. Specializes in manufacturing grassroots campaigns using phone banks, letter-writing campaigns, and orchestrated constituent pressure.",
+        locations: ["Washington DC", "Nationwide operations"],
+        pricing: "Corporate contracts - $50K-500K campaigns",
+        url: null,
+        probability: 85,
+        scandals: [
+            "Forged letters to Congress opposing climate legislation (2009)",
+            "Fake constituent letters on behalf of coal industry"
+        ],
+        evidence: "Congressional investigations, SourceWatch documentation, multiple media exposés"
+    },
+    {
+        name: "FTI Consulting",
+        type: "Strategic Communications",
+        founder: "Dennis Shaughnessy (current chairman)",
+        founderDetails: "Fortune 500 company, $3B+ annual revenue, global operations",
+        description: "Major strategic communications firm that has run astroturf campaigns 'portraying pro-petroleum groups as grass-roots movements' in Texas on fracking, Alaska on drilling, and at the SEC.",
+        locations: ["Global - 90+ offices worldwide"],
+        pricing: "Corporate rates - $500/hr+ for senior consultants",
+        url: "https://www.fticonsulting.com/",
+        probability: 82,
+        scandals: [
+            "ExxonMobil 'shadow groups' to misrepresent climate science",
+            "Pro-petroleum astroturf in Texas fracking debate",
+            "Alaska drilling advocacy campaigns"
+        ],
+        evidence: "ExxonMobil lobbyist admission (2021), Proxy Preview investigations"
+    },
+    {
+        name: "DCI Group",
+        type: "Public Affairs Firm",
+        founder: "Thomas J. Synhorst",
+        founderDetails: "Washington DC, founded 1996, Republican-aligned",
+        description: "Public affairs firm known for creating front groups and manufactured grassroots campaigns. Clients include tobacco, energy, and tech companies seeking to influence policy.",
+        locations: ["Washington DC", "State capitals"],
+        pricing: "Political consulting rates",
+        url: null,
+        probability: 80,
+        scandals: [
+            "Tobacco industry astroturf campaigns",
+            "Created front groups for corporate clients"
+        ],
+        evidence: "SourceWatch documentation, tobacco litigation documents, lobbying disclosures"
     },
     {
         name: "Crowds for Rent",
@@ -65,17 +115,21 @@ const KNOWN_SERVICES = [
         evidence: "Online advertisements, Craigslist postings, event coordination records"
     },
     {
-        name: "Extra Mile Casting",
-        type: "Background Actor Agency",
-        founder: "Various",
-        founderDetails: "Multiple casting agencies provide \"background actors\" for political events",
-        description: "Casting agencies that blur the line between entertainment and politics by providing \"background actors\" for political rallies and events under the guise of film work.",
-        locations: ["Los Angeles", "New York", "Atlanta", "Chicago"],
-        pricing: "$100-200/day standard background rates",
+        name: "Burson-Marsteller",
+        type: "Global PR Firm",
+        founder: "Harold Burson (1953)",
+        founderDetails: "Now part of BCW (Burson Cohn & Wolfe), one of world's largest PR firms",
+        description: "Global PR giant with history of creating front groups and astroturf campaigns for corporate clients including tobacco, chemical, and energy industries.",
+        locations: ["Global - 100+ countries"],
+        pricing: "Major corporate contracts",
         url: null,
-        probability: 60,
-        scandals: [],
-        evidence: "Casting calls matching political event dates, actor testimonials"
+        probability: 72,
+        scandals: [
+            "Union Carbide Bhopal disaster PR",
+            "Facebook anti-Google astroturf campaign (2011)",
+            "Multiple tobacco industry front groups"
+        ],
+        evidence: "USA Today exposé (2011), industry whistleblowers, academic research"
     },
     {
         name: "Gotham Government Relations",
