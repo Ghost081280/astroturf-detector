@@ -250,26 +250,71 @@ function renderConfidence(memory) {
     }
 }
 
-// Render timeline
+// Render timeline - show HIGH-VALUE events only
 function renderTimeline(days) {
     const container = document.getElementById('timeline-events');
     const badge = document.getElementById('timeline-count');
     const seeMoreBtn = document.getElementById('timeline-see-more');
     if (!container) return;
     
+    // Build high-value timeline from scored items
+    let highValueEvents = [];
+    
+    // Add high-relevance news (≥70%)
+    allNewsItems.forEach(n => {
+        if ((n.relevance_score || 0) >= 70) {
+            highValueEvents.push({
+                type: 'news',
+                title: n.title,
+                date: n.date || new Date().toISOString(),
+                sourceUrl: n.url,
+                score: n.relevance_score,
+                scoreLabel: 'relevance'
+            });
+        }
+    });
+    
+    // Add from stored timeline if it has unique high-value items
+    allTimelineEvents.forEach(e => {
+        // Skip if it's just a news item (we already have those)
+        if (e.type === 'job_posting' || e.type === 'organization') {
+            highValueEvents.push({
+                ...e,
+                score: e.score || 50,
+                scoreLabel: e.type === 'job_posting' ? 'suspicion' : 'risk'
+            });
+        }
+    });
+    
+    // Dedupe by title
+    const seen = new Set();
+    highValueEvents = highValueEvents.filter(e => {
+        const key = (e.title || '').substring(0, 50);
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+    });
+    
+    // Filter by date range
     let filtered;
     if (days === 'all') {
-        filtered = allTimelineEvents;
+        filtered = highValueEvents;
     } else {
         const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
-        filtered = allTimelineEvents.filter(e => parseDate(e.date || e.timestamp) >= cutoff);
+        filtered = highValueEvents.filter(e => parseDate(e.date || e.timestamp) >= cutoff);
     }
     
-    filtered.sort((a, b) => parseDate(b.date || b.timestamp) - parseDate(a.date || a.timestamp));
-    badge.textContent = filtered.length + ' events';
+    // Sort by score then date
+    filtered.sort((a, b) => {
+        const scoreDiff = (b.score || 0) - (a.score || 0);
+        if (scoreDiff !== 0) return scoreDiff;
+        return parseDate(b.date || b.timestamp) - parseDate(a.date || a.timestamp);
+    });
+    
+    badge.textContent = filtered.length + ' high-value';
     
     if (!filtered.length) {
-        container.innerHTML = '<div class="empty-state">No events in ' + (days === 'all' ? 'timeline' : 'last ' + days + ' days') + '</div>';
+        container.innerHTML = '<div class="empty-state">No high-value events in ' + (days === 'all' ? 'timeline' : 'last ' + days + ' days') + '. Events appear when news relevance ≥70% or suspicious activity is detected.</div>';
         if (seeMoreBtn) seeMoreBtn.style.display = 'none';
         return;
     }
@@ -281,10 +326,13 @@ function renderTimeline(days) {
         const title = escapeHtml(e.title || 'Event');
         const url = e.sourceUrl ? escapeHtml(e.sourceUrl) : '';
         const type = e.type || 'default';
+        const score = e.score || 0;
+        const scoreClass = score >= 75 ? 'high' : score >= 50 ? 'medium' : 'low';
         
         return `<div class="timeline-event-compact">
             ${getTypeIcon(type)}
-            <span class="event-title-compact">${title.substring(0, 60)}${title.length > 60 ? '...' : ''}</span>
+            <span class="event-title-compact">${title}</span>
+            <span class="event-score ${scoreClass}">${score}%</span>
             <span class="event-time-compact">${formatRelativeTime(e.date || e.timestamp)}</span>
             ${url ? `<a href="${url}" target="_blank" class="event-link-compact" aria-label="View source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>` : ''}
         </div>`;
@@ -295,7 +343,7 @@ function renderTimeline(days) {
             seeMoreBtn.style.display = 'flex';
             seeMoreBtn.innerHTML = timelineExpanded ? 
                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="18 15 12 9 6 15"/></svg> Show Less' :
-                `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg> Show ${filtered.length - 8} More Events`;
+                `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 12 15 18 9"/></svg> Show ${filtered.length - 8} More`;
         } else {
             seeMoreBtn.style.display = 'none';
         }
@@ -346,31 +394,37 @@ function renderNews(memory) {
     }
 }
 
-// Render jobs
+// Render jobs - prioritize high suspicion scores
 function renderJobs(memory) {
     const container = document.getElementById('job-list');
     const countEl = document.getElementById('job-count');
     if (!container) return;
     
-    const jobs = memory.jobPostings || [];
-    if (countEl) countEl.textContent = memory.jobPostingPatterns?.totalJobs || jobs.length || 0;
+    let jobs = memory.jobPostings || [];
+    
+    // Sort by suspicion score descending, filter out very low scores
+    jobs = jobs
+        .filter(j => (j.suspicion_score || 0) >= 15)
+        .sort((a, b) => (b.suspicion_score || 0) - (a.suspicion_score || 0));
+    
+    if (countEl) countEl.textContent = jobs.length || 0;
     
     if (jobs.length) {
         container.innerHTML = jobs.slice(0, 8).map(j => {
             const s = j.suspicion_score || 0;
             const sc = s >= 50 ? 'high' : s >= 25 ? 'medium' : 'low';
             return `<a href="${escapeHtml(j.url || '#')}" target="_blank" class="job-item">
-                <span class="job-title">${escapeHtml((j.title || '').substring(0, 45))}${(j.title || '').length > 45 ? '...' : ''}</span>
+                <span class="job-title">${escapeHtml((j.title || '').substring(0, 50))}${(j.title || '').length > 50 ? '...' : ''}</span>
                 <span class="job-location">${escapeHtml(j.city || j.state || 'US')}</span>
                 <span class="job-score ${sc}">${s}%</span>
             </a>`;
         }).join('');
     } else {
-        container.innerHTML = '<div class="empty-state">No suspicious jobs found</div>';
+        container.innerHTML = '<div class="empty-state">No suspicious job postings detected</div>';
     }
 }
 
-// Render organizations
+// Render organizations with context about why flagged
 function renderOrganizations(memory) {
     const container = document.getElementById('org-list');
     if (!container) return;
@@ -385,12 +439,13 @@ function renderOrganizations(memory) {
             // Build URL - handle different org types
             let url = o.sourceUrl || o.url || '';
             if (!url && o.committee_id) {
-                // FEC committee - construct URL
                 url = `https://www.fec.gov/data/committee/${o.committee_id}/`;
             } else if (!url && o.ein) {
-                // ProPublica nonprofit - construct URL
                 url = `https://projects.propublica.org/nonprofits/organizations/${o.ein}`;
             }
+            
+            // Generate reason why flagged
+            const reason = getFlagReason(o);
             
             const hasLink = url && url !== '#' && url.startsWith('http');
             
@@ -400,6 +455,7 @@ function renderOrganizations(memory) {
                     <div class="org-details">
                         <div class="org-name">${escapeHtml((o.name || 'Unknown').substring(0, 40))}</div>
                         <div class="org-meta">${escapeHtml(o.state || '')}${o.first_file_date ? ' · Filed: ' + o.first_file_date : ''}</div>
+                        <div class="org-reason">${escapeHtml(reason)}</div>
                     </div>
                     <div class="org-score">${s || '-'}%</div>
                 </a>`;
@@ -409,6 +465,7 @@ function renderOrganizations(memory) {
                     <div class="org-details">
                         <div class="org-name">${escapeHtml((o.name || 'Unknown').substring(0, 40))}</div>
                         <div class="org-meta">${escapeHtml(o.state || '')}${o.first_file_date ? ' · Filed: ' + o.first_file_date : ''}</div>
+                        <div class="org-reason">${escapeHtml(reason)}</div>
                     </div>
                     <div class="org-score">${s || '-'}%</div>
                 </div>`;
@@ -417,6 +474,46 @@ function renderOrganizations(memory) {
     } else {
         container.innerHTML = '<div class="empty-state">No organizations flagged</div>';
     }
+}
+
+// Determine why an org was flagged
+function getFlagReason(org) {
+    const name = (org.name || '').toLowerCase();
+    const type = org.type || '';
+    
+    // Check naming patterns
+    if (name.includes('freedom') || name.includes('liberty')) {
+        return 'Patriotic naming pattern';
+    }
+    if (name.includes('citizens for') || name.includes('americans for')) {
+        return 'Generic advocacy naming';
+    }
+    if (name.includes('action fund') || name.includes('action pac')) {
+        return 'Dark money structure';
+    }
+    if (name.includes('voices for') || name.includes('families for')) {
+        return 'Astroturf naming pattern';
+    }
+    
+    // Check org type
+    if (type === 'new_committee') {
+        return 'Recently filed PAC';
+    }
+    if (type === 'nonprofit') {
+        return 'Nonprofit - political activity';
+    }
+    
+    // Check filing date
+    if (org.first_file_date) {
+        const filed = new Date(org.first_file_date);
+        const sixMonthsAgo = new Date();
+        sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+        if (filed > sixMonthsAgo) {
+            return 'Recently formed organization';
+        }
+    }
+    
+    return 'Pattern match detected';
 }
 
 // Render services with probability scores
