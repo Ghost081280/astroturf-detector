@@ -42,7 +42,7 @@
             
             <nav class="main-nav" id="main-nav">
                 <a href="#dashboard" class="nav-link">Dashboard</a>
-                <a href="#timeline" class="nav-link">Timeline</a>
+                <a href="#timeline" class="nav-link">Findings</a>
                 <a href="#connections" class="nav-link">Connections</a>
                 <a href="#services" class="nav-link">Known Services</a>
                 <a href="#alerts" class="nav-link">Alerts</a>
@@ -56,43 +56,62 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content centered">
-                    <h2>Real-time monitoring for manufactured movements</h2>
-                    <p class="hero-description">An open-source intelligence engine tracking paid protest activity, suspicious nonprofit formations, and coordinated astroturf campaigns across all 50 United States.</p>
-                    
-                    <div class="definition-box">
-                        <div class="definition-term">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M12 16v-4M12 8h.01"/>
-                            </svg>
-                            What is Astroturfing?
-                        </div>
-                        <p class="definition-text">Astroturfing is the practice of masking sponsors of a message to make it appear as though it originates from grassroots participants. It creates an impression of widespread support where little exists, often using paid actors, fake organizations, or coordinated campaigns.</p>
+                    <!-- Feature badge row like North Star -->
+                    <div class="feature-badges">
+                        <span class="feature-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                            Hourly scans
+                        </span>
+                        <span class="feature-arrow">→</span>
+                        <span class="feature-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                            AI-powered detection
+                        </span>
+                        <span class="feature-arrow">→</span>
+                        <span class="feature-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0018 0V5"/><path d="M3 12a9 3 0 0018 0"/></svg>
+                            6 OSINT databases
+                        </span>
                     </div>
+                    
+                    <!-- Big impactful title with accent color -->
+                    <h1 class="hero-title">Exposing <span class="text-danger">Paid Protesters</span> & Fake Grassroots</h1>
+                    
+                    <!-- Source badge -->
+                    <div class="source-badge">
+                        <span>Tracking: Crowds on Demand, FEC filings, Nonprofit 990s & more</span>
+                    </div>
+                    
+                    <!-- Description with link -->
+                    <p class="hero-description">
+                        An open-source intelligence engine that scans news hourly, cross-references 6 OSINT databases, 
+                        and exposes coordinated astroturf campaigns. Follow findings on 
+                        <a href="https://github.com/Ghost081280/astroturf-detector" target="_blank" class="hero-link">@AstroturfDetector</a>
+                    </p>
                     
                     <div class="hero-stats" id="hero-stats">
                         <a href="#timeline" class="stat-card-link">
                             <div class="stat-card">
-                                <span class="stat-value" id="stat-events">--</span>
-                                <span class="stat-label">Events</span>
+                                <span class="stat-value text-warning" id="stat-events">--</span>
+                                <span class="stat-label">FINDINGS</span>
                             </div>
                         </a>
                         <a href="#alerts" class="stat-card-link">
                             <div class="stat-card">
-                                <span class="stat-value" id="stat-alerts">--</span>
-                                <span class="stat-label">Alerts</span>
+                                <span class="stat-value text-warning" id="stat-alerts">--</span>
+                                <span class="stat-label">ALERTS</span>
                             </div>
                         </a>
                         <a href="#orgs" class="stat-card-link">
                             <div class="stat-card">
-                                <span class="stat-value" id="stat-orgs">--</span>
-                                <span class="stat-label">Orgs</span>
+                                <span class="stat-value text-warning" id="stat-orgs">--</span>
+                                <span class="stat-label">ORGS FLAGGED</span>
                             </div>
                         </a>
                         <a href="#news" class="stat-card-link">
                             <div class="stat-card">
-                                <span class="stat-value" id="stat-news">--</span>
-                                <span class="stat-label">News</span>
+                                <span class="stat-value text-warning" id="stat-news">--</span>
+                                <span class="stat-label">NEWS TRACKED</span>
                             </div>
                         </a>
                     </div>
@@ -203,12 +222,12 @@
             <div class="container">
                 <div class="section-header">
                     <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                     </svg>
-                    <h2>Activity Timeline</h2>
-                    <span class="region-badge" id="timeline-count">-- events</span>
+                    <h2>Top AI Findings</h2>
+                    <span class="region-badge" id="timeline-count">-- high-value</span>
                 </div>
+                <p class="section-subtitle">High-relevance news and suspicious patterns detected by AI analysis. Only showing items with 70%+ confidence scores.</p>
                 <div class="timeline-controls">
                     <div class="time-range-selector">
                         <button class="range-btn active" data-range="7">7 Days</button>
@@ -377,7 +396,7 @@
                 </div>
                 <div class="footer-links">
                     <a href="#dashboard">Dashboard</a>
-                    <a href="#timeline">Timeline</a>
+                    <a href="#timeline">Findings</a>
                     <a href="#connections">Connections</a>
                     <a href="#services">Known Services</a>
                     <a href="https://github.com/ghost081280/astroturf-detector" target="_blank">GitHub</a>
