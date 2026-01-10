@@ -180,6 +180,8 @@ body.menu-open {
 .hero {
     padding: 50px 0 40px;
     background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .hero-content {
@@ -189,8 +191,64 @@ body.menu-open {
 /* NEW: Centered Hero */
 .hero-content.centered {
     text-align: center;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
+}
+
+/* Feature badges row */
+.feature-badges {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.feature-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+}
+
+.feature-arrow {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+/* Big hero title */
+.hero-title {
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.text-danger {
+    color: var(--color-danger) !important;
+}
+
+.text-warning {
+    color: var(--color-warning) !important;
+}
+
+/* Source badge */
+.source-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--color-warning);
+    color: #000;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 16px;
 }
 
 .hero-content h2 {
@@ -212,10 +270,30 @@ body.menu-open {
 }
 
 .hero-description {
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: var(--color-text-secondary);
-    margin-bottom: 24px;
-    line-height: 1.7;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-link {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.hero-link:hover {
+    text-decoration: underline;
+}
+
+/* Section subtitle */
+.section-subtitle {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin: -8px 0 16px 0;
 }
 
 /* NEW: Definition Box */
@@ -1122,11 +1200,55 @@ section {
     padding: 14px;
 }
 
+.service-founder {
+    font-size: 0.75rem;
+    color: var(--color-text-primary);
+    margin-bottom: 8px;
+    padding: 8px;
+    background: var(--color-bg-hover);
+    border-radius: var(--radius-sm);
+}
+
+.service-founder strong {
+    color: var(--color-accent-primary);
+}
+
+.founder-details {
+    color: var(--color-text-muted);
+    font-size: 0.6875rem;
+}
+
 .service-body p {
     font-size: 0.75rem;
     color: var(--color-text-secondary);
     margin-bottom: 10px;
     line-height: 1.5;
+}
+
+.service-scandals {
+    font-size: 0.6875rem;
+    color: var(--color-text-secondary);
+    margin: 10px 0;
+    padding: 8px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-danger);
+}
+
+.service-scandals strong {
+    color: var(--color-danger);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.service-scandals ul {
+    margin: 0;
+    padding-left: 16px;
+}
+
+.service-scandals li {
+    margin-bottom: 2px;
+    line-height: 1.4;
 }
 
 .service-locations {
@@ -1592,6 +1714,10 @@ section {
         padding: 30px 0;
     }
     
+    .hero-title {
+        font-size: 1.75rem;
+    }
+    
     .hero-content h2 {
         font-size: 1.5rem;
     }
@@ -1602,8 +1728,27 @@ section {
     }
     
     .hero-description {
-        font-size: 1rem;
+        font-size: 0.875rem;
         margin-bottom: 20px;
+    }
+    
+    .feature-badges {
+        gap: 6px;
+        margin-bottom: 16px;
+    }
+    
+    .feature-badge {
+        padding: 4px 10px;
+        font-size: 0.6875rem;
+    }
+    
+    .feature-arrow {
+        display: none;
+    }
+    
+    .source-badge {
+        font-size: 0.6875rem;
+        padding: 4px 12px;
     }
     
     /* Definition box mobile */
