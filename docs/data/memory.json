@@ -1,5 +1,5 @@
 {
-  "lastScan": "2026-01-27T07:22:47.973988Z",
+  "lastScan": "2026-01-27T08:24:39.316476Z",
   "stats": {
     "events": 100,
     "alerts": 1,
@@ -11,15 +11,19 @@
     {
       "factor": "Naming Pattern",
       "score": 78,
-      "detail": "The high probability of the 'Naming Pattern' correlation suggests that the news articles and organizations involved may be part of a coordinated astroturf campaign."
+      "detail": "The news articles mention a common narrative around 'paid protesters', suggesting an astroturfing campaign."
     },
     {
       "factor": "Paid Protest News",
       "score": 72,
-      "detail": "The news articles mentioning 'paid protests' are a strong indicator of potential astroturf activity."
+      "detail": "The news articles directly reference claims of 'paid protesters', which is a common tactic in astroturfing."
     }
   ],
   "agentNotes": [
+    {
+      "summary": "The data suggests a potential astroturfing campaign targeting political protests in the US.",
+      "timestamp": "2026-01-27T08:24:39.316463Z"
+    },
     {
       "summary": "The data suggests the presence of an astroturf campaign, with coordinated naming patterns and paid protest news.",
       "timestamp": "2026-01-27T07:22:47.973975Z"
@@ -55,10 +59,6 @@
     {
       "summary": "The analyzed data suggests potential astroturf activity in the U.S., with patterns in news reporting, organizational involvement, and job postings indicating coordinated efforts to influence public opinion.",
       "timestamp": "2026-01-26T21:17:57.256466Z"
-    },
-    {
-      "summary": "The data suggests the presence of an astroturfing campaign targeting specific states, with potential coordination among organizations and the use of paid protesters to create a false impression of grassroots support.",
-      "timestamp": "2026-01-26T20:19:34.467844Z"
     }
   ],
   "connections": [
@@ -83,21 +83,39 @@
     },
     {
       "type": "Paid Protest News",
-      "description": "5 articles specifically about paid protesters.",
+      "description": "4 articles specifically about paid protesters.",
       "probability": 72,
       "evidence": [
         {
           "type": "News",
-          "detail": "Vikings announcer Paul Allen taking 'a few days off' after pushing paid protester conspiracy regardi"
+          "detail": "Verify: Rep. Burchett claims protesters are 'paid'"
         },
         {
           "type": "News",
-          "detail": "Verify: Rep. Tim Burchett claims protesters in Minneapolis are 'paid'"
+          "detail": "Republicans\u2019 \u2018paid protesters\u2019 nonsense takes an ugly turn in Minnesota"
         }
       ]
     }
   ],
   "timeline": [
+    {
+      "type": "news",
+      "title": "NFL announcer made uncomfortable claim about ICE protesters just day before Alex Pretti shooting",
+      "date": "2026-01-27T08:24:39.316476Z",
+      "sourceUrl": "https://www.msn.com/en-us/sports/nfl/nfl-announcer-made-uncomfortable-claim-about-ice-protesters-just-day-before-alex-pretti-shooting/ar-AA1UWHG8?ocid=BingNewsVerp"
+    },
+    {
+      "type": "news",
+      "title": "Verify: Rep. Burchett claims protesters are 'paid'",
+      "date": "2026-01-27T08:24:39.316476Z",
+      "sourceUrl": "https://www.msn.com/en-us/news/politics/verify-rep-burchett-claims-protesters-are-paid/vi-AA1V2fGk?ocid=BingNewsVerp"
+    },
+    {
+      "type": "news",
+      "title": "Republicans\u2019 \u2018paid protesters\u2019 nonsense takes an ugly turn in Minnesota",
+      "date": "2026-01-27T08:24:39.316476Z",
+      "sourceUrl": "https://www.yahoo.com/news/articles/republicans-paid-protesters-nonsense-takes-191357223.html"
+    },
     {
       "type": "news",
       "title": "Vikings announcer Paul Allen taking 'a few days off' after pushing paid protester conspiracy regarding ICE demonstrations in Minnesota",
@@ -679,24 +697,6 @@
       "title": "Republicans\u2019 \u2018paid protesters\u2019 nonsense takes an ugly turn in Minnesota",
       "date": "2026-01-25T19:12:27.615535Z",
       "sourceUrl": "https://www.yahoo.com/news/articles/republicans-paid-protesters-nonsense-takes-191357223.html"
-    },
-    {
-      "type": "news",
-      "title": "Protesters demand immigration agents leave Minneapolis after man is shot and...",
-      "date": "2026-01-25T19:12:27.615535Z",
-      "sourceUrl": "https://www.yahoo.com/news/articles/protesters-demand-immigration-agents-leave-162506099.html"
-    },
-    {
-      "type": "news",
-      "title": "'STOP TRUMP' Craigslist ad recruiting paid protesters isn't from January 2026",
-      "date": "2026-01-25T19:12:27.615535Z",
-      "sourceUrl": "https://www.msn.com/en-us/news/us/stop-trump-craigslist-ad-recruiting-paid-protesters-isnt-from-january-2026/ar-AA1UhUi9?ocid=BingNewsVerp"
-    },
-    {
-      "type": "news",
-      "title": "Republicans' 'paid protesters' nonsense takes an ugly turn in Minnesota",
-      "date": "2026-01-25T18:21:30.005198Z",
-      "sourceUrl": "https://www.yahoo.com/news/articles/republicans-paid-protesters-nonsense-takes-191357223.html"
     }
   ],
   "recentNews": [
@@ -922,108 +922,6 @@
     }
   ],
   "jobPostings": [
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Community Partnerships and Implementation Manager",
-      "company": "Akido Labs, Inc.",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5579469404?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-27T03:42:48.144906Z",
-      "salary_min": 80000,
-      "salary_max": 100000,
-      "suspicion_score": 0,
-      "keywords": [
-        "community organizer political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Mobility Coordinator",
-      "company": "GE Vernova",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5566637040?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-27T03:42:48.476798Z",
-      "salary_min": 84624.15,
-      "salary_max": 84624.15,
-      "suspicion_score": 0,
-      "keywords": [
-        "mobilization coordinator"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Economic Mobility Coordinator",
-      "company": "National Community Renaissance",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5596318741?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-27T03:42:48.476862Z",
-      "salary_min": 43680,
-      "salary_max": 47840,
-      "suspicion_score": 0,
-      "keywords": [
-        "mobilization coordinator"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Community Outreach",
-      "company": "Clean Water Action",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5581444340?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-27T04:41:37.100635Z",
-      "salary_min": 49322.66,
-      "salary_max": 49322.66,
-      "suspicion_score": 30,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Petitioner",
-      "company": "North Shore Strategies",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5599392929?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-27T04:41:36.788381Z",
-      "salary_min": 75023.98,
-      "salary_max": 75023.98,
-      "suspicion_score": 20,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Community Canvasser",
-      "company": "The Outreach Team",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5570723402?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-01-27T04:41:36.788442Z",
-      "salary_min": 45213.44,
-      "salary_max": 45213.44,
-      "suspicion_score": 20,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
     {
       "type": "job_posting",
       "source": "adzuna",
@@ -1771,6 +1669,108 @@
         "advocacy campaign"
       ],
       "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Senior Director, Campaigns & Advocacy (Houston)",
+      "company": "Confidential",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5601407612?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-01-27T08:24:32.106675Z",
+      "salary_min": 196251.98,
+      "salary_max": 196251.98,
+      "suspicion_score": 10,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Senior Director, Campaigns & Advocacy (Austin)",
+      "company": "Confidential",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5601396668?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-01-27T08:24:32.106732Z",
+      "salary_min": 253649.92,
+      "salary_max": 253649.92,
+      "suspicion_score": 10,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Senior Director, Campaigns & Advocacy (Boston)",
+      "company": "Confidential",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5601395407?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-01-27T08:24:32.106745Z",
+      "salary_min": 160463.8,
+      "salary_max": 160463.8,
+      "suspicion_score": 10,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Political Organizer, Local 1199 UHWE",
+      "company": "Current SEIU",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5530481764?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-01-27T08:24:30.990037Z",
+      "salary_min": 45525.31,
+      "salary_max": 45525.31,
+      "suspicion_score": 0,
+      "keywords": [
+        "political activist"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Corporate Service Administrator",
+      "company": "Linder Industrial Machinery Co",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5587953450?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-01-27T08:24:31.245694Z",
+      "salary_min": 61254.51,
+      "salary_max": 61254.51,
+      "suspicion_score": 0,
+      "keywords": [
+        "campaign field"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Organizing Director, SEIU Local 221",
+      "company": "Current SEIU",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5532915397?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-01-27T08:24:31.526939Z",
+      "salary_min": 110000,
+      "salary_max": 120000,
+      "suspicion_score": 0,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
     }
   ],
   "jobPostingPatterns": {
@@ -1780,373 +1780,399 @@
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00542217",
-      "committee_name": "TEXANS FOR A CONSERVATIVE MAJORITY",
-      "amount": 500000.0,
-      "date": "2026-01-21",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00843110",
-      "committee_name": "LEADERS WE DESERVE",
-      "amount": 16780.0,
-      "date": "2026-01-21",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00843110",
-      "committee_name": "LEADERS WE DESERVE",
-      "amount": 17831.7,
-      "date": "2026-01-21",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00916692",
-      "committee_name": "AMERICAN MISSION",
-      "amount": 150000.0,
-      "date": "2026-01-21",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00418897",
-      "committee_name": "VOTEVETS",
-      "amount": 40000.0,
-      "date": "2026-01-21",
-      "state": "VA"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00633248",
-      "committee_name": "314 ACTION FUND",
-      "amount": 78268.94,
-      "date": "2026-01-21",
-      "state": "IL"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00799031",
-      "committee_name": "UNITED DEMOCRACY PROJECT ('UDP')",
-      "amount": 43493.05,
-      "date": "2026-01-21",
-      "state": "NJ"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00924282",
-      "committee_name": "VETERANS DUTY FUND",
-      "amount": 278073.0,
-      "date": "2026-01-21",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00826263",
-      "committee_name": "HISPANIC LEADERSHIP ALLIANCE",
-      "amount": 16031.39,
-      "date": "2026-01-21",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00826263",
-      "committee_name": "HISPANIC LEADERSHIP ALLIANCE",
-      "amount": 3287.51,
-      "date": "2026-01-21",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00826263",
-      "committee_name": "HISPANIC LEADERSHIP ALLIANCE",
-      "amount": 16031.4,
-      "date": "2026-01-21",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00606962",
-      "committee_name": "WORKING FAMILIES PARTY PAC",
-      "amount": 80000.0,
-      "date": "2026-01-21",
-      "state": "NJ"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00365536",
-      "committee_name": "CHC BOLD PAC",
-      "amount": 204359.18,
-      "date": "2026-01-20",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00542217",
-      "committee_name": "TEXANS FOR A CONSERVATIVE MAJORITY",
-      "amount": 1080183.2,
-      "date": "2026-01-20",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00542217",
-      "committee_name": "TEXANS FOR A CONSERVATIVE MAJORITY",
-      "amount": 8500.0,
-      "date": "2026-01-20",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00916692",
-      "committee_name": "AMERICAN MISSION",
-      "amount": 354025.0,
-      "date": "2026-01-20",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00918268",
-      "committee_name": "LONE STAR RISING PAC",
-      "amount": 320000.0,
-      "date": "2026-01-20",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00931436",
-      "committee_name": "WASHINGTON RISING INC.",
-      "amount": 29085.0,
-      "date": "2026-01-20",
-      "state": "WA"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00931436",
-      "committee_name": "WASHINGTON RISING INC.",
-      "amount": 8500.0,
-      "date": "2026-01-20",
-      "state": "WA"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00931774",
-      "committee_name": "ARTICLE ONE INC. PAC",
-      "amount": 350000.0,
-      "date": "2026-01-20",
-      "state": "NJ"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00685719",
-      "committee_name": "DLGA PAC",
-      "amount": 13627.91,
-      "date": "2026-01-20",
-      "state": "NJ"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00921775",
-      "committee_name": "TEXAS PATH TO FREEDOM PAC",
-      "amount": 27213.89,
-      "date": "2026-01-20",
-      "state": "TX"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00689745",
-      "committee_name": "MAKE THE ROAD ACTION POLITICAL COMMITTEE",
-      "amount": 511.53,
-      "date": "2026-01-19",
-      "state": "NJ"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 15500.0,
-      "date": "2026-01-19",
-      "state": "NC"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 250000.0,
-      "date": "2026-01-19",
-      "state": "NC"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00924951",
-      "committee_name": "ALAMO FREEDOM FIGHTERS PAC",
-      "amount": 29967.0,
+      "committee_id": "C00698936",
+      "committee_name": "WFW ACTION FUND INC",
+      "amount": 40320.0,
       "date": "2026-01-19",
       "state": "TX"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00799031",
-      "committee_name": "UNITED DEMOCRACY PROJECT ('UDP')",
-      "amount": 50000.0,
-      "date": "2026-01-17",
-      "state": "NJ"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00799031",
-      "committee_name": "UNITED DEMOCRACY PROJECT ('UDP')",
-      "amount": 223882.0,
-      "date": "2026-01-17",
-      "state": "NJ"
+      "committee_id": "C00899419",
+      "committee_name": "PATRIOTIC FUND, INC.",
+      "amount": 4416.0,
+      "date": "2026-01-19",
+      "state": "TX"
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00935593",
-      "name": "JASON BARNES FOR PRESIDENT",
-      "committee_type": "U",
-      "first_file_date": "2026-01-20",
-      "state": "TX",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00935536",
-      "name": "NORTH GEORGIANS FOR OUR CONSERVATIVE FUTURE PAC",
+      "committee_id": "C00936153",
+      "name": "STRONGER TOGETHER PA",
       "committee_type": "O",
-      "first_file_date": "2026-01-20",
-      "state": "GA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00935395",
-      "name": "FOR OUR CHILDREN FLORIDA PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-01-20",
-      "state": "FL",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00935312",
-      "name": "GEM CITY GOOD TROUBLE",
-      "committee_type": "O",
-      "first_file_date": "2026-01-19",
-      "state": "OH",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00933689",
-      "name": "GUILFORD-ROCKINGHAM ALLIANCE",
-      "committee_type": "O",
-      "first_file_date": "2026-01-08",
-      "state": "NC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00933564",
-      "name": "COMMONWEALTH TOGETHER PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-01-08",
-      "state": "MA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00933614",
-      "name": "BLUE SHIFT PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-01-08",
+      "first_file_date": "2026-01-23",
       "state": "DC",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00933374",
-      "name": "MICHIGAN FORWARD 2026",
+      "committee_id": "C00936070",
+      "name": "SFF ACTION",
       "committee_type": "O",
-      "first_file_date": "2026-01-07",
+      "first_file_date": "2026-01-23",
+      "state": "FL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935999",
+      "name": "MINNESOTA FORWARD",
+      "committee_type": "O",
+      "first_file_date": "2026-01-22",
+      "state": "VA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00936013",
+      "name": "COLORADO DESERVES BETTER PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-01-22",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935809",
+      "name": "CHICAGO PROGRESSIVE PARTNERSHIP",
+      "committee_type": "O",
+      "first_file_date": "2026-01-22",
+      "state": "IL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935973",
+      "name": "NORTH STAR DAWN PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-01-22",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935924",
+      "name": "AMERICAN GROWTH AND OPPORTUNITY FUND",
+      "committee_type": "O",
+      "first_file_date": "2026-01-22",
+      "state": "WI",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935767",
+      "name": "1ST CONSERVATIVE FUND NC",
+      "committee_type": "O",
+      "first_file_date": "2026-01-21",
+      "state": "MA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935775",
+      "name": "LEADERS FOR DEMOCRACY",
+      "committee_type": "V",
+      "first_file_date": "2026-01-21",
+      "state": "WA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935262",
+      "name": "AMERICA UNITED COALITION INC.",
+      "committee_type": "O",
+      "first_file_date": "2026-01-19",
+      "state": "MA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935296",
+      "name": "CATHOLIC LEADERSHIP FUND",
+      "committee_type": "V",
+      "first_file_date": "2026-01-19",
+      "state": "OK",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935049",
+      "name": "AFFORDABLE CHICAGO NOW!",
+      "committee_type": "O",
+      "first_file_date": "2026-01-16",
+      "state": "IL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935015",
+      "name": "SD 2026",
+      "committee_type": "V",
+      "first_file_date": "2026-01-16",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00935072",
+      "name": "ARIZONA QUALITY PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-01-16",
+      "state": "AZ",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934976",
+      "name": "ILLINOIS AGAINST MAGA",
+      "committee_type": "O",
+      "first_file_date": "2026-01-16",
+      "state": "IL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934992",
+      "name": "ONENJ7 ACTION FUND INC.",
+      "committee_type": "O",
+      "first_file_date": "2026-01-16",
+      "state": "NJ",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934729",
+      "name": "MAIN STREET VALUES PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-01-15",
+      "state": "OH",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934885",
+      "name": "DEFUND SIERRA CLUB PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-01-15",
+      "state": "MA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934877",
+      "name": "STOP COMMUNISM PAC",
+      "committee_type": "V",
+      "first_file_date": "2026-01-15",
+      "state": "AL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934851",
+      "name": "OUR VIRGINIA",
+      "committee_type": "O",
+      "first_file_date": "2026-01-15",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934596",
+      "name": "WIRE TO WIRE FOR KENTUCKY",
+      "committee_type": "O",
+      "first_file_date": "2026-01-14",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934554",
+      "name": "CONSERVATIVE FIGHT",
+      "committee_type": "O",
+      "first_file_date": "2026-01-14",
+      "state": "FL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934653",
+      "name": "STW PAC, INC.",
+      "committee_type": "O",
+      "first_file_date": "2026-01-14",
+      "state": "VA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934570",
+      "name": "ARIZONA PATRIOTS SUPER PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-01-14",
+      "state": "AZ",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934604",
+      "name": "CONSERVATIVE FUTURE TEXAS",
+      "committee_type": "O",
+      "first_file_date": "2026-01-14",
+      "state": "VA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934463",
+      "name": "RED BAYOU PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-01-14",
       "state": "TX",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00933499",
-      "name": "COURAGE FOR DEMOCRACY",
-      "committee_type": "V",
-      "first_file_date": "2026-01-07",
-      "state": "CT",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00933416",
-      "name": "MINNESOTA FREEDOM FUND",
+      "committee_id": "C00934273",
+      "name": "DEMOCRATIC FUTURE PAC",
       "committee_type": "O",
-      "first_file_date": "2026-01-07",
-      "state": "GA",
+      "first_file_date": "2026-01-13",
+      "state": "DC",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00933325",
-      "name": "MISSOURI FOR FAIR HOUSING",
-      "committee_type": "O",
-      "first_file_date": "2026-01-07",
-      "state": "MO",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00933291",
-      "name": "TRACKER PAC",
+      "committee_id": "C00934323",
+      "name": "EQUALITY FOR ALL",
       "committee_type": "V",
-      "first_file_date": "2026-01-07",
+      "first_file_date": "2026-01-13",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934257",
+      "name": "COMIC SENSE PAC, INC.",
+      "committee_type": "O",
+      "first_file_date": "2026-01-13",
+      "state": "KY",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934356",
+      "name": "DEMOCRATS FOR THE NEXT GENERATION",
+      "committee_type": "O",
+      "first_file_date": "2026-01-13",
+      "state": "FL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934307",
+      "name": "IOWA ACTION",
+      "committee_type": "O",
+      "first_file_date": "2026-01-13",
+      "state": "IA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934232",
+      "name": "FLORIDA FOR FISHBACK PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-01-12",
+      "state": "FL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934216",
+      "name": "JOE ALVANEZ FOR SAN BERNARDINO COUNTY SUPERVISOR DISTRICT 2 2026",
+      "committee_type": "U",
+      "first_file_date": "2026-01-12",
       "state": "CA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934034",
+      "name": "DEMOCRATS TOGETHER",
+      "committee_type": "V",
+      "first_file_date": "2026-01-12",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934224",
+      "name": "HOMELAND PAC",
+      "committee_type": "V",
+      "first_file_date": "2026-01-12",
+      "state": "CO",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00933887",
+      "name": "US INNOVATORS PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-01-10",
+      "state": "TX",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00933796",
+      "name": "BLUE DEMOCRACY NETWORK",
+      "committee_type": "O",
+      "first_file_date": "2026-01-09",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00934059",
+      "name": "SENIORS EMPOWERING AN EFFECTIVE DEMOCRACY (SEED-PAC)",
+      "committee_type": "O",
+      "first_file_date": "2026-01-08",
+      "state": "PA",
       "city": null
     }
   ]
