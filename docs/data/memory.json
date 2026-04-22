@@ -1,30 +1,29 @@
 {
-  "lastScan": "2026-04-22T19:04:11.253163Z",
+  "lastScan": "2026-04-22T20:45:38.267136Z",
   "stats": {
     "events": 100,
     "alerts": 3,
     "orgs": 40,
     "newsArticles": 20
   },
-  "systemConfidence": 60,
+  "systemConfidence": 55,
   "confidenceFactors": [
     {
       "factor": "News Coverage",
       "score": 80,
-      "detail": "12 high-relevance articles"
+      "detail": "11 high-relevance articles"
     },
     {
       "factor": "Organization Risk",
       "score": 35,
       "detail": "0 high-risk orgs"
-    },
-    {
-      "factor": "Job Postings",
-      "score": 30,
-      "detail": "0 suspicious postings"
     }
   ],
   "agentNotes": [
+    {
+      "summary": "Monitoring 15 news, 15 orgs, 0 jobs. 3 alerts.",
+      "timestamp": "2026-04-22T20:45:38.266458Z"
+    },
     {
       "summary": "Monitoring 15 news, 15 orgs, 55 jobs. 3 alerts.",
       "timestamp": "2026-04-22T19:04:11.252399Z"
@@ -60,16 +59,12 @@
     {
       "summary": "Monitoring 9 news, 15 orgs, 54 jobs. 3 alerts.",
       "timestamp": "2026-04-22T06:54:12.613700Z"
-    },
-    {
-      "summary": "Monitoring 15 news, 15 orgs, 54 jobs. 3 alerts.",
-      "timestamp": "2026-04-22T04:43:03.400019Z"
     }
   ],
   "connections": [
     {
       "type": "Naming Pattern",
-      "description": "18 orgs with generic patriotic names typical of astroturf.",
+      "description": "12 orgs with generic patriotic names typical of astroturf.",
       "probability": 78,
       "evidence": [
         {
@@ -88,8 +83,8 @@
     },
     {
       "type": "Paid Protest News",
-      "description": "3 articles specifically about paid protesters.",
-      "probability": 64,
+      "description": "4 articles specifically about paid protesters.",
+      "probability": 72,
       "evidence": [
         {
           "type": "News",
@@ -97,12 +92,30 @@
         },
         {
           "type": "News",
-          "detail": "Buying or organizing? That is the 'paid protestors' question"
+          "detail": "Fact Check: Post Does NOT Prove 'No Kings' Rallies Participants Were Paid To Join Protests on March "
         }
       ]
     }
   ],
   "timeline": [
+    {
+      "type": "news",
+      "title": "Paid protests in America - the accusations that keep spreading",
+      "date": "2026-04-22T20:45:38.267136Z",
+      "sourceUrl": "https://www.msn.com/en-us/news/news/paid-protests-in-america-the-accusations-that-keep-spreading/vi-AA1VYLmL"
+    },
+    {
+      "type": "news",
+      "title": "Fact Check: Post Does NOT Prove 'No Kings' Rallies Participants Were Paid To Join Protests on March 28, 2026",
+      "date": "2026-04-22T20:45:38.267136Z",
+      "sourceUrl": "https://www.yahoo.com/news/articles/fact-check-post-does-not-013540503.html"
+    },
+    {
+      "type": "news",
+      "title": "Buying or organizing? That is the 'paid protestors' question",
+      "date": "2026-04-22T20:45:38.267136Z",
+      "sourceUrl": "https://www.times-georgian.com/news/local/buying-or-organizing-that-is-the-paid-protestors-question/article_f94ed7e7-b005-5f56-bf5b-55b234877b2d.html"
+    },
     {
       "type": "news",
       "title": "Paid protests in America - the accusations that keep spreading",
@@ -684,24 +697,6 @@
       "title": "Organizers say Saturday's events could be the biggest collective protest in U.S. history.",
       "date": "2026-04-20T16:58:07.855460Z",
       "sourceUrl": "https://www.yahoo.com/news/politics/article/the-third-no-kings-nationwide-protest-against-the-trump-administration-is-underway-across-the-us-heres-what-you-need-to-know-175415111.html"
-    },
-    {
-      "type": "news",
-      "title": "Lara Trump alleges foreign millionaires funding 'No Kings' protests, rigging Democrat primaries",
-      "date": "2026-04-20T16:58:07.855460Z",
-      "sourceUrl": "https://www.msn.com/en-us/news/news/lara-trump-alleges-foreign-millionaires-funding-no-kings-protests-rigging-democrat-primaries/ar-AA20boJR?ocid=BingNewsVerp"
-    },
-    {
-      "type": "news",
-      "title": "The third 'No Kings' protests against the Trump administration are underway across the US Here's what you need to know.",
-      "date": "2026-04-20T16:58:07.855460Z",
-      "sourceUrl": "https://www.msn.com/en-us/news/us/the-third-no-kings-protests-against-the-trump-administration-are-underway-across-the-us-heres-what-you-need-to-know/ar-AA1ZCMpQ?ocid=BingNewsVerp"
-    },
-    {
-      "type": "news",
-      "title": "British universities paid security firm to \u2018spy\u2019 on pro-Palestine students",
-      "date": "2026-04-20T15:12:24.852416Z",
-      "sourceUrl": "https://www.aljazeera.com/news/2026/4/20/uk-universities-pay-to-spy-on-students-social-media-accounts"
     }
   ],
   "recentNews": [
@@ -1785,395 +1780,362 @@
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00271338",
-      "committee_name": "AMERIPAC: THE FUND FOR A GREATER AMERICA",
-      "amount": 62386.7,
-      "date": "2026-04-17",
-      "state": "MD"
+      "committee_id": "C00829432",
+      "committee_name": "DEFENDING AMERICA'S FUTURE",
+      "amount": 23574.0,
+      "date": "2026-04-21",
+      "state": "AL"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00908707",
-      "committee_name": "BDA PAC",
-      "amount": 161611.35,
+      "committee_id": "C00882480",
+      "committee_name": "PRIVATE PROPERTY RIGHTS PAC",
+      "amount": 20000.0,
+      "date": "2026-04-21",
+      "state": "IN"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00912337",
+      "committee_name": "RED BRIDGE LEADERSHIP PAC",
+      "amount": 23144.34,
+      "date": "2026-04-21",
+      "state": "OH"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00931436",
+      "committee_name": "WASHINGTON RISING INC.",
+      "amount": 4000.0,
+      "date": "2026-04-21",
+      "state": "WA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00633248",
+      "committee_name": "314 ACTION FUND",
+      "amount": 50000.0,
+      "date": "2026-04-21",
+      "state": "PA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00944397",
+      "committee_name": "PROJECT 2026",
+      "amount": 16167.8,
+      "date": "2026-04-21",
+      "state": "SC"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00944397",
+      "committee_name": "PROJECT 2026",
+      "amount": 129718.79,
+      "date": "2026-04-21",
+      "state": "SC"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00944397",
+      "committee_name": "PROJECT 2026",
+      "amount": 31028.3,
+      "date": "2026-04-21",
+      "state": "SC"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00944397",
+      "committee_name": "PROJECT 2026",
+      "amount": 247599.43,
+      "date": "2026-04-21",
+      "state": "SC"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00898270",
+      "committee_name": "KENTUCKY FIRST ACTION",
+      "amount": 93670.35,
+      "date": "2026-04-20",
+      "state": "KY"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00898270",
+      "committee_name": "KENTUCKY FIRST ACTION",
+      "amount": 11329.45,
+      "date": "2026-04-20",
+      "state": "KY"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00685297",
+      "committee_name": "ELECT DEMOCRATIC WOMEN",
+      "amount": 261442.0,
+      "date": "2026-04-18",
+      "state": "NE"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00633248",
+      "committee_name": "314 ACTION FUND",
+      "amount": 150000.0,
+      "date": "2026-04-17",
+      "state": "PA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00906263",
+      "committee_name": "LOUISIANA FREEDOM FUND",
+      "amount": 100995.63,
+      "date": "2026-04-17",
+      "state": "LA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00573733",
+      "committee_name": "SECURITY IS STRENGTH PAC",
+      "amount": 8798.5,
+      "date": "2026-04-17",
+      "state": "SC"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00912865",
+      "committee_name": "OHIO FLYER PAC",
+      "amount": 445796.0,
       "date": "2026-04-17",
       "state": "OH"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00930966",
-      "committee_name": "ARKANSANS FOR DEMOCRACY AND JUSTICE",
-      "amount": 400.0,
+      "committee_id": "C00881011",
+      "committee_name": "UNITY & JUSTICE FUND",
+      "amount": 11034.0,
       "date": "2026-04-17",
-      "state": "AR"
+      "state": "NC"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00559740",
-      "committee_name": "GOPAC ELECTION FUND",
-      "amount": 21924.0,
+      "committee_id": "C00888081",
+      "committee_name": "HEALTH CARE SAVES LIVES",
+      "amount": 17319.0,
       "date": "2026-04-17",
-      "state": "GA"
+      "state": "CA"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00559740",
-      "committee_name": "GOPAC ELECTION FUND",
-      "amount": 160000.0,
+      "committee_id": "C00943753",
+      "committee_name": "KENTUCKY 4TH PAC",
+      "amount": 39600.0,
       "date": "2026-04-17",
-      "state": "GA"
+      "state": "KY"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00559740",
-      "committee_name": "GOPAC ELECTION FUND",
-      "amount": 32490.0,
+      "committee_id": "C00944371",
+      "committee_name": "KY PAC",
+      "amount": 15784.0,
       "date": "2026-04-17",
-      "state": "GA"
+      "state": "KY"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00559740",
-      "committee_name": "GOPAC ELECTION FUND",
-      "amount": 14000.0,
+      "committee_id": "C00940346",
+      "committee_name": "SERVING CA",
+      "amount": 1000.0,
+      "date": "2026-04-17",
+      "state": "CA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00940346",
+      "committee_name": "SERVING CA",
+      "amount": 1668.54,
+      "date": "2026-04-17",
+      "state": "CA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00940346",
+      "committee_name": "SERVING CA",
+      "amount": 8342.7,
+      "date": "2026-04-17",
+      "state": "CA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00606962",
+      "committee_name": "WORKING FAMILIES PARTY PAC",
+      "amount": 75000.0,
+      "date": "2026-04-17",
+      "state": "CA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00728386",
+      "committee_name": "DEFEATING COMMUNISM PAC",
+      "amount": 350000.0,
+      "date": "2026-04-17",
+      "state": "KY"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00524181",
+      "committee_name": "SENATE CONSERVATIVES ACTION",
+      "amount": 10803.47,
+      "date": "2026-04-17",
+      "state": "PA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00524181",
+      "committee_name": "SENATE CONSERVATIVES ACTION",
+      "amount": 10803.47,
+      "date": "2026-04-17",
+      "state": "IA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00524181",
+      "committee_name": "SENATE CONSERVATIVES ACTION",
+      "amount": 10803.47,
+      "date": "2026-04-17",
+      "state": "TX"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00524181",
+      "committee_name": "SENATE CONSERVATIVES ACTION",
+      "amount": 10803.47,
+      "date": "2026-04-17",
+      "state": "AZ"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00524181",
+      "committee_name": "SENATE CONSERVATIVES ACTION",
+      "amount": 10803.47,
+      "date": "2026-04-17",
+      "state": "AK"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00844613",
+      "committee_name": "WIN IT BACK PAC",
+      "amount": 183.74,
+      "date": "2026-04-17",
+      "state": "TX"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00448696",
+      "committee_name": "SENATE CONSERVATIVES FUND",
+      "amount": 2666.67,
       "date": "2026-04-17",
       "state": "OK"
     },
     {
-      "type": "new_committee",
+      "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00947275",
-      "name": "CALIFORNIA CONSERVATIVES PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-15",
-      "state": "MA",
-      "city": null
+      "committee_id": "C00685297",
+      "committee_name": "ELECT DEMOCRATIC WOMEN",
+      "amount": 38558.0,
+      "date": "2026-04-16",
+      "state": "NE"
     },
     {
-      "type": "new_committee",
+      "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00947309",
-      "name": "RISE FLORIDA RISE",
-      "committee_type": "O",
-      "first_file_date": "2026-04-15",
-      "state": "FL",
-      "city": null
+      "committee_id": "C00848440",
+      "committee_name": "PROTECT PROGRESS",
+      "amount": 56045.0,
+      "date": "2026-04-16",
+      "state": "GA"
     },
     {
-      "type": "new_committee",
+      "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00947150",
-      "name": "KIRIRAKOS MITSOTAKIS ANDREAS KATSANIOTIS NEA DIMOKRATIA GREECE",
-      "committee_type": "U",
-      "first_file_date": "2026-04-14",
-      "state": "WA",
-      "city": null
+      "committee_id": "C90023383",
+      "committee_name": "ISSUE ONE ACTION",
+      "amount": 7335.12,
+      "date": "2026-04-16",
+      "state": "KY"
     },
     {
-      "type": "new_committee",
+      "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00947218",
-      "name": "AMERICANS FOR A HUMAN FUTURE",
-      "committee_type": "O",
-      "first_file_date": "2026-04-14",
-      "state": "IL",
-      "city": null
+      "committee_id": "C90023383",
+      "committee_name": "ISSUE ONE ACTION",
+      "amount": 9625.0,
+      "date": "2026-04-16",
+      "state": "KY"
     },
     {
-      "type": "new_committee",
+      "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00947200",
-      "name": "LOWCOUNTRY PATRIOT FUND",
-      "committee_type": "V",
-      "first_file_date": "2026-04-14",
-      "state": "VA",
-      "city": null
+      "committee_id": "C90023383",
+      "committee_name": "ISSUE ONE ACTION",
+      "amount": 80166.74,
+      "date": "2026-04-16",
+      "state": "KY"
     },
     {
-      "type": "new_committee",
+      "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00947242",
-      "name": "DEFEAT THE MACHINE",
-      "committee_type": "O",
-      "first_file_date": "2026-04-14",
-      "state": "VA",
-      "city": null
+      "committee_id": "C00881011",
+      "committee_name": "UNITY & JUSTICE FUND",
+      "amount": 219.35,
+      "date": "2026-04-16",
+      "state": "IL"
     },
     {
-      "type": "new_committee",
+      "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00947093",
-      "name": "UNITED FOR DEMOCRACY",
-      "committee_type": "V",
-      "first_file_date": "2026-04-13",
-      "state": "IN",
-      "city": null
+      "committee_id": "C00881011",
+      "committee_name": "UNITY & JUSTICE FUND",
+      "amount": 310.78,
+      "date": "2026-04-16",
+      "state": "IL"
     },
     {
-      "type": "new_committee",
+      "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00947135",
-      "name": "STOP MAGA JUDGES PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-04-13",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00947028",
-      "name": "PHILLY FIRST SUPER PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-11",
-      "state": "PA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946848",
-      "name": "BRONX UNITY",
-      "committee_type": "O",
-      "first_file_date": "2026-04-10",
-      "state": "NY",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946913",
-      "name": "FUTURE PREDICT INC.",
-      "committee_type": "O",
-      "first_file_date": "2026-04-10",
-      "state": "MA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946855",
-      "name": "HUMANITY ABOVE ARTIFICIAL INTELLIGENCE PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-04-10",
-      "state": "VA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946921",
-      "name": "LEAD MAINE COMMITTEE, INC.",
-      "committee_type": "O",
-      "first_file_date": "2026-04-10",
-      "state": "ME",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946905",
-      "name": "MARKET FREEDOM PAC INC.",
-      "committee_type": "O",
-      "first_file_date": "2026-04-10",
-      "state": "MA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946814",
-      "name": "AMERICA FIRST WARRIOR PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-09",
-      "state": "VA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946822",
-      "name": "STOP KINGS",
-      "committee_type": "V",
-      "first_file_date": "2026-04-09",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946830",
-      "name": "YOU CAN PUSH BACK",
-      "committee_type": "O",
-      "first_file_date": "2026-04-09",
-      "state": "CA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946715",
-      "name": "CITIZENS FOR A STRONGER NATION",
-      "committee_type": "V",
-      "first_file_date": "2026-04-08",
-      "state": "NC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946772",
-      "name": "PROGRESSIVE TURNOUT PROJECT 2026",
-      "committee_type": "V",
-      "first_file_date": "2026-04-08",
-      "state": "IL",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946590",
-      "name": "MAKING CONGRESS GREAT AGAIN PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-07",
-      "state": "WI",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946624",
-      "name": "PROTECTING WYOMING VALUES",
-      "committee_type": "O",
-      "first_file_date": "2026-04-07",
-      "state": "WI",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946574",
-      "name": "TENNESSEE STAND PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-07",
-      "state": "TN",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946533",
-      "name": "FIGHT FASCISM (FF)",
-      "committee_type": "V",
-      "first_file_date": "2026-04-07",
-      "state": "TX",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946640",
-      "name": "RESTORE AMERICA'S MISSION (RAM) PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-07",
-      "state": "MD",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946608",
-      "name": "KEEP IT ALASKA PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-07",
-      "state": "WI",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946509",
-      "name": "CALIFORNIA DEMOCRACY ALLIANCE",
-      "committee_type": "O",
-      "first_file_date": "2026-04-06",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946376",
-      "name": "ANTHROPPAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-06",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946327",
-      "name": "LGM PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-04",
-      "state": "PA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946301",
-      "name": "RON FIFE FOR CONGRESS",
-      "committee_type": "U",
-      "first_file_date": "2026-04-04",
-      "state": "CA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946129",
-      "name": "POLICE CRIMELINE ACTION FUND",
-      "committee_type": "O",
-      "first_file_date": "2026-04-03",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946186",
-      "name": "AMERICANS FOR AN EFFICIENT GOVERNMENT PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-03",
-      "state": "VA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946178",
-      "name": "SHOW ME VALOR PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-03",
-      "state": "WI",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00946210",
-      "name": "FLORIDIANS FOR GOOD GOVERNMENT JAXPAC",
-      "committee_type": "O",
-      "first_file_date": "2026-04-03",
-      "state": "FL",
-      "city": null
+      "committee_id": "C00881011",
+      "committee_name": "UNITY & JUSTICE FUND",
+      "amount": 14.25,
+      "date": "2026-04-16",
+      "state": "IL"
     }
   ]
 }
