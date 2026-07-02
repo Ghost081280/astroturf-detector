@@ -1,8 +1,8 @@
 {
-  "lastScan": "2026-07-02T06:33:43.552996Z",
+  "lastScan": "2026-07-02T09:55:28.230123Z",
   "stats": {
     "events": 100,
-    "alerts": 3,
+    "alerts": 2,
     "orgs": 40,
     "newsArticles": 20
   },
@@ -11,7 +11,7 @@
     {
       "factor": "News Coverage",
       "score": 80,
-      "detail": "6 high-relevance articles"
+      "detail": "7 high-relevance articles"
     },
     {
       "factor": "Organization Risk",
@@ -25,6 +25,10 @@
     }
   ],
   "agentNotes": [
+    {
+      "summary": "Monitoring 15 news, 14 orgs, 56 jobs. 2 alerts.",
+      "timestamp": "2026-07-02T09:55:28.229285Z"
+    },
     {
       "summary": "Monitoring 15 news, 14 orgs, 57 jobs. 3 alerts.",
       "timestamp": "2026-07-02T06:33:43.552079Z"
@@ -60,16 +64,12 @@
     {
       "summary": "Monitoring 12 news, 14 orgs, 57 jobs. 3 alerts.",
       "timestamp": "2026-07-01T09:33:28.772840Z"
-    },
-    {
-      "summary": "Monitoring 12 news, 14 orgs, 58 jobs. 3 alerts.",
-      "timestamp": "2026-07-01T05:16:41.377317Z"
     }
   ],
   "connections": [
     {
       "type": "Naming Pattern",
-      "description": "14 orgs with generic patriotic names typical of astroturf.",
+      "description": "11 orgs with generic patriotic names typical of astroturf.",
       "probability": 78,
       "evidence": [
         {
@@ -85,24 +85,27 @@
           "detail": "Citizens For Peace"
         }
       ]
-    },
-    {
-      "type": "Paid Protest News",
-      "description": "5 articles specifically about paid protesters.",
-      "probability": 72,
-      "evidence": [
-        {
-          "type": "News",
-          "detail": "Paid protests in America - the accusations that keep spreading"
-        },
-        {
-          "type": "News",
-          "detail": "Are Minneapolis protesters paid, like the Trump administration says? Here's a fact check"
-        }
-      ]
     }
   ],
   "timeline": [
+    {
+      "type": "news",
+      "title": "The brazen ad for rent-a-crowd protesters to attend anti-Israel rally in Melbourne",
+      "date": "2026-07-02T09:55:28.230123Z",
+      "sourceUrl": "https://www.msn.com/en-in/news/other/the-brazen-ad-for-rent-a-crowd-protesters-to-attend-anti-israel-rally-in-melbourne/ar-AA1WVqBb?ocid=BingNewsVerp"
+    },
+    {
+      "type": "news",
+      "title": "Phoenix officer accused of provoking student protesters on paid leave",
+      "date": "2026-07-02T09:55:28.230123Z",
+      "sourceUrl": "https://www.aol.com/articles/phoenix-officer-accused-provoking-student-015721361.html"
+    },
+    {
+      "type": "news",
+      "title": "A fearless protester was hit by a car at Delaney Hall. Here\u2019s why it didn\u2019t stop...",
+      "date": "2026-07-02T09:55:28.230123Z",
+      "sourceUrl": "https://www.yahoo.com/news/us/articles/fearless-protester-run-over-car-113140621.html"
+    },
     {
       "type": "news",
       "title": "Paid protests in America - the accusations that keep spreading",
@@ -684,24 +687,6 @@
       "title": "Paid protests in America - the accusations that keep spreading",
       "date": "2026-06-28T17:01:50.647920Z",
       "sourceUrl": "https://www.msn.com/en-us/money/news/paid-protests-in-america-the-accusations-that-keep-spreading/vi-AA1VYLmL"
-    },
-    {
-      "type": "news",
-      "title": "Trump says Delaney Hall protesters are 'paid' as clashes escalate outside NJ ICE facility",
-      "date": "2026-06-28T17:01:50.647920Z",
-      "sourceUrl": "https://www.yahoo.com/news/politics/articles/trump-says-delaney-hall-protesters-222333517.html"
-    },
-    {
-      "type": "news",
-      "title": "Are Minneapolis protesters paid, like the Trump administration says? Here's a fact check",
-      "date": "2026-06-28T17:01:50.647920Z",
-      "sourceUrl": "https://www.msn.com/en-ca/news/us/are-minneapolis-protesters-paid-like-the-trump-administration-says-here-s-a-fact-check/ar-AA1W1ReG"
-    },
-    {
-      "type": "news",
-      "title": "Phoenix officer accused of provoking student protesters on paid leave",
-      "date": "2026-06-28T15:13:11.352100Z",
-      "sourceUrl": "https://www.aol.com/articles/phoenix-officer-accused-provoking-student-015721361.html"
     }
   ],
   "recentNews": [
@@ -927,499 +912,6 @@
     }
   ],
   "jobPostings": [
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Director, Political Engagement \u2013 Southwest Region",
-      "company": "AIPAC",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5620913907?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T02:37:06.940973Z",
-      "salary_min": 125000,
-      "salary_max": 165000,
-      "suspicion_score": 0,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Field Campaigns Lead",
-      "company": "Salesforce",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5763447771?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T02:37:07.154961Z",
-      "salary_min": 221285.72,
-      "salary_max": 221285.72,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Sales Representative",
-      "company": "Lbc International Inc",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5763194824?se=at7l6r518RGb2oUBK2cczQ&utm_medium=api&utm_source=a70fa881&v=EB2780E26934F8C54E6366CD774B29F3886CFC01",
-      "date": "2026-07-02T02:37:07.154999Z",
-      "salary_min": 51914.69,
-      "salary_max": 51914.69,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Sr Digital Experience Marketing Manager",
-      "company": "Conga",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5721289061?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T02:37:07.155020Z",
-      "salary_min": 89460,
-      "salary_max": 143140,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Marketing Coordinator",
-      "company": "Dreamfields Brand Inc",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5768999670?se=at7l6r518RGb2oUBK2cczQ&utm_medium=api&utm_source=a70fa881&v=1D2F7E8DA0509E7CE253F7211A64BAB0E79479E5",
-      "date": "2026-07-02T02:37:07.155042Z",
-      "salary_min": 42773.11,
-      "salary_max": 42773.11,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Sr Field Marketing Manager, Amazon Business",
-      "company": "Amazon",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5710742715?se=at7l6r518RGb2oUBK2cczQ&utm_medium=api&utm_source=a70fa881&v=6AC49758986D3841A3D8EC700603D3810741110D",
-      "date": "2026-07-02T02:37:07.155122Z",
-      "salary_min": 273466.97,
-      "salary_max": 273466.97,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Driver",
-      "company": "Meadow Falls of Rocky River",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5680425305?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T02:37:07.432220Z",
-      "salary_min": 45167.97,
-      "salary_max": 45167.97,
-      "suspicion_score": 0,
-      "keywords": [
-        "community organizer political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Co-Responding Mobile Coordinator",
-      "company": "NORTH SUFFOLK COMMUNITY SERVICES INC",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5782839380?se=RuEz67518RG075onbIWOaw&utm_medium=api&utm_source=a70fa881&v=5D3FD3DED82F09CFD35B258152F1AC88B4AB52EE",
-      "date": "2026-07-02T02:37:07.722529Z",
-      "salary_min": 62741.7,
-      "salary_max": 62741.7,
-      "suspicion_score": 0,
-      "keywords": [
-        "mobilization coordinator"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Co-Responding Mobile Coordinator - Per Diem",
-      "company": "NORTH SUFFOLK COMMUNITY SERVICES INC",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5783930866?se=RuEz67518RG075onbIWOaw&utm_medium=api&utm_source=a70fa881&v=CBE8393CA11E15FBC5AB101E984070036DF3F25C",
-      "date": "2026-07-02T02:37:07.722604Z",
-      "salary_min": 71451.28,
-      "salary_max": 71451.28,
-      "suspicion_score": 0,
-      "keywords": [
-        "mobilization coordinator"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Immigration and Global Mobility Coordinator: 26-00080",
-      "company": "Platinum Resource Group",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5780806323?se=RuEz67518RG075onbIWOaw&utm_medium=api&utm_source=a70fa881&v=DC4DFF97C7CE083813BB2FC2827FEA2335051815",
-      "date": "2026-07-02T02:37:07.722627Z",
-      "salary_min": 73902.7,
-      "salary_max": 73902.7,
-      "suspicion_score": 0,
-      "keywords": [
-        "mobilization coordinator"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "LMSW Program Coordinator for Children Mobile Crisis Team",
-      "company": "VNS Health",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5783636811?se=RuEz67518RG075onbIWOaw&utm_medium=api&utm_source=a70fa881&v=6A37C4ECCC86BD87704B837897E1B66F96433914",
-      "date": "2026-07-02T02:37:07.722693Z",
-      "salary_min": 119051.58,
-      "salary_max": 119051.58,
-      "suspicion_score": 0,
-      "keywords": [
-        "mobilization coordinator"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Ford Mobile Service Coordinator",
-      "company": "Stivers Automotive Group",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5755575943?se=RuEz67518RG075onbIWOaw&utm_medium=api&utm_source=a70fa881&v=742D06D746FEC60BEF9E5A7D2F3E45DCCD722E3B",
-      "date": "2026-07-02T02:37:07.722714Z",
-      "salary_min": 58684.22,
-      "salary_max": 58684.22,
-      "suspicion_score": 0,
-      "keywords": [
-        "mobilization coordinator"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Director/Senior Director of Policy and Campaigns",
-      "company": "Healthier Colorado",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5756847310?se=kqlb67518RGkh8sIF4x1Ew&utm_medium=api&utm_source=a70fa881&v=EF7872821009171104BE75B8AD3D60992343E31E",
-      "date": "2026-07-02T02:37:08.028178Z",
-      "salary_min": 151852.66,
-      "salary_max": 151852.66,
-      "suspicion_score": 0,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Production Assistant",
-      "company": "TSG - The Sheridan Group",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5767926289?se=kqlb67518RGkh8sIF4x1Ew&utm_medium=api&utm_source=a70fa881&v=33EA5F7B922DF8EC7EAFFE6D5C60872D41BEE70D",
-      "date": "2026-07-02T02:37:08.028206Z",
-      "salary_min": 46000,
-      "salary_max": 58000,
-      "suspicion_score": 0,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Trimmer Operator",
-      "company": "TSG - The Sheridan Group",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5773514796?se=kqlb67518RGkh8sIF4x1Ew&utm_medium=api&utm_source=a70fa881&v=3C6DDE5745AED19A9634928B3D919ACF6A2F08EE",
-      "date": "2026-07-02T02:37:08.028232Z",
-      "salary_min": 44000,
-      "salary_max": 54000,
-      "suspicion_score": 0,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Field Canvasser",
-      "company": "Mobilize Michigan",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5632260612?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:38.863900Z",
-      "salary_min": 55089.25,
-      "salary_max": 55089.25,
-      "suspicion_score": 30,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Community Petitioner",
-      "company": "The Outreach Team",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5768376108?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:38.619795Z",
-      "salary_min": 50486.59,
-      "salary_max": 50486.59,
-      "suspicion_score": 25,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Canvass Manager - Baltimore",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5731134687?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:38.355061Z",
-      "salary_min": 53372.95,
-      "salary_max": 53372.95,
-      "suspicion_score": 20,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Canvass Manager - Fulton County",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5731198854?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:38.355076Z",
-      "salary_min": 54740.98,
-      "salary_max": 54740.98,
-      "suspicion_score": 20,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Regional Canvass Manager - Bel Air",
-      "company": "Civics Education Project",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5731295881?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:38.863964Z",
-      "salary_min": 59446.62,
-      "salary_max": 59446.62,
-      "suspicion_score": 20,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Manager, Government Relations & Grassroots Ad",
-      "company": "Lupus Foundation of America",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5782833770?se=MjnN9t918RGkS_qvTk-4qA&utm_medium=api&utm_source=a70fa881&v=E18BC70E7ADA8572683CE9C330266A1A5029C06E",
-      "date": "2026-07-02T06:33:40.718308Z",
-      "salary_min": 88354,
-      "salary_max": 88354,
-      "suspicion_score": 20,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Petition Circulator",
-      "company": "The Outreach Team",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5746765997?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:38.619829Z",
-      "salary_min": 69971.87,
-      "salary_max": 69971.87,
-      "suspicion_score": 15,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "1.1 Regional Canvass Manager",
-      "company": "Kingston Strategy",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5222440372?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:38.354999Z",
-      "salary_min": 72867.07,
-      "salary_max": 72867.07,
-      "suspicion_score": 10,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Senior Manager, Political Programs & Grassroots",
-      "company": "National Association Of Chain",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5763720749?se=0M_L9d918RGt3dtJYsVrNQ&utm_medium=api&utm_source=a70fa881&v=A1D7CA752837174C4C9E094E0202BBD71DBDC770",
-      "date": "2026-07-02T06:33:38.863813Z",
-      "salary_min": 99733.39,
-      "salary_max": 99733.39,
-      "suspicion_score": 10,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Roles",
-      "company": "Talarico for Texas",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5408399336?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:38.863855Z",
-      "salary_min": 58642.65,
-      "salary_max": 58642.65,
-      "suspicion_score": 10,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "State Director, Arkansas",
-      "company": "Stand Together",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5774422018?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:38.864018Z",
-      "salary_min": 185945.39,
-      "salary_max": 185945.39,
-      "suspicion_score": 10,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Regional Political Engagement Director",
-      "company": "AIPAC",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/4950628330?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:39.208765Z",
-      "salary_min": 125000,
-      "salary_max": 165000,
-      "suspicion_score": 10,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Organizer I",
-      "company": "Service Employees International Union",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5763409100?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:39.208858Z",
-      "salary_min": 74341,
-      "salary_max": 78104,
-      "suspicion_score": 10,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Organizer, SEIU Local 1199",
-      "company": "Current SEIU",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5561467572?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-02T06:33:39.208950Z",
-      "salary_min": 46556.62,
-      "salary_max": 46556.62,
-      "suspicion_score": 10,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
     {
       "type": "job_posting",
       "source": "adzuna",
@@ -1776,92 +1268,505 @@
         "advocacy campaign"
       ],
       "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Canvasser - Colorado's 8th Congressional District",
+      "company": "North Shore Strategies",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5765030467?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:53.294339Z",
+      "salary_min": 104462.1,
+      "salary_max": 104462.1,
+      "suspicion_score": 25,
+      "keywords": [
+        "canvasser political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Canvass Manager - Annapolis",
+      "company": "Civics Education Project",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5731284815?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:53.294464Z",
+      "salary_min": 71901.89,
+      "salary_max": 71901.89,
+      "suspicion_score": 20,
+      "keywords": [
+        "canvasser political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Canvass Manager - Columbia",
+      "company": "Civics Education Project",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5731131499?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:53.294487Z",
+      "salary_min": 59297.31,
+      "salary_max": 59297.31,
+      "suspicion_score": 20,
+      "keywords": [
+        "canvasser political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Regional Canvass Manager - Baltimore",
+      "company": "Civics Education Project",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5732182902?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:53.841280Z",
+      "salary_min": 51053.61,
+      "salary_max": 51053.61,
+      "suspicion_score": 20,
+      "keywords": [
+        "grassroots organizer"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Regional Canvass Manager - Annapolis",
+      "company": "Civics Education Project",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5731126673?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:53.841322Z",
+      "salary_min": 68172.66,
+      "salary_max": 68172.66,
+      "suspicion_score": 20,
+      "keywords": [
+        "grassroots organizer"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Manager, Government Relations & Grassroots Ad",
+      "company": "Lupus Foundation of America",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5782833770?se=8BzZE_x18RGt3dtJYsVrNQ&utm_medium=api&utm_source=a70fa881&v=E18BC70E7ADA8572683CE9C330266A1A5029C06E",
+      "date": "2026-07-02T09:54:55.189223Z",
+      "salary_min": 88354,
+      "salary_max": 88354,
+      "suspicion_score": 20,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Petition Circulator: Expand Affordable Housing",
+      "company": "The Outreach Team",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5768376130?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:53.592238Z",
+      "salary_min": 40756.62,
+      "salary_max": 40756.62,
+      "suspicion_score": 15,
+      "keywords": [
+        "petition signature"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "2.1 Regional Canvass Manager",
+      "company": "Kingston Strategy",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5502477463?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:53.294419Z",
+      "salary_min": 59676.39,
+      "salary_max": 59676.39,
+      "suspicion_score": 10,
+      "keywords": [
+        "canvasser political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Senior Manager, Political Programs & Grassroots",
+      "company": "National Association Of Chain",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5763720749?se=ohwKE_x18RGt3dtJYsVrNQ&utm_medium=api&utm_source=a70fa881&v=A1D7CA752837174C4C9E094E0202BBD71DBDC770",
+      "date": "2026-07-02T09:54:53.841172Z",
+      "salary_min": 99733.39,
+      "salary_max": 99733.39,
+      "suspicion_score": 10,
+      "keywords": [
+        "grassroots organizer"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Coordinator (Strategic Campaign Manager)",
+      "company": "Service Employees International Union",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5639894384?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:54.695631Z",
+      "salary_min": 113083,
+      "salary_max": 118808,
+      "suspicion_score": 10,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Community and Advocacy Organizer",
+      "company": "Nc Association Of Ed",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/4811113387?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:54.695667Z",
+      "salary_min": 90420.45,
+      "salary_max": 90420.45,
+      "suspicion_score": 10,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Policy & Advocacy Strategist",
+      "company": "Aclu Foundation Of Texas",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5758319808?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:54.695711Z",
+      "salary_min": 84000,
+      "salary_max": 90000,
+      "suspicion_score": 10,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Advocacy Campaign Strategist, Elections and Government Program",
+      "company": "Brennan Center for Justice",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5683283119?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:55.189111Z",
+      "salary_min": 103441.5,
+      "salary_max": 103441.5,
+      "suspicion_score": 10,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Senior Administrator, Policy, Advocacy & Campaigns (S3)",
+      "company": "Save the Children 2022",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5730159207?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:55.189177Z",
+      "salary_min": 55250,
+      "salary_max": 61750,
+      "suspicion_score": 10,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Revenue Clerk",
+      "company": "Montgomery County",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5726742877?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:52.816515Z",
+      "salary_min": 45884,
+      "salary_max": 61193,
+      "suspicion_score": 0,
+      "keywords": [
+        "paid protest"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Field Marketing Manager",
+      "company": "Erie Home",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5749723185?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:53.294294Z",
+      "salary_min": 112944,
+      "salary_max": 112944,
+      "suspicion_score": 0,
+      "keywords": [
+        "canvasser political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "2026-2027 Democracy In Action Fellowship Application",
+      "company": "Mississippi Votes",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5722537649?se=ohwKE_x18RGt3dtJYsVrNQ&utm_medium=api&utm_source=a70fa881&v=1629B75A148FD23E1CCC1E7612EE706C5FDDF3CD",
+      "date": "2026-07-02T09:54:53.841238Z",
+      "salary_min": 48987.72,
+      "salary_max": 48987.72,
+      "suspicion_score": 0,
+      "keywords": [
+        "grassroots organizer"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "LEGISLATIVE AND REGULATORY AFFAIRS DIRECTOR AT HOUSING CALIFORNIA",
+      "company": "Axis Talent Partners",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5758532695?se=ohwKE_x18RGt3dtJYsVrNQ&utm_medium=api&utm_source=a70fa881&v=9BE471C4B87085F84A12CD86E467CFEFAE6EDD89",
+      "date": "2026-07-02T09:54:53.841338Z",
+      "salary_min": 150000,
+      "salary_max": 150000,
+      "suspicion_score": 0,
+      "keywords": [
+        "grassroots organizer"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Coordinator, Political Operations - Central States",
+      "company": "AIPAC",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5751639629?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:54.071215Z",
+      "salary_min": 50000,
+      "salary_max": 65000,
+      "suspicion_score": 0,
+      "keywords": [
+        "political activist"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Marketing Coordinator",
+      "company": "Dreamfields Brand Inc",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5768999670?se=5pRXE_x18RG6r8FOSQ_5ag&utm_medium=api&utm_source=a70fa881&v=1D2F7E8DA0509E7CE253F7211A64BAB0E79479E5",
+      "date": "2026-07-02T09:54:54.405323Z",
+      "salary_min": 42773.11,
+      "salary_max": 42773.11,
+      "suspicion_score": 0,
+      "keywords": [
+        "campaign field"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Sr Field Marketing Manager, Amazon Business",
+      "company": "Amazon",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5710742715?se=5pRXE_x18RG6r8FOSQ_5ag&utm_medium=api&utm_source=a70fa881&v=6AC49758986D3841A3D8EC700603D3810741110D",
+      "date": "2026-07-02T09:54:54.405409Z",
+      "salary_min": 273466.97,
+      "salary_max": 273466.97,
+      "suspicion_score": 0,
+      "keywords": [
+        "campaign field"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Security Manager",
+      "company": "Graham-Windham Inc.",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5391630274?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:54.695546Z",
+      "salary_min": 68501.32,
+      "salary_max": 68501.32,
+      "suspicion_score": 0,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Shift Supervisor",
+      "company": "Graham-Windham Inc.",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5391538151?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:54.695591Z",
+      "salary_min": 54605.57,
+      "salary_max": 54605.57,
+      "suspicion_score": 0,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Organizing Director, SEIU Local 221",
+      "company": "Current SEIU",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5532915397?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-02T09:54:54.695609Z",
+      "salary_min": 110000,
+      "salary_max": 120000,
+      "suspicion_score": 0,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Immigration and Global Mobility Coordinator: 26-00080",
+      "company": "Platinum Resource Group",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5780806323?se=qgO2E_x18RGOeNvhEByHAg&utm_medium=api&utm_source=a70fa881&v=DC4DFF97C7CE083813BB2FC2827FEA2335051815",
+      "date": "2026-07-02T09:54:54.937156Z",
+      "salary_min": 73902.7,
+      "salary_max": 73902.7,
+      "suspicion_score": 0,
+      "keywords": [
+        "mobilization coordinator"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "LMSW Program Coordinator for Children Mobile Crisis Team",
+      "company": "VNS Health",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5783636811?se=qgO2E_x18RGOeNvhEByHAg&utm_medium=api&utm_source=a70fa881&v=6A37C4ECCC86BD87704B837897E1B66F96433914",
+      "date": "2026-07-02T09:54:54.937274Z",
+      "salary_min": 119051.58,
+      "salary_max": 119051.58,
+      "suspicion_score": 0,
+      "keywords": [
+        "mobilization coordinator"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Director/Senior Director of Policy and Campaigns",
+      "company": "Healthier Colorado",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5756847310?se=8BzZE_x18RGt3dtJYsVrNQ&utm_medium=api&utm_source=a70fa881&v=EF7872821009171104BE75B8AD3D60992343E31E",
+      "date": "2026-07-02T09:54:55.189245Z",
+      "salary_min": 151852.66,
+      "salary_max": 151852.66,
+      "suspicion_score": 0,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Production Assistant",
+      "company": "TSG - The Sheridan Group",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5767926289?se=8BzZE_x18RGt3dtJYsVrNQ&utm_medium=api&utm_source=a70fa881&v=33EA5F7B922DF8EC7EAFFE6D5C60872D41BEE70D",
+      "date": "2026-07-02T09:54:55.189266Z",
+      "salary_min": 46000,
+      "salary_max": 58000,
+      "suspicion_score": 0,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Trimmer Operator",
+      "company": "TSG - The Sheridan Group",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5773514796?se=8BzZE_x18RGt3dtJYsVrNQ&utm_medium=api&utm_source=a70fa881&v=3C6DDE5745AED19A9634928B3D919ACF6A2F08EE",
+      "date": "2026-07-02T09:54:55.189287Z",
+      "salary_min": 44000,
+      "salary_max": 54000,
+      "suspicion_score": 0,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
     }
   ],
   "jobPostingPatterns": {
     "totalJobs": 50
   },
   "flaggedOrganizations": [
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00954636",
-      "name": "AMERICA 250 PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-06-26",
-      "state": "CA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00954503",
-      "name": "WORKING CLASS MAJORITY PAC, INC",
-      "committee_type": "V",
-      "first_file_date": "2026-06-25",
-      "state": "DE",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00953695",
-      "name": "THE AMERICAN SYSTEM PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-06-15",
-      "state": "CA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00953687",
-      "name": "SOUTH CAROLINA EQUITY PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-06-15",
-      "state": "SC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00953646",
-      "name": "COUNT ON CONNECTICUT",
-      "committee_type": "O",
-      "first_file_date": "2026-06-15",
-      "state": "TX",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00953588",
-      "name": "CIVIC RENEWAL FUND INC.",
-      "committee_type": "O",
-      "first_file_date": "2026-06-15",
-      "state": "AL",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00953653",
-      "name": "AFFORD AMERICA PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-06-15",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00953620",
-      "name": "AMERICAN SENSIBLE ACTION PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-06-15",
-      "state": "NC",
-      "city": null
-    },
     {
       "type": "new_committee",
       "source": "fec",
@@ -2205,6 +2110,118 @@
       "first_file_date": "2026-06-10",
       "state": "TX",
       "city": null
+    },
+    {
+      "type": "nonprofit",
+      "source": "propublica",
+      "ein": 882968375,
+      "name": "Citizens For Sanity",
+      "city": "Snellville",
+      "state": "GA",
+      "ntee_code": null,
+      "ruling_date": null,
+      "total_revenue": null,
+      "total_assets": null,
+      "risk_score": 30,
+      "sourceUrl": "https://projects.propublica.org/nonprofits/organizations/882968375"
+    },
+    {
+      "type": "nonprofit",
+      "source": "propublica",
+      "ein": 341633378,
+      "name": "Citizens For Education",
+      "city": "New Franklin",
+      "state": "OH",
+      "ntee_code": null,
+      "ruling_date": null,
+      "total_revenue": null,
+      "total_assets": null,
+      "risk_score": 30,
+      "sourceUrl": "https://projects.propublica.org/nonprofits/organizations/341633378"
+    },
+    {
+      "type": "nonprofit",
+      "source": "propublica",
+      "ein": 412141119,
+      "name": "Citizens For Peace",
+      "city": "Livonia",
+      "state": "MI",
+      "ntee_code": "Q40",
+      "ruling_date": null,
+      "total_revenue": null,
+      "total_assets": null,
+      "risk_score": 30,
+      "sourceUrl": "https://projects.propublica.org/nonprofits/organizations/412141119"
+    },
+    {
+      "type": "nonprofit",
+      "source": "propublica",
+      "ein": 454874128,
+      "name": "Case Action Fund",
+      "city": "Phoenix",
+      "state": "AZ",
+      "ntee_code": "S01",
+      "ruling_date": null,
+      "total_revenue": null,
+      "total_assets": null,
+      "risk_score": 30,
+      "sourceUrl": "https://projects.propublica.org/nonprofits/organizations/454874128"
+    },
+    {
+      "type": "nonprofit",
+      "source": "propublica",
+      "ein": 923603212,
+      "name": "Floridians Protecting Freedom",
+      "city": "Miami",
+      "state": "FL",
+      "ntee_code": null,
+      "ruling_date": null,
+      "total_revenue": null,
+      "total_assets": null,
+      "risk_score": 30,
+      "sourceUrl": "https://projects.propublica.org/nonprofits/organizations/923603212"
+    },
+    {
+      "type": "nonprofit",
+      "source": "propublica",
+      "ein": 933362628,
+      "name": "Election Freedom Inc",
+      "city": "Columbus",
+      "state": "OH",
+      "ntee_code": null,
+      "ruling_date": null,
+      "total_revenue": null,
+      "total_assets": null,
+      "risk_score": 30,
+      "sourceUrl": "https://projects.propublica.org/nonprofits/organizations/933362628"
+    },
+    {
+      "type": "nonprofit",
+      "source": "propublica",
+      "ein": 461324378,
+      "name": "Michigan Freedom Fund",
+      "city": "Lansing",
+      "state": "MI",
+      "ntee_code": null,
+      "ruling_date": null,
+      "total_revenue": null,
+      "total_assets": null,
+      "risk_score": 30,
+      "sourceUrl": "https://projects.propublica.org/nonprofits/organizations/461324378"
+    },
+    {
+      "type": "nonprofit",
+      "source": "propublica",
+      "ein": 742736849,
+      "name": "Texas Freedom Network",
+      "city": "Austin",
+      "state": "TX",
+      "ntee_code": null,
+      "ruling_date": null,
+      "total_revenue": null,
+      "total_assets": null,
+      "risk_score": 30,
+      "sourceUrl": "https://projects.propublica.org/nonprofits/organizations/742736849"
     }
   ]
 }
