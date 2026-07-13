@@ -1,8 +1,8 @@
 {
-  "lastScan": "2026-07-13T21:49:08.867220Z",
+  "lastScan": "2026-07-13T22:49:01.179308Z",
   "stats": {
     "events": 100,
-    "alerts": 2,
+    "alerts": 3,
     "orgs": 40,
     "newsArticles": 20
   },
@@ -11,7 +11,7 @@
     {
       "factor": "News Coverage",
       "score": 80,
-      "detail": "7 high-relevance articles"
+      "detail": "10 high-relevance articles"
     },
     {
       "factor": "Organization Risk",
@@ -25,6 +25,10 @@
     }
   ],
   "agentNotes": [
+    {
+      "summary": "Monitoring 10 news, 14 orgs, 7 jobs. 3 alerts.",
+      "timestamp": "2026-07-13T22:49:01.178493Z"
+    },
     {
       "summary": "Monitoring 15 news, 14 orgs, 54 jobs. 2 alerts.",
       "timestamp": "2026-07-13T21:49:08.866502Z"
@@ -60,10 +64,6 @@
     {
       "summary": "Monitoring 15 news, 14 orgs, 53 jobs. 3 alerts.",
       "timestamp": "2026-07-12T23:44:51.802129Z"
-    },
-    {
-      "summary": "Monitoring 10 news, 14 orgs, 53 jobs. 3 alerts.",
-      "timestamp": "2026-07-12T22:40:03.176113Z"
     }
   ],
   "connections": [
@@ -88,8 +88,8 @@
     },
     {
       "type": "Paid Protest News",
-      "description": "2 articles specifically about paid protesters.",
-      "probability": 56,
+      "description": "3 articles specifically about paid protesters.",
+      "probability": 64,
       "evidence": [
         {
           "type": "News",
@@ -103,6 +103,24 @@
     }
   ],
   "timeline": [
+    {
+      "type": "news",
+      "title": "KFAN's Paul Allen returns after week away, reiterates apology for 'paid protesters' quip",
+      "date": "2026-07-13T22:49:01.179308Z",
+      "sourceUrl": "https://www.aol.com/articles/kfans-paul-allen-returns-week-194031701.html"
+    },
+    {
+      "type": "news",
+      "title": "State Republicans Target 'Paid Protesters' With 'Mercenary Rioting' Bill",
+      "date": "2026-07-13T22:49:01.179308Z",
+      "sourceUrl": "https://www.nashvillescene.com/news/pithinthewind/republican-paid-protester-bill/article_f8be615c-509a-4897-8461-f13142e334b1.html"
+    },
+    {
+      "type": "news",
+      "title": "Trump says Delaney Hall protesters are 'paid' as clashes escalate outside NJ ICE facility",
+      "date": "2026-07-13T22:49:01.179308Z",
+      "sourceUrl": "https://www.aol.com/articles/trump-says-delaney-hall-protesters-222333000.html"
+    },
     {
       "type": "news",
       "title": "KFAN's Paul Allen returns after week away, reiterates apology for 'paid protesters' quip",
@@ -684,24 +702,6 @@
       "title": "Deep dive into 'paid protester' discourse after ICE shootings",
       "date": "2026-07-11T13:01:46.556862Z",
       "sourceUrl": "https://www.msn.com/en-us/news/us/deep-dive-into-paid-protester-discourse-after-ice-shootings/vi-AA1WtGY5?ocid=BingNewsVerp"
-    },
-    {
-      "type": "news",
-      "title": "Phoenix officer accused of provoking student protesters on paid leave",
-      "date": "2026-07-11T13:01:46.556862Z",
-      "sourceUrl": "https://www.aol.com/articles/phoenix-officer-accused-provoking-student-015721361.html"
-    },
-    {
-      "type": "news",
-      "title": "KFAN's Paul Allen returns after week away, reiterates apology for 'paid protesters' quip",
-      "date": "2026-07-11T13:01:46.556862Z",
-      "sourceUrl": "https://www.aol.com/articles/kfans-paul-allen-returns-week-194031701.html"
-    },
-    {
-      "type": "news",
-      "title": "The brazen ad for rent-a-crowd protesters to attend anti-Israel rally in Melbourne",
-      "date": "2026-07-11T11:50:23.982791Z",
-      "sourceUrl": "https://www.msn.com/en-ca/news/world/the-brazen-ad-for-rent-a-crowd-protesters-to-attend-anti-israel-rally-in-melbourne/ar-AA1WVg6O"
     }
   ],
   "recentNews": [
@@ -927,74 +927,6 @@
     }
   ],
   "jobPostings": [
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Senior Administrator, Policy, Advocacy & Campaigns (S3)",
-      "company": "Save the Children 2022",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5730159207?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-13T20:07:11.863811Z",
-      "salary_min": 45050,
-      "salary_max": 50350,
-      "suspicion_score": 10,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Web Press Operator",
-      "company": "TSG - The Sheridan Group",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5729495414?se=uKEob_Z-8RGs7dgs9IoaeQ&utm_medium=api&utm_source=a70fa881&v=BC6EB2AEA9BB1E31EDDF492570C6F046BFBD5C2A",
-      "date": "2026-07-13T20:07:11.863942Z",
-      "salary_min": 52000,
-      "salary_max": 64000,
-      "suspicion_score": 10,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Revenue Clerk",
-      "company": "Montgomery County",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5726742877?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-13T20:07:09.135119Z",
-      "salary_min": 45884,
-      "salary_max": 61193,
-      "suspicion_score": 0,
-      "keywords": [
-        "paid protest"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Field Marketing Manager",
-      "company": "Erie Home",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5749723185?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-07-13T20:07:09.533652Z",
-      "salary_min": 112944,
-      "salary_max": 112944,
-      "suspicion_score": 0,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
     {
       "type": "job_posting",
       "source": "adzuna",
@@ -1776,6 +1708,74 @@
         "advocacy campaign"
       ],
       "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Canvasser - Colorado's 8th Congressional District",
+      "company": "North Shore Strategies",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5772229642?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-13T22:48:56.020050Z",
+      "salary_min": 52000,
+      "salary_max": 58240,
+      "suspicion_score": 25,
+      "keywords": [
+        "canvasser political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Political Canvasser",
+      "company": "Echo Canyon Consulting LLC",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5793137777?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-13T22:48:56.019938Z",
+      "salary_min": 68169.6,
+      "salary_max": 68169.6,
+      "suspicion_score": 20,
+      "keywords": [
+        "canvasser political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Canvasser - Phoenix, AZ",
+      "company": "North Shore Strategies",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5785794175?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-07-13T22:48:56.020012Z",
+      "salary_min": 57742.46,
+      "salary_max": 57742.46,
+      "suspicion_score": 20,
+      "keywords": [
+        "canvasser political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Entry Level Sales",
+      "company": "Renewal by Andersen\u00ae Greater Wisconsin",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5798944973?se=In6JBg1_8RGgX8pGgfOrZg&utm_medium=api&utm_source=a70fa881&v=6227F121BAD617C3874F53C67BCAF21221501208",
+      "date": "2026-07-13T22:48:56.020072Z",
+      "salary_min": 56719.28,
+      "salary_max": 56719.28,
+      "suspicion_score": 10,
+      "keywords": [
+        "canvasser political"
+      ],
+      "is_monitoring_entry": false
     }
   ],
   "jobPostingPatterns": {
@@ -1785,373 +1785,399 @@
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00946178",
-      "committee_name": "SHOW ME VALOR PAC",
-      "amount": 150035.0,
+      "committee_id": "C00799031",
+      "committee_name": "UNITED DEMOCRACY PROJECT ('UDP')",
+      "amount": 25900.25,
       "date": "2026-07-10",
       "state": "MO"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00931808",
-      "committee_name": "COME AND TAKE IT PAC",
-      "amount": 36699.0,
+      "committee_id": "C00799031",
+      "committee_name": "UNITED DEMOCRACY PROJECT ('UDP')",
+      "amount": 54319.72,
       "date": "2026-07-10",
-      "state": "MO"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00944389",
-      "committee_name": "WHEEL DOG PAC",
-      "amount": 1776.67,
-      "date": "2026-07-09",
-      "state": "AK"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "OH"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "OH"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "OH"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "OH"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "NH"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "NH"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "NC"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "NC"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "NC"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "NC"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 7756.25,
-      "date": "2026-07-09",
-      "state": "NC"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 7756.25,
-      "date": "2026-07-09",
-      "state": "NC"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 10937.5,
-      "date": "2026-07-09",
-      "state": "MT"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "MT"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
       "state": "MI"
     },
     {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "MI"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 13465.0,
-      "date": "2026-07-09",
-      "state": "MI"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "IA"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 12187.5,
-      "date": "2026-07-09",
-      "state": "IA"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 150.0,
-      "date": "2026-07-09",
-      "state": "AK"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 2500.0,
-      "date": "2026-07-09",
-      "state": "AK"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 7750.0,
-      "date": "2026-07-09",
-      "state": "OH"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 7750.0,
-      "date": "2026-07-09",
-      "state": "OH"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 7672.5,
-      "date": "2026-07-09",
-      "state": "OH"
-    },
-    {
-      "type": "independent_expenditure",
-      "source": "fec",
-      "committee_id": "C00687103",
-      "committee_name": "AMERICANS FOR PROSPERITY ACTION, INC. (AFP ACTION) DBA CVA ACTION AND DBA LIBRE ACTION",
-      "amount": 7750.0,
-      "date": "2026-07-09",
-      "state": "NH"
-    },
-    {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00956037",
-      "name": "DRAFT AOC 2028",
-      "committee_type": "U",
-      "first_file_date": "2026-07-11",
-      "state": "WA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00955948",
-      "name": "MINNESOTANS FOR PROGRESS PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-07-10",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00955799",
-      "name": "AMERICA RISING PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-07-09",
-      "state": "NJ",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00955849",
-      "name": "HEALTHY AMERICA PAC",
+      "committee_id": "C00955716",
+      "name": "HOMETOWNS OF TOMORROW PAC",
       "committee_type": "V",
-      "first_file_date": "2026-07-09",
+      "first_file_date": "2026-07-08",
+      "state": "NC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00955575",
+      "name": "NC FIRST PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-07-07",
+      "state": "GA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00955591",
+      "name": "AMERICAN WORKERS FIRST PAC",
+      "committee_type": "V",
+      "first_file_date": "2026-07-07",
       "state": "MA",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00955856",
-      "name": "BLUE FLORIDA MAJORITY",
-      "committee_type": "V",
-      "first_file_date": "2026-07-09",
+      "committee_id": "C00955559",
+      "name": "AMERICAN POWER FORWARD PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-07-06",
       "state": "DC",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00955740",
-      "name": "MY AMERICAN DREAM",
+      "committee_id": "C00955435",
+      "name": "I NOT E PAC",
       "committee_type": "O",
-      "first_file_date": "2026-07-08",
-      "state": "WV",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00955732",
-      "name": "FIX NEW MEXICO",
-      "committee_type": "O",
-      "first_file_date": "2026-07-08",
-      "state": "NM",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00955674",
-      "name": "LET GLIZZYS REIGN OR ALLOW MY ALLIES THE EXIT OF GLIZZYS SIGNS",
-      "committee_type": "U",
-      "first_file_date": "2026-07-08",
+      "first_file_date": "2026-07-04",
       "state": "NV",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00955708",
-      "name": "ELECT DEMOCRATIC FIGHTERS PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-07-08",
-      "state": "NY",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00955393",
-      "name": "AMERICAN DEMOCRACY PROJECT",
+      "committee_id": "C00955294",
+      "name": "MAKE TENNESSEE GREAT",
       "committee_type": "O",
-      "first_file_date": "2026-07-03",
+      "first_file_date": "2026-07-02",
       "state": "DC",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00953646",
-      "name": "COUNT ON CONNECTICUT",
+      "committee_id": "C00955302",
+      "name": "QUALITY EDUCATION ALLIANCE",
       "committee_type": "O",
-      "first_file_date": "2026-06-15",
+      "first_file_date": "2026-07-02",
+      "state": "WI",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00955310",
+      "name": "VOTERS FOR A STRONGER COMMUNITY PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-07-02",
+      "state": "WI",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00955138",
+      "name": "BUILDING TOGETHER",
+      "committee_type": "V",
+      "first_file_date": "2026-07-01",
+      "state": "CA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00955146",
+      "name": "COMMUNITY RISING",
+      "committee_type": "V",
+      "first_file_date": "2026-07-01",
+      "state": "CA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00955120",
+      "name": "INSURING MISSOURI'S FUTURE PAC",
+      "committee_type": "V",
+      "first_file_date": "2026-07-01",
+      "state": "MO",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00955104",
+      "name": "RETIRED AMERICANS ACTION",
+      "committee_type": "O",
+      "first_file_date": "2026-07-01",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00955088",
+      "name": "MODEL ILLINOIS",
+      "committee_type": "O",
+      "first_file_date": "2026-07-01",
+      "state": "IL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00955047",
+      "name": "ENERGY SOLUTIONS ACTION FUND",
+      "committee_type": "V",
+      "first_file_date": "2026-07-01",
+      "state": "VA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954966",
+      "name": "NORTHWEST IMPACT FUND",
+      "committee_type": "O",
+      "first_file_date": "2026-07-01",
+      "state": "WA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00955112",
+      "name": "1836 FUND",
+      "committee_type": "V",
+      "first_file_date": "2026-07-01",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954891",
+      "name": "THE LEADERSHIP FUND",
+      "committee_type": "V",
+      "first_file_date": "2026-06-30",
+      "state": "CA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954792",
+      "name": "VIRGINIA FREEDOM PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-06-29",
+      "state": "VA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954677",
+      "name": "THE INDEPENDENT CONSTITUTIONALIST",
+      "committee_type": "O",
+      "first_file_date": "2026-06-27",
       "state": "TX",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00953653",
-      "name": "AFFORD AMERICA PAC",
+      "committee_id": "C00954636",
+      "name": "AMERICA 250 PAC",
+      "committee_type": "V",
+      "first_file_date": "2026-06-26",
+      "state": "CA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954446",
+      "name": "NEXT250",
+      "committee_type": "O",
+      "first_file_date": "2026-06-25",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954503",
+      "name": "WORKING CLASS MAJORITY PAC, INC",
+      "committee_type": "V",
+      "first_file_date": "2026-06-25",
+      "state": "DE",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954388",
+      "name": "LET FREEDOM RING",
+      "committee_type": "O",
+      "first_file_date": "2026-06-24",
+      "state": "FL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954404",
+      "name": "AMERICAN GROWTH AND INFRASTRUCTURE PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-06-24",
+      "state": "TX",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954248",
+      "name": "ACTION TOGETHER NEPA PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-06-23",
+      "state": "PA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954206",
+      "name": "DEMOCRATIC MAJORITY FOR AMERICA",
+      "committee_type": "V",
+      "first_file_date": "2026-06-22",
+      "state": "CA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954024",
+      "name": "TEXAS FOR ALL VICTORY FUND",
+      "committee_type": "O",
+      "first_file_date": "2026-06-19",
+      "state": "TX",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00954032",
+      "name": "KAPOW PAC",
+      "committee_type": "V",
+      "first_file_date": "2026-06-19",
+      "state": "IL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00953984",
+      "name": "CIVIC RESEARCH PROJECT",
+      "committee_type": "O",
+      "first_file_date": "2026-06-18",
+      "state": "MN",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00953919",
+      "name": "GREAT JOBS PAC INC",
+      "committee_type": "O",
+      "first_file_date": "2026-06-18",
+      "state": "VA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00953810",
+      "name": "LIVE FREE PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-06-17",
+      "state": "MD",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00953836",
+      "name": "NORTHLAND PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-06-17",
+      "state": "WI",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00953893",
+      "name": "FORWRD-TX",
+      "committee_type": "O",
+      "first_file_date": "2026-06-17",
+      "state": "TX",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00953885",
+      "name": "ROBERTA MACINTYRE FOR SOUTH LAKE FIRE PROTECTION DISTRICT",
+      "committee_type": "U",
+      "first_file_date": "2026-06-17",
+      "state": "CA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00953828",
+      "name": "-5 POINT DRAFT ELECTION COMMITTEE",
+      "committee_type": "O",
+      "first_file_date": "2026-06-17",
+      "state": "NV",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00953729",
+      "name": "VOICES FOR A COMMON GOOD PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-06-16",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00953695",
+      "name": "THE AMERICAN SYSTEM PAC",
       "committee_type": "V",
       "first_file_date": "2026-06-15",
-      "state": "DC",
+      "state": "CA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00953588",
+      "name": "CIVIC RENEWAL FUND INC.",
+      "committee_type": "O",
+      "first_file_date": "2026-06-15",
+      "state": "AL",
       "city": null
     }
   ]
