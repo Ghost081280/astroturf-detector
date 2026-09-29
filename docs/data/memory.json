@@ -1,13 +1,18 @@
 {
-  "lastScan": "2026-09-29T06:28:33.997895Z",
+  "lastScan": "2026-09-29T13:37:32.834438Z",
   "stats": {
     "events": 100,
-    "alerts": 1,
+    "alerts": 3,
     "orgs": 40,
     "newsArticles": 20
   },
-  "systemConfidence": 50,
+  "systemConfidence": 60,
   "confidenceFactors": [
+    {
+      "factor": "News Coverage",
+      "score": 80,
+      "detail": "8 high-relevance articles"
+    },
     {
       "factor": "Organization Risk",
       "score": 35,
@@ -20,6 +25,10 @@
     }
   ],
   "agentNotes": [
+    {
+      "summary": "Monitoring 15 news, 14 orgs, 46 jobs. 3 alerts.",
+      "timestamp": "2026-09-29T13:37:32.833447Z"
+    },
     {
       "summary": "Monitoring 4 news, 14 orgs, 42 jobs. 1 alerts.",
       "timestamp": "2026-09-29T06:28:33.997161Z"
@@ -55,16 +64,31 @@
     {
       "summary": "Monitoring 7 news, 14 orgs, 47 jobs. 3 alerts.",
       "timestamp": "2026-09-27T14:29:17.430429Z"
-    },
-    {
-      "summary": "Monitoring 6 news, 14 orgs, 47 jobs. 3 alerts.",
-      "timestamp": "2026-09-27T08:49:53.835442Z"
     }
   ],
   "connections": [
     {
+      "type": "Geographic Match",
+      "description": "46 job posting(s) found in cities with protest-related news.",
+      "probability": 85,
+      "evidence": [
+        {
+          "type": "Job",
+          "detail": "Grassroots Environmental Organizer"
+        },
+        {
+          "type": "Job",
+          "detail": "Long-Term Grassroots Organizer: Community Health and Corporate Accountability"
+        },
+        {
+          "type": "Job",
+          "detail": "Long-Term Grassroots Organizer: Environmental Justice and Public Health Advocacy"
+        }
+      ]
+    },
+    {
       "type": "Naming Pattern",
-      "description": "13 orgs with generic patriotic names typical of astroturf.",
+      "description": "14 orgs with generic patriotic names typical of astroturf.",
       "probability": 78,
       "evidence": [
         {
@@ -80,9 +104,42 @@
           "detail": "Citizens For Peace"
         }
       ]
+    },
+    {
+      "type": "Paid Protest News",
+      "description": "4 articles specifically about paid protesters.",
+      "probability": 72,
+      "evidence": [
+        {
+          "type": "News",
+          "detail": "Phoenix officer accused of provoking student protesters on paid leave"
+        },
+        {
+          "type": "News",
+          "detail": "Paid protests in America - the accusations that keep spreading"
+        }
+      ]
     }
   ],
   "timeline": [
+    {
+      "type": "news",
+      "title": "Phoenix officer accused of provoking student protesters on paid leave",
+      "date": "2026-09-29T13:37:32.834438Z",
+      "sourceUrl": "https://www.msn.com/en-us/news/us/phoenix-officer-accused-of-provoking-student-protesters-on-paid-leave/ar-AA20Chi3?ocid=BingNewsVerp"
+    },
+    {
+      "type": "news",
+      "title": "Paid protests in America - the accusations that keep spreading",
+      "date": "2026-09-29T13:37:32.834438Z",
+      "sourceUrl": "https://www.msn.com/en-us/news/other/paid-protests-in-america-the-accusations-that-keep-spreading/vi-AA1VYLmL?ocid=BingNewsVerp"
+    },
+    {
+      "type": "news",
+      "title": "Verify: Rep. Tim Burchett claims protesters in Minneapolis are 'paid'",
+      "date": "2026-09-29T13:37:32.834438Z",
+      "sourceUrl": "https://www.msn.com/en-us/politics/government/verify-rep-tim-burchett-claims-protesters-in-minneapolis-are-paid/ar-AA1V4qBW"
+    },
     {
       "type": "news",
       "title": "Phoenix officer accused of provoking student protesters on paid leave",
@@ -664,24 +721,6 @@
       "title": "Trump Dismisses Delaney Hall Protesters as 'Paid' Amid Growing Scrutiny of ICE Detention Facility",
       "date": "2026-09-23T07:06:05.751539Z",
       "sourceUrl": "https://www.theepochtimes.com/us/trump-dismisses-delaney-hall-protesters-as-paid-amid-growing-scrutiny-of-ice-detention-facility-6039796"
-    },
-    {
-      "type": "news",
-      "title": "KFAN's Paul Allen returns after week away, reiterates apology for 'paid protesters' quip",
-      "date": "2026-09-23T07:06:05.751539Z",
-      "sourceUrl": "https://www.aol.com/articles/kfans-paul-allen-returns-week-194031701.html"
-    },
-    {
-      "type": "news",
-      "title": "Verify: Rep. Tim Burchett claims protesters in Minneapolis are 'paid'",
-      "date": "2026-09-23T07:06:05.751539Z",
-      "sourceUrl": "https://www.msn.com/en-us/politics/government/verify-rep-tim-burchett-claims-protesters-in-minneapolis-are-paid/ar-AA1V4qBW"
-    },
-    {
-      "type": "news",
-      "title": "Phoenix officer accused of provoking student protesters on paid leave",
-      "date": "2026-09-23T01:07:23.034748Z",
-      "sourceUrl": "https://www.msn.com/en-us/news/us/phoenix-officer-accused-of-provoking-student-protesters-on-paid-leave/ar-AA20Chi3?ocid=BingNewsVerp"
     }
   ],
   "recentNews": [
@@ -907,448 +946,6 @@
     }
   ],
   "jobPostings": [
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Sr. WW Data & AI Specialist, Campaigns & Field Activations, Data & AI GTM",
-      "company": "Amazon",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5866606714?se=lC-gY3-78RG3HbWPlKe6Vw&utm_medium=api&utm_source=a70fa881&v=C9F22B3C4A7EA590244E0C2C7C169FFB15AA73EC",
-      "date": "2026-09-28T20:58:43.319618Z",
-      "salary_min": 189100.16,
-      "salary_max": 189100.16,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Product Marketing Manager",
-      "company": "Kforce Technology Staffing",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5901749050?se=lC-gY3-78RG3HbWPlKe6Vw&utm_medium=api&utm_source=a70fa881&v=65D68818A357B0BD2132CC0CB29FF35F1E55242B",
-      "date": "2026-09-28T20:58:43.319702Z",
-      "salary_min": 145255.08,
-      "salary_max": 145255.08,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Economic Mobility Coordinator",
-      "company": "Safe Haven Family Shelter",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5861994136?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-28T20:58:43.863565Z",
-      "salary_min": 50000,
-      "salary_max": 55000,
-      "suspicion_score": 0,
-      "keywords": [
-        "mobilization coordinator"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Special Projects and Mobilization Coordinator",
-      "company": "Southeastern Baptist Theological Seminary",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5859639112?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-28T20:58:43.863581Z",
-      "salary_min": 27914.55,
-      "salary_max": 27914.55,
-      "suspicion_score": 0,
-      "keywords": [
-        "mobilization coordinator"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Public Policy Manager II - Corporate",
-      "company": "BCForward",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5885743131?se=KkUSZH-78RG3HbWPlKe6Vw&utm_medium=api&utm_source=a70fa881&v=A5B75AF76C0A90D567F22DE7504F20F0F5E5CF88",
-      "date": "2026-09-28T20:58:44.054330Z",
-      "salary_min": 154331.53,
-      "salary_max": 154331.53,
-      "suspicion_score": 0,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Public Policy Manager II",
-      "company": "BCForward",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5885741084?se=KkUSZH-78RG3HbWPlKe6Vw&utm_medium=api&utm_source=a70fa881&v=A5A670A2F5323EB8481E2215D29C57D8B54A999B",
-      "date": "2026-09-28T20:58:44.054347Z",
-      "salary_min": 174174.33,
-      "salary_max": 174174.33,
-      "suspicion_score": 0,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Senior Organizer - Suffolk County Regional Office",
-      "company": "New York Civil Liberties Union Foundation",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5901928045?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-28T20:58:44.054362Z",
-      "salary_min": 65000,
-      "salary_max": 70000,
-      "suspicion_score": 0,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Grassroots Environmental Organizer",
-      "company": "Clean Water Action",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5886149160?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-29T00:51:58.182804Z",
-      "salary_min": 60113.3,
-      "salary_max": 60113.3,
-      "suspicion_score": 30,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Long-Term Grassroots Organizer: Community Health and Corporate Accountability",
-      "company": "Clean Water Action",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5888469244?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-29T00:51:58.182844Z",
-      "salary_min": 48544.28,
-      "salary_max": 48544.28,
-      "suspicion_score": 30,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Canvasser",
-      "company": "North Shore Strategies",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5863692075?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-29T00:51:57.571290Z",
-      "salary_min": 94732.16,
-      "salary_max": 94732.16,
-      "suspicion_score": 20,
-      "keywords": [
-        "canvasser political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Petitioner - Chicago, IL",
-      "company": "North Shore Strategies",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5889661678?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-29T00:51:57.862580Z",
-      "salary_min": 61998.08,
-      "salary_max": 61998.08,
-      "suspicion_score": 20,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Temporary Election Worker Specialist-Petitions and Registration-26079003PR",
-      "company": "County of San Diego",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5810829683?se=qrf7-J-78RGS97j_zW5Twg&utm_medium=api&utm_source=a70fa881&v=B119E169B5A955BA4108054C0B74A32A253626A6",
-      "date": "2026-09-29T00:51:57.862438Z",
-      "salary_min": 38688,
-      "salary_max": 38688,
-      "suspicion_score": 15,
-      "keywords": [
-        "petition signature"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Senior Clinical Social Worker (Remote) - Positive Steps Consultancy Miami, FL",
-      "company": "Positive Steps Consultancy",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5875871701?se=VD4q-Z-78RG8drI3UgoA2A&utm_medium=api&utm_source=a70fa881&v=3B6B6B099EA0554C41750D285F4FD10FC5879F9E",
-      "date": "2026-09-29T00:51:58.183012Z",
-      "salary_min": 75000,
-      "salary_max": 100000,
-      "suspicion_score": 10,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Organizer, SEIU Local 1199",
-      "company": "Current SEIU",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5561467572?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-29T00:51:58.505416Z",
-      "salary_min": 81426,
-      "salary_max": 81426,
-      "suspicion_score": 10,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Membership Growth and Retention Coordinator",
-      "company": "DEMOCRATIC SOCIALISTS OF AMERICA",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5863986971?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-29T00:51:58.505475Z",
-      "salary_min": 65500,
-      "salary_max": 65500,
-      "suspicion_score": 10,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Executive Director, Government Relations Communications & Campaigns",
-      "company": "Kaiser Permanente",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5857514147?se=fhhN-p-78RGS97j_zW5Twg&utm_medium=api&utm_source=a70fa881&v=4BA58E04C25B5A3D3ED4EC64FF6197D9DB0AAA7B",
-      "date": "2026-09-29T00:52:00.076879Z",
-      "salary_min": 208926.1,
-      "salary_max": 208926.1,
-      "suspicion_score": 10,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Information Security Analyst",
-      "company": "Smart Synergies",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5821225855?se=fhhN-p-78RGS97j_zW5Twg&utm_medium=api&utm_source=a70fa881&v=50055FD689008DCB50A08A8105E4B8955E275BAE",
-      "date": "2026-09-29T00:52:00.076929Z",
-      "salary_min": 87539.02,
-      "salary_max": 87539.02,
-      "suspicion_score": 10,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Full-Time Licensed Clinical Social Worker (LCSW) for Community Health Clinic in Oxnard, California",
-      "company": "Release the Stress, Ltd",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5875867155?se=VD4q-Z-78RG8drI3UgoA2A&utm_medium=api&utm_source=a70fa881&v=C216FBFB4B518443EAB663360E07B40C6C5748E7",
-      "date": "2026-09-29T00:51:58.182932Z",
-      "salary_min": 115000,
-      "salary_max": 120000,
-      "suspicion_score": 0,
-      "keywords": [
-        "grassroots organizer"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Director",
-      "company": "SEIU 521",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5540489070?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-29T00:51:58.505380Z",
-      "salary_min": 132263,
-      "salary_max": 146184,
-      "suspicion_score": 0,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Director, SEIU Local 521",
-      "company": "Current SEIU",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5543529916?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-29T00:51:58.505399Z",
-      "salary_min": 128411,
-      "salary_max": 141927,
-      "suspicion_score": 0,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Political Organizer, 1199 SEIU",
-      "company": "Current SEIU",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5684819735?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-29T00:51:58.505455Z",
-      "salary_min": 81426,
-      "salary_max": 81426,
-      "suspicion_score": 0,
-      "keywords": [
-        "political activist"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Sr. WW Data & AI Specialist, Campaigns & Field Activations, Data & AI GTM",
-      "company": "Amazon",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5866606714?se=AsqQ-Z-78RGS97j_zW5Twg&utm_medium=api&utm_source=a70fa881&v=C9F22B3C4A7EA590244E0C2C7C169FFB15AA73EC",
-      "date": "2026-09-29T00:51:58.909505Z",
-      "salary_min": 189100.16,
-      "salary_max": 189100.16,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Product Marketing Manager",
-      "company": "Kforce Technology Staffing",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5901749050?se=AsqQ-Z-78RGS97j_zW5Twg&utm_medium=api&utm_source=a70fa881&v=65D68818A357B0BD2132CC0CB29FF35F1E55242B",
-      "date": "2026-09-29T00:51:58.909614Z",
-      "salary_min": 145255.08,
-      "salary_max": 145255.08,
-      "suspicion_score": 0,
-      "keywords": [
-        "campaign field"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Organizing Director, SEIU Local 221",
-      "company": "Current SEIU",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/details/5532915397?utm_medium=api&utm_source=a70fa881",
-      "date": "2026-09-29T00:51:59.315872Z",
-      "salary_min": 110000,
-      "salary_max": 120000,
-      "suspicion_score": 0,
-      "keywords": [
-        "community organizer political"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Public Policy Manager II - Corporate",
-      "company": "BCforward",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5885743131?se=fhhN-p-78RGS97j_zW5Twg&utm_medium=api&utm_source=a70fa881&v=A5B75AF76C0A90D567F22DE7504F20F0F5E5CF88",
-      "date": "2026-09-29T00:52:00.076802Z",
-      "salary_min": 154331.53,
-      "salary_max": 154331.53,
-      "suspicion_score": 0,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
-    {
-      "type": "job_posting",
-      "source": "adzuna",
-      "title": "Public Policy Manager II",
-      "company": "BCforward",
-      "city": "US",
-      "state": "",
-      "url": "https://www.adzuna.com/land/ad/5885741084?se=fhhN-p-78RGS97j_zW5Twg&utm_medium=api&utm_source=a70fa881&v=A5A670A2F5323EB8481E2215D29C57D8B54A999B",
-      "date": "2026-09-29T00:52:00.076827Z",
-      "salary_min": 174174.33,
-      "salary_max": 174174.33,
-      "suspicion_score": 0,
-      "keywords": [
-        "advocacy campaign"
-      ],
-      "is_monitoring_entry": false
-    },
     {
       "type": "job_posting",
       "source": "adzuna",
@@ -1756,6 +1353,448 @@
         "advocacy campaign"
       ],
       "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Long-Term Grassroots Organizer: Environmental Justice and Public Health Advocacy",
+      "company": "Clean Water Action",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5886887490?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:26.729047Z",
+      "salary_min": 37966.5,
+      "salary_max": 37966.5,
+      "suspicion_score": 30,
+      "keywords": [
+        "grassroots organizer"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Temporary Election Worker Specialist-Petitions and Registration-26079003PR",
+      "company": "County of San Diego",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5810829683?se=XluU6Aq88RGpps7V-erNsQ&utm_medium=api&utm_source=a70fa881&v=B119E169B5A955BA4108054C0B74A32A253626A6",
+      "date": "2026-09-29T13:37:26.448831Z",
+      "salary_min": 38688,
+      "salary_max": 38688,
+      "suspicion_score": 15,
+      "keywords": [
+        "petition signature"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Regional Party Services Manager",
+      "company": "Texas Democratic Party",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5846888351?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:27.623164Z",
+      "salary_min": 70000,
+      "salary_max": 70000,
+      "suspicion_score": 10,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "GOTV Field Team Member Entry Level",
+      "company": "National Ballot Inc",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5902547616?se=3qpG6Qq88RGpps7V-erNsQ&utm_medium=api&utm_source=a70fa881&v=4DAA14313DD29E81E06A1376E8663064B47CFE76",
+      "date": "2026-09-29T13:37:27.623202Z",
+      "salary_min": 39530.48,
+      "salary_max": 39530.48,
+      "suspicion_score": 10,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Coordinator, Advocacy and Government Relations",
+      "company": "Planned Parenthood Hudson Peconic",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5899374981?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:27.623247Z",
+      "salary_min": 4160,
+      "salary_max": 4160,
+      "suspicion_score": 10,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Coordinator, Advocacy and Student Programs",
+      "company": "Planned Parenthood Hudson Peconic",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5899394308?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:27.623289Z",
+      "salary_min": 57512,
+      "salary_max": 57720,
+      "suspicion_score": 10,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Coordinator (Strategic Campaign Manager)",
+      "company": "Service Employees International Union",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5639957439?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:27.623322Z",
+      "salary_min": 113083,
+      "salary_max": 118808,
+      "suspicion_score": 10,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Community and Advocacy Organizer",
+      "company": "NC Association of Ed",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/4811113387?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:27.623341Z",
+      "salary_min": 62914,
+      "salary_max": 62914,
+      "suspicion_score": 10,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Advocacy Campaigns Manager - West",
+      "company": "Constellation",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5859061409?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:28.249296Z",
+      "salary_min": 81117.94,
+      "salary_max": 81117.94,
+      "suspicion_score": 10,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Associate",
+      "company": "Civitas",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5895631467?se=WGGn6Qq88RGpps7V-erNsQ&utm_medium=api&utm_source=a70fa881&v=EC26322709AA64E77A5C4C3809D98D83078E0CC2",
+      "date": "2026-09-29T13:37:28.249353Z",
+      "salary_min": 48700.92,
+      "salary_max": 48700.92,
+      "suspicion_score": 10,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "ASAP Manager",
+      "company": "Blue River Services, Inc.",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5897251976?se=3qpG6Qq88RGpps7V-erNsQ&utm_medium=api&utm_source=a70fa881&v=922265C7BFD03FE2A0E0399E46EE636E80E8F9AA",
+      "date": "2026-09-29T13:37:27.623361Z",
+      "salary_min": 39736.9,
+      "salary_max": 39736.9,
+      "suspicion_score": 5,
+      "keywords": [
+        "community organizer political"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Mobile Outreach Coordinator",
+      "company": "Community Health Service Inc.",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5878918711?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:27.998520Z",
+      "salary_min": 63124.79,
+      "salary_max": 63124.79,
+      "suspicion_score": 5,
+      "keywords": [
+        "mobilization coordinator"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Revenue Clerk",
+      "company": "Montgomery County",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5726742877?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:25.646335Z",
+      "salary_min": 45884,
+      "salary_max": 61193,
+      "suspicion_score": 0,
+      "keywords": [
+        "paid protest"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Community Impact Coordinator",
+      "company": "St. Joseph Center",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5902249178?se=Lrq66Aq88RGsapmCK03uFQ&utm_medium=api&utm_source=a70fa881&v=9DAC275BF048792512735ADA33A994921FD59143",
+      "date": "2026-09-29T13:37:26.729089Z",
+      "salary_min": 40230.93,
+      "salary_max": 40230.93,
+      "suspicion_score": 0,
+      "keywords": [
+        "grassroots organizer"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Full-Time Licensed Clinical Social Worker (LCSW) for Community Health Clinic in Oxnard, California",
+      "company": "Release the Stress, Ltd",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5875867155?se=Lrq66Aq88RGsapmCK03uFQ&utm_medium=api&utm_source=a70fa881&v=C216FBFB4B518443EAB663360E07B40C6C5748E7",
+      "date": "2026-09-29T13:37:26.729130Z",
+      "salary_min": 115000,
+      "salary_max": 120000,
+      "suspicion_score": 0,
+      "keywords": [
+        "grassroots organizer"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Director of Community Organizing and Coalitions",
+      "company": "Issue One",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5871760419?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:26.729167Z",
+      "salary_min": 120000,
+      "salary_max": 130000,
+      "suspicion_score": 0,
+      "keywords": [
+        "grassroots organizer"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Director, Political Engagement \u2013 Southwest Region",
+      "company": "AIPAC",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5620913907?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:27.000130Z",
+      "salary_min": 125000,
+      "salary_max": 165000,
+      "suspicion_score": 0,
+      "keywords": [
+        "political activist"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Sr. WW Data & AI Specialist, Campaigns & Field Activations, Data & AI GTM",
+      "company": "Amazon",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5866606714?se=RvkX6Qq88RGGIMuNWmfObw&utm_medium=api&utm_source=a70fa881&v=C9F22B3C4A7EA590244E0C2C7C169FFB15AA73EC",
+      "date": "2026-09-29T13:37:27.324044Z",
+      "salary_min": 189100.16,
+      "salary_max": 189100.16,
+      "suspicion_score": 0,
+      "keywords": [
+        "campaign field"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Product Marketing Manager",
+      "company": "Kforce Technology Staffing",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5901749050?se=RvkX6Qq88RGGIMuNWmfObw&utm_medium=api&utm_source=a70fa881&v=65D68818A357B0BD2132CC0CB29FF35F1E55242B",
+      "date": "2026-09-29T13:37:27.324149Z",
+      "salary_min": 145255.08,
+      "salary_max": 145255.08,
+      "suspicion_score": 0,
+      "keywords": [
+        "campaign field"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Mobility Coordinator",
+      "company": "Hertz",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5831962780?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:27.998338Z",
+      "salary_min": 47840,
+      "salary_max": 47840,
+      "suspicion_score": 0,
+      "keywords": [
+        "mobilization coordinator"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Mobile Coordinator",
+      "company": "The Rose",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5893985365?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:27.998416Z",
+      "salary_min": 43415.95,
+      "salary_max": 43415.95,
+      "suspicion_score": 0,
+      "keywords": [
+        "mobilization coordinator"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Mobile Diversion Coordinator",
+      "company": "Community Care ME",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5724385883?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:27.998540Z",
+      "salary_min": 45760,
+      "salary_max": 49920,
+      "suspicion_score": 0,
+      "keywords": [
+        "mobilization coordinator"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Senior Manager, Government Affairs",
+      "company": "Denver Metro Chamber Of Commerce",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/details/5896918963?utm_medium=api&utm_source=a70fa881",
+      "date": "2026-09-29T13:37:28.249401Z",
+      "salary_min": 90000,
+      "salary_max": 110000,
+      "suspicion_score": 0,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Public Policy Manager II - Corporate",
+      "company": "BCforward",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5885743131?se=WGGn6Qq88RGpps7V-erNsQ&utm_medium=api&utm_source=a70fa881&v=A5B75AF76C0A90D567F22DE7504F20F0F5E5CF88",
+      "date": "2026-09-29T13:37:28.249422Z",
+      "salary_min": 154331.53,
+      "salary_max": 154331.53,
+      "suspicion_score": 0,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Public Policy Manager II",
+      "company": "BCforward",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5885741084?se=WGGn6Qq88RGpps7V-erNsQ&utm_medium=api&utm_source=a70fa881&v=A5A670A2F5323EB8481E2215D29C57D8B54A999B",
+      "date": "2026-09-29T13:37:28.249442Z",
+      "salary_min": 174174.33,
+      "salary_max": 174174.33,
+      "suspicion_score": 0,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
+    },
+    {
+      "type": "job_posting",
+      "source": "adzuna",
+      "title": "Government Affairs Manager II, Northwest",
+      "company": "Instacart",
+      "city": "US",
+      "state": "",
+      "url": "https://www.adzuna.com/land/ad/5884723520?se=WGGn6Qq88RGpps7V-erNsQ&utm_medium=api&utm_source=a70fa881&v=181640BA0AAA75CE6010EC3C8EF93CD8F2C5D1FF",
+      "date": "2026-09-29T13:37:28.249460Z",
+      "salary_min": 105037.3,
+      "salary_max": 105037.3,
+      "suspicion_score": 0,
+      "keywords": [
+        "advocacy campaign"
+      ],
+      "is_monitoring_entry": false
     }
   ],
   "jobPostingPatterns": {
@@ -1765,397 +1804,378 @@
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00573733",
-      "committee_name": "SECURITY IS STRENGTH PAC",
-      "amount": 180180.75,
-      "date": "2026-09-28",
-      "state": "SC"
+      "committee_id": "C90020231",
+      "committee_name": "THOMAS PAINE SOCIETY L.L.C.",
+      "amount": 6781.25,
+      "date": "2026-09-27",
+      "state": "GA"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00573733",
-      "committee_name": "SECURITY IS STRENGTH PAC",
-      "amount": 140381.96,
-      "date": "2026-09-28",
-      "state": "SC"
+      "committee_id": "C90020231",
+      "committee_name": "THOMAS PAINE SOCIETY L.L.C.",
+      "amount": 3900.0,
+      "date": "2026-09-27",
+      "state": "OH"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00853861",
-      "committee_name": "GLCF, INC.",
-      "amount": 97491.89,
-      "date": "2026-09-28",
-      "state": "MI"
+      "committee_id": "C90020231",
+      "committee_name": "THOMAS PAINE SOCIETY L.L.C.",
+      "amount": 2558.1,
+      "date": "2026-09-27",
+      "state": "OH"
     },
     {
       "type": "independent_expenditure",
       "source": "fec",
-      "committee_id": "C00853861",
-      "committee_name": "GLCF, INC.",
-      "amount": 146237.84,
-      "date": "2026-09-28",
-      "state": "MI"
+      "committee_id": "C90020231",
+      "committee_name": "THOMAS PAINE SOCIETY L.L.C.",
+      "amount": 1380.0,
+      "date": "2026-09-27",
+      "state": "OH"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C90020231",
+      "committee_name": "THOMAS PAINE SOCIETY L.L.C.",
+      "amount": 2118.0,
+      "date": "2026-09-27",
+      "state": "NC"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C90020231",
+      "committee_name": "THOMAS PAINE SOCIETY L.L.C.",
+      "amount": 1680.0,
+      "date": "2026-09-27",
+      "state": "NC"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C90020231",
+      "committee_name": "THOMAS PAINE SOCIETY L.L.C.",
+      "amount": 1680.0,
+      "date": "2026-09-27",
+      "state": "NC"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 51507.48,
+      "date": "2026-09-27",
+      "state": "WI"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 106012.4,
+      "date": "2026-09-27",
+      "state": "WI"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 81443.31,
+      "date": "2026-09-27",
+      "state": "VA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 44063.47,
+      "date": "2026-09-27",
+      "state": "VA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 37473.51,
+      "date": "2026-09-27",
+      "state": "TX"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 20590.87,
+      "date": "2026-09-27",
+      "state": "TX"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 16882.64,
+      "date": "2026-09-27",
+      "state": "TX"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 41302.96,
+      "date": "2026-09-27",
+      "state": "PA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 23285.26,
+      "date": "2026-09-27",
+      "state": "PA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 21803.07,
+      "date": "2026-09-27",
+      "state": "PA"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 67773.0,
+      "date": "2026-09-27",
+      "state": "OH"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 20805.76,
+      "date": "2026-09-27",
+      "state": "OH"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 46967.24,
+      "date": "2026-09-27",
+      "state": "OH"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 68324.0,
+      "date": "2026-09-27",
+      "state": "NJ"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 14364.57,
+      "date": "2026-09-27",
+      "state": "NE"
+    },
+    {
+      "type": "independent_expenditure",
+      "source": "fec",
+      "committee_id": "C00580068",
+      "committee_name": "PROGRESSIVE TURNOUT PROJECT",
+      "amount": 14364.57,
+      "date": "2026-09-27",
+      "state": "NE"
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00962332",
-      "name": "BATTLE TESTED PAC",
+      "committee_id": "C00962480",
+      "name": "FOREVER UNITED",
       "committee_type": "O",
-      "first_file_date": "2026-09-25",
-      "state": "GA",
+      "first_file_date": "2026-09-28",
+      "state": "OR",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00962381",
-      "name": "NETWORK LOBBY COMMITTEE",
+      "committee_id": "C00962456",
+      "name": "NEBRASKA FREEDOM AND LIBERTY SUPER PAC",
       "committee_type": "O",
-      "first_file_date": "2026-09-25",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962233",
-      "name": "IOWANS FOR CLEAN WATER",
-      "committee_type": "O",
-      "first_file_date": "2026-09-24",
-      "state": "IA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962274",
-      "name": "VOTEREADY",
-      "committee_type": "O",
-      "first_file_date": "2026-09-24",
-      "state": "CA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962282",
-      "name": "CIVICFORWARD",
-      "committee_type": "O",
-      "first_file_date": "2026-09-24",
-      "state": "CA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962217",
-      "name": "USSBA",
-      "committee_type": "O",
-      "first_file_date": "2026-09-24",
-      "state": "NY",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962290",
-      "name": "NEW PROGRESSIVE SOUTH PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-09-24",
-      "state": "FL",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962308",
-      "name": "TEXAS FOREVER",
-      "committee_type": "O",
-      "first_file_date": "2026-09-24",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962316",
-      "name": "NEVADA FREEDOM PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-09-24",
-      "state": "WI",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962142",
-      "name": "MERIDIAN SUPER PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-09-23",
-      "state": "OH",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962191",
-      "name": "BETTER AMERICA",
-      "committee_type": "O",
-      "first_file_date": "2026-09-23",
-      "state": "GA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962092",
-      "name": "MILYFE",
-      "committee_type": "U",
-      "first_file_date": "2026-09-22",
-      "state": "FL",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962126",
-      "name": "LOUISIANA IN COMMON PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-09-22",
-      "state": "LA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00962100",
-      "name": "PROTECTING ALASKA FISHERMEN",
-      "committee_type": "O",
-      "first_file_date": "2026-09-22",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961904",
-      "name": "ALABAMA TRUTH PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-09-19",
-      "state": "WI",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961755",
-      "name": "POINT JUDITH PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-09-17",
-      "state": "MA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961698",
-      "name": "59 PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-09-16",
-      "state": "AK",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961672",
-      "name": "CREATING HOPE IN ILLINOIS",
-      "committee_type": "O",
-      "first_file_date": "2026-09-16",
-      "state": "IL",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961680",
-      "name": "THE MARQUE PAC, INC.",
-      "committee_type": "O",
-      "first_file_date": "2026-09-16",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961656",
-      "name": "CHOOSE FREEDOM PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-09-15",
-      "state": "AL",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961615",
-      "name": "FORWARD WITH DEMOCRATS PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-09-15",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961607",
-      "name": "STEADFAST AMERICA",
-      "committee_type": "O",
-      "first_file_date": "2026-09-15",
+      "first_file_date": "2026-09-28",
       "state": "IN",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00961524",
-      "name": "PAY THE PEOPLE PAC",
+      "committee_id": "C00962464",
+      "name": "MAIN STREET OPPORTUNITY ALLIANCE",
       "committee_type": "O",
-      "first_file_date": "2026-09-14",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961508",
-      "name": "VOTE SONG",
-      "committee_type": "V",
-      "first_file_date": "2026-09-14",
-      "state": "CA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961482",
-      "name": "WIN UNITED PAC",
-      "committee_type": "V",
-      "first_file_date": "2026-09-14",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961490",
-      "name": "NO MORE MAGA",
-      "committee_type": "V",
-      "first_file_date": "2026-09-14",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961581",
-      "name": "SOCIAL SECURITY EMERGENCY RESPONSE",
-      "committee_type": "O",
-      "first_file_date": "2026-09-14",
-      "state": "IL",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961540",
-      "name": "DEMOCRATIC MAJORITY PROJECT",
-      "committee_type": "O",
-      "first_file_date": "2026-09-14",
-      "state": "DC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961557",
-      "name": "AI ACCOUNTABILITY SUPER PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-09-14",
-      "state": "CA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961466",
-      "name": "MICHIGANDERS AGAINST DATA CENTERS",
-      "committee_type": "O",
-      "first_file_date": "2026-09-13",
-      "state": "MD",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961441",
-      "name": "BLACK REPUBLICANS FOR AMERICA",
-      "committee_type": "O",
-      "first_file_date": "2026-09-12",
-      "state": "SC",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961326",
-      "name": "SMALL BUSINESS VICTORY FUND PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-09-11",
-      "state": "MA",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961342",
-      "name": "THE MAINE STANDARD",
-      "committee_type": "O",
-      "first_file_date": "2026-09-11",
-      "state": "ME",
-      "city": null
-    },
-    {
-      "type": "new_committee",
-      "source": "fec",
-      "committee_id": "C00961334",
-      "name": "AMERICAN OPPORTUNITY PAC",
-      "committee_type": "O",
-      "first_file_date": "2026-09-11",
+      "first_file_date": "2026-09-28",
       "state": "VA",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00961383",
-      "name": "CYPRESS & SUMMIT PAC",
+      "committee_id": "C00962472",
+      "name": "HONEST CHOICE MAINE",
       "committee_type": "O",
-      "first_file_date": "2026-09-11",
-      "state": "LA",
+      "first_file_date": "2026-09-28",
+      "state": "ME",
       "city": null
     },
     {
       "type": "new_committee",
       "source": "fec",
-      "committee_id": "C00961318",
-      "name": "FAITH & BUSINESS ALLIANCE",
+      "committee_id": "C00962076",
+      "name": "DEMOCRACY NOW AND FOREVER 2276",
       "committee_type": "O",
-      "first_file_date": "2026-09-11",
-      "state": "TX",
+      "first_file_date": "2026-09-22",
+      "state": "IL",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00962084",
+      "name": "COLLEGE SPORTS UNITED PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-09-22",
+      "state": "TN",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00961995",
+      "name": "GREAT PLAINS VOICES PAC",
+      "committee_type": "V",
+      "first_file_date": "2026-09-21",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00961953",
+      "name": "LAUREN BOEBERT LOVES TO EAT PUSSY",
+      "committee_type": "O",
+      "first_file_date": "2026-09-21",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00962001",
+      "name": "WESTERN CROSSROADS",
+      "committee_type": "V",
+      "first_file_date": "2026-09-21",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00961961",
+      "name": "AMERICA TOGETHER PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-09-21",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00962019",
+      "name": "MOBILIZING AMERICANS FOR REAL CHANGE AND OPPORTUNITY PAC",
+      "committee_type": "V",
+      "first_file_date": "2026-09-21",
+      "state": "WI",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00961979",
+      "name": "PUBLIC EDUCATION VICTORY FUND",
+      "committee_type": "O",
+      "first_file_date": "2026-09-21",
+      "state": "VT",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00961987",
+      "name": "GEM STATE FUTURE PAC",
+      "committee_type": "V",
+      "first_file_date": "2026-09-21",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00961862",
+      "name": "VOTERLIFT PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-09-18",
+      "state": "VA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00961854",
+      "name": "COMMON GROUND COALITION PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-09-18",
+      "state": "DC",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00961839",
+      "name": "US-ARMENIA STRATEGIC ALLIANCE",
+      "committee_type": "V",
+      "first_file_date": "2026-09-18",
+      "state": "VA",
+      "city": null
+    },
+    {
+      "type": "new_committee",
+      "source": "fec",
+      "committee_id": "C00961821",
+      "name": "(UN)RIG PAC",
+      "committee_type": "O",
+      "first_file_date": "2026-09-17",
+      "state": "PA",
       "city": null
     }
   ]
